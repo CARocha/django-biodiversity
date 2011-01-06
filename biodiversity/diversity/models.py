@@ -6,10 +6,10 @@ from biodiversity.utils import get_file_path
 # Create your models here.
 
 class Pais(models.Model):
-	''' Modelo para contener todos los paises
-		que esten en este sistema
-	'''
-	nombre = models.CharField(max_length=200)
+    ''' Modelo para contener todos los paises
+        que esten en este sistema
+    '''
+    nombre = models.CharField(max_length=200)
 	  
     def __unicode__(self):
     	return self.nombre
@@ -18,9 +18,9 @@ class Pais(models.Model):
 		verbose_name_plural = "Pais"
 
 class Lugar(models.Model):
-	''' Lugar de origen de los productos que vayan
-		agregando
-	'''
+    ''' Lugar de origen de los productos que vayan
+	agregando
+    '''
     nombre = models.CharField(max_length=200)
     pais = models.ForeignKey(Pais)
     latitud = models.DecimalField('Latitud', max_digits=8, decimal_places=5, blank=True, null = True)
@@ -33,8 +33,8 @@ class Lugar(models.Model):
     	verbose_name_plural = "Lugar"
 
 class Variedad(models.Model):
-	''' Modelo sobre la variedad de platanos
-	'''
+    ''' Modelo sobre la variedad de platanos
+    '''
     nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
@@ -44,9 +44,9 @@ class Variedad(models.Model):
     	verbose_name_plural = "Variedad"
 
 class UnidadProducto(models.Model):
-	''' Modelo sobre las diferentes unidades de los
-		bananos que son ingresados por los usuarios
-	'''
+    ''' Modelo sobre las diferentes unidades de los
+	bananos que son ingresados por los usuarios
+    '''
     nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
@@ -56,9 +56,9 @@ class UnidadProducto(models.Model):
     	verbose_name_plural = "Unidad del Producto"
 
 class Producto(models.Model):
-	''' Modelo sobre los nombres de los productos
-		por el momento solo va ser para los bananos
-	'''
+    ''' Modelo sobre los nombres de los productos
+	por el momento solo va ser para los bananos
+    '''
     nombre = models.CharField(max_length=200)
     variedad = models.ForeignKey(Variedad)
     unidad = models.ForeignKey(UnidadProducto)
@@ -70,9 +70,9 @@ class Producto(models.Model):
     	verbose_name_plural = "Productos"
 
 class Precio(models.Model):
-	''' Modelos sobre los distintos precios
-		de los productos
-	'''
+    ''' Modelos sobre los distintos precios
+	de los productos
+    '''
     pais = models.ForeignKey(Pais)
     lugar = models.ForeignKey(Lugar)
     fecha = models.DateField()
@@ -86,9 +86,9 @@ class Precio(models.Model):
     	verbose_name_plural = "Precio"
    
 class Clima(models.Model):
-	''' Modelo sobre el clima en las distintas
-		regiones de los distintos paises o lugares
-	'''
+    ''' Modelo sobre el clima en las distintas
+	regiones de los distintos paises o lugares
+    '''
     fecha = models.DateField()
     pais = models.ForeignKey(Pais)
     lugar = models.ForeignKey(Lugar)
@@ -101,9 +101,9 @@ class Clima(models.Model):
     	return "%s %s" % int(self.t_max, self.t_min)
 
 class Socios(models.Model):
-	''' Modelo que contendra un pegueño perfil de las 
-		organizaciones socias
-	'''
+    ''' Modelo que contendra un pegueño perfil de las 
+	organizaciones socias
+    '''
     lugar = models.ForeignKey(Lugar)
     nombre = models.CharField(max_length=200)
     link = models.URLField(null=True, blank=True)
@@ -114,14 +114,14 @@ class Socios(models.Model):
     def __unicode__(self):
     	return self.nombre
     	
-	class Meta:
-		verbose_name = "Socios"
-		verbose_name_plural = "Socio"
+    class Meta:
+	verbose_name = "Socios"
+	verbose_name_plural = "Socio"
 
 class Categoria(models.Model):
-	''' Modelos sobre las categorias de los
-		documentos
-	'''
+    ''' Modelos sobre las categorias de los
+	documentos
+    '''
     nombre = models.CharField(max_length=200)
     
     def __unicode__(self):
@@ -131,9 +131,9 @@ class Categoria(models.Model):
     	verbose_name_plural = "Categoria"
 
 class Documentos(models.Model):
-	''' Modelo sobre los modelos que 
-		contendran los distintos documentos
-	'''
+    ''' Modelo sobre los modelos que 
+	contendran los distintos documentos
+    '''
     fecha = models.DateField()
     titulo = models.CharField(max_length=200)
     resumen = models.TextField()
@@ -147,29 +147,29 @@ class Documentos(models.Model):
     class Meta:
     	verbose_name_plural = "Documentos"
 
-class Galeria(models.Model):
-	''' Modelo sobre lo que contendran las fotos
-		adjuntas a las noticias
-	'''
-    nombre = models.CharField(max_length=200)
-    adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
-    
-    def __unicode__(self):
-    	return self.nombre
-    	
-    class Meta:
-    	verbose_name_plural = "Galeria"
-
 class Noticias(models.Model):
-	''' Modelo que contendra las noticias del sitio
-	'''
+    ''' Modelo que contendra las noticias del sitio
+    '''
     fecha = models.DateField()
     titulo = models.CharField(max_length=200)
     texto = models.TextField()
-    galeria = models.ForeignKey(Galeria)
     
     def __unicode__(self):
     	return self.titulo
     	
     class Meta:
     	verbose_name_plural = "Noticias"
+
+class Galeria(models.Model):
+    ''' Modelo sobre lo que contendran las fotos
+	adjuntas a las noticias
+    '''
+    nombre = models.CharField(max_length=200)
+    adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
+    galeria = models.ForeignKey(Noticias)
+    
+    def __unicode__(self):
+    	return self.nombre
+    	
+    class Meta:
+    	verbose_name_plural = "Galeria"
