@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from biodiversity.diversity.models import *
+from models import *
 
 class PaisAdmin(admin.ModelAdmin):
     save_on_top = True
