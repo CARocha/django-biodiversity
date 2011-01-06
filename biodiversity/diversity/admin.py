@@ -4,34 +4,70 @@ from django.contrib import admin
 from diversity.models import *
 
 class PaisAdmin(admin.ModelAdmin):
-    pass
+    save_on_top = True
+    actions_on_top = True
+    list_display = ('nombre', )
+    list_filter = ['nombre', ]
+    search_fields = ['nombre',]
+
+class LugarAdmin(admin.ModelAdmin):
+    save_on_top = True
+    actions_on_top = True
+    list_display = ('nombre', )
+    list_filter = ['nombre', ]
+    search_fields = ['nombre',]
 
 class VariedadAdmin(admin.ModelAdmin):
-    pass
-    
-class LugarAdmin(admin.ModelAdmin):
-    pass
+    save_on_top = True
+    actions_on_top = True
+    list_display = ('nombre', )
+    list_filter = ['nombre', ]
+    search_fields = ['nombre',]
 
 class UnidadProductoAdmin(admin.ModelAdmin):
-    pass
+    save_on_top = True
+    actions_on_top = True
+    list_display = ('nombre', )
+    list_filter = ['nombre', ]
+    search_fields = ['nombre',]
 
 class ProductoAdmin(admin.ModelAdmin):
-    pass
+    save_on_top = True
+    actions_on_top = True
+    list_display = ('nombre', )
+    list_filter = ['nombre', ]
+    search_fields = ['nombre',]
     
 class PrecioAdmin(admin.ModelAdmin):
-    pass
+    save_on_top = True
+    actions_on_top = True
+    list_display = ('__unicode__', )
+    list_filter = ['__unicode__', ]
+    search_fields = ['__unicode__',]
 
 class ClimaAdmin(admin.ModelAdmin):
     pass
 
 class SociosAdmin(admin.ModelAdmin):
-    pass
+    save_on_top = True
+    actions_on_top = True
+    list_display = ('nombre', )
+    list_filter = ['nombre', ]
+    search_fields = ['nombre',]
 	
 class CategoriaAdmin(admin.ModelAdmin):
-    pass
+    save_on_top = True
+    actions_on_top = True
+    list_display = ('nombre', )
+    list_filter = ['nombre', ]
+    search_fields = ['nombre',]
 	
 class DocumentosAdmin(admin.ModelAdmin):
-    pass
+    save_on_top = True
+    actions_on_top = True
+    list_display = ('titulo', )
+    list_filter = ['titulo', ]
+    search_fields = ['titulo',]
 
 class GaleriaInline(admin.TabularInline):
     model = Galeria
