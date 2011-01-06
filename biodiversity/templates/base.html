@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{%block title%}SISTEMA DE INFORMACIÓN BIODIVERSITY{%endblock%}</title>
+    <link href="{{MEDIA_URL}}css/style.css" rel="stylesheet" type="text/css" media="screen" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	{%block extra_header%}{%endblock%}
+</head>
+<body>
+<!-- Comienza el header -->
+<div id="header">
+    
+<div id="contenedor">  
+<!-- Comienza Contenido-->
+	<div id="contenido">
+
+      {%block contenido%}
+      {%endblock%}
+
+<div class="separador" ></div>
+	</div><!-- Termina Contenido-->
+</div><!-- Termina Contenedor-->
+
+<!-- Comienza Footer-->
+    <div id="footer">
+            <div id="creditos">Desarrollado por <a href="http://www.simas.org.ni">SIMAS</a> Con <a href="http://www.djangoproject.com/">Django</a> framework</div>
+    </div><!-- Termina Footer-->
+    
+</body>
+</html>
