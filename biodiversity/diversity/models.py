@@ -138,7 +138,6 @@ class Documentos(models.Model):
     titulo = models.CharField(max_length=200)
     resumen = models.TextField()
     publico = models.BooleanField()
-    privado = models.BooleanField()
     adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
     
     def __unicode__(self):
@@ -166,7 +165,7 @@ class Galeria(models.Model):
     '''
     nombre = models.CharField(max_length=200)
     adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
-    galeria = models.ForeignKey(Noticias)
+    noticia = models.ForeignKey(Noticias)
     
     def __unicode__(self):
     	return self.nombre
