@@ -1,31 +1,72 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>{%block title%}SISTEMA DE INFORMACIÓN BIODIVERSITY{%endblock%}</title>
-    <link href="{{MEDIA_URL}}css/style.css" rel="stylesheet" type="text/css" media="screen" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{%block title%}SISTEMA DE INFORMACIÓN BIOVERSITY{%endblock%}</title>
+        <link href="{{MEDIA_URL}}css/bioversity.css" rel="stylesheet" type="text/css" media="screen" />
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	{%block extra_header%}{%endblock%}
-</head>
-<body>
-<!-- Comienza el header -->
-<div id="header">
-    
-<div id="contenedor">  
-<!-- Comienza Contenido-->
-	<div id="contenido">
-
-      {%block contenido%}
-      {%endblock%}
-
-<div class="separador" ></div>
-	</div><!-- Termina Contenido-->
-</div><!-- Termina Contenedor-->
-
-<!-- Comienza Footer-->
-    <div id="footer">
-            <div id="creditos">Desarrollado por <a href="http://www.simas.org.ni">SIMAS</a> Con <a href="http://www.djangoproject.com/">Django</a> framework</div>
-    </div><!-- Termina Footer-->
-    
-</body>
+    </head>
+    <body>
+        <!-- Comienza el header -->
+        <div id="wrapper">
+            <div class="header">
+                <div class="logo">
+                    <a href="/">
+                        <img src="/files/img/logo.png" alt="Logo Bioversity">
+                    </a>
+                </div>
+                <div class="pagetitle">
+                    <img src="/files/img/pagetitle.png" alt="Sistema de informacion Bioversity">
+                </div>
+                <div class="nav">
+                    <div class="login"><a href="/login/"><img src="/files/img/login.png" alt="login"></a></div>
+                    <div class="menu">
+                        <ul>
+                            <li class="selecto"><a href="/">Inicio</a></li>&nbsp;|&nbsp;
+                            <li><a href="/proyecto/">El Proyecto</a></li>&nbsp;|&nbsp;
+                            <li><a href="/mapa/">Mapa de sitios</a></li>&nbsp;|&nbsp;
+                            <li><a href="/noticias/">Noticias</a></li>&nbsp;|&nbsp;
+                            <li><a href="/datos/">Datos</a></li>
+                        </ul>                         
+                    </div>
+                    <div class="clean"></div>
+                </div>
+            </div>
+            <div class="banner">
+                <div class="left">
+                    <div class="banner_content">
+                        <span style="font-weight: bold;">EL PROGRAMA</span> Nascetur elit, phasellus hac ultrices, mattis proin adipiscing elementum porttitor lorem dis vel porttitor! Risus nunc nisi! Diam, a odio magnis eros dictumst, tristique! Dolor nunc etiam? Aliquam! In cras, ut nunc amet, ac in vut urna enim massa dapibus mattis odio proin eu mus, dolor ut placerat, aenean tincidunt habitasse scelerisque lorem duis lectus magna et parturient in nisi? Turpis arcu dis et nec, in proin nunc sed mattis rhoncus tincidunt, pid vut nunc nisi, porta rhoncus, eros porta aenean mid lectus rhoncus augue, turpis dolor! Sed. Porttitor odio non risus aliquam tristique eu, turpis a nisi aenean porttitor, montes parturient mid, sagittis magnis ultrices. Est turpis, tincidunt augue augue velit, placerat, turpis! Augue odio dictumst aliquam purus, penatibus.
+                    </div>
+                    <a class="leer-mas" href="/info/"></a><a class="mapas" href="/mapas/"></a>
+                </div>
+                <div class="right">                    
+                    <img width="328" height="170" src="/files/img/foto.jpg" alt="foto">
+                    <div class="controls">                        
+                        <a href="#" class="atras"></a>
+                        <div class="descrip">
+                            <div class="text">Precios aumentan en Nicaragua, zona Jinotega y Matagalpa </div>
+                        </div>
+                        <a href="#" class="adelante"></a>
+                    </div>
+                </div>
+                <div class="clean"></div>
+            </div>
+            <div class="contenedor">                
+                {%block contenido%}
+                {%endblock%}
+                <div class="clean" ></div>
+            </div><!-- Termina Contenedor-->
+            <!-- Comienza Footer-->
+            <div class="footer">
+                <img class="separator" src="/files/img/separator.png" alt="separador">
+                <div class="creditos">Desarrollado por <a href="http://www.simas.org.ni">SIMAS</a> <br>
+                    Tecnolog&iacute;a <a href="http://www.djangoproject.com/">Django</a> Framework
+                </div>
+                <img class="logo-footer" src="/files/img/logo-footer.png" alt="Bioversity">
+                <div class="clean"></div>
+            </div><!-- Termina Footer-->
+        </div>
+    </body>
 </html>
