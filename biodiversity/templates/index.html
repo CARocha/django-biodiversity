@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="buttons">
+    <div class="big price">
+        <div class="b_info">
+            <span class="b_title">Precio</span><br>
+            Precios de bananas
+            en puntos de control
+        </div>
+    </div>
+    <div class="big clima">
+        <div class="b_info">
+            <span class="b_title">Clima</span><br>
+            Precipitaciones,
+            temperatura y humedad
+            de suelo de puntos
+            de control
+        </div>
+    </div>
+    <div class="big docs">
+        <div class="b_info">
+            <span class="b_title">Documentos</span><br>
+            Documentos de descarga<br>del programa
+        </div>
+    </div>
+    <div class="clean"></div>
+</div>
+<div>
+    <p class="graphs">GR&Aacute;FICOS</p>
+    <div class="graficos">
+        <div class="selectores">
+            <a href="#" class="selector">Precios por punto de control</a>
+            <a href="#" class="selector">Precios por punto de control</a>
+            <a href="#" class="selector activo">Precios por punto de control</a>
+            <a href="#" class="selector">Precios por punto de control</a>
+            <a href="#" class="selector">Precios por punto de control</a>
+        </div>
+        <div class="grafico">
+            <img src="/files/img/grafico-muestra.png" alt="grafico muestra">
+        </div>
+        <div class="clean"></div>
+    </div>
+</div>
+{% endblock %}
