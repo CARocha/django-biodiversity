@@ -108,13 +108,13 @@ a{
     width: 629px;
     background: url(/files/img/banner.png) repeat-x;
     height: 213px;
-    border-right: 1px #fff solid;
+    border-right: 2px #fff solid;
 }
 .banner .right{
     float: left;
     width: 329px;
     height: 213px;
-    border-left: 1px #fff solid;
+    /*border-left: 1px #fff solid;*/
 }
 .atras{
     display: block;
