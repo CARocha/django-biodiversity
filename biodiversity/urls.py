@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import *
+from django.views.generic.simple import direct_to_template
 import settings
 from os import path as os_path
 
@@ -14,11 +15,12 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
+    (r'^$', direct_to_template, {'template': 'index.html'}),
     (r'^admin/', include(admin.site.urls)),
 )
 
 if settings.DEBUG:
     urlpatterns += patterns('',
-                            (r'^archivos/(.*)$', 'django.views.static.serve',
+                            (r'^files/(.*)$', 'django.views.static.serve',
                              {'document_root': os_path.join(settings.MEDIA_ROOT)}),
                            )
