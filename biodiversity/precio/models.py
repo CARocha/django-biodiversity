@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from diversity.models import *
+from biodiversity.diversity.models import *
 
 class Variedad(models.Model):
     ''' Modelo sobre la variedad de platanos

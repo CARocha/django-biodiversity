@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from diversity.models import *
+from biodiversity.diversity.models import *
 
 class Clima(models.Model):
     ''' Modelo sobre el clima en las distintas

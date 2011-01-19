@@ -2,10 +2,10 @@
 
 from django.contrib import admin
 from models import *
-from noticias.models import *
-from clima.models import *
-from documentos.models import *
-from precio.models import *
+from biodiversity.noticias.models import *
+from biodiversity.clima.models import *
+from biodiversity.documentos.models import *
+from biodiversity.precio.models import *
 
 class PaisAdmin(admin.ModelAdmin):
     save_on_top = True
