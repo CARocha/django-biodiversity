@@ -3,8 +3,6 @@ from django.db import models
 from thumbs import ImageWithThumbsField
 from biodiversity.utils import get_file_path 
 
-# Create your models here.
-
 class Pais(models.Model):
     ''' Modelo para contener todos los paises
         que esten en este sistema
@@ -34,74 +32,6 @@ class Lugar(models.Model):
     def __unicode__(self):
         return self.nombre
 
-class Variedad(models.Model):
-    ''' Modelo sobre la variedad de platanos
-    '''
-    nombre = models.CharField(max_length=200)
-    
-    class Meta:
-        verbose_name_plural = "Variedad"
-
-    def __unicode__(self):
-        return self.nombre
-        
-class UnidadProducto(models.Model):
-    ''' Modelo sobre las diferentes unidades de los
-    bananos que son ingresados por los usuarios
-    '''
-    nombre = models.CharField(max_length=200)
-        
-    class Meta:
-        verbose_name_plural = "Unidad del Producto"
-
-    def __unicode__(self):
-        return self.nombre
-
-class Producto(models.Model):
-    ''' Modelo sobre los nombres de los productos
-    por el momento solo va ser para los bananos
-    '''
-    nombre = models.CharField(max_length=200)
-    variedad = models.ForeignKey(Variedad)
-    unidad = models.ForeignKey(UnidadProducto)
-    
-    class Meta:
-        verbose_name_plural = "Productos"
-
-    def __unicode__(self):
-        return self.nombre
-        
-class Precio(models.Model):
-    ''' Modelos sobre los distintos precios
-    de los productos
-    '''
-    pais = models.ForeignKey(Pais)
-    lugar = models.ForeignKey(Lugar)
-    fecha = models.DateField()
-    producto = models.ForeignKey(Producto)
-    precio = models.FloatField()
-    
-    class Meta:
-        verbose_name_plural = "Precio"
-   
-    def __unicode__(self):
-        return self.producto.nombre
-        
-class Clima(models.Model):
-    ''' Modelo sobre el clima en las distintas
-    regiones de los distintos paises o lugares
-    '''
-    fecha = models.DateField()
-    pais = models.ForeignKey(Pais)
-    lugar = models.ForeignKey(Lugar)
-    t_max = models.FloatField('Temperatura Max.')
-    t_min = models.FloatField('Temperatura Min.')
-    Presi = models.FloatField('Presipitación')
-    humedad = models.FloatField('Humedad en %')
-    
-    def __unicode__(self):
-        return "%s %s" % int(self.t_max, self.t_min)
-
 class Socios(models.Model):
     ''' Modelo que contendra un pegueño perfil de las 
     organizaciones socias
@@ -116,61 +46,6 @@ class Socios(models.Model):
     class Meta:
         verbose_name = "Socios"
         verbose_name_plural = "Socio"
-
-    def __unicode__(self):
-        return self.nombre
-        
-class Categoria(models.Model):
-    ''' Modelos sobre las categorias de los
-    documentos
-    '''
-    nombre = models.CharField(max_length=200)
-    
-    class Meta:
-        verbose_name_plural = "Categoria"
-
-    def __unicode__(self):
-        return self.nombre
-        
-class Documentos(models.Model):
-    ''' Modelo sobre los modelos que 
-    contendran los distintos documentos
-    '''
-    fecha = models.DateField()
-    titulo = models.CharField(max_length=200)
-    resumen = models.TextField()
-    publico = models.BooleanField()
-    adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
-    
-    class Meta:
-        verbose_name_plural = "Documentos"
-
-    def __unicode__(self):
-        return self.titulo
-        
-class Noticias(models.Model):
-    ''' Modelo que contendra las noticias del sitio
-    '''
-    fecha = models.DateField()
-    titulo = models.CharField(max_length=200)
-    texto = models.TextField()
-    
-    class Meta:
-        verbose_name_plural = "Noticias"
-
-    def __unicode__(self):
-        return self.titulo
-        
-class Galeria(models.Model):
-    ''' Modelo sobre lo que contendran las fotos
-    adjuntas a las noticias
-    '''
-    nombre = models.CharField(max_length=200)
-    adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
-    noticia = models.ForeignKey(Noticias)
-    
-    class Meta:
-        verbose_name_plural = "Galeria"
 
     def __unicode__(self):
         return self.nombre
