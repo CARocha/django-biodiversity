@@ -2,6 +2,10 @@
 
 from django.contrib import admin
 from models import *
+from noticias.models import *
+from clima.models import *
+from documentos.models import *
+from precio.models import *
 
 class PaisAdmin(admin.ModelAdmin):
     save_on_top = True
@@ -84,8 +88,8 @@ class NoticiasAdmin(admin.ModelAdmin):
     date_hierarchy = 'fecha'
     
     class Media:
-        js = ['../archivos/js/tiny_mce/tiny_mce.js',
-              '../archivos/js/editores/textareas.js',]
+        js = ['../files/js/tiny_mce/tiny_mce.js',
+              '../files/js/editores/textareas.js',]
 
 admin.site.register(Pais)
 admin.site.register(Lugar)
