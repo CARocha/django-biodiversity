@@ -5,7 +5,7 @@ import datetime
 
 CICLO_CHOICES=[]
 d=0
-for i in range (datetime.date.today().year,1989,-1):
+for i in range (datetime.date.today().year,2000,-1):
 	d=i
 	CICLO_CHOICES.append((i,str(d)))
 	
@@ -18,7 +18,6 @@ class Clima(models.Model):
     ''' Modelo sobre el clima en las distintas
     regiones de los distintos paises o lugares
     '''
-    #fecha = models.DateField()
     pais = models.ForeignKey(Pais)
     lugar = models.ForeignKey(Lugar)
     semana = models.IntegerField(choices=CICLO_SEMANA)

@@ -4,7 +4,7 @@ import datetime
 
 CICLO_CHOICES=[]
 d=0
-for i in range (datetime.date.today().year,1989,-1):
+for i in range (datetime.date.today().year,2000,-1):
 	d=i
 	CICLO_CHOICES.append((i,str(d)))
 
