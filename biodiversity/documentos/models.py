@@ -9,7 +9,7 @@ class Categoria(models.Model):
     nombre = models.CharField(max_length=200)
     
     class Meta:
-        verbose_name_plural = "Categoria"
+        verbose_name_plural = "Categorias"
 
     def __unicode__(self):
         return self.nombre
@@ -22,7 +22,7 @@ class SubCategoria(models.Model):
     categoria = models.ForeignKey(Categoria)
 
     class Meta:
-        verbose_name_plural = "Categoria"
+        verbose_name_plural = "SubCategorias"
 
     def __unicode__(self):
         return "%s - %s" % (self.nombre, self.categoria.nombre)
