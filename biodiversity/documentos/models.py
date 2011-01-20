@@ -37,10 +37,21 @@ class Documentos(models.Model):
     titulo = models.CharField(max_length=200)
     resumen = models.TextField()
     publico = models.BooleanField()
-    adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
+#    adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
     
     class Meta:
         verbose_name_plural = "Documentos"
 
     def __unicode__(self):
         return self.titulo
+        
+class Adjunto(models.Model):
+    ''' Modelo para agregar varios archivos 
+    a los documentos
+    '''
+    adjunto = models.FileField(upload_to=get_file_path)
+    documento = models.ForeignKey(Documentos)
+    
+    class Meta:
+        verbose_name_plural = "Adjunto a documentos"
+

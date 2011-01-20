@@ -41,6 +41,16 @@ class Producto(models.Model):
     def __unicode__(self):
         return self.nombre
         
+class Moneda(models.Model):
+    nombre = models.CharField(max_length=200)
+    
+    
+    class Meta:
+        verbose_name_plural = "Tipos de Moneda"
+        
+    def __unicode__(self):
+        return self.nombre
+        
 class Precio(models.Model):
     ''' Modelos sobre los distintos precios
     de los productos
@@ -49,6 +59,7 @@ class Precio(models.Model):
     lugar = models.ForeignKey(Lugar)
     fecha = models.DateField()
     producto = models.ForeignKey(Producto)
+    moneda = models.ForeignKey(Moneda)
     precio = models.FloatField()
     
     class Meta:

@@ -6,6 +6,7 @@ from biodiversity.noticias.models import *
 from biodiversity.clima.models import *
 from biodiversity.documentos.models import *
 from biodiversity.precio.models import *
+from biodiversity.humedad.models import *
 
 class PaisAdmin(admin.ModelAdmin):
     save_on_top = True
@@ -65,10 +66,16 @@ class CategoriaAdmin(admin.ModelAdmin):
     list_display = ('nombre', )
     list_filter = ['nombre', ]
     search_fields = ['nombre',]
+    
+class AdjuntoInline(admin.TabularInline):
+    model = Adjunto
+    extra = 1
+    max_num = 4
 	
 class DocumentosAdmin(admin.ModelAdmin):
     save_on_top = True
     actions_on_top = True
+    inlines = [AdjuntoInline]
     list_display = ('titulo', )
     list_filter = ['titulo', ]
     search_fields = ['titulo',]
@@ -100,6 +107,6 @@ admin.site.register(Precio)
 admin.site.register(Clima)
 admin.site.register(Socios)
 admin.site.register(Categoria)
-admin.site.register(Documentos)
-#admin.site.register(Galeria)
+admin.site.register(Documentos, DocumentosAdmin)
+admin.site.register(Humedad)
 admin.site.register(Noticias, NoticiasAdmin)
