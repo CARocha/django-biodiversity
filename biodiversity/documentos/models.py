@@ -37,7 +37,7 @@ class Documentos(models.Model):
     titulo = models.CharField(max_length=200)
     resumen = models.TextField()
     publico = models.BooleanField()
-#    adjunto = models.FileField(upload_to=get_file_path, null=True, blank=True)
+    palabra_clave = models.CharField(max_length=200)
     
     class Meta:
         verbose_name_plural = "Documentos"

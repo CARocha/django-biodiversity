@@ -27,7 +27,7 @@ class Lugar(models.Model):
             decimal_places=5, blank=True, null = True)
 
     class Meta:
-        verbose_name_plural = "Lugar"
+        verbose_name_plural = "Sitio"
     
     def __unicode__(self):
         return self.nombre
@@ -36,7 +36,7 @@ class Socios(models.Model):
     ''' Modelo que contendra un pegueño perfil de las 
     organizaciones socias
     '''
-    lugar = models.ForeignKey(Lugar)
+    lugar = models.ManyToManyField(Lugar)
     nombre = models.CharField(max_length=200)
     link = models.URLField(null=True, blank=True)
     logotipo = ImageWithThumbsField(upload_to=get_file_path,
