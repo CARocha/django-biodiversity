@@ -28,6 +28,8 @@ class Lugar(models.Model):
 
     class Meta:
         verbose_name_plural = "Sitio"
+#        app_label = 'Sitio'
+#        db_table = 'diversity_lugar' 
     
     def __unicode__(self):
         return self.nombre
