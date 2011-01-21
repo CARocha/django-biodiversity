@@ -1,0 +1,13 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Bioversity sitio admin' %}{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name">{% trans 'Administración de Bioversity' %}</h1>
+{% endblock %}
+
+{% block nav-global %} 
+    <a href="/"><img src="/files/img/home.png">Ver sitio</a> 
+{% endblock %}
+
