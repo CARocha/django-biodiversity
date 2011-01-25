@@ -9,13 +9,15 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Changing field 'Humedad.mes'
-        db.alter_column('humedad_humedad', 'mes', self.gf('django.db.models.fields.IntegerField')())
+        db.delete_column('humedad_humedad', 'mes')
+        db.add_column('humedad_humedad', 'mes', self.gf('django.db.models.fields.IntegerField')(default=None), keep_default=False)
 
 
     def backwards(self, orm):
         
         # Changing field 'Humedad.mes'
-        db.alter_column('humedad_humedad', 'mes', self.gf('django.db.models.fields.DateField')())
+        db.delete_column('humedad_humedad', 'mes')
+        db.add_column('humedad_humedad', 'mes', self.gf('django.db.models.fields.DateField')(default=None), keep_default=False)
 
 
     models = {

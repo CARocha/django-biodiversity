@@ -33,7 +33,6 @@ class Producto(models.Model):
     '''
     nombre = models.CharField(max_length=200)
     variedad = models.ForeignKey(Variedad)
-    unidad = models.ForeignKey(UnidadProducto)
     
     class Meta:
         verbose_name_plural = "Productos"
@@ -56,11 +55,13 @@ class Precio(models.Model):
     de los productos
     '''
     pais = models.ForeignKey(Pais)
-    lugar = models.ForeignKey(Lugar)
+    zona = models.ForeignKey(Lugar)
     fecha = models.DateField()
     producto = models.ForeignKey(Producto)
+    unidad = models.ForeignKey(UnidadProducto)
     moneda = models.ForeignKey(Moneda)
-    precio = models.FloatField()
+    precio_productor = models.FloatField('Precio a Productor')
+    precio_consumidor= models.FloatField('Precio a Consumidor')
     
     class Meta:
         verbose_name_plural = "Precio"

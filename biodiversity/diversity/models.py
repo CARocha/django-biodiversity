@@ -27,7 +27,8 @@ class Lugar(models.Model):
             decimal_places=5, blank=True, null = True)
 
     class Meta:
-        verbose_name_plural = "Sitio"
+        verbose_name_plural = "Zonas"
+        verbose_name_plural = "Zona"
 #        app_label = 'Sitio'
 #        db_table = 'diversity_lugar' 
     
@@ -38,7 +39,7 @@ class Socios(models.Model):
     ''' Modelo que contendra un pegueño perfil de las 
     organizaciones socias
     '''
-    lugar = models.ManyToManyField(Lugar)
+    zona = models.ManyToManyField(Lugar)
     nombre = models.CharField(max_length=200)
     link = models.URLField(null=True, blank=True)
     logotipo = ImageWithThumbsField(upload_to=get_file_path,

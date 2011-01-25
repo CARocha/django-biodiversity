@@ -3,23 +3,15 @@ from django.db import models
 from biodiversity.diversity.models import *
 import datetime
 
-CICLO_CHOICES=[]
-d=0
-for i in range (datetime.date.today().year,2000,-1):
-	d=i
-	CICLO_CHOICES.append((i,str(d)))
-	
-CICLO_SEMANA=[]
-for a in range(1,53):
-    d="semana-%d" % a
-    CICLO_SEMANA.append((a,str(d)))
+CICLO_CHOICES=[(numero, numero) for numero in range(datetime.date.today().year, 2000, -1)]
+CICLO_SEMANA=[(numero ,("semana-%d" % numero)) for numero in range (1, 53)]
 
 class Clima(models.Model):
     ''' Modelo sobre el clima en las distintas
     regiones de los distintos paises o lugares
     '''
     pais = models.ForeignKey(Pais)
-    lugar = models.ForeignKey(Lugar)
+    zona = models.ForeignKey(Lugar)
     semana = models.IntegerField(choices=CICLO_SEMANA)
     ano = models.IntegerField('Año', choices=CICLO_CHOICES)
     t_max = models.FloatField('Temperatura Max.')
@@ -32,3 +24,4 @@ class Clima(models.Model):
         
     class Meta:
         verbose_name_plural = "Clima"
+        unique_together = ['ano', 'semana']
