@@ -50,8 +50,16 @@ class PrecioAdmin(admin.ModelAdmin):
     list_filter = ['__unicode__', ]
     search_fields = ['__unicode__',]
 
-class ClimaAdmin(admin.ModelAdmin):
-    pass
+class ClimaInline(admin.TabularInline):
+    model = Clima
+    extra = 1
+    max_num = 4
+    
+class ClimasAdmin(admin.ModelAdmin):
+    actions_on_top = True
+    inlines = [ClimaInline,]
+    list_display = ('temperatura','presipitacion','zonas','paises',)
+    
 
 class SociosAdmin(admin.ModelAdmin):
     save_on_top = True
@@ -104,7 +112,7 @@ admin.site.register(Variedad)
 admin.site.register(UnidadProducto)
 admin.site.register(Producto)
 admin.site.register(Precio)
-admin.site.register(Clima)
+admin.site.register(Climas, ClimasAdmin)
 admin.site.register(Socios)
 admin.site.register(Categoria)
 admin.site.register(Documentos, DocumentosAdmin)

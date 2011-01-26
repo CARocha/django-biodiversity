@@ -103,6 +103,7 @@ INSTALLED_APPS = (
     'biodiversity.precio',
     'biodiversity.clima',
     'south',
+    'biodiversity.notification',
 )
 
 # A sample logging configuration. The only tangible logging
