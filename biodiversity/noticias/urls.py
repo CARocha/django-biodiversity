@@ -5,5 +5,5 @@ from noticias.views import *
 
 urlpatterns = patterns('noticias.views',
    (r'^listar/$',  lista_noticias),
-   (r'^ver/$',  ver_noticia), 
+   (r'^ver/(?P<noticia_id>\d+)/$',  ver_noticia), 
  )

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<tr>
+    <td>{{noticia.fecha}}</td>
+    <td>{{noticia.titulo}}</td>
+    <td>{{noticia.texto|safe}}</td>
+    {% for galeria in  noticia.adjunto.all %}
+     <td><img src="{{galeria.adjunto.url_250x250}}"></td>
+     {% endfor %}
+</tr>
+
+{% endblock %}
