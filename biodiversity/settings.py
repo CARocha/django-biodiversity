@@ -102,6 +102,7 @@ INSTALLED_APPS = (
     'biodiversity.noticias',
     'biodiversity.precio',
     'biodiversity.clima',
+    'biodiversity.eventos',
     'south',
     'biodiversity.notification',
 )

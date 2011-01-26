@@ -1,0 +1,59 @@
+{%extends "interna.html"%}
+{%block title%}Calendario{%endblock%}
+{%block extra_header%}
+<script src="{{MEDIA_URL}}js/calendario/fullcalendar.min.js"></script>
+<link href="{{MEDIA_URL}}css/fullcalendar.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type='text/javascript'>
+	$(document).ready(function() {
+
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+		m = m-1;
+
+		$('#calendar').fullCalendar({
+			minTime: '8:00',
+			maxTime: '6:00pm',
+			defaultView: 'month',
+			dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+			dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+			monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+      contentHeight: 470,
+      
+
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+            buttonText: {   
+                today: 'Hoy',
+                month: 'Mes',
+                day: 'Día',
+                week: 'Semana',
+            },
+
+			eventClick: function(calEvent, jsEvent, view) {
+                window.location = '/eventos/evento/' + calEvent.slug;
+      },
+			editable: false,
+			events: "/eventos/calendario/",		
+
+		});	
+	});
+</script>
+
+{%endblock%}
+{%block cuerpo%}
+       <h2>Calendario</h2>
+        <div id="acciones">
+            <div class="label">Vistas </div>
+            <a href="/eventos/calendario"><img src="{{MEDIA_URL}}imagen/calendarioicon.png">Calendario</a>
+            <a href="/eventos"><img src="{{MEDIA_URL}}imagen/listaicon.png">Lista</a>
+        </div>
+       <div id="calendar"></div>
+{%endblock %}
+
+ 

@@ -1,0 +1,31 @@
+{%extends "interna.html"%}
+{%block title%}Evento - {{evento.titulo}}{%endblock%}
+{%block extra_header%}
+{%endblock%}
+{%block cuerpo%}
+    <h2>{{evento.titulo}}</h2>
+       
+       <div id="lista">
+           <div id="elemento_lista">
+               <div id="fechas">
+                   <b>Inicia:</b> <img src="{{MEDIA_URL}}imagen/icon_fecha.jpg"> {{evento.fecha_inicio|date:"d M Y"}} <img src="{{MEDIA_URL}}imagen/icon_hora.jpg"> {{evento.fecha_inicio|date:"h:i a"}}
+                   <b>Finaliza:</b> <img src="{{MEDIA_URL}}imagen/icon_fecha.jpg"> {{evento.fecha_final|date:"d M Y"}} <img src="{{MEDIA_URL}}imagen/icon_hora.jpg"> {{evento.fecha_final|date:"h:i a"}}
+               </div>
+               <br>
+               {%if evento.lugar %}<b>Lugar: </b>{{evento.lugar}}<br><br>{%endif%}
+               <div id="contenido_pagina">
+                    {%if evento.contenido %}{{evento.contenido|safe}}<br>{%else%}No hay información adicional{%endif%}
+               </div>
+                {%if evento.adjunto.all %}
+                <div id="archivos_adjuntos">
+                    <b>Archivos Adjuntos</b>
+                        {%for adjunto in evento.adjunto.all%}
+                            <a href="/archivos/{{adjunto.adjunto}}">{{adjunto.nombre}}</a>
+                        {%endfor%}
+                </div>
+                {%endif%}
+           </div>
+       </div>
+{%endblock %}
+
+ 

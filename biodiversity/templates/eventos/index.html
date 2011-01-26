@@ -1,0 +1,37 @@
+{%extends "interna.html"%}
+{%block title%}Eventos{%endblock%}
+{%block cuerpo%}
+       <h2>Eventos</h2>
+        <div id="acciones">
+            <div class="label">Vistas </div>
+            <a href="/eventos/calendario"><img src="{{MEDIA_URL}}imagen/calendarioicon.png">Calendario</a>
+            <a href="/eventos"><img src="{{MEDIA_URL}}imagen/listaicon.png">Lista</a>
+        </div>
+       <div id="lista">
+           {%for evento in eventos.object_list%}
+           <div class="elemento_lista">
+               <div class="titulo"><a href="/eventos/evento/{{evento.slug}}/">{{evento.titulo}}</a></div>
+               <div id="fechas">
+                   <b>Inicia:</b> <img src="{{MEDIA_URL}}imagen/icon_fecha.jpg"> {{evento.fecha_inicio|date:"d M Y"}} <img src="{{MEDIA_URL}}imagen/icon_hora.jpg"> {{evento.fecha_inicio|date:"h:i a"}}
+                   <b>Finaliza:</b> <img src="{{MEDIA_URL}}imagen/icon_fecha.jpg"> {{evento.fecha_final|date:"d M Y"}} <img src="{{MEDIA_URL}}imagen/icon_hora.jpg"> {{evento.fecha_final|date:"h:i a"}}
+               </div>
+               <div class="seguir_leyendo der"><a class="con_flechita" href="/eventos/evento/{{evento.slug}}/">Mas info</a></div><br>
+           </div>
+           {%endfor%}
+           <div class="paginacion">
+               <span class="pagina-links">
+                   {%if eventos.has_previous%}
+                   <a href="?page={{ eventos.previous_page_number }}" class="pag_izq">anterior</a>
+                   {%endif%}
+                   <span class="actual">
+                       Página {{ eventos.number }} de {{ eventos.paginator.num_pages }}.
+                   </span>
+                   {%if eventos.has_next%}
+                   <a href="?page={{ eventos.next_page_number }}" class="pag_der">siguiente</a>
+                   {%endif%}
+               </span>
+           </div>
+       </div>
+{%endblock %}
+
+ 
