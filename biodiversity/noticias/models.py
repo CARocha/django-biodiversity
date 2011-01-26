@@ -16,6 +16,10 @@ class Noticias(models.Model):
     def __unicode__(self):
         return self.titulo
         
+    def adjunto(self):
+        adjunto = Galeria.objects.filter(noticia__id=self.id)
+        return adjunto
+        
 class Galeria(models.Model):
     ''' Modelo sobre lo que contendran las fotos
     adjuntas a las noticias

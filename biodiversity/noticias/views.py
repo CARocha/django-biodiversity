@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 def lista_noticias(request):
     '''Vista de lista general de noticias paginadas'''
     noticias_list = Noticias.objects.all()
-    paginator = Paginator(noticias_list, 25) 
+    paginator = Paginator(noticias_list, 5) 
 
     try:
         page = int(request.GET.get('page', '1'))
@@ -21,11 +21,12 @@ def lista_noticias(request):
         noticias = paginator.page(paginator.num_pages)
 
     return render_to_response('noticias/lista_noticias.html', 
-            {"noticias": noticias},context_instance=RequestContext(request))
+            {"noticias": noticias},
+            context_instance=RequestContext(request))
 
 def ver_noticia(request, noticia_id):
     '''Ver una sola noticia'''
     noticia = get_object_or_404(Noticias, pk=noticia_id)
 
     return render_to_response('noticias/ver_noticias.html', 
-            {"noticia": noticia})
+            {"noticia": noticia},context_instance=RequestContext(request))
