@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^$', direct_to_template, {'template': 'index.html'}),
     (r'^admin/', include(admin.site.urls)),
+    (r'^eventos/', include('eventos.site.urls')),
 )
 
 if settings.DEBUG:
