@@ -26,31 +26,6 @@ def ver_sitio(request, sitio):
     '''Vista para ver un sitio especifico'''
     pass
 
-def lista_noticias(request):
-    '''Vista de lista general de noticias paginadas'''
-    noticias_list = Noticias.objects.all()
-    paginator = Paginator(noticias_list, 25) 
-
-    try:
-        page = int(request.GET.get('page', '1'))
-    except ValueError:
-        page = 1
-
-    try:
-        noticias = paginator.page(page)
-    except (EmptyPage, InvalidPage):
-        noticias = paginator.page(paginator.num_pages)
-
-    return render_to_response('diversity/lista_noticias.html', 
-            {"noticias": noticias})
-
-def ver_noticia(request, noticia_id):
-    '''Ver una sola noticia'''
-    noticia = get_object_or_404(Noticias, pk=noticia_id)
-
-    return render_to_response('diversity/ver_noticias.html', 
-            {"noticia": noticia})
-
 def lista_documentos(request):
     '''Lista de documentos paginada'''
     documentos_list = Documentos.objects.all()

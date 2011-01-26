@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+{% for noticia in noticias.object_list%}
+    {{noticia.fecha}}
+    {{noticia.titulo}}
+    {{noticia.texto}}
+
+{% endfor %}
+
+{% endblock %}
+
+
