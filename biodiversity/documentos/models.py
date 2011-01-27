@@ -14,25 +14,11 @@ class Categoria(models.Model):
     def __unicode__(self):
         return self.nombre
 
-class SubCategoria(models.Model):
-    ''' Modelos sobre las categorias de los
-    documentos
-    '''
-    nombre = models.CharField(max_length=200)
-    categoria = models.ForeignKey(Categoria)
-
-    class Meta:
-        verbose_name_plural = "SubCategorias"
-
-    def __unicode__(self):
-        return "%s - %s" % (self.nombre, self.categoria.nombre)
-
-        
 class Documentos(models.Model):
     ''' Modelo sobre los modelos que 
     contendran los distintos documentos
     '''
-    subcategoria = models.ForeignKey(SubCategoria)
+    categoria = models.ForeignKey(Categoria)
     fecha = models.DateField()
     titulo = models.CharField(max_length=200)
     resumen = models.TextField()
@@ -41,6 +27,7 @@ class Documentos(models.Model):
     
     class Meta:
         verbose_name_plural = "Documentos"
+        ordering = ['-fecha']
 
     def __unicode__(self):
         return self.titulo
