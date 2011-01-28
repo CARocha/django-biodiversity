@@ -14,7 +14,9 @@ def privados(request):
 def documento(request, documento_id):
     #todo validar privado
     documento = get_object_or_404(Documento, pk=documento_id)
-    return render_to_response('documentos/documento.html'
+    return render_to_response('documentos/documento.html',
+                              {'documento': documento},
+                              context_instance=RequestContext(request))
 
 def categoria(request, categoria_id):
     #todo validar privado
