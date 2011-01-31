@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block extratitle %} preview{% endblock %}
+{% block extrahead %}
+
+{% endblock %}
+{% block contenido %}
+<div>
+<table cellspacing="1" width="100%">
+<tr>
+	<th colspan="2">&nbsp;Foros&nbsp;</th>
+	<th width="50">&nbsp;Temas&nbsp;</th>
+	<th width="50">&nbsp;Posts&nbsp;</th>
+	<th>&nbsp;Ultimo post&nbsp;</th>
+</tr>
+{% for categoria in categorias %}
+<tr>
+			<td class="forum-cat" colspan="5"><a href="">{{categoria.titulo|title}}</a></td>
+		</tr>
+    {% for foro in categoria.forum_set.all %}
+		<tr>
+			<td class="row1" width="50" align="center"><img src="/files/images/forum/post.png" alt="{{foro.titulo}}" title="{{foro.titulo}}" /></td>
+			<td class="row1" width="100%">
+				<div style="margin-left: 10px;">
+				<a class="forumlink" href="{{foro.slug}}/">{{foro.titulo}}</a>
+				<p class="forumdesc">{{foro.descripcion|safe}}</p>
+				</div>
+					<!--<p class="forumdesc"><strong>Subforum: </strong> <a href="./viewforum.php?f=9&amp;sid=369664c73fb29c30b7ab2d1cceda298f" class="subforum read" title="No new posts">Announcements Discussions</a></p>-->
+			</td>
+			<td class="row2" align="center"><p class="topicdetails">{{foro.threads}}</p></td>
+			<td class="row2" align="center"><p class="topicdetails">{{foro.posts}}</p></td>
+			<td class="row1 last-post" >
+				<p class="topicdetailsx" style="white-space: nowrap;">Ultimo mensaje por: <a href={% if foro.forum_latest_post.author.get_profile %}"/{{foro.forum_latest_post.author}}/"{% else %}""{% endif %}>{{foro.forum_latest_post.author}}</a>
+				<p class="topicdetailsx">en <a href="./memberlist.php?mode=viewprofile&amp;u=246372&amp;sid=369664c73fb29c30b7ab2d1cceda298f">{{foro.forum_latest_post.thread.titulo}}</a></p>
+				<p class="topicdetailsx" style="white-space: nowrap;">el {{foro.forum_latest_post.time|date:"M j, Y f a"}}</p>
+			</td>
+		</tr>
+    {% endfor %}
+{% endfor %}
+</table>
+<table cellspacing="1" width="100%" style="margin-top: 20px;">
+<tr>
+	<th colspan="5" style="text-align: left;">&nbsp;Estad&iacute;sticas&nbsp;</th>
+</tr>
+<tr>
+			<td class="row1" width="50" align="center"><img src="/files/images/forum/stats.png" alt="No new posts" title="No new posts" /></td>
+			<td class="row1" width="100%" collspan="4">
+				<div style="margin-left: 10px;">
+				<p class="forumdesc">Total Post: <span style="font-weight: bold; color: #069;">{{total_post}}</span> | Total de Temas: <span style="font-weight: bold; color: #069;">{{total_topics}}</span> | Total de miembros: <span style="font-weight: bold; color: #069;">{{total_users}}</span></p>
+				</div>
+					<!--<p class="forumdesc"><strong>Subforum: </strong> <a href="./viewforum.php?f=9&amp;sid=369664c73fb29c30b7ab2d1cceda298f" class="subforum read" title="No new posts">Announcements Discussions</a></p>-->
+			</td>
+</tr>
+</table>
+</div>
+{% endblock %}
+

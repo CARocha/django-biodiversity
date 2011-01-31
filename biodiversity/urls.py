@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     (r'^eventos/', include('eventos.urls')),
     (r'^documentos/', include('documentos.urls')),
     (r'^noticias/', include('noticias.urls')),
+    (r'^foro/', include('forum.urls')),
 )
 
 if settings.DEBUG:

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block extratitle %} {{forum.titulo}}{% endblock %}
+{% block extrahead %}
+
+{% endblock %}
+{% block contenido %}
+<div>
+    <br><br><br><br><br>
+    <div><!--<a href="../"><span class="forum_title">Foros&nbsp;&rsaquo;&rsaquo;</span></a>--><span class="forum_title">{{forum.titulo}}</span></div>
+    <div style="float: right;"><a href="./post/new/" class="new"></a></div><br><br>
+    <table cellspacing="1" width="100%">
+        <tr>
+            <th class="azul" colspan="2">&nbsp;Temas&nbsp;</th>
+            <th class="azul" width="50">&nbsp;Autor&nbsp;</th>
+            <th class="azul" width="50">&nbsp;Respuestas&nbsp;</th>
+            <th class="azul" width="50">&nbsp;Vistas&nbsp;</th>
+            <th class="azul">&nbsp;Ultimo mensaje&nbsp;</th>
+        </tr>
+        {% for tema in forum.thread_set.all %}
+        <tr>
+            <td class="row1" width="50" align="center"><img src="/files/img/forum/topic.png" alt="{{tema.titulo}}" title="{{tema.titulo}}" /></td>
+            <td class="row1" width="100%">
+                <div style="margin-left: 10px;">
+                    <a class="forumlink" href="{{tema.slug}}/">{{tema.titulo}}</a>
+                </div>
+            </td>
+            <td class="row2" align="center">
+                <p class="topicdetails">
+                    <a href="">{{tema.author}}</a></p></td>
+            <td class="row1" align="center"><p class="topicdetails">{{tema.posts}}</p></td>
+            <td class="row2" align="center"><p class="topicdetails">{{tema.visto}}</p></td>
+            <td class="row1 last-post" width="50" align="center">
+                <p class="topicdetailsx" style="white-space: nowrap;">
+			    {% if tema.latest_post_time %}{{tema.latest_post_time|date:"M j, Y f a"}}{% else %}{{tema.thread_latest_post.time|date:"M j, Y f a"}}{% endif %}
+                </p>
+                <p class="topicdetailsx" style="white-space: nowrap;">por:
+                    <a href="">{{tema.thread_latest_post.author.username}}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table cellspacing="1" width="100%" style="margin-top: 20px;">
+        <tr>
+            <th colspan="5" style="text-align: left;">&nbsp;Estad&iacute;sticas&nbsp;</th>
+        </tr>
+        <tr>
+            <td class="row1" width="50" align="center"><img src="/files/img/forum/stats.png" alt="No new posts" title="No new posts" /></td>
+            <td class="row1" width="100%" collspan="4">
+                <div style="margin-left: 10px;">
+                    <p class="forumdesc">Total Post: <span style="font-weight: bold; color: #069;">{{total_post}}</span> | Total de Temas: <span style="font-weight: bold; color: #069;">{{total_topics}}</span> | Total de miembros: <span style="font-weight: bold; color: #069;">{{total_users}}</span></p>
+                </div>
+                <!--<p class="forumdesc"><strong>Subforum: </strong> <a href="./viewforum.php?f=9&amp;sid=369664c73fb29c30b7ab2d1cceda298f" class="subforum read" title="No new posts">Announcements Discussions</a></p>-->
+            </td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
+

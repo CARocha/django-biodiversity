@@ -105,6 +105,8 @@ INSTALLED_APPS = (
     'biodiversity.eventos',
     'south',
     'biodiversity.notification',
+    'biodiversity.forum',
+    'pagination',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -129,3 +131,5 @@ LOGGING = {
         },
     }
 }
+
+AUTH_PROFILE_MODULE = ""
