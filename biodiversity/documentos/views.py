@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from models import *
 
 @login_required
@@ -12,17 +15,23 @@ def privados(request):
                               {'documentos': documentos},
                               context_instance=RequestContext(request))
 def documento(request, documento_id):
-    #todo validar privado
-    documento = get_object_or_404(Documento, pk=documento_id)
-    return render_to_response('documentos/documento.html',
-                              {'documento': documento},
-                              context_instance=RequestContext(request))
+    documento = get_object_or_404(Documentos, pk=documento_id)
+    if request.user.is_authenticated() and not documento.publico:
+        return render_to_response('documentos/documento.html',
+                                  {'documento': documento},
+                                  context_instance=RequestContext(request))
+    else:
+        request.flash['message'] = 'Este documento no es público, favor inice sesión'
+        return HttpResponseRedirect(reverse('django.contrib.auth.views.login'))
 
 def categoria(request, categoria_id):
-    #todo validar privado
     categoria = get_object_or_404(Categoria, pk=categoria_id)
-    documentos = _get_documentos(request, 
-                                 Documentos.objects.filter(categoria=categoria))
+    if request.user.is_authenticated():
+        documentos = _get_documentos(request, 
+                                     Documentos.objects.filter(categoria=categoria))
+    else:
+        documentos = _get_documentos(request, 
+                                     Documentos.objects.filter(categoria=categoria, publico=True))
     return render_to_response('documentos/categoria.html', 
                               {'documentos': documentos},
                               context_instance=RequestContext(request))

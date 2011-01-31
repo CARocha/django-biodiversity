@@ -39,6 +39,8 @@ class Adjunto(models.Model):
     adjunto = models.FileField(upload_to=get_file_path)
     documento = models.ForeignKey(Documentos)
     
+    fileDir = 'documentos/'
+
     class Meta:
         verbose_name_plural = "Adjunto a documentos"
 
