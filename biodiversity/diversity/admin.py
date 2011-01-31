@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-
 from django.contrib import admin
 from models import *
 from biodiversity.noticias.models import *
 from biodiversity.clima.models import *
-from biodiversity.documentos.models import *
 from biodiversity.precio.models import *
 from biodiversity.humedad.models import *
 
@@ -68,26 +66,6 @@ class SociosAdmin(admin.ModelAdmin):
     list_filter = ['nombre', ]
     search_fields = ['nombre',]
 	
-class CategoriaAdmin(admin.ModelAdmin):
-    save_on_top = True
-    actions_on_top = True
-    list_display = ('nombre', )
-    list_filter = ['nombre', ]
-    search_fields = ['nombre',]
-    
-class AdjuntoInline(admin.TabularInline):
-    model = Adjunto
-    extra = 1
-    max_num = 4
-	
-class DocumentosAdmin(admin.ModelAdmin):
-    save_on_top = True
-    actions_on_top = True
-    inlines = [AdjuntoInline]
-    list_display = ('titulo', )
-    list_filter = ['titulo', ]
-    search_fields = ['titulo',]
-
 class GaleriaInline(admin.TabularInline):
     model = Galeria
     extra = 1
@@ -114,9 +92,6 @@ admin.site.register(Producto)
 admin.site.register(Precio)
 admin.site.register(Climas, ClimasAdmin)
 admin.site.register(Socios)
-admin.site.register(Categoria)
-admin.site.register(Documentos, DocumentosAdmin)
 admin.site.register(Humedad)
 admin.site.register(Moneda)
 admin.site.register(Noticias, NoticiasAdmin)
-admin.site.register(SubCategoria)

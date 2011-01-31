@@ -1,0 +1,14 @@
+{%extends "base.html"%}
+{%block title%}Documentos - {{documento.titulo}}{%endblock%}
+{%block extra_header%}
+{%endblock%}
+{%block contenido%}
+    <h2>{{documento.titulo}}</h2>
+    {{documento.resumen}}
+    {{documento.fecha}}
+    {{documento.publico}}
+    {{documento.palabra_clave}}
+       
+{%endblock %}
+
+ 

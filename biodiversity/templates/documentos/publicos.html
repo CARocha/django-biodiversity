@@ -1,0 +1,26 @@
+{%extends "base.html"%}
+{%block title%}Documentos - {{documento.titulo}}{%endblock%}
+{%block extra_header%}
+{%endblock%}
+{%block contenido%}
+
+    {%for documento in documentos.object_list%}
+      <h2>{{documento.titulo}}</h2>
+      {{documento.resumen}}
+      {{documento.fecha}}
+      {{documento.publico}}
+      {{documento.palabra_clave}}
+    {%endfor%}
+    
+    {% if documentos.has_previous %}
+      <a href="?page={{documentos.previous_page_number}}">Anterior</a>
+    {%endif%}
+    Página {{documentos.number}} de {{documentos.paginator.num_pages}}
+    {% if documentos.has_next%}
+      <a href="?page={{documentos.next_page_number}}">Anterior</a>
+    {%endif%}
+
+    
+{%endblock %}
+
+ 
