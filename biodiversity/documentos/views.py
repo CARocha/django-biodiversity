@@ -10,9 +10,10 @@ from models import *
 @login_required
 def privados(request):
     documentos = _get_documentos(request, 
-                                 Documentos.objects.all())
+                                 Documentos.objects.all().order_by('-fecha'))
+    categorias = Categoria.objects.all()
     return render_to_response('documentos/privados.html', 
-                              {'documentos': documentos},
+                              {'documentos': documentos,'categorias':categorias},
                               context_instance=RequestContext(request))
 def documento(request, documento_id):
     documento = get_object_or_404(Documentos, pk=documento_id)
@@ -38,9 +39,10 @@ def categoria(request, categoria_id):
 
 def publicos(request):
     documentos = _get_documentos(request, 
-                                 Documentos.objects.filter(publico=True))
+                                 Documentos.objects.filter(publico=True).order_by('-fecha'))
+    categorias = Categoria.objects.all()
     return render_to_response('documentos/publicos.html', 
-                              {'documentos': documentos},
+                              {'documentos': documentos,'categorias':categorias},
                               context_instance=RequestContext(request))
 
 def _get_documentos(request, queryset, elements=25):

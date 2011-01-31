@@ -67,6 +67,73 @@ a{
 .header .login{
     margin-left: 430px;
 }
+
+/*agregado por byron */
+
+#sidebar{
+    background:#d3cfa9;
+    width:250px;
+    float:left;
+    margin-top:5px;
+}
+
+#sidebar .titulo{
+    font-size:20px;
+    color:#000;
+    font-weight:normal;
+    background: url(/files/img/h1sidebar.jpg) repeat-x;
+    height:48px;
+    padding-top:10px;
+    padding-left:10px;
+}
+
+#sidebar a, #sidebar a:visited{
+    padding-left:45px;
+    display:block;
+    font-size:11px;
+    margin-bottom:10px;
+    height:40px;
+    background: url(/files/img/carpetadocumento.png) no-repeat;
+    background-position:center left;
+    color:#000;
+}
+
+#sidebar a:hover{
+    border-left:#a5a28a 4px solid;
+}
+
+#contenido{
+    float:left;
+    background:#fff;
+    margin-top:5px;
+    margin-left:5px;
+    width:695px;
+}
+
+#encabezado_contenido{
+    border-top:#90beb8 10px solid;
+    border-bottom:#90beb8 1px solid;
+    font-size:24px;
+    color:#6c6c6c;
+    padding-left:5px;
+    height:35px;
+}
+
+#barra_busqueda{
+    background:#f8fbfa;
+    font-size:14px;
+    color:#000;
+    padding-left:5px;
+    height:29px;
+    padding-top:4px;
+}
+
+#barra_busqueda #busqueda{
+    border:#dfdfdf 1px solid;
+    width:250px;
+    background: url(/files/img/fondobusqueda.png) repeat-x;
+}
+
 .footer{
     color: #7d7361;
     font-size: 12px;

@@ -14,6 +14,11 @@ class Categoria(models.Model):
     def __unicode__(self):
         return self.nombre
 
+    def conteo(self):
+        #Cuenta el numero de archivos en esta categoria
+        conteo = Documentos.objects.filter(categoria__id = self.id).count()
+        return "%s" % str(conteo)
+
 class Documentos(models.Model):
     ''' Modelo sobre los modelos que 
     contendran los distintos documentos
