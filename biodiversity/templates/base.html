@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{%block title%}SISTEMA DE INFORMACIÓN BIOVERSITY{%endblock%}</title>
         <link href="{{MEDIA_URL}}css/bioversity.css" rel="stylesheet" type="text/css" media="screen" />
+         <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/forum/baseforo.css">
         <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	{%block extra_header%}{%endblock%}
@@ -27,8 +28,11 @@
                             <li class="selecto"><a href="/">Inicio</a></li>&nbsp;|&nbsp;
                             <li><a href="/proyecto/">El Proyecto</a></li>&nbsp;|&nbsp;
                             <li><a href="/mapa/">Mapa de sitios</a></li>&nbsp;|&nbsp;
-                            <li><a href="/noticias/listar">Noticias</a></li>&nbsp;|&nbsp;
-                            <li><a href="/datos/">Datos</a></li>
+                            <li><a href="/noticias/listar">Noticias</a></li>
+                            {% if user.is_authenticated %}
+                                &nbsp;|&nbsp;<li><a href="#">Biblioteca</a></li>&nbsp;|&nbsp;
+                                <li><a href="/foro/">Foro</a></li>
+                            {% endif %}
                         </ul>                         
                     </div>
                     <div class="clean"></div>

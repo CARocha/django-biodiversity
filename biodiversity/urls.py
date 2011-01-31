@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     (r'^$', direct_to_template, {'template': 'index.html'}),
     (r'^admin/', include(admin.site.urls)),
     (r'^noticias/', include('noticias.urls')),
+    (r'^foro/', include('forum.urls')),
 )
 
 if settings.DEBUG:

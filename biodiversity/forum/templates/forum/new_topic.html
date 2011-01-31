@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block extratitle %} Nuevo Tema{% endblock %}
+{% block extrahead %}
+<script type="text/javascript" src="/files/js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript">
+    {% if user.get_profile or user.is_superuser %}
+    function CustomFileBrowser(field_name, url, type, win) {
+        //alert("Field_Name: " + field_name + "\nURL: " + url + "\nType: " + type + "\nWin: " + win);
+        var cmsURL = "/admin/filebrowser/";
+        cmsURL = cmsURL + "&type=" + type;
+
+        tinyMCE.activeEditor.windowManager.open({
+            file: cmsURL,
+            width: 400,  // Your dimensions may differ - toy around with them!
+            height: 300,
+            resizable: "yes",
+            scrollbars: "yes",
+            inline: "no",  // This parameter only has an effect if you use the inlinepopups plugin!
+            popup_css : false,
+            close_previous: "no"
+        }, {
+            window: win,
+            input: field_name,
+            editor_id: tinyMCE.selectedInstance.editorId
+        });
+        return false;
+    }
+
+    tinyMCE.init({
+        // General options
+        mode : "textareas",
+        theme : "advanced",
+        plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,template,inlinepopups,autosave",
+        // Theme options
+        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+        theme_advanced_buttons2 : "cut,copy,paste,|,bullist,numlist,|,blockquote,|,undo,redo,|,link,unlink,image,cleanup,|,emotions,inserttime,preview,|,forecolor,",
+        theme_advanced_buttons3 : "",
+        theme_advanced_buttons4 : "",
+        theme_advanced_toolbar_location : "top",
+        theme_advanced_toolbar_align : "left",
+        theme_advanced_statusbar_location : "bottom",
+        invalid_elements: "script,form,textarea,input,label",
+        file_browser_callback: "CustomFileBrowser",
+        // Example word content CSS (should be your site CSS) this one removes paragraph margins
+        content_css : "/files/js/tiny_mce/css/word.css"
+
+    });
+    {% else %}
+    tinyMCE.init({
+        mode: "textareas",
+        theme: "advanced",
+        theme_advanced_buttons1: "bold,italic,underline, strikethrough, separator,justifyleft, justifycenter,justifyright,  justifyfull, separator",
+        theme_advanced_buttons2: "",
+        theme_advanced_buttons3: "",
+        theme_advanced_buttons4: "",
+        theme_advanced_toolbar_location : "top",
+        theme_advanced_toolbar_align : "left"
+    });
+    {% endif %}
+</script>
+
+<style type="text/css">
+    label{
+        font-size: 12px;
+    }
+
+    input#id_titulo{
+        border: 1px solid #BFBFBF;
+        padding: 2px;
+        width: 250px;
+    }
+
+    textarea{
+        width: 550px;
+        height: 300px;
+    }
+
+    .submit{
+        margin-left: 15px;
+    }
+</style>
+{% endblock %}
+{% block contenido %}
+<div>
+    <br><br><br><br><br>
+    <div><span class="forum_title">Nuevo Tema</span></div><br>
+    <form action="." method="POST" class="topic-form" id="topic-form">{% csrf_token %}
+        <table cellspacing="1" width="100%" style="background: #f2f3e6;">
+            {{form.as_table}}
+        </table><br>
+        <input type="submit" class="submit" value="Crear">
+    </form>
+</div>
+{% endblock %}
+
