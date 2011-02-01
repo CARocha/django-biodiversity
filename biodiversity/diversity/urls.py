@@ -4,8 +4,8 @@ from models import Encuesta
 
 urlpatterns = patterns('bioversity.views',
     (r'^$', 'index'),
-    (r'^noticias/$', 'lista_noticias'),
-    (r'^noticias/(?P<noticia_id>\d+)/$', 'ver_noticia'),
-    (r'^documentos/$', 'lista_documentos'),
-    (r'^documentos/(?P<documento_id>\d+)/$', 'ver_documento'),
+    (r'^sitios/$', 'lista_sitios'),
+    (r'^sitios/(?P<sitio_id>\d+)/$', 'ver_sitio'),
+    (r'^socios/$', 'lista_socios'),
+    (r'^socios/(?P<socio_id>\d+)/$', 'ver_socio'),
 )

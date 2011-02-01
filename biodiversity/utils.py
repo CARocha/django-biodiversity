@@ -1,6 +1,7 @@
  # -*- coding: UTF-8 -*-
 import os
 import re
+from django.core.paginator import Paginator, InvalidPage, EmptyPage
 
 p = re.compile(r'[^0-9a-zA-Z\._]+')
 
@@ -27,3 +28,19 @@ def get_image_path(instance, filename):
     filename = "%s.%s" % (nombre, ext)
     return os.path.join(instance.imgDir, filename)
 
+def _get_elementos(request, queryset, elements=25):
+    '''Metodo para jalar documentos paginados via queryset
+    usar queryset filtrado que devuelva mas de 1 resultado'''
+    paginator = Paginator(queryset, elements)
+
+    try: 
+        page = int(request.GET.get('page', '1'))
+    except ValueError:
+        page = 1
+
+    try:
+        elementos = paginator.page(page)
+    except (EmptyPage, InvalidPage):
+        elementos = paginator.page(paginator.num_pages)
+
+    return elementos 
