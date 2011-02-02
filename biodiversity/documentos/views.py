@@ -24,7 +24,8 @@ def documento(request, documento_id):
                                   context_instance=RequestContext(request))
     else:
         request.flash['message'] = 'Este documento no es público, favor inice sesión'
-        return HttpResponseRedirect(reverse('django.contrib.auth.views.login'))
+        #return HttpResponseRedirect(reverse('django.contrib.auth.views.login'))
+        return HttpResponseRedirect('/accounts/login?next=/documentos/documento/%s' % documento.id)
 
 def categoria(request, categoria_id):
     categoria = get_object_or_404(Categoria, pk=categoria_id)
