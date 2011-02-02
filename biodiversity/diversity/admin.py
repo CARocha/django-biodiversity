@@ -41,13 +41,20 @@ class ProductoAdmin(admin.ModelAdmin):
     list_filter = ['nombre', ]
     search_fields = ['nombre',]
     
+class PrecioInline(admin.TabularInline):
+    model = Precio
+    extra = 1
+    
+class PrecioConsumidorInline(admin.TabularInline):
+    model = PrecioConsumidor
+    extra = 1
+    
 class PrecioAdmin(admin.ModelAdmin):
-    save_on_top = True
     actions_on_top = True
-    list_display = ('__unicode__', )
-    list_filter = ['__unicode__', ]
-    search_fields = ['__unicode__',]
-
+    inlines = [PrecioInline,PrecioConsumidorInline]
+    list_display = ('precioconsumidor', 'precioproductor', 
+                    'productoconsumidor', 'productoproductor',)
+    
 class ClimaInline(admin.TabularInline):
     model = Clima
     extra = 1
@@ -89,7 +96,7 @@ admin.site.register(Lugar)
 admin.site.register(Variedad)
 admin.site.register(UnidadProducto)
 admin.site.register(Producto)
-admin.site.register(Precio)
+admin.site.register(Precios, PrecioAdmin)
 admin.site.register(Climas, ClimasAdmin)
 admin.site.register(Socios)
 admin.site.register(Humedad)
