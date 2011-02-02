@@ -63,17 +63,17 @@ class Precios(models.Model):
     def precioproductor(self):
         mostrar1 = Precio.objects.get(precios2__id=self.id).precio_productor
         return "%s" % (mostrar1)
-    precioconsumidor.short_description = 'Precio Productor'
+    precioproductor.short_description = 'Precio Productor'
         
     def productoconsumidor(self):
         mostrar2 = PrecioConsumidor.objects.get(precios1__id=self.id).producto.nombre
         return "%s" % (mostrar2)
-    precioconsumidor.short_description = 'Producto Consumidor'
+    productoconsumidor.short_description = 'Producto Consumidor'
     
     def productoproductor(self):
         mostrar3 = Precio.objects.get(precios2__id=self.id).producto.nombre
         return "%s" % (mostrar3)
-    precioconsumidor.short_description = 'Producto Productor'
+    productoproductor.short_description = 'Producto Productor'
         
    
 class PrecioConsumidor(models.Model):
