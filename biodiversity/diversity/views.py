@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from diversity.models import *
 #from datetime import date
 #from decimal import Decimal
-from biodiversity.utils import _get_elmentos
+from biodiversity.utils import _get_elementos 
 
 
 def index(request):
@@ -20,7 +20,7 @@ def index(request):
 
 def lista_sitios(request):
     '''Lista de sitios paginados'''
-    sitios = _get_elmentos(request, Lugar.objects.all())
+    sitios = _get_elementos(request, Lugar.objects.all())
     return render_to_response('diversity/lista_sitios.html', {'sitios': sitios},
                               context_instance=RequestContext(request))
 
@@ -31,7 +31,7 @@ def ver_sitio(request, sitio_id):
                               context_instance=RequestContext(request))
 
 def lista_socios(request):
-    socios = _get_elmentos(request, Socios.objects.all())
+    socios = _get_elementos(request, Socios.objects.all())
     return render_to_response('diversity/lista_socios.html', {'socios': socios},
                               context_instance=RequestContext(request))
 

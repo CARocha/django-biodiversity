@@ -1,0 +1,49 @@
+{%extends "base.html"%}
+{%block title%}sitios Privados - {{sitio.titulo}}{%endblock%}
+{%block extra_header%}
+{%endblock%}
+{%block contenido%}
+
+<div id="sidebar">
+    <div class="titulo">Directorio</div>
+        {%for categoria in categorias %}
+            <a href="/sitios/categoria/{{categoria.id}}">
+                {{categoria.nombre}}<br>
+                <span style="color:#565656">{{categoria.conteo}} archivos</span>
+            </a>
+        {%endfor%}
+</div>
+
+<div id="contenido">
+    <div id="encabezado_contenido">Biblioteca de sitios</div>
+    <div id="barra_busqueda">
+        <form action="/busqueda/" method="get">
+            <div>
+                <label>Palabra Clave</label>
+                 <input type="text" name="q" id="busqueda" value=""/>
+            </div>
+        </form>
+    </div>
+    {%for sitio in sitios.object_list%}
+      <h2>{{sitio.titulo}}</h2>
+      {{sitio.resumen}}
+      {{sitio.fecha}}
+      {{sitio.publico}}
+      {{sitio.palabra_clave}}
+    {%endfor%}
+    
+    {% if sitios.has_previous %}
+      <a href="?page={{sitios.previous_page_number}}">Anterior</a>
+    {%endif%}
+    Página {{sitios.number}} de {{sitios.paginator.num_pages}}
+    {% if sitios.has_next%}
+      <a href="?page={{sitios.next_page_number}}">Anterior</a>
+    {%endif%}
+
+
+</div>
+
+    
+{%endblock %}
+
+ 
