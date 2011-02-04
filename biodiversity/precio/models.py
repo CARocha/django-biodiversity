@@ -41,8 +41,8 @@ class Producto(models.Model):
         return self.nombre
         
 class Moneda(models.Model):
+    codigo = models.CharField(max_length=3, unique=True)
     nombre = models.CharField(max_length=200)
-    
     
     class Meta:
         verbose_name_plural = "Tipos de Moneda"
@@ -113,3 +113,28 @@ class Precio(models.Model):
    
     def __unicode__(self):
         return self.producto.nombre
+
+class TipoCambio(models.Model):
+    cantidad_local = models.FloatField('Ingrese cantidad en moneda local')
+    moneda_local = models.ForeignKey(Moneda)
+    cantidad_extranjera = models.FloatField('Ingrese cantidad en moneda extranjera')
+    moneda_extranjera= models.ForeignKey(Moneda, related_name="tipocambio_moneda")
+    fecha = models.DateField(auto_now=True)
+
+    class Meta: 
+        verbose_name = "Tipo de cambio"
+        verbose_name_plural = "Tipos de cambios"
+        unique_together = ['moneda_local', 'moneda_extranjera', 
+                           'fecha']
+
+    def __unicode__(self):
+        return "conversion de %s a %s para %s" % (self.moneda_local.nombre, 
+                self.moneda_extranjera.nombre, self.fecha)
+
+    def to_local(monto):
+        local = (self.cantidad_local * monto)/self.cantidad_extranjera
+        return local 
+    
+    def to_extran(monto):
+        extran = (monto * self.cantidad_extranjera)/self.cantidad_local
+        return extran
