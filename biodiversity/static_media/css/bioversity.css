@@ -18,6 +18,10 @@ img{
 a{
     outline: none;
 }
+.centro{
+  margin: 0pt auto;
+  padding:0pt;
+ }
 .header{
     height: 114px;    
 }
@@ -75,6 +79,7 @@ a{
     width:250px;
     float:left;
     margin-top:5px;
+    
 }
 
 #sidebar .titulo{
@@ -135,6 +140,18 @@ a{
 }
 
 /*agregado por byron para la biblioteca*/
+
+#titulo_categoria{
+    padding:5px;
+    background:#D2D1AC;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    width:250px;
+    text-align:center;
+    margin-top:5px;
+    color:#595856;
+}
 
 .detalle_doc_prin{
     height:42px;
