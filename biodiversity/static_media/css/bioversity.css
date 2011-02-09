@@ -134,6 +134,60 @@ a{
     background: url(/files/img/fondobusqueda.png) repeat-x;
 }
 
+/*agregado por byron para la biblioteca*/
+
+.detalle_doc_prin{
+    height:42px;
+    border-bottom:#e6f1ed 1px solid;
+    padding-top:8px;
+    padding-left:5px;
+}
+
+.detalle_doc_prin:hover{
+    background:#E9F7FA;
+}
+
+.cuenta_archivo{
+    font-size:11px;
+    color:#5d5d5d;
+}
+
+.tag_archivo{
+    padding:2px;
+    background:#ebebeb;
+    width:100px;
+    float:right;
+    font-size:11px;
+}
+
+.nombre_archivo{
+    font-size:12px;
+    color:#000;
+}
+
+.detalle_doc_sec{
+    background:#fdfcc3;
+    font-size:12px;
+    color:#424242;
+
+}
+
+.resumen_archivo{
+    border-bottom:#d3cfa9 1px solid;
+    padding:5px;
+}
+
+.adjunto_archivo{
+    border-bottom:#d3cfa9 1px solid;
+    padding:5px;
+}
+
+.adjunto_archivo a:hover img{
+    -moz-box-shadow: 0px 0px 3px #757575;
+    -webkit-box-shadow: 0px 0px 3px #757575;
+}
+
+
 .footer{
     color: #7d7361;
     font-size: 12px;
