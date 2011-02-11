@@ -8,9 +8,13 @@
     <td><a href="/noticias/ver/{{noticia.id}}">{{noticia.titulo}}</a></td>
     <td>{{noticia.texto|truncatewords:5}}</td>
     {%if noticia.adjunto %}
-     {% for galeria in  noticia.adjunto.all %}
-        <td> <img src="{{galeria.adjunto.url_250x250}}"> </td>
-     {% endfor %}
+
+	    	<div id="slider">
+           {% for galeria in  noticia.adjunto.all %}
+                <img src="{{galeria.adjunto.url_250x250}}">
+           {% endfor %}
+            </div>
+
      {%endif%}
 </tr>
 <br>
