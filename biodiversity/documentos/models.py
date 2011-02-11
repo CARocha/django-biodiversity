@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from biodiversity.utils import get_file_path 
+import re
         
 class Categoria(models.Model):
     ''' Modelos sobre las categorias de los
@@ -36,6 +37,14 @@ class Documentos(models.Model):
 
     def __unicode__(self):
         return self.titulo
+    
+    def archivos_cuenta(self):
+        archivos_cuenta = Adjunto.objects.filter(documento__id = self.id).count()
+        return "%s" % str(archivos_cuenta)
+
+    def adjuntos(self):
+        adjuntos = Adjunto.objects.filter(documento__id = self.id)
+        return adjuntos
         
 class Adjunto(models.Model):
     ''' Modelo para agregar varios archivos 
@@ -48,4 +57,10 @@ class Adjunto(models.Model):
 
     class Meta:
         verbose_name_plural = "Adjunto a documentos"
-
+        
+    def tipo(self):
+        '''Devuelve la extension del archivo'''
+        cadena = len(str(self.adjunto))
+        tipo = str(self.adjunto)[cadena-3:cadena]
+        return tipo
+    

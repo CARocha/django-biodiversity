@@ -29,6 +29,7 @@ def documento(request, documento_id):
 
 def categoria(request, categoria_id):
     categoria = get_object_or_404(Categoria, pk=categoria_id)
+    categorias = Categoria.objects.all()
     if request.user.is_authenticated():
         documentos = _get_elementos(request, 
                                      Documentos.objects.filter(categoria=categoria))
@@ -36,7 +37,7 @@ def categoria(request, categoria_id):
         documentos = _get_elementos(request, 
                                      Documentos.objects.filter(categoria=categoria, publico=True))
     return render_to_response('documentos/categoria.html', 
-                              {'documentos': documentos},
+                              {'documentos': documentos, 'categorias':categorias, 'categoria':categoria},
                               context_instance=RequestContext(request))
 
 def publicos(request):
