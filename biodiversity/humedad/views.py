@@ -1,5 +1,8 @@
 from models import *
 import datetime
+from diversity.forms import *
+from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
+from django.template import RequestContext
 
 def inicio(request):
     if request.method == 'POST':
@@ -7,13 +10,9 @@ def inicio(request):
         form = DiversityForm(request.POST)
         if form.is_valid():
             request.session['fecha'] = form.cleaned_data['fecha']
-            request.session['departamento'] = form.cleaned_data['departamento']
-            try:
-                municipio = Municipio.objects.get(id=form.cleaned_data['municipio']) 
-            except:
-                municipio = None
-
-            request.session['municipio'] = municipio 
+            request.session['pais'] = form.cleaned_data['pais']
+            request.session['lugar'] = form.cleaned_data['lugar']
+            request.session['tipo_grafo'] = form.cleaned_data['tipo_grafo'] 
 
             mensaje = "Todas las variables estan correctamente :)"
             request.session['activo'] = True
@@ -27,5 +26,6 @@ def inicio(request):
                               context_instance=RequestContext(request)) 
 
 def grafohumedad(request):
+    pass
     
 

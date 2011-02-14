@@ -6,5 +6,4 @@ urlpatterns = patterns('diversity.views',
     (r'^sitios/(?P<sitio_id>\d+)/$', 'ver_sitio'),
     (r'^socios/$', 'lista_socios'),
     (r'^socios/(?P<socio_id>\d+)/$', 'ver_socio'),
-    (r'^index/$', 'inicio'),
 )
