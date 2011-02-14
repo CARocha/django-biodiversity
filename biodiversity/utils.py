@@ -43,4 +43,4 @@ def _get_elementos(request, queryset, elements=25):
     except (EmptyPage, InvalidPage):
         elementos = paginator.page(paginator.num_pages)
 
-    return elementos 
+    return elementos

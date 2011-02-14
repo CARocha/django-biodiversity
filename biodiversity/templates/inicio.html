@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{%block extra_header%}
+<script>
+        $(document).ready(function() {
+        var departamento = document.getElementById("id_departamento");
+        var municipio = document.getElementById("id_municipio");
+        var comunidad= document.getElementById("id_comunidad");
+       
+        $("#id_departamento").change(function () {
+            var index = departamento.options.selectedIndex;
+            var id = departamento.options[index].value;
+            $.getJSON("ajax/municipio/" + id +"/",
+            function(data){
+                municipio.options.length = 0;
+                comunidad.options.length = 0;
+                municipio.options[0] = new Option("--------");
+                for(i=0; i< data.length; i++){
+                    municipio.options[i+1] = new Option(data[i][1], data[i][0]);
+                }
+            });
+        });
+        $("#id_municipio").change(function () {
+            var index = municipio.options.selectedIndex;
+            var id = municipio.options[index].value;
+            $.getJSON("ajax/comunidad/" + id +"/",
+            function(data){
+                comunidad.options.length = 0;
+                comunidad.options[0] = new Option("---------");
+                for(i=0; i< data.length; i++){
+                    comunidad.options[i+1] = new Option(data[i][1], data[i][0]);
+                }
+            });
+        });
+        
+    });
+</script>
+{% endblock %}
+{% block menu %}  
+
+{% endblock %}
+
+{% block contenido %}
+                    <form action"." method="POST">
+                        {% csrf_token %}
+
+                    <div id="formulario_tabla" >
+                        <div class="form_label"><b>{{form.fecha.label}}</b></div>
+                        <div class="form_widget">{{form.fecha}}</div>
+                        <div class="form_label"><b>{{form.pais.label}}</b></div>
+                        <div class="form_widget">{{form.pais}}</div>
+                        <div class="form_label"><b>{{form.lugar.label}}</b></div>
+                        <div class="form_widget">{{form.lugar}}</div>
+                        <div class="form_label"><b>{{form.tipo_grafo.label}}</b></div>
+                        <div class="form_widget">{{form.tipo_grafo}}</div>
+                    </div>
+
+                      <input type="submit" value="Consultar" id="boton" class="filtro"/>
+                    </form>
+                   
+
+
+{% endblock %}
