@@ -6,11 +6,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.http import *
 import datetime
-
-#from members.forms import *
-#from registro.models import *
 from forum.models import *
-#from registro.files import *
 from forum.forms import *
 
 

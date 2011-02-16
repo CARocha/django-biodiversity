@@ -4,10 +4,16 @@
 
 {% endblock %}
 {% block contenido %}
-<div>
-    <br><br><br><br><br>
-    <div><!--<a href="../"><span class="forum_title">Foros&nbsp;&rsaquo;&rsaquo;</span></a>--><span class="forum_title">{{forum.titulo}}</span></div>
-    <div style="float: right;"><a href="./post/new/" class="new"></a></div><br><br>
+<div>        
+    <div class="controls">
+        <a href="./post/new/" class="new">
+            <img src="/files/img/forum/new_post.png" alt="nuevo tema">Nuevo Tema
+        </a>
+    </div>
+    <div class="breadcrumbs">
+        <a href="../">Foro &raquo; </a>{{forum.titulo|title}}
+    </div>
+    <div class="clean"></div>
     <table cellspacing="1" width="100%">
         <tr>
             <th class="azul" colspan="2">&nbsp;Temas&nbsp;</th>
@@ -27,7 +33,7 @@
             <td class="row2" align="center">
                 <p class="topicdetails">
                     <a href="">{{tema.author}}</a></p></td>
-            <td class="row1" align="center"><p class="topicdetails">{{tema.posts}}</p></td>
+            <td class="row1" align="center"><p class="topicdetails">{{tema.post_set.all.count}}</p></td>
             <td class="row2" align="center"><p class="topicdetails">{{tema.visto}}</p></td>
             <td class="row1 last-post" width="50" align="center">
                 <p class="topicdetailsx" style="white-space: nowrap;">
