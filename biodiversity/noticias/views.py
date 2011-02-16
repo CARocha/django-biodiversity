@@ -6,6 +6,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 
 def lista_noticias(request):
+    request.session['flag'] = 'noticia'
     '''Vista de lista general de noticias paginadas'''
     noticias_list = Noticias.objects.all()
     paginator = Paginator(noticias_list, 5) 
@@ -21,7 +22,7 @@ def lista_noticias(request):
         noticias = paginator.page(paginator.num_pages)
 
     return render_to_response('noticias/lista_noticias.html', 
-            {"noticias": noticias},
+            locals(),
             context_instance=RequestContext(request))
 
 def ver_noticia(request, noticia_id):

@@ -6,15 +6,12 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.http import *
 import datetime
-
-#from members.forms import *
-#from registro.models import *
 from forum.models import *
-#from registro.files import *
 from forum.forms import *
 
 
 def index(request):
+    request.session['flag'] = 'foro'
     categorias = Categories.objects.all()
     total_post = Post.objects.all().count()
     total_topics = Thread.objects.all().count()
@@ -24,6 +21,7 @@ def index(request):
                               context_instance=RequestContext(request))
 
 def forum_list(request, slug):
+    flag = 'foro'
     try:
         forum = Forum.objects.get(slug=slug)
     except ObjectDoesNotExist:
@@ -37,6 +35,7 @@ def forum_list(request, slug):
                                context_instance=RequestContext(request))
 
 def forum_detail(request, slug, t_slug):
+    flag = 'foro'
     try:
         thread = Thread.objects.get(slug=t_slug)
         thread.visto = thread.visto+1
@@ -51,6 +50,7 @@ def forum_detail(request, slug, t_slug):
 
 @login_required(redirect_field_name='next')
 def new_topic(request, slug):
+    flag = 'foro'
     try:
         forum = Forum.objects.get(slug=slug)
     except ObjectDoesNotExist:
@@ -85,6 +85,7 @@ def new_topic(request, slug):
 
 @login_required(redirect_field_name='next')
 def topic_reply(request, slug, t_slug):
+    flag = 'foro'
     try:
         forum = Forum.objects.get(slug=slug)
     except ObjectDoesNotExist:

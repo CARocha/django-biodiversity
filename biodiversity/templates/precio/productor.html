@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{%block extra_header%}
+<script>
+  $('#grafo').visualize();
+</script>
+{% endblock %}
+{% block menu %}  
+{% if request.session.activa%}
+<a href="/precio/grafo/productor/"> Precio al productor</a>
+<a href="/precio/grafo/consumidor/"> Precio al consumidor</a>
+<a href="/precio/grafo/comparativa/">Comparativa </a>
+{%endif%}
+{% endblock %}
+
+{% block contenido %}
+<table id="grafo">
+  <caption>Precio al Productor.</caption>
+  <thead>
+    <tr>
+      <td scope='col'>meses</td>
+      <td scope='col'>meses</td>
+      <td scope='col'>meses</td>
+      <td scope='col'>meses</td>
+      <td scope='col'>meses</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td scope='row'>Producto</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100</td>
+      <td>100</td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}

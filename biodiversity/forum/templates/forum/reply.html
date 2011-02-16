@@ -1,51 +1,8 @@
 {% extends "base.html" %}
 {% block extratitle %} Responder{% endblock %}
-{% block extrahead %}
+{% block extra_header %}
 <script type="text/javascript" src="/files/js/tiny_mce/tiny_mce.js"></script>
-<script type="text/javascript">
-    {% if user.get_profile or user.is_superuser %}
-    function CustomFileBrowser(field_name, url, type, win) {
-        //alert("Field_Name: " + field_name + "\nURL: " + url + "\nType: " + type + "\nWin: " + win);
-        var cmsURL = "/admin/filebrowser/";
-        cmsURL = cmsURL + "&type=" + type;
-
-        tinyMCE.activeEditor.windowManager.open({
-            file: cmsURL,
-            width: 400,  // Your dimensions may differ - toy around with them!
-            height: 300,
-            resizable: "yes",
-            scrollbars: "yes",
-            inline: "no",  // This parameter only has an effect if you use the inlinepopups plugin!
-            popup_css : false,
-            close_previous: "no"
-        }, {
-            window: win,
-            input: field_name,
-            editor_id: tinyMCE.selectedInstance.editorId
-        });
-        return false;
-    }
-
-    tinyMCE.init({
-        // General options
-        mode : "textareas",
-        theme : "advanced",
-        plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,template,inlinepopups,autosave",
-        // Theme options
-        theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
-        theme_advanced_buttons2 : "cut,copy,paste,|,bullist,numlist,|,blockquote,|,undo,redo,|,link,unlink,image,cleanup,|,emotions,inserttime,preview,|,forecolor,",
-        theme_advanced_buttons3 : "",
-        theme_advanced_buttons4 : "",
-        theme_advanced_toolbar_location : "top",
-        theme_advanced_toolbar_align : "left",
-        theme_advanced_statusbar_location : "bottom",
-        invalid_elements: "script,form,textarea,input,label",
-        file_browser_callback: "CustomFileBrowser",
-        // Example word content CSS (should be your site CSS) this one removes paragraph margins
-        content_css : "/files/js/tiny_mce/css/word.css"
-
-    });
-    {% else %}
+<script type="text/javascript">    
     tinyMCE.init({
         mode : "textareas",
         theme : "advanced",
@@ -55,8 +12,7 @@
         theme_advanced_buttons4: "",
         theme_advanced_toolbar_location : "top",
         theme_advanced_toolbar_align : "left"
-    });
-    {% endif %}
+    });    
 </script>
 <style type="text/css">
     label{
@@ -70,8 +26,8 @@
     }
 
     textarea{
-        width: 550px;
-        height: 300px;
+        width: 99.5%;
+        height: 150px;        
     }
 
     .submit{
@@ -80,17 +36,20 @@
 </style>
 {% endblock %}
 {% block contenido %}
+<div class="breadcrumbs">
+    <a href="../../../">Foro &raquo; </a><a href="../../">{{thread.forum|title}} &raquo;</a> {{thread.titulo|title}}
+</div>
+<div class="clean"></div>
 <div>
-    <br><br><br><br><br>
-    <div><span class="forum_title">Respuesta</span></div><br>
+    <br>
+    <div class="respuesta">Respuesta a: <span class="to">{{thread.titulo|title}}</span></div><br>
     <form action="." method="POST" class="topic-form" id="topic-form">{% csrf_token %}
-        <div style="margin-left: 15px;">{{form.body}}</div>
+        <div>{{form.body}}</div>
         <br>
-        <input type="submit" class="submit" value="Responder">
+        <input type="submit" class="submit" value="Responder"> <button onclick="javascript:history.back(1); return false;">Cancelar</button>
     </form>
 </div>
 <div>
-
     <br>
     <table cellspacing="1" width="100%">
         <tr>
@@ -98,17 +57,13 @@
             <th class="azul">&nbsp;Mensaje original&nbsp;</th>
         </tr>
         <tr>
-            <td class="row1" align="center"><a href="/{{thread.author.username}}/"><div style="font-size: 14px;"><b>{{thread.author.username}}</b></div></a></td>
+            <td class="row1" align="center"><a href="."><span style="font-size: 14px;"><b>{{thread.author.username}}</b></span></a></td>
             <td class="row1"><b>Titulo: </b>{{thread.titulo|title}} <div style="float: right;"><b>Posteado: </b>{{thread.time|date:"M j, Y f a"}}</div></td>
         </tr>
         <tr>
             <td class="row1">
                 <div style="font-size: 10px;">
-                   
-                    <center><img class="forum-avatar" src="" alt=""></center>
-                
-                    <center><img class="forum-avatar" src="/files/img/no-image.jpg" alt=""></center>
-                   
+                    <center><img class="forum-avatar" src="/files/img/forum/user.png" alt=""></center>
                     <p><b>Joined: </b> {{thread.author.date_joined|date:"M j, Y f a"}}<p>
                         <b>Post: </b>{{thread.author.post_set.count}}<br><br>
                         <b style="color: #069;">{{thread.author.get_full_name}}</b>
@@ -124,17 +79,13 @@
     {% for post in thread.post_set.all %}
     <table cellspacing="1" width="100%">
         <tr>
-            <th width="150px" class="row2" style="padding: 7px 5px;"><a href="/{{post.author.username}}/"><div style="font-size: 12px;"><b>{{post.author.username}}</b></div></a></th>
+            <th width="150px" class="row2" style="padding: 7px 5px;"><a href="."><span style="font-size: 12px;"><b>{{post.author.username}}</b></span></a></th>
             <th class="row2"><div style="float: left;"><b>Re: </b>{{thread.titulo|title}}</div><div style="float: right;"><b>Posteado: </b>{{post.time|date:"M j, Y f a"}}</div></th>
         </tr>
         <tr>
             <td class="row1" style="vertical-align: top;">
                 <div style="font-size: 10px;">
-                  
-                    <center><img class="forum-avatar" src="" alt=""></center>
-                  
-                    <center><img class="forum-avatar" src="/files/img/no-image.jpg" alt=""></center>
-                  
+                    <center><img class="forum-avatar" src="/files/img/forum/user.png" alt=""></center>
                     <p><b>Joined: </b> {{post.author.date_joined|date:"M j, Y f a"}}<p>
                         <b>Post: </b>{{post.author.post_set.count}}<br><br>
                         <b style="color: #069;">{{post.author.get_full_name}}</b>
