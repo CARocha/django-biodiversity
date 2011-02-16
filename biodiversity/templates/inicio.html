@@ -3,36 +3,20 @@
 {%block extra_header%}
 <script>
         $(document).ready(function() {
-        var departamento = document.getElementById("id_departamento");
-        var municipio = document.getElementById("id_municipio");
-        var comunidad= document.getElementById("id_comunidad");
+        var pais = document.getElementById("id_pais");
+        var zona = document.getElementById("id_lugar");
        
-        $("#id_departamento").change(function () {
-            var index = departamento.options.selectedIndex;
-            var id = departamento.options[index].value;
-            $.getJSON("ajax/municipio/" + id +"/",
+        $("#id_pais").change(function () {
+            var index = pais.options.selectedIndex;
+            var id = pais.options[index].value;
+            $.getJSON("/bioversity/ajax/pais/" + id +"/",
             function(data){
-                municipio.options.length = 0;
-                comunidad.options.length = 0;
-                municipio.options[0] = new Option("--------");
+                zona.options.length = 0;
                 for(i=0; i< data.length; i++){
-                    municipio.options[i+1] = new Option(data[i][1], data[i][0]);
+                    zona.options[i] = new Option(data[i][1], data[i][0]);
                 }
             });
         });
-        $("#id_municipio").change(function () {
-            var index = municipio.options.selectedIndex;
-            var id = municipio.options[index].value;
-            $.getJSON("ajax/comunidad/" + id +"/",
-            function(data){
-                comunidad.options.length = 0;
-                comunidad.options[0] = new Option("---------");
-                for(i=0; i< data.length; i++){
-                    comunidad.options[i+1] = new Option(data[i][1], data[i][0]);
-                }
-            });
-        });
-        
     });
 </script>
 {% endblock %}
@@ -57,7 +41,4 @@
 
                       <input type="submit" value="Consultar" id="boton" class="filtro"/>
                     </form>
-                   
-
-
 {% endblock %}

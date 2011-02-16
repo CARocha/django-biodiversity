@@ -4,7 +4,8 @@ from diversity.forms import *
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template import RequestContext
 
-def inicio(request):
+def index(request):
+    centinela = 0
     if request.method == 'POST':
         mensaje = None
         form = DiversityForm(request.POST)
@@ -20,7 +21,6 @@ def inicio(request):
     else:
         form = DiversityForm()
         mensaje = ":P"
-        centinela = 0
     dict = {'form': form,'user': request.user,'centinela':centinela}
     return render_to_response('inicio.html', dict,
                               context_instance=RequestContext(request)) 

@@ -3,6 +3,6 @@ from django.conf import settings
 
 urlpatterns = patterns('precio.views',
                       (r'^$', 'index'),
-                      (r'^grafo/(?P<tipo>\d+)/$', 'grafo'),
+                      (r'^grafo/(?P<tipo>\w+)/$', 'grafo'),
               )
 

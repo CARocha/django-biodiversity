@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-#from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 #from django.views.generic.simple import direct_to_template
-#from django.utils import simplejson
+from django.utils import simplejson
 #from django.db.models import Sum, Count, Avg
 from diversity.models import *
 #from datetime import date
@@ -47,3 +47,9 @@ def ver_socio(request, socio_id):
 def mapa(request):
     '''Vista para el mapa de los lugares en que esta el socio'''
     pass
+
+def ajax_zonas(request, pais_id):
+    pais = get_object_or_404(Pais, pk=pais_id)
+    zonas = Lugar.objects.filter(pais = pais)
+    lista = [(zona.id, zona.nombre) for zona in zonas]
+    return HttpResponse(simplejson.dumps(lista), mimetype='application/javascript')

@@ -8,4 +8,4 @@ class DiversityForm(forms.Form):
     fecha = forms.ChoiceField(choices=ANOS_CHOICES)
     pais = forms.ModelChoiceField(queryset=Pais.objects.all(),
              required=False, empty_label="Todos los Paises")
-    lugar = forms.MultipleChoiceField(required=False)
+    lugar = forms.CharField(widget = forms.SelectMultiple, required=False) 
