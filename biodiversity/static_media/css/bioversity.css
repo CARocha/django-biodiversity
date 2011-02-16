@@ -178,6 +178,7 @@ a{
     font-size:17px;
     text-decoration:none;
     margin-bottom:8px;
+    font-weight:bold;
 }
 
 .noticia-titulo a:hover{
