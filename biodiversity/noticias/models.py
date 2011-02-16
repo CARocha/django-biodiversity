@@ -2,12 +2,15 @@
 from django.db import models
 from biodiversity.utils import get_file_path 
 from thumbs import ImageWithThumbsField
+from diversity.models import Pais
         
 class Noticias(models.Model):
     ''' Modelo que contendra las noticias del sitio
     '''
     fecha = models.DateField()
     titulo = models.CharField(max_length=200)
+    autor = models.CharField(max_length=200)
+    pais = models.ForeignKey(Pais)
     texto = models.TextField()
     
     class Meta:

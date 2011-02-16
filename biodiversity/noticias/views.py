@@ -28,6 +28,6 @@ def lista_noticias(request):
 def ver_noticia(request, noticia_id):
     '''Ver una sola noticia'''
     noticia = get_object_or_404(Noticias, pk=noticia_id)
-
+    ultimas = Noticias.objects.all().order_by('-fecha')[:3]
     return render_to_response('noticias/ver_noticias.html', 
-            {"noticia": noticia},context_instance=RequestContext(request))
+            {"noticia": noticia,"ultimas":ultimas},context_instance=RequestContext(request))

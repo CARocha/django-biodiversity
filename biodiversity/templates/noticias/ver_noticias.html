@@ -1,18 +1,70 @@
 {% extends "base.html" %}
-
+{% block extra_header%}
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.slider').nivoSlider({
+		effect:'random', //Specify sets like: 'fold,fade,sliceDown'
+		slices:15,
+		animSpeed:500, //Slide transition speed
+		pauseTime:3000,
+		startSlide:0, //Set starting Slide (0 index)
+		directionNav:true, //Next & Prev
+		directionNavHide:true, //Only show on hover
+		controlNav:true, //1,2,3...
+		controlNavThumbs:false, //Use thumbnails for Control Nav
+      	controlNavThumbsFromRel:false, //Use image rel for thumbs
+		controlNavThumbsSearch: '.jpg', //Replace this with...
+		controlNavThumbsReplace: '_thumb.jpg', //...this in thumb Image src
+		keyboardNav:true, //Use left & right arrows
+		pauseOnHover:true, //Stop animation while hovering
+		manualAdvance:false, //Force manual transitions
+		captionOpacity:0.8, //Universal caption opacity
+		beforeChange: function(){},
+		afterChange: function(){},
+		slideshowEnd: function(){} //Triggers after all slides have been shown
+	});
+});
+</script>
+{%endblock%}
 {% block contenido %}
+<div id="sidebar">
+    <div class="titulo">Ultimas Noticias</div>
+    {%for ultima in ultimas%}
+	<div class="item-noticia"><a href="/noticias/ver/{{ultima.id}}">{{ultima.titulo}}</a></div>
+    {%endfor%}
+</div>
+<div id="contenido">
+    <div id="encabezado_contenido">Noticias</div>
+    
 
-<tr>
-    <td>{{noticia.fecha}}</td>
-    <td>{{noticia.titulo}}</td>
-    <td>{{noticia.texto|safe}}</td>
-    <div id="container">
-	    	<div id="slider">
-    {% for galeria in  noticia.adjunto.all %}
-     <td><img src="{{galeria.adjunto.url_250x250}}"></td>
-     {% endfor %}
-            </div>
+    <div class="noticia">
+	<div class="noticia-meta">
+	    <b>Autor</b><br>
+	    {{noticia.autor}}<br><br>
+	    <b>fecha</b><br>
+	    <div class="fechabox">
+		{{noticia.fecha|date:"d M"}}
+	    </div><br>
+	    <b>País</b><br>
+	    {{noticia.pais}}
 	</div>
-</tr>
+	<div class="noticia-content">
+	    <div class="noticia-titulo"><a href="/noticias/ver/{{noticia.id}}">{{noticia.titulo}}</a></div>
+	    {{noticia.texto|safe}}<br>
+	</div>
+	<div class="noticia-thumb">
+	    {%if noticia.adjunto %}
+		<div class="slider">
+	       {% for galeria in  noticia.adjunto.all %}
+		    <img src="{{galeria.adjunto.url_250x250}}">
+	       {% endfor %}
+		</div>
+	    {%endif%}
+	</div>
+	<div class="clean"></div>
+    </div>
 
-{% endblock %}
+</div>
+    {% endblock %}
+
+
