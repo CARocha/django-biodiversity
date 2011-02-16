@@ -381,3 +381,13 @@ a{
 	margin-left: 212px;
 	margin-top: 79px;
 }
+
+#nada {
+    height:10px;
+    weight:40px;
+}
+
+#nada2 {
+    margin:25px;
+    padding:10px;
+}
