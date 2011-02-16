@@ -1,39 +1,86 @@
 {% extends "base.html" %}
-
+{% block extra_header%}
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.slider').nivoSlider({
+		effect:'random', //Specify sets like: 'fold,fade,sliceDown'
+		slices:15,
+		animSpeed:500, //Slide transition speed
+		pauseTime:3000,
+		startSlide:0, //Set starting Slide (0 index)
+		directionNav:true, //Next & Prev
+		directionNavHide:true, //Only show on hover
+		controlNav:true, //1,2,3...
+		controlNavThumbs:false, //Use thumbnails for Control Nav
+      	controlNavThumbsFromRel:false, //Use image rel for thumbs
+		controlNavThumbsSearch: '.jpg', //Replace this with...
+		controlNavThumbsReplace: '_thumb.jpg', //...this in thumb Image src
+		keyboardNav:true, //Use left & right arrows
+		pauseOnHover:true, //Stop animation while hovering
+		manualAdvance:true, //Force manual transitions
+		captionOpacity:0.8, //Universal caption opacity
+		beforeChange: function(){},
+		afterChange: function(){},
+		slideshowEnd: function(){} //Triggers after all slides have been shown
+	});
+});
+</script>
+{%endblock%}
 {% block contenido %}
-
-{% for noticia in noticias.object_list %}
-<tr>
-    <td>{{noticia.fecha}}</td>
-    <td><a href="/noticias/ver/{{noticia.id}}">{{noticia.titulo}}</a></td>
-    <td>{{noticia.texto|truncatewords:5}}</td>
-    {%if noticia.adjunto %}
-
-<div id="slider">
-    {% for galeria in  noticia.adjunto.all %}
-    <img src="{{galeria.adjunto.url_250x250}}">
-    {% endfor %}
+<div id="sidebar">
+    <div class="titulo">Acerca de</div>
+    <p> Esta es una seccion dedicada a publicar la actualidad del programa de forma grafica</p>
 </div>
 
-{%endif%}
-</tr>
-<br>
-{% endfor %}
+<div id="contenido">
+    <div id="encabezado_contenido">Noticias</div>
+    
+    {% for noticia in noticias.object_list %}
+    <div class="noticia">
+	<div class="noticia-meta">
+	    <b>Autor</b><br>
+	    {{noticia.autor}}<br><br>
+	    <b>fecha</b><br>
+	    <div class="fechabox">
+		{{noticia.fecha|date:"d M"}}
+	    </div><br>
+	    <b>País</b><br>
+	    {{noticia.pais}}
+	</div>
+	<div class="noticia-content">
+	    <div class="noticia-titulo"><a href="/noticias/ver/{{noticia.id}}">{{noticia.titulo}}</a></div>
+	    {{noticia.texto|truncatewords:80|safe}}<br>
+	    <div class="noticia-seguir"><a href="/noticias/ver/{{noticia.id}}">Seguir leyendo</a></div>
+	</div>
+	<div class="noticia-thumb">
+	    {%if noticia.adjunto %}
+		<div class="slider">
+	       {% for galeria in  noticia.adjunto.all %}
+		    <img src="{{galeria.adjunto.url_250x250}}">
+	       {% endfor %}
+		</div>
+	    {%endif%}
+	</div>
+	<div class="clean"></div>
+    </div>
+    	
+    {% endfor %}
 
-<div class="paginacion">
-    <span class="pagina-links">
-        {% if noticias.has_previous %}
-        <a href="?page={{ noticias.previous_page_number }}" class="pag_izq">Anterior</a>
-        {% endif %}
+    <div class="paginacion">
+		    <span class="pagina-links">
+		    {% if noticias.has_previous %}
+		    <a href="?page={{ noticias.previous_page_number }}" class="pag_izq">Anterior</a>
+		    {% endif %}
 
-        <span class="actual">
-            Página {{ noticias.number }} de {{ noticias.paginator.num_pages }}.
-        </span>
+		    <span class="actual">
+			Página {{ noticias.number }} de {{ noticias.paginator.num_pages }}.
+		    </span>
 
-        {% if noticias.has_next %}
-        <a href="?page={{ noticias.next_page_number }}" class="pag_der">Siguiente</a>
-        {% endif %}
-    </span>
+		    {% if noticias.has_next %}
+			<a href="?page={{ noticias.next_page_number }}" class="pag_der">Siguiente</a>
+		    {% endif %}
+		    </span>
+		</div>
 </div>
 
 {% endblock %}
