@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {%block extra_header%}
-<script>
+<link href="{{MEDIA_URL}}css/visualize.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="{{MEDIA_URL}}css/visualize-dark.css" rel="stylesheet" type="text/css" media="screen" />
+<!--<link href="{{MEDIA_URL}}css/visualize-light.css" rel="stylesheet" type="text/css" media="screen" />-->
+<script type="text/javascript">
+$(document).ready(function (){
   $('#grafo').visualize();
+  });
 </script>
 {% endblock %}
 {% block menu %}  
@@ -28,10 +33,18 @@
     <tr>
       <td scope='row'>Producto</td>
       <td>100</td>
-      <td>100</td>
+      <td>200</td>
       <td>100</td>
       <td>100</td>
     </tr>
+    <tr>
+      <td scope='row'>LoL</td>
+      <td>100</td>
+      <td>200</td>
+      <td>100</td>
+      <td>100</td>
+    </tr>
+
   </tbody>
 </table>
 {% endblock %}
