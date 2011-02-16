@@ -107,6 +107,14 @@ a{
     border-left:#a5a28a 4px solid;
 }
 
+#sidebar p{
+    font-size:12px;
+    font-weight:normal;
+    padding-left:10px;
+    padding-right:10px;
+    color:#574F4A;
+}
+
 #contenido{
     float:left;
     background:#fff;
@@ -137,6 +145,75 @@ a{
     border:#dfdfdf 1px solid;
     width:250px;
     background: url(/files/img/fondobusqueda.png) repeat-x;
+}
+/*agregado por byron para las noticias*/
+
+.noticia{
+
+    border-bottom:#e4e8e7 1px solid;
+    margin-top:8px;
+    padding-bottom:5px;
+}
+
+.noticia-meta{
+    float:left;
+    width:58px;
+    border-right:#888888 1px solid;
+    font-size:11px;
+    height:250px;
+    color:#333333;
+    padding:5px;
+}
+
+.noticia-content{
+    float:left;
+    width:356px;
+    padding:5px;
+    font-size:12px;
+    color:#333333;
+}
+
+.noticia-titulo a, .noticia-titulo a:visited{
+    color:#3b8118;
+    font-size:17px;
+    text-decoration:none;
+    margin-bottom:8px;
+}
+
+.noticia-titulo a:hover{
+    color:#2F571B;
+}
+
+.noticia-seguir a, .noticia-seguir a:visited{
+    color:#fff;
+    font-size:11px;
+    text-decoration:none;
+    background:url(/files/img/seguir_leyendo.png);
+    background-position:left top;
+    height:16px;
+    display:block;
+    width:100px;
+    padding:2px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.noticia-seguir a:hover{
+    background:url(/files/img/seguir_leyendo.png);
+    background-position:left bottom;
+}
+
+.noticia-thumb{
+    float:right;
+    width:250px;
+    height:260px;
+}
+
+.item-noticia a{
+    display:block !important;
+    background:none !important;
+    height:20px !important;
+    padding:5px !important;
 }
 
 /*agregado por byron para la biblioteca*/
@@ -376,8 +453,45 @@ a{
     margin-left: 8%;
 }
 #slider {
-	width: 260px;
-	height: 245px;
-	margin-left: 212px;
-	margin-top: 79px;
+	width: 230px;
+
+
+}
+
+.paginacion{
+    padding:10px;
+    border:#f2f2db 1px solid;
+    background:#fff url(/files/img/autor_noticia.png);
+    background-repeat:repeat-x;
+    background-position:bottom left;
+    font-size:13px;
+}
+
+.paginacion a, .paginacion a:visited{
+text-decoration:none;
+font-weight:bold;
+color:#4D4D4D;
+}
+
+.paginacion a:hover{
+color:#000;
+}
+.pag_izq{
+    background:url(/files/img/pag_izq.png);
+    background-repeat:no-repeat;
+    background-position:center left;
+    padding-left: 22px;
+    border-right:#BFBFBF 1px solid;
+    margin-right:5px;
+    padding-right: 8px;
+}
+
+.pag_der{
+    background:url(/files/img/pag_der.png);
+    background-repeat:no-repeat;
+    background-position:center right;
+    padding-right: 23px;
+    border-left:#BFBFBF 1px solid;
+    margin-left:5px;
+    padding-left: 8px;
 }
