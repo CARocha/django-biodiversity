@@ -58,13 +58,13 @@
                     <div class="login"><a href="/admin/"><img src="/files/img/login.png" alt="login"></a></div>
                     <div class="menu">
                         <ul>
-                            <li class="selecto"><a href="/">Inicio</a></li>&nbsp;|&nbsp;
-                            <li><a href="/proyecto/">El Proyecto</a></li>&nbsp;|&nbsp;
-                            <li><a href="/mapa/">Mapa de sitios</a></li>&nbsp;|&nbsp;
-                            <li><a href="/noticias/listar">Noticias</a></li>
+                            <li {% if request.session.flag == 'index' %}class='selecto'{% endif %}><a href="/">Inicio</a></li>&nbsp;|&nbsp;
+                            <li {% if request.session.flag == 'proyecto' %}class='selecto'{% endif %}><a href="/proyecto/">El Proyecto</a></li>&nbsp;|&nbsp;
+                            <li {% if request.session.flag == 'mapa' %}class='selecto'{% endif %}><a href="/mapa/">Mapa de sitios</a></li>&nbsp;|&nbsp;
+                            <li {% if request.session.flag == 'noticia' %}class='selecto'{% endif %}><a href="/noticias/listar">Noticias</a></li>
                             {% if user.is_authenticated %}
-                            &nbsp;|&nbsp;<li><a href="#">Biblioteca</a></li>&nbsp;|&nbsp;
-                            <li><a href="/foro/">Foro</a></li>
+                            &nbsp;|&nbsp;<li {% if request.session.flag == 'biblioteca' %}class='selecto'{% endif %}><a href="#">Biblioteca</a></li>&nbsp;|&nbsp;
+                            <li {% if request.session.flag == 'foro' %}class='selecto'{% endif %}><a href="/foro/">Foro</a></li>
                             {% endif %}
                         </ul>                         
                     </div>

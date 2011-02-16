@@ -15,7 +15,8 @@ def index(request):
     ''' Vista que devolvera muchas de las salidas
         de la pagina principal o inicio del sitio
     '''
-    return render_to_response('diversity/index.html', 
+    request.session['flag'] = 'index'
+    return render_to_response('diversity/index.html', locals(),
                               context_instance=RequestContext(request))
 
 def lista_sitios(request):
