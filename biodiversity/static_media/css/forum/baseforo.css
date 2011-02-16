@@ -51,7 +51,7 @@ th.azul{
     color: #FFFFFF;
     font-size: 1.0em;
     font-weight: bold;
-    background: url('/files/img/forum/cellpic3.gif') top repeat-x #507ca6;
+    background: url('/files/img/forum/forotitulo.png') top repeat-x #4b932a;
     white-space: nowrap;
     padding: 7px 5px;
     text-transform:uppercase;
@@ -66,7 +66,7 @@ th {
     color:#FFFFFF;
     height: 28px;
     border: 0;
-    background: #FF9221 url('/files/img/forum/cellpic1-orange.gif') top repeat-x;
+    background: #def3d4 url('/files/img/forum/forocat.png') top repeat-x;
     font-size: 14px;
 }
 
@@ -78,19 +78,19 @@ th {
 
 table{
     font-size: 11px;
-    background: #b9cadb;
+    background: #9FDFA0;
 }
 .errorlist{
     padding: 0;
     color: red;
 }
 .row1 {    
-    background-color: #f5f5f5;
+    background-color: #FFFFFF;
     padding: 4px;
 }
 
 .row2 {
-    background-color: #e7ebf0;
+    background-color: #F9F9F9;
     padding: 3px;
 }
 
