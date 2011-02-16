@@ -38,13 +38,12 @@ class Forum(models.Model):
     forum_latest_post = property(_get_forum_latest_post)
 
     def save(self, force_insert=False, force_update=False):
-        try:
-	    f = Forum.objects.get(pk=self.id)
-	    super(Forum, self).save(force_insert, force_update)
-	except:
-	    n = Forum.objects.all().count()
-	    self.slug = str(n) + '-'  + slugify(self.titulo)
-	    super(Forum, self).save(force_insert, force_update)
+        if self.id:
+            pass
+        else:
+            n = Forum.objects.all().count()
+            self.slug = str(n+1) + '-'  + slugify(self.titulo)
+	super(Forum, self).save(force_insert, force_update)
 
 
     def __unicode__(self):
@@ -63,7 +62,7 @@ class Thread(models.Model):
     slug = models.CharField(unique=True, max_length=100, editable=False)
     time = models.DateTimeField(blank=True, null=True)
     latest_post_time = models.DateTimeField(blank=True, null=True, verbose_name='Latest Post Time')
-    body = models.TextField()
+    body = models.TextField(verbose_name='Contenido')
 
     def _get_thread_latest_post(self):
         """Obtiene el ultimo post para este tema"""
@@ -88,12 +87,12 @@ class Thread(models.Model):
         f = self.forum
         f.threads = f.thread_set.count()+1
         f.save()
-	try:
-	    f = Thread.objects.get(pk=self.id)
-	except:
-	    n = Thread.objects.all().count()
+	if self.id:
+            pass
+        else:
+            n = Thread.objects.all().count()
             self.slug = str(n) + '-' + slugify(self.titulo)
-	    super(Thread, self).save(force_insert, force_update)
+	super(Thread, self).save(force_insert, force_update)
 
     def delete(self):
         super(Thread, self).delete()

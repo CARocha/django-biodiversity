@@ -41,9 +41,10 @@ def categoria(request, categoria_id):
                               context_instance=RequestContext(request))
 
 def publicos(request):
+    request.session['flag'] = 'biblioteca'
     documentos = _get_elementos(request, 
                                  Documentos.objects.filter(publico=True).order_by('-fecha'))
     categorias = Categoria.objects.all()
     return render_to_response('documentos/publicos.html', 
-                              {'documentos': documentos,'categorias':categorias},
+                              locals(),
                               context_instance=RequestContext(request))

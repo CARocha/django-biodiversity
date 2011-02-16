@@ -5,28 +5,36 @@
 
 {% endblock %}
 {% block contenido %}
-<div>
-    
-    <br><br><br><br><br>
-    <div style="float: right;"><a href="../post/new/" class="new"></a><a href="./post/reply/" class="reply"></a></div><br><br><br>
-    <div style="font-size: 12px; float: right;"></div><br>
+<div>    
+    <div class="controls">
+        <a href="../post/new/" class="new">
+            <img src="/files/img/forum/new_post.png" alt="nuevo tema">Nuevo Tema
+        </a>&nbsp;&nbsp;
+        <a href="./responder/" class="new">
+            <img src="/files/img/forum/reply.png" alt="responder">Responder
+        </a>
+    </div>
+    <div class="breadcrumbs">
+        <a href="../../">Foro &raquo; </a><a href="../">{{thread.forum|title}} &raquo;</a> {{thread.titulo|title}}
+    </div>
+    <div class="clean"></div>
     <table cellspacing="1" width="100%">
         <tr>
             <th width="150px" class="azul">&nbsp;Autor&nbsp;</th>
             <th class="azul">&nbsp;Mensaje&nbsp;</th>
         </tr>
         <tr>
-            <td class="row1" align="center"><a href="/{{thread.author.username}}/"><div style="font-size: 14px;"><b>{{thread.author.username}}</b></div></a></td>
+            <td class="row1" align="center"><a href=".">
+                    <span style="font-size: 14px;">
+                        <b>{{thread.author.username}}</b>
+                    </span>
+                </a></td>
             <td class="row1"><b>Titulo: </b>{{thread.titulo|title}} <div style="float: right;"><b>Posteado: </b>{{thread.time|date:"M j, Y f a"}}</div></td>
         </tr>
         <tr>
             <td class="row1" style="vertical-align: top;">
                 <div style="font-size: 10px;">
-                    
-                    <center><img class="forum-avatar" src="" alt=""></center>
-                    
-                    <center><img class="forum-avatar" src="/files/img/no-image.jpg" alt="Imagen usuario"></center>
-                    
+                    <center><img class="forum-avatar" src="/files/img/forum/user.png" alt="Imagen usuario"></center>
                     <p><b>Joined: </b> {{thread.author.date_joined|date:"M j, Y f a"}}<p>
                         <b>Post: </b>{{thread.author.post_set.count}}<br><br>
                         <b style="color: #069;">{{thread.author.get_full_name}}</b>
@@ -42,17 +50,13 @@
     {% for post in posts %}
     <table cellspacing="1" width="100%">
         <tr>
-            <th width="150px" class="row2" style="padding: 7px 5px;"><a href="/{{post.author.username}}/"><div style="font-size: 12px;"><b>{{post.author.username}}</b></div></a></th>
+            <th width="150px" class="row2" style="padding: 7px 5px;"><a href="."><span style="font-size: 12px;"><b>{{post.author.username}}</b></span></a></th>
             <th class="row2"><div style="float: left;"><b>Re: </b>{{thread.titulo|title}}</div><div style="float: right;"><b>Posteado: </b>{{post.time|date:"M j, Y f a"}}</div></th>
         </tr>
         <tr>
             <td class="row1" style="vertical-align: top;">
                 <div style="font-size: 10px;">
-                   
-                    <center><img class="forum-avatar" src="" alt=""></center>
-                 
-                    <center><img class="forum-avatar" src="/files/img/no-image.jpg" alt=""></center>
-                  
+                    <center><img class="forum-avatar" src="/files/img/forum/user.png" alt="user no image"></center>
                     <p><b>Joined: </b> {{post.author.date_joined|date:"M j, Y f a"}}<p>
                         <b>Post: </b>{{post.author.post_set.count}}<br><br>
                         <b style="color: #069;">{{post.author.get_full_name}}</b>

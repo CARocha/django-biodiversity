@@ -9,6 +9,6 @@ urlpatterns = patterns('forum.views',
     (r'^(?P<slug>[-\w]+)/$', 'forum_list'),
     (r'^(?P<slug>[-\w]+)/(?P<t_slug>[-\w]+)/$', 'forum_detail'),
     (r'^(?P<slug>[-\w]+)/post/new/$', 'new_topic'),
-    (r'^(?P<slug>[-\w]+)/(?P<t_slug>[-\w]+)/post/reply/$', 'topic_reply'),
+    (r'^(?P<slug>[-\w]+)/(?P<t_slug>[-\w]+)/responder/$', 'topic_reply'),
 )
 
