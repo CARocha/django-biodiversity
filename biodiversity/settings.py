@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     'biodiversity.notification',
     'biodiversity.forum',
     'pagination',
+    'haystack',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -145,3 +146,6 @@ LOGGING = {
 
 AUTH_PROFILE_MODULE = ""
 LOGIN_REDIRECT_URL = '/'
+
+HAYSTACK_SITECONF = 'biodiversity.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'simple'

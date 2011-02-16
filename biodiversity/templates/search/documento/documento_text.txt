@@ -1,0 +1,4 @@
+{{ object.titulo }}
+{{ object.fecha }}
+{{ object.resumen }}
+{{ object.palabra }}

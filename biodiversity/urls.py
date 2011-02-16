@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     (r'^documentos/', include('documentos.urls')),
     (r'^noticias/', include('noticias.urls')),
     (r'^foro/', include('forum.urls')),
+    (r'^busqueda/', include('haystack.urls')),
 )
 
 if settings.DEBUG:

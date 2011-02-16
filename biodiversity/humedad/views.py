@@ -13,7 +13,6 @@ def index(request):
             request.session['fecha'] = form.cleaned_data['fecha']
             request.session['pais'] = form.cleaned_data['pais']
             request.session['lugar'] = form.cleaned_data['lugar']
-            request.session['tipo_grafo'] = form.cleaned_data['tipo_grafo'] 
 
             mensaje = "Todas las variables estan correctamente :)"
             request.session['activo'] = True
