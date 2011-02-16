@@ -5,6 +5,10 @@
         $("#boton-documentos").click(function () {
             window.location = '/documentos/';
         });
+
+        $("#boton-precio").click(function () {
+            window.location = '/precio/';
+        });
     });
 </script>
 {%endblock%}
@@ -30,7 +34,7 @@
 </div>
 
 <div class="buttons">
-    <div class="big price">
+    <div class="big price" id="boton-precio">
         <div class="b_info">
             <span class="b_title">Precio</span><br>
             Precios de bananas
