@@ -51,10 +51,10 @@ def grafo(request, tipo):
     if tipo == 'productor':
         #params  = _get_params(request)
         #lista_precios = Precio.objects.filter(**params)
-        for producto in Producto.objects.all():
-            for mes in range(1, 13):
-                lista_precios = Precio.objects.filter(**_get_params(request) )
-        return render_to_response('precio/productor.html', {'tabla': lista_precios},
+        #for producto in Producto.objects.all():
+        #    for mes in range(1, 13):
+        #        lista_precios = Precio.objects.filter(**_get_params(request) )
+        return render_to_response('precio/productor.html', #{'tabla': lista_precios},
                                   context_instance = RequestContext(request))
     if tipo == 'consumidor':
         pass
