@@ -53,7 +53,7 @@ def grafohumedad(request):
         key = (opcion[1]).replace('-','_')
         #query = a.filter(humedad__mes = opcion[0])
         humedad = Humedad.objects.filter(mes = opcion[0])
-        tabla[key]={'humedad'}
+        tabla[key]={'humedad':humedad}
         
     return render_to_response('humedad/grafo_humedad.html',locals(),
                              context_instance=RequestContext(request))

@@ -29,7 +29,7 @@ $(document).ready(function (){
     {%for key, value in tabla.items%}
     <tr>
         <td>{{key|unslugify}}</td>
-        <td>{{value.humedad|floatformat}}</td>
+        <td>{{value.humedad}}</td>
     </tr>
     {%endfor%}
 </table>
