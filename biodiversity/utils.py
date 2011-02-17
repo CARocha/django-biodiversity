@@ -44,3 +44,11 @@ def _get_elementos(request, queryset, elements=25):
         elementos = paginator.page(paginator.num_pages)
 
     return elementos
+
+MESES = ['Enero', 'Febrero', 'Marzo', 
+         'Abril', 'Mayo', 'Junio',
+         'Julio', 'Agosto', 'Septiembre',
+         'Octubre', 'Noviembre', 'Diciembre']
+
+def get_mes(num):
+    return MESES[num-1]

@@ -1,10 +1,12 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import Http404
 from django.template import RequestContext
+from django.db.models import Avg
 from models import *
 #from bioversity.utils import _get_elementos
 from diversity.forms import DiversityForm
 from diversity.decorators import session_required
+from biodiversity.utils import MESES 
 
 def list_parse(s):
     for c in ['[', ']', 'u', "'",]:
@@ -49,15 +51,38 @@ def grafo(request, tipo):
     if tipo == 'comparativa':
         pass
     if tipo == 'productor':
-        #params  = _get_params(request)
-        #lista_precios = Precio.objects.filter(**params)
-        #for producto in Producto.objects.all():
-        #    for mes in range(1, 13):
-        #        lista_precios = Precio.objects.filter(**_get_params(request) )
-        return render_to_response('precio/productor.html', #{'tabla': lista_precios},
+        filas = []
+        for producto in Producto.objects.all():
+            valores = []
+            for mes in range(1, 13):
+                params = _get_params(request)
+                params['fecha__month'] = mes
+                params['producto'] = producto 
+                precio = Precio.objects.filter(**params).aggregate(valor = Avg('precio_productor'))['valor']
+                valores.append(precio)
+            fila = {'leyenda': producto.nombre, 'valores': valores}
+            filas.append(fila)
+        return render_to_response('precio/productor.html',
+                                 {'tiempos': MESES,
+                                  'filas': filas},
                                   context_instance = RequestContext(request))
     if tipo == 'consumidor':
-        pass
+        filas = []
+        for producto in Producto.objects.all():
+            valores = []
+            for mes in range(1, 13):
+                params = _get_params(request)
+                params['fecha__month'] = mes
+                params['producto'] = producto 
+                precio = Precio.objects.filter(**params).aggregate(valor = Avg('precio_productor'))['valor']
+                valores.append(precio)
+            fila = {'leyenda': producto.nombre, 'valores': valores}
+            filas.append(fila)
+        return render_to_response('precio/productor.html',
+                                 {'tiempos': MESES,
+                                  'filas': filas},
+                                  context_instance = RequestContext(request))
+
     else:
         raise Http404
 
