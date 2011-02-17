@@ -11,6 +11,10 @@ class Migration(SchemaMigration):
         # Adding model 'Humedad'
         db.create_table('humedad_humedad', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('mes', self.gf('django.db.models.fields.IntegerField')()),
+            ('ano', self.gf('django.db.models.fields.IntegerField')()),
+            ('humedad', self.gf('django.db.models.fields.FloatField')()),
+            ('zona', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['diversity.Lugar'])),
         ))
         db.send_create_signal('humedad', ['Humedad'])
 
@@ -22,9 +26,26 @@ class Migration(SchemaMigration):
 
 
     models = {
+        'diversity.lugar': {
+            'Meta': {'object_name': 'Lugar'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'latitud': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '8', 'decimal_places': '5', 'blank': 'True'}),
+            'longitud': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '8', 'decimal_places': '5', 'blank': 'True'}),
+            'nombre': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'pais': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['diversity.Pais']"})
+        },
+        'diversity.pais': {
+            'Meta': {'object_name': 'Pais'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'nombre': ('django.db.models.fields.CharField', [], {'max_length': '200'})
+        },
         'humedad.humedad': {
             'Meta': {'object_name': 'Humedad'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
+            'ano': ('django.db.models.fields.IntegerField', [], {}),
+            'humedad': ('django.db.models.fields.FloatField', [], {}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'mes': ('django.db.models.fields.IntegerField', [], {}),
+            'zona': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['diversity.Lugar']"})
         }
     }
 

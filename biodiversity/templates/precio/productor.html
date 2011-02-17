@@ -4,7 +4,7 @@
 <link href="{{MEDIA_URL}}css/visualize-light.css" rel="stylesheet" type="text/css" media="screen" />
 <script type="text/javascript">
 $(document).ready(function (){
-  $('#grafo').visualize();
+    $('#grafo').visualize({type: 'line'});
   });
 </script>
 {% endblock %}
@@ -18,32 +18,28 @@ $(document).ready(function (){
 
 {% block contenido %}
 <table id="grafo">
-  <caption>Precio al Productor.</caption>
+  <caption>Precio al Productor</caption>
   <thead>
     <tr>
       <td></td>
-      <th scope='col'>meses</th>
-      <th scope='col'>lalal</th>
-      <th scope='col'>ooo</th>
-      <th scope='col'>po</th>
+      {%for tiempo in tiempos%}
+      <th scope='col'>{{tiempo}}</th>
+      {%endfor%}
     </tr>
   </thead>
   <tbody>
+    {% for fila in filas%}
     <tr>
-      <th scope='row'>Producto</th>
-      <td>100</td>
-      <td>200</td>
-      <td>100</td>
-      <td>100</td>
+      <th scope='row'>{{fila.leyenda}}</th>
+      {%for valor in fila.valores%}
+      {%if valor%}
+      <td>{{valor}}</td>
+      {%else%}
+      <td>0</td>
+      {%endif%}
+      {%endfor%}
     </tr>
-    <tr>
-      <th scope='row'>LoL</th>
-      <td>100</td>
-      <td>200</td>
-      <td>100</td>
-      <td>100</td>
-    </tr>
-
+    {%endfor%}
   </tbody>
 </table>
 {% endblock %}
