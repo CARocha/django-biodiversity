@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{%load unslugify %}
+{%block extra_header%}
+<link href="{{MEDIA_URL}}css/visualize.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="{{MEDIA_URL}}css/visualize-light.css" rel="stylesheet" type="text/css" media="screen" />
+<script type="text/javascript">
+$(document).ready(function (){
+  $('#grafo').visualize();
+  });
+</script>
+{% endblock %}
+{% block menu %}  
+{% if request.session.activa%}
+<a href="/humedad/humedad/"> Humedad</a>
+
+{%endif%}
+{% endblock %}
+
+{% block contenido %}
+<table id="grafo">
+ <table>
+ <caption>Humedad</caption>
+ <thead>
+    <tr>
+        <th>MESES</th>
+        <th>Humedad</th>
+    </tr>
+  </thead>
+    {%for key, value in tabla.items%}
+    <tr>
+        <td>{{key|unslugify}}</td>
+        <td>{{value.humedad|floatformat}}</td>
+    </tr>
+    {%endfor%}
+</table>
+{% endblock %}

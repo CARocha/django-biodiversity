@@ -3,28 +3,57 @@ import datetime
 from diversity.forms import *
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template import RequestContext
+from diversity.decorators import session_required
+from django.template.defaultfilters import slugify
 
+def list_parse(s):
+    for c in ['[', ']', 'u', "'",]:
+        s = s.replace(c,'')
+    return s.split(',')
+
+@session_required
+def _get_params(request):
+    '''Sacar de la variable de sesion y formar queryset''' 
+    params = {'fecha__year': request.session['fecha']}
+    if request.session['lugares']:
+        params['zona__in'] = request.session['lugares']
+    elif request.session['pais']:
+        params['pais'] = request.session['pais']
+
+    return params
+    
+    
 def index(request):
-    centinela = 0
+    '''Vista incluye formulario de consulta'''
     if request.method == 'POST':
-        mensaje = None
         form = DiversityForm(request.POST)
         if form.is_valid():
+            print form.cleaned_data['lugar']
+            request.session['lugares'] = list_parse(form.cleaned_data['lugar'])
             request.session['fecha'] = form.cleaned_data['fecha']
-            request.session['pais'] = form.cleaned_data['pais']
-            request.session['lugar'] = form.cleaned_data['lugar']
-
-            mensaje = "Todas las variables estan correctamente :)"
-            request.session['activo'] = True
-            centinela = 1 #Variable para aparecer el menu de indicadores a lado del formulario
+            request.session['pais'] = form.cleaned_data['fecha']
+            request.session['activa'] = True
+            activa = True
+        else:
+            activa = False
+        dicc = {'form': form, 'activa': activa}
+        return render_to_response('humedad/index.html', dicc,
+                                  context_instance = RequestContext(request))
     else:
         form = DiversityForm()
-        mensaje = ":P"
-    dict = {'form': form,'user': request.user,'centinela':centinela}
-    return render_to_response('inicio.html', dict,
-                              context_instance=RequestContext(request)) 
+        return render_to_response('humedad/index.html', {'form': form},
+                                  context_instance = RequestContext(request))
 
 def grafohumedad(request):
-    pass
+    a = _get_params(request)
     
-
+    tabla = {}
+    
+    for opcion in CICLO_MES:
+        key = (opcion[1]).replace('-','_')
+        #query = a.filter(humedad__mes = opcion[0])
+        humedad = Humedad.objects.filter(mes = opcion[0])
+        tabla[key]={'humedad'}
+        
+    return render_to_response('humedad/grafo_humedad.html',locals(),
+                             context_instance=RequestContext(request))
