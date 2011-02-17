@@ -17,8 +17,12 @@
 .fc .fc-header,
 .fc .fc-content {
 	font-size: 1em;
+
 	}
-	
+
+.fc-header{
+        padding-top:5px;
+}
 .fc {
 	direction: ltr;
 	text-align: left;
@@ -27,6 +31,8 @@
 .fc table {
 	border-collapse: collapse;
 	border-spacing: 0;
+    background:#fff!important;
+
 	}
 	
 .fc td, .fc th {
@@ -244,9 +250,10 @@ table.fc-header {
 .fc-agenda .fc-event-time,
 .fc-event a {
 	border-style: solid; 
-	border-color: #D5E275;     /* default BORDER color (probably the same as background-color) */
-	background-color: #ecfa88; /* default BACKGROUND color */
+	border-color: #83b4af;     /* default BORDER color (probably the same as background-color) */
+	background-color: #E0E8E7; /* default BACKGROUND color */
 	color: #333;            /* default TEXT color */
+    font-size:12px;
 	}
 	
 	/* Use the 'className' CalEvent property and the following
