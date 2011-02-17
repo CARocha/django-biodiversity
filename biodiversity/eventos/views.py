@@ -9,6 +9,7 @@ from models import *
 
 def index(request):
     '''Vista general de los eventos'''
+    request.session['flag'] = 'evento'
     evento_list = Evento.objects.all().order_by('-fecha_inicio')
     paginator = Paginator(evento_list, 4)
 
@@ -27,6 +28,7 @@ def index(request):
 
 def evento(request, slug):
     '''Vista de detalle'''
+    request.session['flag'] = 'evento'
     evento = get_object_or_404(Evento, slug = slug)
 
     return render_to_response('eventos/evento.html', {'evento': evento},
@@ -34,6 +36,7 @@ def evento(request, slug):
 
 def calendario(request):
     '''effin calenadar!'''
+    request.session['flag'] = 'evento'
     if request.is_ajax():
         start = datetime.datetime.fromtimestamp(float(request.GET['start']))
         end = datetime.datetime.fromtimestamp(float(request.GET['end']))

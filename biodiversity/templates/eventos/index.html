@@ -1,21 +1,19 @@
 {%extends "base.html"%}
 {%block title%}Eventos{%endblock%}
 {%block contenido%}
-       <h2>Eventos</h2>
-        <div id="acciones">
-            <div class="label">Vistas </div>
-            <a href="/eventos/calendario"><img src="{{MEDIA_URL}}imagen/calendarioicon.png">Calendario</a>
-            <a href="/eventos"><img src="{{MEDIA_URL}}imagen/listaicon.png">Lista</a>
-        </div>
-       <div id="lista">
+<br>
+<div id="encabezado_contenido">Eventos</div>
+    <div id="barra_eventos">
+        <a href="/eventos" class="lista_boton">Ver en<br>lista</a><a href="/eventos/calendario" class="calendario_boton">Ver en <br>calendario</a>
+    </div>
+       <div id="contenido_full">
            {%for evento in eventos.object_list%}
-           <div class="elemento_lista">
+           <div class="elemento_evento">
                <div class="titulo"><a href="/eventos/evento/{{evento.slug}}/">{{evento.titulo}}</a></div>
                <div id="fechas">
                    <b>Inicia:</b> <img src="{{MEDIA_URL}}imagen/icon_fecha.jpg"> {{evento.fecha_inicio|date:"d M Y"}} <img src="{{MEDIA_URL}}imagen/icon_hora.jpg"> {{evento.fecha_inicio|date:"h:i a"}}
                    <b>Finaliza:</b> <img src="{{MEDIA_URL}}imagen/icon_fecha.jpg"> {{evento.fecha_final|date:"d M Y"}} <img src="{{MEDIA_URL}}imagen/icon_hora.jpg"> {{evento.fecha_final|date:"h:i a"}}
                </div>
-               <div class="seguir_leyendo der"><a class="con_flechita" href="/eventos/evento/{{evento.slug}}/">Mas info</a></div><br>
            </div>
            {%endfor%}
            <div class="paginacion">
