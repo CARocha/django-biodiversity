@@ -46,14 +46,14 @@
 </script>
 
 {%endblock%}
-{%block contenido%}
-       <h2>Calendario</h2>
-        <div id="acciones">
-            <div class="label">Vistas </div>
-            <a href="/eventos/calendario"><img src="{{MEDIA_URL}}imagen/calendarioicon.png">Calendario</a>
-            <a href="/eventos"><img src="{{MEDIA_URL}}imagen/listaicon.png">Lista</a>
-        </div>
-       <div id="calendar"></div>
+{%block contenido%}<br>
+<div id="encabezado_contenido">Calendario</div>
+    <div id="barra_eventos">
+        <a href="/eventos" class="lista_boton">Ver en<br>lista</a><a href="/eventos/calendario" class="calendario_boton">Ver en <br>calendario</a>
+    </div>
+<div id="contenido_full">
+           <div id="calendar"></div>
+</div>
 {%endblock %}
 
  
