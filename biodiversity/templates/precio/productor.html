@@ -23,19 +23,19 @@ $(document).ready(function (){
     <tr>
       <td></td>
       {%for tiempo in tiempos%}
-      <th scope='col'>{{tiempo}}</th>
+      <th scope="col">{{tiempo}}</th>
       {%endfor%}
     </tr>
   </thead>
   <tbody>
     {% for fila in filas%}
     <tr>
-      <th scope='row'>{{fila.leyenda}}</th>
+      <th scope="row">{{fila.leyenda}}</th>
       {%for valor in fila.valores%}
       {%if valor%}
       <td>{{valor}}</td>
       {%else%}
-      <td>0</td>
+      <td>100</td>
       {%endif%}
       {%endfor%}
     </tr>

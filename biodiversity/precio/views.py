@@ -59,11 +59,11 @@ def grafo(request, tipo):
                 params['fecha__month'] = mes
                 params['producto'] = producto 
                 precio = Precio.objects.filter(**params).aggregate(valor = Avg('precio_productor'))['valor']
-                valores.append(precio)
+                valores.append(int(precio)) if precio != None else valores.append(0)
             fila = {'leyenda': producto.nombre, 'valores': valores}
             filas.append(fila)
         return render_to_response('precio/productor.html',
-                                 {'tiempos': MESES,
+                                  {'tiempos': MESES,
                                   'filas': filas},
                                   context_instance = RequestContext(request))
     if tipo == 'consumidor':
@@ -74,11 +74,11 @@ def grafo(request, tipo):
                 params = _get_params(request)
                 params['fecha__month'] = mes
                 params['producto'] = producto 
-                precio = Precio.objects.filter(**params).aggregate(valor = Avg('precio_productor'))['valor']
+                precio = PrecioConsumidor.objects.filter(**params).aggregate(valor = Avg('precio_consumidor'))['valor']
                 valores.append(precio)
             fila = {'leyenda': producto.nombre, 'valores': valores}
             filas.append(fila)
-        return render_to_response('precio/productor.html',
+        return render_to_response('precio/consumidor.html',
                                  {'tiempos': MESES,
                                   'filas': filas},
                                   context_instance = RequestContext(request))
