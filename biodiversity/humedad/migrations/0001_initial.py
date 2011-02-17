@@ -7,25 +7,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
-        # Adding model 'Humedad'
-        db.create_table('humedad_humedad', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-        ))
-        db.send_create_signal('humedad', ['Humedad'])
+        pass
 
 
     def backwards(self, orm):
-        
-        # Deleting model 'Humedad'
-        db.delete_table('humedad_humedad')
+        pass
 
 
     models = {
-        'humedad.humedad': {
-            'Meta': {'object_name': 'Humedad'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
-        }
+        
     }
 
     complete_apps = ['humedad']
