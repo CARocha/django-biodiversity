@@ -28,7 +28,6 @@ def index(request):
     if request.method == 'POST':
         form = DiversityForm(request.POST)
         if form.is_valid():
-            print form.cleaned_data['lugar']
             request.session['lugares'] = list_parse(form.cleaned_data['lugar'])
             request.session['fecha'] = form.cleaned_data['fecha']
             request.session['pais'] = form.cleaned_data['fecha']
@@ -47,13 +46,24 @@ def index(request):
 def grafohumedad(request):
     a = _get_params(request)
     
-    tabla = {}
+    tabla = []
+    fila = []
     
+    #for humo in Humedad.objects.all():
     for opcion in CICLO_MES:
-        key = (opcion[1]).replace('-','_')
-        #query = a.filter(humedad__mes = opcion[0])
+        meses = (opcion[1]).replace('-','_')
         humedad = Humedad.objects.filter(mes = opcion[0])
-        tabla[key]={'humedad':humedad}
+        fila = {'mes':meses, 'humo':humedad}
+        tabla.append(fila)
+#    print fila
+#    print '*********'
+#    print tabla
+    
+#    for opcion in CICLO_MES:
+#        key = (opcion[1]).replace('-','_')
+#        #query = a.filter(humedad__mes = opcion[0])
+#        humedad = Humedad.objects.filter(mes = opcion[0])
+#        tabla[key]={'humedad':humedad}
         
     return render_to_response('humedad/grafo_humedad.html',locals(),
                              context_instance=RequestContext(request))

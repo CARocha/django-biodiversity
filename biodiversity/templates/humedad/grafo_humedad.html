@@ -9,9 +9,9 @@ $(document).ready(function (){
   });
 </script>
 {% endblock %}
-{% block menu %}  
+{% block menu %}
 {% if request.session.activa%}
-<a href="/humedad/humedad/"> Humedad</a>
+<a href="/clima/humedad/">Humedad</a>
 
 {%endif%}
 {% endblock %}
@@ -29,7 +29,7 @@ $(document).ready(function (){
       {%for valor in tabla%}	
     <tr>            
          <th scope="row">{{valor.mes}}</th>
-         {%for a in valor.humedad%}
+         {%for a in valor.humo%}
          <td>{{a}}</td>
          {%endfor%}
     </tr>
