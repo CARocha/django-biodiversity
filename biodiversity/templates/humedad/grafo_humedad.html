@@ -5,7 +5,7 @@
 <link href="{{MEDIA_URL}}css/visualize-light.css" rel="stylesheet" type="text/css" media="screen" />
 <script type="text/javascript">
 $(document).ready(function (){
-  $('#grafo').visualize();
+  $('#grafo').visualize({width:850,height:130,barMargin:25});
   });
 </script>
 {% endblock %}
@@ -18,19 +18,22 @@ $(document).ready(function (){
 
 {% block contenido %}
 <table id="grafo">
- <table>
- <caption>Humedad</caption>
- <thead>
-    <tr>
-        <th>MESES</th>
-        <th>Humedad</th>
-    </tr>
-  </thead>
-    {%for key, value in tabla.items%}
-    <tr>
-        <td>{{key|unslugify}}</td>
-        <td>{{value.humedad}}</td>
+	<caption>Húmedad</caption>
+	<thead>
+		<tr>
+			<td></td>
+			<th scope="col">Humedad</th>
+		</tr>
+	</thead>
+	<tbody>
+      {%for valor in tabla%}	
+    <tr>            
+         <th scope="row">{{valor.mes}}</th>
+         {%for a in valor.humedad%}
+         <td>{{a}}</td>
+         {%endfor%}
     </tr>
     {%endfor%}
+   </tbody>
 </table>
 {% endblock %}

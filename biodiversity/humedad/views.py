@@ -47,13 +47,17 @@ def index(request):
 def grafohumedad(request):
     a = _get_params(request)
     
-    tabla = {}
+    tabla = []
     
-    for opcion in CICLO_MES:
-        key = (opcion[1]).replace('-','_')
+    for opcion in Humedad.objects.all():
+        for mes in range(1, 13):
+            #a = mes[1]   
+        #key = (opcion[1]).replace('-','_')
         #query = a.filter(humedad__mes = opcion[0])
-        humedad = Humedad.objects.filter(mes = opcion[0])
-        tabla[key]={'humedad':humedad}
-        
+            humedad = Humedad.objects.filter(mes = mes)
+            fila = {'mes':a, 'humedad':humedad}
+        tabla.append(fila)
+        print opcion
+    # print tabla    
     return render_to_response('humedad/grafo_humedad.html',locals(),
                              context_instance=RequestContext(request))
