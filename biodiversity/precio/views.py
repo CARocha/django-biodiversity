@@ -48,8 +48,6 @@ def index(request):
 @session_required
 def grafo(request, tipo):
     '''Grafo generado del precio'''
-    if tipo == 'comparativa':
-        pass
     if tipo == 'productor':
         filas = []
         for producto in Producto.objects.all():
@@ -85,7 +83,3 @@ def grafo(request, tipo):
 
     else:
         raise Http404
-
-def tabla(request):
-    '''Tabla de precios'''
-    pass

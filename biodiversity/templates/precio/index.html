@@ -40,11 +40,8 @@
 
   <input type="submit" value="Consultar" id="boton" class="filtro"/>
 </form>
-{{form.errors}}
-{% if activa%}
-<h1>Session activa mother fucker</h1>
+{% if request.session.activa%}
 <a href="/precio/grafo/productor/"> Precio al productor</a>
 <a href="/precio/grafo/consumidor/"> Precio al consumidor</a>
-<a href="/precio/grafo/comparativa/">Comparativa </a>
 {%endif%}
 {% endblock %}
