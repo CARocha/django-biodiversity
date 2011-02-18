@@ -109,7 +109,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'biodiversity.diversity',
     'biodiversity.documentos',
-    'biodiversity.humedad',
     'biodiversity.noticias',
     'biodiversity.precio',
     'biodiversity.clima',
