@@ -9,6 +9,10 @@
         $("#boton-precio").click(function () {
             window.location = '/precio/';
         });
+
+        $("#boton-clima").click(function () {
+            window.location = '/clima/';
+        });
     });
 </script>
 {%endblock%}
@@ -41,7 +45,7 @@
             en puntos de control
         </div>
     </div>
-    <div class="big clima">
+    <div class="big clima" id="boton-clima">
         <div class="b_info">
             <span class="b_title">Clima</span><br>
             Precipitaciones,

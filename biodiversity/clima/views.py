@@ -3,6 +3,7 @@ import datetime
 from diversity.forms import *
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template import RequestContext
+from django.db.models import Avg
 from diversity.decorators import session_required
 from django.template.defaultfilters import slugify
 
@@ -36,11 +37,11 @@ def index(request):
         else:
             activa = False
         dicc = {'form': form, 'activa': activa}
-        return render_to_response('humedad/index.html', dicc,
+        return render_to_response('clima/index.html', dicc,
                                   context_instance = RequestContext(request))
     else:
         form = DiversityForm()
-        return render_to_response('humedad/index.html', {'form': form},
+        return render_to_response('clima/index.html', {'form': form},
                                   context_instance = RequestContext(request))
 
 def grafohumedad(request):
@@ -50,10 +51,9 @@ def grafohumedad(request):
     fila = []
     
     #for humo in Humedad.objects.all():
-    for opcion in CICLO_MES:
-        meses = (opcion[1]).replace('-','_')
-        humedad = Humedad.objects.filter(mes = opcion[0])
-        fila = {'mes':meses, 'humo':humedad}
+    for numero, letras in CICLO_MES:
+        humedad = Humedad.objects.filter(mes = numero).aggregate(prom = Avg('humedad'))['prom']
+        fila = {'mes':letras, 'humo':humedad}
         tabla.append(fila)
 #    print fila
 #    print '*********'
@@ -65,5 +65,5 @@ def grafohumedad(request):
 #        humedad = Humedad.objects.filter(mes = opcion[0])
 #        tabla[key]={'humedad':humedad}
         
-    return render_to_response('humedad/grafo_humedad.html',locals(),
+    return render_to_response('clima/grafo_humedad.html',locals(),
                              context_instance=RequestContext(request))

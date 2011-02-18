@@ -64,8 +64,6 @@ class Humedad(models.Model):
 
     class Meta:
         verbose_name_plural = "Humedad de suelo"
-        app_label = 'Humedad de suelo'
-        db_table = 'humedad_humedad' 
         unique_together = ['ano', 'mes']
         
     def __unicode__(self):
