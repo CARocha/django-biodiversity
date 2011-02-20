@@ -9,11 +9,11 @@
        <div id="contenido_full">
            {%for evento in eventos.object_list%}
            <div class="elemento_evento">
-               <div class="titulo"><a href="/eventos/evento/{{evento.slug}}/">{{evento.titulo}}</a></div>
-               <div id="fechas">
-                   <b>Inicia:</b> <img src="{{MEDIA_URL}}imagen/icon_fecha.jpg"> {{evento.fecha_inicio|date:"d M Y"}} <img src="{{MEDIA_URL}}imagen/icon_hora.jpg"> {{evento.fecha_inicio|date:"h:i a"}}
-                   <b>Finaliza:</b> <img src="{{MEDIA_URL}}imagen/icon_fecha.jpg"> {{evento.fecha_final|date:"d M Y"}} <img src="{{MEDIA_URL}}imagen/icon_hora.jpg"> {{evento.fecha_final|date:"h:i a"}}
+                <div class="fecha-lista">
+                   {{evento.fecha_inicio|date:"d M"}}
                </div>
+               <div class="titulo-evento"><a href="/eventos/evento/{{evento.slug}}/">{{evento.titulo}}</a></div>
+                <div class="clean"></div>
            </div>
            {%endfor%}
            <div class="paginacion">

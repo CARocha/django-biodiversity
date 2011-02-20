@@ -3,28 +3,24 @@
 {%block extra_header%}
 {%endblock%}
 {%block contenido%}
-    <h2>{{evento.titulo}}</h2>
-       
-       <div id="lista">
-           <div id="elemento_lista">
-               <div id="fechas">
-                   <b>Inicia:</b> <img src="{{MEDIA_URL}}imagen/icon_fecha.jpg"> {{evento.fecha_inicio|date:"d M Y"}} <img src="{{MEDIA_URL}}imagen/icon_hora.jpg"> {{evento.fecha_inicio|date:"h:i a"}}
-                   <b>Finaliza:</b> <img src="{{MEDIA_URL}}imagen/icon_fecha.jpg"> {{evento.fecha_final|date:"d M Y"}} <img src="{{MEDIA_URL}}imagen/icon_hora.jpg"> {{evento.fecha_final|date:"h:i a"}}
+<br>
+<div id="encabezado_contenido">Eventos</div>
+    <div id="barra_eventos">
+        <a href="/eventos" class="lista_boton">Ver en<br>lista</a><a href="/eventos/calendario" class="calendario_boton">Ver en <br>calendario</a>
+    </div>
+       <div id="contenido_full">
+            <div id="ficha-evento">
+               <h2>{{evento.titulo}}</h2>
+               <div class="ficha-evento-elemento">
+                    <b>Inicia:</b>{{evento.fecha_inicio|date:"d M Y"}}    <b>Finaliza:</b> {{evento.fecha_final|date:"d M Y"}}<br>
                </div>
-               <br>
-               {%if evento.lugar %}<b>Lugar: </b>{{evento.lugar}}<br><br>{%endif%}
-               <div id="contenido_pagina">
-                    {%if evento.contenido %}{{evento.contenido|safe}}<br>{%else%}No hay información adicional{%endif%}
-               </div>
-                {%if evento.adjunto.all %}
-                <div id="archivos_adjuntos">
-                    <b>Archivos Adjuntos</b>
-                        {%for adjunto in evento.adjunto.all%}
-                            <a href="/archivos/{{adjunto.adjunto}}">{{adjunto.nombre}}</a>
-                        {%endfor%}
+                <div class="ficha-evento-elemento">
+                    {%if evento.lugar %}<b>Lugar: </b>{{evento.lugar}}<br>{%endif%}
                 </div>
-                {%endif%}
-           </div>
+                <div class="ficha-evento-elemento">
+                    {%if evento.contenido %}{{evento.contenido|safe}}<br>{%else%}No hay información adicional{%endif%}
+                </div>
+            </div>
        </div>
 {%endblock %}
 

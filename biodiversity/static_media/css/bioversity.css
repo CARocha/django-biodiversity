@@ -164,7 +164,35 @@ a{
 
 
 .elemento_evento{
+    font-size:12px;
+    border-bottom:#CFD0D0 1px solid;
+    margin-bottom:5px;
+}
 
+.fecha-lista{
+    color:#BAC2C1;
+    font-size:24px;
+    float:left;
+    margin-right:15px;
+
+}
+
+.titulo-evento{
+    padding-top:5px;
+    font-size:14px;
+    float:left;
+}
+
+.ficha-evento-elemento{
+    font-size:12px;
+    border-bottom:#CFD0D0 1px solid;
+    margin-bottom:5px;
+}
+
+#ficha-evento h2 {
+    color:#3686A0;
+    margin-top:5px;
+    margin-bottom:15px;
 }
 
 .lista_boton{ 
