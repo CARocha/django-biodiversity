@@ -4,7 +4,6 @@ from models import *
 from biodiversity.noticias.models import *
 from biodiversity.clima.models import *
 from biodiversity.precio.models import *
-from biodiversity.humedad.models import *
 
 class PaisAdmin(admin.ModelAdmin):
     save_on_top = True

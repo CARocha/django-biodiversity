@@ -29,9 +29,11 @@ $(document).ready(function (){
       {%for valor in tabla%}	
     <tr>            
          <th scope="row">{{valor.mes}}</th>
-         {%for a in valor.humo%}
-         <td>{{a}}</td>
-         {%endfor%}
+         {%if valor.humo%}
+         <td>{{valor.humo}}</td>
+         {%else%}
+         <td>0</td>
+         {%endif%}
     </tr>
     {%endfor%}
    </tbody>
