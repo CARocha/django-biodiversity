@@ -29,7 +29,6 @@ def index(request):
     if request.method == 'POST':
         form = DiversityForm(request.POST)
         if form.is_valid():
-            print form.cleaned_data['lugar']
             request.session['lugares'] = list_parse(form.cleaned_data['lugar'])
             request.session['fecha'] = form.cleaned_data['fecha']
             request.session['pais'] = form.cleaned_data['fecha']
