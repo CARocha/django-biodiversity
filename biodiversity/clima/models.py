@@ -15,23 +15,30 @@ class Climas(models.Model):
         verbose_name_plural = "Clima"
         
     def temperatura(self):
-        mostrar = Clima.objects.get(climas__id=self.id).t_max
-        mostrar1 = Clima.objects.get(climas__id=self.id).t_min
+        mostrar = Clima.objects.filter(climas__id=self.id).t_max
+        print mostrar
+        mostrar1 = Clima.objects.filter(climas__id=self.id).t_min
+        print mostrar1
         return "Max: %s - Min: %s" % (mostrar, mostrar1)
     temperatura.short_description = 'Temperaturas Max - Min'
     
     def presipitacion(self):
-        presi = Clima.objects.get(climas__id=self.id).precipitacion
-        return "%s" % (presi)
+        presi = Clima.objects.filter(climas__id=self.id).precipitacion
+        print presi
+        lista = []
+        for a in presi:
+            lista.append(a)        
+        return lista
+        print lista
     presipitacion.short_description = 'Precipitación'
     
     def zonas(self):
-        zona = Clima.objects.get(climas__id=self.id).zona.nombre
+        zona = Clima.objects.filter(climas__id=self.id).zona.nombre
         return "%s" % (zona)
     zonas.short_description = 'Zona'
     
     def paises(self):
-        pais = Clima.objects.get(climas__id=self.id).pais.nombre
+        pais = Clima.objects.filter(climas__id=self.id).pais.nombre
         return "%s" % (pais)
     paises.short_description = 'Pais'
 
@@ -49,8 +56,8 @@ class Clima(models.Model):
             help_text = "Total en mm acumulada")
     climas = models.ForeignKey(Climas)
     
-    def __unicode__(self):
-        return "%s %s" % int(self.t_max, self.t_min)
+#    def __unicode__(self):
+#        return "%s %s" % int(self.t_max, self.t_min)
         
     class Meta:
         verbose_name_plural = "Clima"
