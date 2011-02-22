@@ -90,7 +90,6 @@ def clima(request, tipo):
                                   'titulo': 'Temperaturas máximas y mínimas(promedio)'},
                                   context_instance = RequestContext(request))
     elif tipo == 'precipitacion':
-        valores = []
         params = _get_params(request)
         #se hace un FIX al params para que soporte ano y no fecha
         params['ano'] = params['fecha__year']
@@ -101,12 +100,14 @@ def clima(request, tipo):
         semanas = range(1, 53)
         for zona in zonas:
             nombre_zona = Lugar.objects.get(id=zona).nombre
+            valores = []
             for semana in semanas:
                 params['semana'] = semana
                 params['zona__id'] = int(zona) 
                 prec = Clima.objects.filter(**params).aggregate(prec = Avg('precipitacion'))['prec'] 
                 valores.append(prec)
             filas.append(dict(leyenda = nombre_zona, valores = valores))
+        print filas
         return render_to_response('clima/clima.html',
                                   {'tiempos': semanas,
                                   'filas': filas, 
