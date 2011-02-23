@@ -3,8 +3,11 @@ from django.conf import settings
 
 urlpatterns = patterns('diversity.views',
     (r'^sitios/$', 'lista_sitios'),
+    (r'^mapa/$', 'mapa'),
     (r'^sitios/(?P<sitio_id>\d+)/$', 'ver_sitio'),
     (r'^socios/$', 'lista_socios'),
     (r'^socios/(?P<socio_id>\d+)/$', 'ver_socio'),
-    (r'^ajax/pais/(?P<pais_id>\d+)/$', 'ajax_zonas'),
+    (r'^ajax/zonas/$', 'ajax_zonas'),
+    (r'^ajax/pais/(?P<pais_id>\d+)/$', 'ajax_pais'),
+    (r'^ajax/socios/(?P<zona>\d+)/$', 'ajax_socios'),
 )

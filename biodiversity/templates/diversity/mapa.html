@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{%block extra_header%}
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<!--<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>-->
+<script type="text/javascript" src="/files/js/markerclusterer.js"></script>
+<script type="text/javascript" src="/files/js/infobox.js"></script>
+<script type="text/javascript">    
+    // Aplicar QuickSearch a la tabla y la lista
+    var map;
+    var markers = [];
+    $(document).ready(function () {
+        var infowindow = new google.maps.InfoWindow();
+        var myLatlng = new google.maps.LatLng({{center.lat}},{{center.lon}});
+        var myOptions = {
+            zoom: 7,
+            mapTypeControl: true,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        var image = new google.maps.MarkerImage('/files/img/custom_marker.png',
+        new google.maps.Size(15, 32),
+        new google.maps.Point(0,0),
+        new google.maps.Point(0, 32));
+
+        $.getJSON('/bioversity/ajax/zonas/', function(data){
+            $.each(data, function(i, elemento){
+                var latlng = new google.maps.LatLng(elemento.lat, elemento.lon);
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map,
+                    title: elemento.nombre,
+                    icon: image,                        
+                    item: 'zona',
+                    id: elemento.id                        
+                });
+                attachInfowindow(marker, elemento.id, 12, elemento.nombre);
+                markers.push(marker);                    
+            });
+            var markerCluster = new MarkerClusterer(map, markers);
+        });
+    });
+
+    var ib;
+    function attachInfowindow(marker, id, item, nombre) {
+        var boxText = document.createElement("div");
+        boxText.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto;";
+        boxText.innerHTML =  "<div class='infobox'><ul><li><a href='/mapeo/ficha/" + item + "/" + id + "'>"+nombre+"</a></li></ul></div>";
+
+        var myOptions = {
+            content: boxText,
+            disableAutoPan: false,
+            maxWidth: 0,
+            pixelOffset: new google.maps.Size(-130, 0),
+            zIndex: null,
+            boxStyle: {
+                background: "url('../images/tipbox.gif') no-repeat",
+                opacity: 1,
+                width: "180px"
+            },            
+            closeBoxMargin: "2px 5px 0px 2px",
+            closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+            infoBoxClearance: new google.maps.Size(1, 1),            
+            isHidden: false,
+            pane: "floatPane",
+            enableEventPropagation: false
+        };
+
+
+        ib = new InfoBox(myOptions);        
+        google.maps.event.addListener(marker, 'mouseover', function() {
+            try{
+                infowindow.close();
+            }catch(err){}
+            ib.open(map, marker);
+        });        
+    }
+</script>
+{%endblock%}
+<div id="map_canvas"></div>
+{% block contenido %}
+{% endblock %}
