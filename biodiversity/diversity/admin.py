@@ -62,7 +62,8 @@ class ClimaInline(admin.TabularInline):
 class ClimasAdmin(admin.ModelAdmin):
     actions_on_top = True
     inlines = [ClimaInline,]
-    list_display = ('temperatura','presipitacion','zonas','paises',)
+    list_display = ('id','nombre',)
+    list_display_links = ('id','nombre',)
     
 
 class SociosAdmin(admin.ModelAdmin):

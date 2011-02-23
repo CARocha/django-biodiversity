@@ -10,37 +10,41 @@ CICLO_MES=((1,'Enero'),(2,'Febrero'),(3,'Marzo'),(4,'Abril'),(5,'Mayo'),
            (11,'Noviembre'),(12,'Diciembre'))
 
 class Climas(models.Model):
+    nombre = models.CharField(max_length=200, help_text="Introduzca un titulo para estos climas")
+    
+    def __unicode__(self):
+        return self.nombre        
         
     class Meta:
         verbose_name_plural = "Clima"
         
-    def temperatura(self):
-        mostrar = Clima.objects.filter(climas__id=self.id).t_max
-        print mostrar
-        mostrar1 = Clima.objects.filter(climas__id=self.id).t_min
-        print mostrar1
-        return "Max: %s - Min: %s" % (mostrar, mostrar1)
-    temperatura.short_description = 'Temperaturas Max - Min'
-    
-    def presipitacion(self):
-        presi = Clima.objects.filter(climas__id=self.id).precipitacion
-        print presi
-        lista = []
-        for a in presi:
-            lista.append(a)        
-        return lista
-        print lista
-    presipitacion.short_description = 'Precipitación'
-    
-    def zonas(self):
-        zona = Clima.objects.filter(climas__id=self.id).zona.nombre
-        return "%s" % (zona)
-    zonas.short_description = 'Zona'
-    
-    def paises(self):
-        pais = Clima.objects.filter(climas__id=self.id).pais.nombre
-        return "%s" % (pais)
-    paises.short_description = 'Pais'
+#    def temperatura(self):
+#        mostrar = Clima.objects.filter(climas__id=self.id).t_max
+#        print mostrar
+#        mostrar1 = Clima.objects.filter(climas__id=self.id).t_min
+#        print mostrar1
+#        return "Max: %s - Min: %s" % (mostrar, mostrar1)
+#    temperatura.short_description = 'Temperaturas Max - Min'
+#    
+#    def presipitacion(self):
+#        presi = Clima.objects.filter(climas__id=self.id).precipitacion
+#        print presi
+#        lista = []
+#        for a in presi:
+#            lista.append(a)        
+#        return lista
+#        print lista
+#    presipitacion.short_description = 'Precipitación'
+#    
+#    def zonas(self):
+#        zona = Clima.objects.filter(climas__id=self.id).zona.nombre
+#        return "%s" % (zona)
+#    zonas.short_description = 'Zona'
+#    
+#    def paises(self):
+#        pais = Clima.objects.filter(climas__id=self.id).pais.nombre
+#        return "%s" % (pais)
+#    paises.short_description = 'Pais'
 
 class Clima(models.Model):
     ''' Modelo sobre el clima en las distintas
