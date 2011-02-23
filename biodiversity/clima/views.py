@@ -52,8 +52,10 @@ def grafohumedad(request):
     '''
     tabla = []
     fila = []
+    ano = request.session['fecha']
+    zona = request.session['lugares']
     for numero, letras in CICLO_MES:
-        humedad = Humedad.objects.filter(mes = numero, zona__in=request.session['lugares']).aggregate(prom = Avg('humedad'))['prom']
+        humedad = Humedad.objects.filter(mes = numero, zona__in=zona, ano = ano).aggregate(prom = Avg('humedad'))['prom']
         fila = {'mes':letras, 'humo':humedad}
         tabla.append(fila)
         
