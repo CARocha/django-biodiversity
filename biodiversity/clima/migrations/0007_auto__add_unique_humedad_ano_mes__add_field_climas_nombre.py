@@ -12,7 +12,7 @@ class Migration(SchemaMigration):
         db.create_unique('clima_humedad', ['ano', 'mes'])
 
         # Adding field 'Climas.nombre'
-        db.add_column('clima_climas', 'nombre', self.gf('django.db.models.fields.CharField')(default=None, max_length=200), keep_default=False)
+        db.add_column('clima_climas', 'nombre', self.gf('django.db.models.fields.CharField')(default='', max_length=200), keep_default=False)
 
 
     def backwards(self, orm):
