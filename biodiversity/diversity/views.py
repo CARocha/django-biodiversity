@@ -10,7 +10,6 @@ from diversity.models import *
 #from decimal import Decimal
 from biodiversity.utils import _get_elementos 
 
-
 def index(request):
     ''' Vista que devolvera muchas de las salidas
         de la pagina principal o inicio del sitio
@@ -47,9 +46,26 @@ def ver_socio(request, socio_id):
 
 def mapa(request):
     '''Vista para el mapa de los lugares en que esta el socio'''
-    pass
+    map_center = dict(lat = 0, lon = 0) 
+    return render_to_response('diversity/mapa.html', {'center': map_center},
+                              context_instance=RequestContext(request))
 
-def ajax_zonas(request, pais_id):
+def ajax_socios(request, zona):
+    zona = get_object_or_404(Lugar, pk = zona)
+    socios_list = Socios.objects.filter(zona = zona).values('nombre', 'link', 'id')
+    
+    return HttpResponse(simplejson.dumps(list(socios_list)), mimetype="application/javascript")
+
+def ajax_zonas(request):
+    zonas_list = Lugar.objects.all().values('id', 'nombre', 'latitud', 'longitud')
+    for i in range(len(zonas_list)):
+        zonas_list[i]['latitud'] = float(zonas_list[i]['latitud']) if zonas_list[i]['latitud'] else 0
+        zonas_list[i]['longitud'] = float(zonas_list[i]['longitud']) if zonas_list[i]['longitud'] else 0
+    ##Esta shit de zonas_list se tiene que convertir explicitamente a lista por que es un 
+    #value queryset x_x
+    return HttpResponse(simplejson.dumps(list(zonas_list)), mimetype="application/javascript")
+
+def ajax_pais(request, pais_id):
     pais = get_object_or_404(Pais, pk=pais_id)
     zonas = Lugar.objects.filter(pais = pais)
     lista = [(zona.id, zona.nombre) for zona in zonas]
