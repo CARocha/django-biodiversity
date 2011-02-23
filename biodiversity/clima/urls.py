@@ -5,5 +5,6 @@ urlpatterns = patterns('clima.views',
                       (r'^$', 'index'),
 #                      (r'^grafo/(?P<tipo>\w+)/$', 'grafo'),
                       (r'^humedad/$', 'grafohumedad'),
+                      (r'^clima/(?P<tipo>\w+)/$', 'clima'),
               )
 
