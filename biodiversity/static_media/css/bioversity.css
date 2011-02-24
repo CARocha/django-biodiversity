@@ -529,7 +529,7 @@ a{
     margin-left: 8%;
 }
 #slider {
-	width: 230px;
+	min-width: 230px;
 
 
 }
