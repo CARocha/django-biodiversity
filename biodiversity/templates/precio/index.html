@@ -44,4 +44,70 @@
 <a href="/precio/grafo/productor/"> Precio al productor</a>
 <a href="/precio/grafo/consumidor/"> Precio al consumidor</a>
 {%endif%}
+
+<br>
+<br>
+<br>
+<br>
+
+<div id="encabezado_contenido">PRECIOS DE PRODUCTOS</div>
+<div id="contenido_full">
+    <p>Tempor nunc auctor, eu porta aliquam placerat a integer montes ridiculus? Sit in porttitor, nisi? A elementum! Pellentesque turpis ac odio magnis vel mauris. Pulvinar. Facilisis magna parturient, hac integer ac amet aenean! Enim sed, urna penatibus a mauris nascetur dis ridiculus! Enim pulvinar magna! Ac a sed mid? Sit cum, ultricies ut, nec? Magna cursus duis elementum et natoque quis placerat, adipiscing dis. Mus in duis! Mid integer tincidunt mid tristique, mus sociis placerat scelerisque! Aliquet odio turpis, ac, aliquet integer nisi montes</p>
+    <div id="formarea">
+        <form action"." method="POST">
+            {% csrf_token %}
+            <div id="form-left">
+                <div class="form_label">Año</div>
+                <div class="form_widget">{{form.fecha}}</div>
+                <div class="form_label">Producto</div>
+                <div class="form_widget">
+                    <select name="producto" id="id_producto">
+                        <option value="1">Bananin</option>
+                        <option value="2">Bananon</option>
+                        <option value="3">Bananote</option>
+                    </select>
+                </div>
+                <div class="clean"></div>
+                <div id="zonas">ZONAS DE CONTROL</div>
+                    <div class="zona-pais">
+                        <div class="zona-pais-nombre">Nicaragua</div>
+                            <div class="checks"><input type="checkbox" name="Matagalpa"><label FOR="Matagalpa">Matagalpa</label></div>
+                            <div class="checks"><input type="checkbox" name="Quilali"><label FOR="Matagalpa">Quilali</label></div>
+                            <div class="checks"><input type="checkbox" name="Leon"><label FOR="Matagalpa">Leon</label></div>
+                    </div>
+                    <div class="zona-pais">
+                        <div class="zona-pais-nombre">Honduras</div>
+                            <div class="checks"><input type="checkbox" name="Matagalpa"><label FOR="Matagalpa">Matagalpa</label></div>
+                            <div class="checks"><input type="checkbox" name="Quilali"><label FOR="Matagalpa">Quilali</label></div>
+                    </div>
+                    <div class="zona-pais">
+                        <div class="zona-pais-nombre">Costa Rica</div>
+                            <div class="checks"><input type="checkbox" name="Matagalpa"><label FOR="Matagalpa">Matagalpa</label></div>
+                    </div>
+                    <div class="zona-pais">
+                        <div class="zona-pais-nombre">Peru</div>
+                            <div class="checks"><input type="checkbox" name="Matagalpa"><label FOR="Matagalpa">Matagalpa</label></div>
+                            <div class="checks"><input type="checkbox" name="Quilali"><label FOR="Matagalpa">Quilali</label></div>
+                            <div class="checks"><input type="checkbox" name="Leon"><label FOR="Matagalpa">Leon</label></div>
+                    </div>
+                    <div class="clean"></div>
+            </div>
+            <div id="form-right">
+
+                <div class="zona-pais" style="float:left">
+                    <div class="zona-pais-nombre">Moneda</div>
+                        <div class="checks"><input type="checkbox" name="Nativa"><label FOR="Nativa">Nativa</label></div>
+                        <div class="checks"><input type="checkbox" name="Estandarizada"><label FOR="Estandarizada">Estandarizada $</label></div>
+                </div>
+                                <div id="mensajito-moneda">
+                    La moneda nativa depende de cada pais o zona y solamente se aplica cuando solo se selecciona una zona de control
+                </div>
+                <div class="clean"></div>
+                <input type="submit" value="Consultar" id="boton" class="filtro"/>
+            </div>
+            <div class="clean"></div>
+        </form>
+    </div>
+</div>
+
 {% endblock %}

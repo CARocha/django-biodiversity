@@ -8,3 +8,4 @@ class PrecioForm(forms.Form):
             choices = Pais.objects.all())
     zona = forms.MultipleChoiceField(required = False, 
             choices = Lugar.objects.all()) 
+
