@@ -1,15 +1,14 @@
 {% extends "base.html" %}
 {%block extra_header%}
+<script type="text/javascript" src="/files/js/jquery.nivo.slider.pack.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         $("#boton-documentos").click(function () {
             window.location = '/documentos/';
         });
-
         $("#boton-precio").click(function () {
             window.location = '/precio/';
         });
-
         $("#boton-clima").click(function () {
             window.location = '/clima/';
         });
@@ -25,14 +24,15 @@
         <a class="leer-mas" href="/info/"></a><a class="mapas" href="/mapas/"></a>
     </div>
     <div class="right">
-        <img width="328" height="170" src="/files/img/foto.jpg" alt="foto">
-        <div class="controls">
-            <a href="#" class="atras"></a>
-            <div class="descrip">
-                <div class="text">Precios aumentan en Nicaragua, zona Jinotega y Matagalpa </div>
-            </div>
-            <a href="#" class="adelante"></a>
-        </div>
+        <div id="slider" style="min-width: 328px !important; min-height: 213px !important;">
+            {% for noticia in lista %}
+            <a href="/noticias/ver/{{noticia.id}}">
+                {% for galeria in  noticia.adjunto.all %}
+                <img alt="{{galeria.nombre}}" src="{{galeria.adjunto.url_328x213}}" title="<a href='/noticias/ver/{{noticia.id}}'>{{galeria.nombre}}</a>">
+                {% endfor %}
+            </a>
+            {% endfor %}                        
+        </div>        
     </div>
     <div class="clean"></div>
 </div>
@@ -78,4 +78,21 @@
         <div class="clean"></div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#slider').nivoSlider({
+            effect:'random', //Specify sets like: 'fold,fade,sliceDown'
+            slices:8,
+            animSpeed:1000, //Slide transition speed
+            pauseTime:3000,
+            startSlide:0, //Set starting Slide (0 index)
+            directionNav:true, //Next & Prev
+            directionNavHide:false, //Only show on hover
+            controlNav:false, //1,2,3...
+            keyboardNav:true, //Use left & right arrows
+            pauseOnHover:true, //Stop animation while hovering
+            manualAdvance:false //Force manual transitions
+        });
+    });
+</script>
 {% endblock %}
