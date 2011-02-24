@@ -69,14 +69,14 @@
 }
 .nivo-directionNav a {
 	display:block;
-	width:32px;
+	width:30px;
 	height:34px;
-	background:url(arrows.png) no-repeat;
+	background:url(/files/img/arrows.png) no-repeat;
 	text-indent:-9999px;
 	border:0;
 }
 a.nivo-nextNav {
-	background-position:-32px 0;
+	background-position:-30px 0;
 	right:10px;
 }
 a.nivo-prevNav {

@@ -6,12 +6,11 @@
 <script type="text/javascript" src="/files/js/infobox.js"></script>
 <script type="text/javascript">    
     // Aplicar QuickSearch a la tabla y la lista
-    var map;
-    var markers = [];
+    var map;    
     $(document).ready(function () {
-        var myLatlng = new google.maps.LatLng({{center.lat}}, {{center.lon}});
+        var myLatlng = new google.maps.LatLng(13, -85);
         var myOptions = {
-            zoom: 2,
+            zoom: 8,
             mapTypeControl: false,
             center: myLatlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -24,7 +23,7 @@
         new google.maps.Point(0, 32));
 
         $.getJSON('/bioversity/ajax/zonas/', function(data){
-            $.each(data, function(i, elemento){
+            $.each(data, function(i, elemento){                
                 var latlng = new google.maps.LatLng(elemento.latitud, elemento.longitud);
                 var marker = new google.maps.Marker({
                     position: latlng,
@@ -34,29 +33,24 @@
                     id: elemento.id
                 });
                 attachInfowindow(marker, elemento.id);
-                markers.push(marker);
             });
         });
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     });
 
-    var ib;
     function attachInfowindow(marker, id) {
-        var boxText = document.createElement("div");
-        boxText.innerHTML = '';
-        boxText.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto;";
-        var html_cajita = '';
+        var ib;
+        var boxText = document.createElement("div");        
+        boxText.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto;";        
         $.getJSON('/bioversity/ajax/socios/' + id, function(data){
-          html_cajita =  "<div class='infobox'><ul>"; 
-            $.each(data, function(i, socio){
-              html_cajita += "<li><a href='/bioversity/socio/" + socio.id + "/'>"+socio.nombre+"</a></li>";
-              });
-            html_cajita += "</ul></div>";
-          });
+            boxText =  "<div class='infobox'><ul>";            
+            $.each(data, function(i, socio){                
+                boxText += "<li><a href='/bioversity/socio/" + socio.id + "/'>"+socio.nombre+"</a></li>";                
+            });
+            boxText += "</ul></div>";
+            console.log(boxText);
+        });
 
-
-        alert(html_cajita); 
-        boxText.innerHTML = html_cajita;
-        alert(boxText.innerHTML);
         var myOptions = {
             content: boxText,
             disableAutoPan: false,
@@ -75,8 +69,6 @@
             pane: "floatPane",
             enableEventPropagation: false
         };
-        alert(boxText.innerHTML);
-
 
         ib = new InfoBox(myOptions);
         google.maps.event.addListener(marker, 'mouseover', function() {
@@ -84,31 +76,32 @@
                 infowindow.close();
             }catch(err){}
             ib.open(map, marker);
-        });
+        });        
     }
-function deepCopy(obj) {
-    if (Object.prototype.toString.call(obj) === '[object Array]') {
-        var out = [], i = 0, len = obj.length;
-        for ( ; i < len; i++ ) {
-            out[i] = arguments.callee(obj[i]);
+    
+    function deepCopy(obj) {
+        if (Object.prototype.toString.call(obj) === '[object Array]') {
+            var out = [], i = 0, len = obj.length;
+            for ( ; i < len; i++ ) {
+                out[i] = arguments.callee(obj[i]);
+            }
+            return out;
         }
-        return out;
-    }
-    if (typeof obj === 'object') {
-        var out = {}, i;
-        for ( i in obj ) {
-            out[i] = arguments.callee(obj[i]);
+        if (typeof obj === 'object') {
+            var out = {}, i;
+            for ( i in obj ) {
+                out[i] = arguments.callee(obj[i]);
+            }
+            return out;
         }
-        return out;
+        return obj;
     }
-    return obj;
-}
                 
 </script>
 <style type="text/css">
     #map_canvas{        
         height: 500px;
-}
+    }
 </style>
 {%endblock%}
 
