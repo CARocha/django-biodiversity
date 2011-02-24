@@ -2,7 +2,7 @@
 {%block extra_header%}
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <!--<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>-->
-<script type="text/javascript" src="/files/js/markerclusterer.js"></script>
+<!--<script type="text/javascript" src="/files/js/markerclusterer.js"></script>-->
 <script type="text/javascript" src="/files/js/infobox.js"></script>
 <script type="text/javascript">    
     // Aplicar QuickSearch a la tabla y la lista
@@ -14,7 +14,7 @@
             mapTypeControl: false,
             center: myLatlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
+        }        
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
         
         var image = new google.maps.MarkerImage('/files/img/custom_marker.png',
@@ -23,7 +23,7 @@
         new google.maps.Point(0, 32));
 
         $.getJSON('/bioversity/ajax/zonas/', function(data){
-            $.each(data, function(i, elemento){                
+            $.each(data, function(i, elemento){
                 var latlng = new google.maps.LatLng(elemento.latitud, elemento.longitud);
                 var marker = new google.maps.Marker({
                     position: latlng,
@@ -38,21 +38,21 @@
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     });
 
+    var ib;
+    var text = document.createElement("div");
     function attachInfowindow(marker, id) {
-        var ib;
-        var boxText = document.createElement("div");        
-        boxText.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto;";        
-        $.getJSON('/bioversity/ajax/socios/' + id, function(data){
-            boxText =  "<div class='infobox'><ul>";            
+        $(text).html('');
+        text.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto;";
+        $(text).append("<div class='infobox'><ul>");
+        $.getJSON('/bioversity/ajax/socios/' + id + '/', function(data){                        
             $.each(data, function(i, socio){                
-                boxText += "<li><a href='/bioversity/socio/" + socio.id + "/'>"+socio.nombre+"</a></li>";                
-            });
-            boxText += "</ul></div>";
-            console.log(boxText);
-        });
-
-        var myOptions = {
-            content: boxText,
+                $(text).append("<li><a href='/mapeo/ficha/'>"+socio.nombre+"</a></li>");
+            });            
+        });        
+        $(text).append("</ul></div>");
+        
+        var myOptions = {            
+            content: text,
             disableAutoPan: false,
             maxWidth: 0,
             pixelOffset: new google.maps.Size(-130, 0),
@@ -68,10 +68,11 @@
             isHidden: false,
             pane: "floatPane",
             enableEventPropagation: false
-        };
+        };        
 
         ib = new InfoBox(myOptions);
         google.maps.event.addListener(marker, 'mouseover', function() {
+            console.log($(text).html());
             try{
                 infowindow.close();
             }catch(err){}
