@@ -17,33 +17,37 @@ def list_parse(s):
 @session_required
 def _get_params(request):
     '''Sacar de la variable de sesion y formar queryset''' 
-    params = {'fecha__year': request.session['fecha']}
+    params = {'fecha__year': request.session['fecha'], 
+              'producto': request.session['producto']
+             }
     if request.session['lugares']:
         params['zona__in'] = request.session['lugares']
-    elif request.session['pais']:
-        params['pais'] = request.session['pais']
 
     return params
 
 def index(request):
     '''Vista incluye formulario de consulta'''
+    paises = Pais.objects.all()
     if request.method == 'POST':
         form = PrecioForm(request.POST)
         if form.is_valid():
-            request.session['lugares'] = list_parse(form.cleaned_data['lugar'])
+            request.session['lugares'] = form.cleaned_data['lugar'].values_list('id', flat=True)
             request.session['fecha'] = form.cleaned_data['fecha']
-            request.session['pais'] = form.cleaned_data['fecha']
+            #request.session['pais'] = form.cleaned_data['fecha']
             request.session['producto'] = form.cleaned_data['producto']
+            #Unidad no se mete al params.
+            request.session['unidad'] = form.cleaned_data['producto']
             request.session['activa'] = True
             activa = True
         else:
             activa = False
-        dicc = {'form': form, 'activa': activa}
+        dicc = {'form': form, 'activa': activa, 'paises': paises}
         return render_to_response('precio/index.html', dicc,
                                   context_instance = RequestContext(request))
     else:
         form = PrecioForm()
-        return render_to_response('precio/index.html', {'form': form},
+        return render_to_response('precio/index.html', 
+                                  {'form': form, 'paises': paises},
                                   context_instance = RequestContext(request))
 
 @session_required

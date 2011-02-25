@@ -14,9 +14,10 @@ class DiversityForm(forms.Form):
 
 class PrecioForm(forms.Form):
     fecha = forms.ChoiceField(choices=ANOS_CHOICES)
-    pais = forms.ModelChoiceField(queryset=Pais.objects.all(),
-             required=False, empty_label="Todos los Paises")
-    lugar = forms.CharField(widget = forms.SelectMultiple, required=False) 
+    #pais = forms.ModelChoiceField(queryset=Pais.objects.all(),
+    #         required=False, empty_label="Todos los Paises")
+    lugar = forms.ModelMultipleChoiceField(widget = forms.CheckboxSelectMultiple, 
+                                   queryset=Lugar.objects.all(), required=False) 
     producto = forms.ModelChoiceField(queryset=Producto.objects.all())
     unidad = forms.ChoiceField(choices=(('nativa', 'Nativa'), 
                                         ('normalizada', 'Normalizada')),
