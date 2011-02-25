@@ -4,4 +4,14 @@
 {% block contenido %}
 <h1>Askbot Mini, sin poderes de Super Vaca!! :D</h1>
 <a href="./questions/ask/">Ask Question</a>
+<br><br>
+<div class="question_list">
+    {% for question in questions %}
+    <div class="question">
+        <span>{{question.answer_set.all.count}} respuestas</span>&nbsp;|&nbsp;<span>{{question.views}} views</span> - <a href="./questions/{{question.id}}/" title="{{question.question}}">{{question.question}}</a>
+        Publicado por: {{question.user}} hace {{question.date_created|timesince}}<br>
+        <span style="font-size: 12px;">{% for tag in question.get_tags %}&bull; {{tag.name}}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</span>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
