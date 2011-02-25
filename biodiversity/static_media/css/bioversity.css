@@ -687,3 +687,21 @@ color:#000;
     margin:25px;
     padding:10px;
 }
+.infobox{
+    cursor: pointer;
+    background: #fff;
+}
+.infobox ul{
+    color: #000;
+    font-size: 11px;
+    padding: 0;
+    padding-left: 3px;
+    margin: 0;
+    list-style: none;
+}
+.infobox a{
+    color: #08368F;
+}
+.infobox a:hover{
+    text-decoration: underline;
+}

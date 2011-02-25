@@ -6,12 +6,13 @@
 <script type="text/javascript" src="/files/js/infobox.js"></script>
 <script type="text/javascript">    
     // Aplicar QuickSearch a la tabla y la lista
-    var map;    
-    $(document).ready(function () {
+    var map;
+    var ibs = new Array();    
+    $(document).ready(function () {        
         var myLatlng = new google.maps.LatLng(13, -85);
         var myOptions = {
             zoom: 8,
-            mapTypeControl: false,
+            mapTypeControl: true,
             center: myLatlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }        
@@ -23,34 +24,32 @@
         new google.maps.Point(0, 32));
 
         $.getJSON('/bioversity/ajax/zonas/', function(data){
-            $.each(data, function(i, elemento){
-                var latlng = new google.maps.LatLng(elemento.latitud, elemento.longitud);
+            $.each(data, function(i, elemento){                
+                var latlng = new google.maps.LatLng(elemento.punto[0], elemento.punto[1]);
                 var marker = new google.maps.Marker({
                     position: latlng,
                     map: map,
-                    title: elemento.nombre,
+                    title: elemento.zona,
                     icon: image,
                     id: elemento.id
                 });
-                attachInfowindow(marker, elemento.id);
+                attachInfowindow(marker, elemento.socios);
             });
-        });
-        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-    });
-
-    var ib;
-    var text = document.createElement("div");
-    function attachInfowindow(marker, id) {
-        $(text).html('');
-        text.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto;";
-        $(text).append("<div class='infobox'><ul>");
-        $.getJSON('/bioversity/ajax/socios/' + id + '/', function(data){                        
-            $.each(data, function(i, socio){                
-                $(text).append("<li><a href='/mapeo/ficha/'>"+socio.nombre+"</a></li>");
-            });            
         });        
-        $(text).append("</ul></div>");
-        
+    });
+    
+    function attachInfowindow(marker, socios) {
+        var ib;
+        var salida;
+        var text = document.createElement("div");
+        text.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto;";
+        salida = "<div class='infobox'><ul>";
+        for(var i=0; i < socios.length; i++){            
+            salida += "<li><a href='/mapeo/ficha/'>"+socios[i].nombre+"</a></li>";
+        }
+        salida += "</ul></div>";                
+
+        text.innerHTML = salida;
         var myOptions = {            
             content: text,
             disableAutoPan: false,
@@ -68,36 +67,19 @@
             isHidden: false,
             pane: "floatPane",
             enableEventPropagation: false
-        };        
-
+        };       
+        
         ib = new InfoBox(myOptions);
+        ibs.push(ib);        
         google.maps.event.addListener(marker, 'mouseover', function() {
-            console.log($(text).html());
             try{
-                infowindow.close();
+                for(var i=0;i<ibs.length;i++){
+                    ibs[i].close();
+                }                
             }catch(err){}
             ib.open(map, marker);
-        });        
-    }
-    
-    function deepCopy(obj) {
-        if (Object.prototype.toString.call(obj) === '[object Array]') {
-            var out = [], i = 0, len = obj.length;
-            for ( ; i < len; i++ ) {
-                out[i] = arguments.callee(obj[i]);
-            }
-            return out;
-        }
-        if (typeof obj === 'object') {
-            var out = {}, i;
-            for ( i in obj ) {
-                out[i] = arguments.callee(obj[i]);
-            }
-            return out;
-        }
-        return obj;
-    }
-                
+        });
+    }           
 </script>
 <style type="text/css">
     #map_canvas{        
