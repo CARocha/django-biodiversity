@@ -61,11 +61,7 @@
                 <div class="form_widget">{{form.fecha}}</div>
                 <div class="form_label">Producto</div>
                 <div class="form_widget">
-                    <select name="producto" id="id_producto">
-                        <option value="1">Bananin</option>
-                        <option value="2">Bananon</option>
-                        <option value="3">Bananote</option>
-                    </select>
+                  {{form.producto}}
                 </div>
                 <div class="clean"></div>
                 <div id="zonas">ZONAS DE CONTROL</div>
@@ -96,8 +92,7 @@
 
                 <div class="zona-pais" style="float:left">
                     <div class="zona-pais-nombre">Moneda</div>
-                        <div class="checks"><input type="checkbox" name="Nativa"><label FOR="Nativa">Nativa</label></div>
-                        <div class="checks"><input type="checkbox" name="Estandarizada"><label FOR="Estandarizada">Estandarizada $</label></div>
+                        <div class="checks">{{form.unidad}}</div>
                 </div>
                                 <div id="mensajito-moneda">
                     La moneda nativa depende de cada pais o zona y solamente se aplica cuando solo se selecciona una zona de control

@@ -449,6 +449,13 @@ a{
     font-size:13px;
     color:#4b4b4b;
 }
+
+.checks ul{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
 .footer{
     color: #7d7361;
     font-size: 12px;
@@ -679,4 +686,22 @@ color:#000;
 #nada2 {
     margin:25px;
     padding:10px;
+}
+.infobox{
+    cursor: pointer;
+    background: #fff;
+}
+.infobox ul{
+    color: #000;
+    font-size: 11px;
+    padding: 0;
+    padding-left: 3px;
+    margin: 0;
+    list-style: none;
+}
+.infobox a{
+    color: #08368F;
+}
+.infobox a:hover{
+    text-decoration: underline;
 }

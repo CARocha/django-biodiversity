@@ -53,14 +53,25 @@ def grafohumedad(request):
     '''
     tabla = []
     fila = []
+    valores = []
+    leyends = []
     ano = request.session['fecha']
     zona = request.session['lugares']
     for numero, letras in CICLO_MES:
         humedad = Humedad.objects.filter(mes = numero, zona__in=zona, ano = ano).aggregate(prom = Avg('humedad'))['prom']
         fila = {'mes':letras, 'humo':humedad}
+        valores.append(humedad) if humedad != None else valores.append(0)
+        leyends.append(letras)
         tabla.append(fila)
-        
-    return render_to_response('clima/grafo_humedad.html',locals(),
+    
+    grafo_url = grafos.make_graph(valores, ['humedad'], 
+                                      'Temperatura max y minima', 
+                                      leyends,
+                                      type = grafos.BAR_CHART_V, multiline=False, size=(650, 300))
+   
+    dicc = {'tabla': tabla, 'url': grafo_url}
+    
+    return render_to_response('clima/grafo_humedad.html', dicc,
                              context_instance=RequestContext(request))
 
 @session_required

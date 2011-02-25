@@ -1,20 +1,6 @@
 {% extends "base.html" %}
 {%load unslugify %}
 {%block extra_header%}
-<link href="{{MEDIA_URL}}css/visualize.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="{{MEDIA_URL}}css/visualize-light.css" rel="stylesheet" type="text/css" media="screen" />
-<script type="text/javascript">
-$(document).ready(function (){
-  $('#grafo').visualize({
-        width:850,
-        height:130,
-        barMargin:15,
-        colors:['#be1e2d','#666699','#92d5ea','#ee8310','#8d10ee',
-                '#5a3b16','#26a4ed','#f45a90','#e9e744','#0000FF',
-                '#1C8809','#6B886E']
-    });
-  });
-</script>
 {% endblock %}
 {% block menu %}
 {% if request.session.activa%}
@@ -45,4 +31,5 @@ $(document).ready(function (){
     {%endfor%}
    </tbody>
 </table>
+<img src="{{url}}"/>
 {% endblock %}
