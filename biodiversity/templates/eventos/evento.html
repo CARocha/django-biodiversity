@@ -20,6 +20,10 @@
                 <div class="ficha-evento-elemento">
                     {%if evento.contenido %}{{evento.contenido|safe}}<br>{%else%}No hay información adicional{%endif%}
                 </div>
+                
+                <div class="ficha-evento-elemento">
+                    {%if evento.foto %}<img src="{{evento.foto.url_150x150}}"><br>{%else%}No hay Foto para este evento{%endif%}
+                </div>
             </div>
        </div>
 {%endblock %}

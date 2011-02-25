@@ -7,6 +7,7 @@ from models import *
 from diversity.forms import DiversityForm
 from diversity.decorators import session_required
 from biodiversity.utils import MESES 
+from biodiversity import grafos 
 
 def list_parse(s):
     for c in ['[', ']', 'u', "'",]:
@@ -47,10 +48,13 @@ def index(request):
 @session_required
 def grafo(request, tipo):
     '''Grafo generado del precio'''
+    leyendas = []
     if tipo == 'productor':
         filas = []
+        filas_grafo = []
         for producto in Producto.objects.all():
             valores = []
+            leyendas.append(producto.nombre)
             for mes in range(1, 13):
                 params = _get_params(request)
                 params['fecha__month'] = mes
@@ -58,25 +62,39 @@ def grafo(request, tipo):
                 precio = Precio.objects.filter(**params).aggregate(valor = Avg('precio_productor'))['valor']
                 valores.append(int(precio)) if precio != None else valores.append(0)
             fila = {'leyenda': producto.nombre, 'valores': valores}
+            filas_grafo.append(valores)
             filas.append(fila)
+        grafo_url = grafos.make_graph(filas_grafo, leyendas,  
+                                      'Precio al productor',
+                                      MESES,
+                                      type = grafos.LINE_CHART, multiline=True)
         return render_to_response('precio/productor.html',
                                   {'tiempos': MESES,
+                                   'url': grafo_url,
                                   'filas': filas},
                                   context_instance = RequestContext(request))
     if tipo == 'consumidor':
         filas = []
+        filas_grafo = []
         for producto in Producto.objects.all():
+            leyendas.append(producto.nombre)
             valores = []
             for mes in range(1, 13):
                 params = _get_params(request)
                 params['fecha__month'] = mes
                 params['producto'] = producto 
                 precio = PrecioConsumidor.objects.filter(**params).aggregate(valor = Avg('precio_consumidor'))['valor']
-                valores.append(precio)
+                valores.append(precio) if precio != None else valores.append(0)
             fila = {'leyenda': producto.nombre, 'valores': valores}
             filas.append(fila)
+            filas_grafo.append(valores)
+        grafo_url = grafos.make_graph(filas_grafo, leyendas,  
+                                      'Precio al productor',
+                                      MESES,
+                                      type = grafos.LINE_CHART, multiline=True)
         return render_to_response('precio/consumidor.html',
                                  {'tiempos': MESES,
+                                  'url': grafo_url,
                                   'filas': filas},
                                   context_instance = RequestContext(request))
 

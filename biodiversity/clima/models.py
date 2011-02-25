@@ -68,14 +68,14 @@ class Clima(models.Model):
         unique_together = ['ano', 'semana']
         
 class Humedad(models.Model):
+    zona = models.ForeignKey(Lugar)
     mes = models.IntegerField(choices=CICLO_MES)
     ano = models.IntegerField('Año',choices=CICLO_CHOICES)
     humedad = models.FloatField('Humedad de suelo')
-    zona = models.ForeignKey(Lugar)
 
     class Meta:
         verbose_name_plural = "Humedad de suelo"
         unique_together = ['ano', 'mes']
         
     def __unicode__(self):
-        return "%s" % int(self.humedad)
+        return "Humedad para %s en el mes %s del  %s" % (self.zona.nombre, self.mes, self.ano)

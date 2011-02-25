@@ -498,6 +498,14 @@ a{
     height: 213px;
     /*border-left: 1px #fff solid;*/
 }
+.nivo-caption a{
+    color: #fff;
+    font-size: 12px;
+    text-shadow: #000 2px 2px 2px;
+}
+.nivo-caption a:hover{
+    text-decoration: underline;
+}
 .atras{
     display: block;
     width: 41px;
