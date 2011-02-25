@@ -63,13 +63,22 @@ def ajax_socios(request, zona):
     return HttpResponse(simplejson.dumps(list(socios_list)), mimetype="application/javascript")
 
 def ajax_zonas(request):
-    zonas_list = Lugar.objects.all().values('id', 'nombre', 'latitud', 'longitud')
-    for i in range(len(zonas_list)):
-        zonas_list[i]['latitud'] = float(zonas_list[i]['latitud']) if zonas_list[i]['latitud'] else 0
-        zonas_list[i]['longitud'] = float(zonas_list[i]['longitud']) if zonas_list[i]['longitud'] else 0
+    dicc = {}
+    lista = []
+    zonas_list = Lugar.objects.all()#.values('id', 'nombre', 'latitud', 'longitud')
+
+    for zona in zonas_list:
+        socios = Socios.objects.filter(zona__id=zona.id).values('nombre', 'id')
+        dicc = {
+            'punto': (float(zona.latitud), float(zona.longitud)),
+            'zona': zona.nombre,
+            'socios': list(socios)
+        }
+        lista.append(dicc)
+
     ##Esta shit de zonas_list se tiene que convertir explicitamente a lista por que es un 
-    #value queryset x_x
-    return HttpResponse(simplejson.dumps(list(zonas_list)), mimetype="application/javascript")
+    #value queryset x_x    
+    return HttpResponse(simplejson.dumps(lista), mimetype="application/javascript")
 
 def ajax_pais(request, pais_id):
     pais = get_object_or_404(Pais, pk=pais_id)
