@@ -56,22 +56,22 @@ class Precios(models.Model):
         verbose_name_plural = "Precios"
         
     def precioconsumidor(self):
-        mostrar = PrecioConsumidor.objects.get(precios1__id=self.id).precio_consumidor
+        mostrar = PrecioConsumidor.objects.filter(precios1__id=self.id)[0].precio_consumidor
         return "%s" % (mostrar)
     precioconsumidor.short_description = 'Precio Consumidor'
     
     def precioproductor(self):
-        mostrar1 = Precio.objects.get(precios2__id=self.id).precio_productor
+        mostrar1 = Precio.objects.filter(precios2__id=self.id)[0].precio_productor
         return "%s" % (mostrar1)
     precioproductor.short_description = 'Precio Productor'
         
     def productoconsumidor(self):
-        mostrar2 = PrecioConsumidor.objects.get(precios1__id=self.id).producto.nombre
+        mostrar2 = PrecioConsumidor.objects.filter(precios1__id=self.id)[0].producto.nombre
         return "%s" % (mostrar2)
     productoconsumidor.short_description = 'Producto Consumidor'
     
     def productoproductor(self):
-        mostrar3 = Precio.objects.get(precios2__id=self.id).producto.nombre
+        mostrar3 = Precio.objects.filter(precios2__id=self.id)[0].producto.nombre
         return "%s" % (mostrar3)
     productoproductor.short_description = 'Producto Productor'
         
