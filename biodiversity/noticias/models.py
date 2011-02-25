@@ -21,7 +21,7 @@ class Noticias(models.Model):
         
     def adjunto(self):
         adjunto = Galeria.objects.filter(noticia__id=self.id)
-        return adjunto
+        return adjunto    
         
 class Galeria(models.Model):
     ''' Modelo sobre lo que contendran las fotos
@@ -29,12 +29,12 @@ class Galeria(models.Model):
     '''
     nombre = models.CharField(max_length=200)
     adjunto = ImageWithThumbsField(upload_to=get_file_path,
-                                         sizes=((250,250),(350,250)), null=True, blank=True)
+                                         sizes=((250,250), (328, 213), (350,250)), null=True, blank=True)
     noticia = models.ForeignKey(Noticias)
     
     fileDir = 'noticiasfotos/fotos'
     class Meta:
-        verbose_name_plural = "Galeria"
+        verbose_name_plural = "Galeria"        
 
     def __unicode__(self):
         return self.nombre

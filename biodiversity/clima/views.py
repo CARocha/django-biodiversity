@@ -9,6 +9,7 @@ from diversity.decorators import session_required
 from django.template.defaultfilters import slugify
 from diversity.forms import DiversityForm
 from biodiversity.utils import MESES 
+from biodiversity import grafos 
 
 def list_parse(s):
     for c in ['[', ']', 'u', "'",]:
@@ -82,13 +83,25 @@ def clima(request, tipo):
             #se hace un FIX al params para que soporte ano y no fecha
             temps = Clima.objects.filter(**params).aggregate(maxima = Avg('t_max'), 
                                                          minima = Avg('t_min'))
-            valores_max.append(temps['maxima'])
-            valores_min.append(temps['minima'])
+            if temps['maxima']:
+                valores_max.append(temps['maxima'])
+            else:
+                valores_max.append(0)
+            if temps['minima']:
+                valores_min.append(temps['minima'])
+            else:
+                valores_min.append(0)
+
         filas.append(dict(leyenda = 'Máximas', valores = valores_max))
         filas.append(dict(leyenda = 'Mínimas', valores = valores_min))
+        grafo_url = grafos.make_graph([valores_max, valores_min], ['Máxima', 'Minima'], 
+                                      'Temperatura max y minima', 
+                                      semanas,
+                                      type = grafos.LINE_CHART, multiline=True)
         return render_to_response('clima/clima.html',
                                   {'tiempos': semanas,
                                   'filas': filas, 
+                                  'url': grafo_url,
                                   'titulo': 'Temperaturas máximas y mínimas(promedio)'},
                                   context_instance = RequestContext(request))
     elif tipo == 'precipitacion':
@@ -100,6 +113,8 @@ def clima(request, tipo):
         del params['zona__in']
 
         semanas = range(1, 53)
+        filas_grafo = []
+        leyendas = []
         for zona in zonas:
             nombre_zona = Lugar.objects.get(id=zona).nombre
             valores = []
@@ -107,12 +122,22 @@ def clima(request, tipo):
                 params['semana'] = semana
                 params['zona__id'] = int(zona) 
                 prec = Clima.objects.filter(**params).aggregate(prec = Avg('precipitacion'))['prec'] 
-                valores.append(prec)
+                if prec:
+                    valores.append(prec)
+                else:
+                    valores.append(0)
+
+            filas_grafo.append(valores)
+            leyendas.append(nombre_zona)
             filas.append(dict(leyenda = nombre_zona, valores = valores))
-        print filas
+        grafo_url = grafos.make_graph(filas_grafo, leyendas,  
+                                      'Precipitación promedio',
+                                      semanas,
+                                      type = grafos.LINE_CHART, multiline=True)
         return render_to_response('clima/clima.html',
                                   {'tiempos': semanas,
                                   'filas': filas, 
+                                  'url': grafo_url,
                                   'titulo': 'Precipitación Promedio'},
                                   context_instance = RequestContext(request))
     else:
