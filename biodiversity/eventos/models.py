@@ -6,6 +6,8 @@ from django.contrib.contenttypes.models import ContentType
 #from tagging.fields import TagField
 #from tagging.models import *
 #from tagging_autocomplete.models import TagAutocompleteField
+from thumbs import ImageWithThumbsField
+from biodiversity.utils import get_file_path 
 
 # Regla para que funcionen las migraciones de south con los campos de django-tagging
 #from south.modelsinspector import add_introspection_rules
@@ -24,6 +26,9 @@ class Evento(models.Model):
     lugar = models.CharField('Lugar', max_length = 150,blank = True, null = True)
     contenido = models.TextField('Contenido',blank = True, null = True)
     #tags =  TagAutocompleteField(help_text='Separar elementos con "," ')
+    foto = ImageWithThumbsField(upload_to=get_file_path,
+                                         sizes=((150,150),(250,250)), null=True, blank=True)
+    fileDir = 'eventosfotos/fotos'
 
     def __unicode__(self):
         return self.titulo
