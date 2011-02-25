@@ -19,7 +19,7 @@ class Question(models.Model):
     user = models.ForeignKey(User)
 
     def __unicode__(self):
-        return u'%s' % self.pregunta
+        return u'%s' % self.question
 
     class Meta:
         verbose_name = u'Pregunta'
@@ -32,8 +32,14 @@ class Question(models.Model):
     def get_tags(self):
         return Tag.objects.get_for_object(self)
 
+    def get_answer_count(self):
+        if self.answer_set.all().count() == 0:
+            return 0        
+        return self.answer_set.all().count()
+
+
 class Answer(models.Model):
-    question = models.IntegerField(Question)
+    question = models.ForeignKey(Question)
     answer = models.TextField()
     fecha = models.DateTimeField(datetime.datetime.now())
     user = models.ForeignKey(User)
