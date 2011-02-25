@@ -11,6 +11,7 @@
        <div id="contenido_full">
             <div id="ficha-evento">
                <h2>{{evento.titulo}}</h2>
+                {%if evento.foto %}<img align="left"  style="margin-right:10px;" src="{{evento.foto.url_150x150}}"><br>{%else%}{%endif%}
                <div class="ficha-evento-elemento">
                     <b>Inicia:</b>{{evento.fecha_inicio|date:"d M Y"}}    <b>Finaliza:</b> {{evento.fecha_final|date:"d M Y"}}<br>
                </div>
@@ -21,8 +22,8 @@
                     {%if evento.contenido %}{{evento.contenido|safe}}<br>{%else%}No hay información adicional{%endif%}
                 </div>
                 
-                <div class="ficha-evento-elemento">
-                    {%if evento.foto %}<img src="{{evento.foto.url_150x150}}"><br>{%else%}No hay Foto para este evento{%endif%}
+                <div class="clean">
+                   
                 </div>
             </div>
        </div>

@@ -19,7 +19,7 @@
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
         
         var image = new google.maps.MarkerImage('/files/img/custom_marker.png',
-        new google.maps.Size(15, 32),
+        new google.maps.Size(45, 44),
         new google.maps.Point(0,0),
         new google.maps.Point(0, 32));
 
@@ -83,12 +83,14 @@
 </script>
 <style type="text/css">
     #map_canvas{        
-        height: 500px;
+        height: 400px;
     }
 </style>
 {%endblock%}
 
 {% block contenido %}
 <div class="clean"></div>
+<br>
+<div id="encabezado_contenido">Mapa de ubicación de socios y zonas de control</div>
 <div id="map_canvas"></div>
 {% endblock %}

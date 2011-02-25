@@ -1,1 +1,29 @@
 Sistema de Monitoreo de cultivos de bananas
+=======
+=====Django-Simas=======
+
+Página Interna del Servicio de Información Mesoamericano sobre Agricultura Sostenible.
+
+Como parte de la renovación y el mejoramiento de los servicios internos para los usuarios de SIMAS, el equipo de informática esta trabajando
+en la renovacion de la página interna. Pasando de una página estática a una plataforma que pueda ser administrada dinámicamente por cualquier miembro del equipo.
+
+Funciones:
+
+-Perfiles de usuarios(capacidad de los usuarios de modificar su información personal y subir noticias, documentos, etc)
+-Mejoramiento de usabilidad de página principal para tener un mejor acceso a la información
+-Secciones de enlaces para cada área o temática que se desee.
+-Información de tasa de cambio monetaria actualizada dinamicamente a partir del sitio elpueblopresidente.com
+-Noticias: tendra el equipo la capasidad de subir noticias importante internas
+-Actividades: El equipo podra poner las actividades mas importante en la cual los miembros del simas estan participando
+-Cumpleañeros.
+-Días feriados.
+-Documentos: Link de descarga a los documentos internos, manuales, informes, etc
+-Contactos: Para subir los contactos telefonicos del simas.
+
+Requerimientos de Instalación.
+
+- Django trunk (requerido o 1.2 beta 1)
+- Python Imaging Library (PIL)
+- Base de datos soportada por Django
+- Servidor web compatible.
+
