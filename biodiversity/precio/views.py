@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.db.models import Avg
 from models import *
 #from bioversity.utils import _get_elementos
-from diversity.forms import DiversityForm
+from diversity.forms import DiversityForm, PrecioForm
 from diversity.decorators import session_required
 from biodiversity.utils import MESES 
 from biodiversity import grafos 
@@ -28,11 +28,12 @@ def _get_params(request):
 def index(request):
     '''Vista incluye formulario de consulta'''
     if request.method == 'POST':
-        form = DiversityForm(request.POST)
+        form = PrecioForm(request.POST)
         if form.is_valid():
             request.session['lugares'] = list_parse(form.cleaned_data['lugar'])
             request.session['fecha'] = form.cleaned_data['fecha']
             request.session['pais'] = form.cleaned_data['fecha']
+            request.session['producto'] = form.cleaned_data['producto']
             request.session['activa'] = True
             activa = True
         else:
@@ -41,7 +42,7 @@ def index(request):
         return render_to_response('precio/index.html', dicc,
                                   context_instance = RequestContext(request))
     else:
-        form = DiversityForm()
+        form = PrecioForm()
         return render_to_response('precio/index.html', {'form': form},
                                   context_instance = RequestContext(request))
 

@@ -449,6 +449,13 @@ a{
     font-size:13px;
     color:#4b4b4b;
 }
+
+.checks ul{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
 .footer{
     color: #7d7361;
     font-size: 12px;
