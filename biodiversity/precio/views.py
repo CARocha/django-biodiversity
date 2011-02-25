@@ -20,8 +20,6 @@ def _get_params(request):
     params = {'fecha__year': request.session['fecha'], 
               'producto': request.session['producto']
              }
-    if request.session['lugares']:
-        params['zona__in'] = request.session['lugares']
 
     return params
 
@@ -53,55 +51,33 @@ def index(request):
 @session_required
 def grafo(request, tipo):
     '''Grafo generado del precio'''
+    #TODO: normalizar la shit!
     leyendas = []
-    if tipo == 'productor':
+    models = dict(productor = Precio, consumidor=PrecioConsumidor)
+    if tipo in models.keys():
         filas = []
         filas_grafo = []
-        for producto in Producto.objects.all():
+        params = _get_params(request)
+        for zona in request.session['lugares']:
             valores = []
-            leyendas.append(producto.nombre)
+            leyenda = Lugar.objects.get(pk=zona).nombre
+            leyendas.append(leyenda)
+            params['zona'] = zona
             for mes in range(1, 13):
-                params = _get_params(request)
                 params['fecha__month'] = mes
-                params['producto'] = producto 
-                precio = Precio.objects.filter(**params).aggregate(valor = Avg('precio_productor'))['valor']
+                precio = models[tipo].objects.filter(**params).aggregate(valor = Avg('precio_%s' % tipo))['valor']
                 valores.append(int(precio)) if precio != None else valores.append(0)
-            fila = {'leyenda': producto.nombre, 'valores': valores}
+            fila = {'leyenda': leyenda, 'valores': valores}
             filas_grafo.append(valores)
             filas.append(fila)
         grafo_url = grafos.make_graph(filas_grafo, leyendas,  
-                                      'Precio al productor',
+                                      'Precio al %s' % tipo,
                                       MESES,
                                       type = grafos.LINE_CHART, multiline=True)
-        return render_to_response('precio/productor.html',
+        return render_to_response('precio/%s.html' % tipo,
                                   {'tiempos': MESES,
                                    'url': grafo_url,
                                   'filas': filas},
                                   context_instance = RequestContext(request))
-    if tipo == 'consumidor':
-        filas = []
-        filas_grafo = []
-        for producto in Producto.objects.all():
-            leyendas.append(producto.nombre)
-            valores = []
-            for mes in range(1, 13):
-                params = _get_params(request)
-                params['fecha__month'] = mes
-                params['producto'] = producto 
-                precio = PrecioConsumidor.objects.filter(**params).aggregate(valor = Avg('precio_consumidor'))['valor']
-                valores.append(precio) if precio != None else valores.append(0)
-            fila = {'leyenda': producto.nombre, 'valores': valores}
-            filas.append(fila)
-            filas_grafo.append(valores)
-        grafo_url = grafos.make_graph(filas_grafo, leyendas,  
-                                      'Precio al productor',
-                                      MESES,
-                                      type = grafos.LINE_CHART, multiline=True)
-        return render_to_response('precio/consumidor.html',
-                                 {'tiempos': MESES,
-                                  'url': grafo_url,
-                                  'filas': filas},
-                                  context_instance = RequestContext(request))
-
     else:
         raise Http404

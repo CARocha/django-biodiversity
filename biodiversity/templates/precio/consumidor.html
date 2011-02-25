@@ -1,12 +1,5 @@
 {% extends "base.html" %}
 {%block extra_header%}
-<link href="{{MEDIA_URL}}css/visualize.css" rel="stylesheet" type="text/css" media="screen" />
-<link href="{{MEDIA_URL}}css/visualize-light.css" rel="stylesheet" type="text/css" media="screen" />
-<script type="text/javascript">
-$(document).ready(function (){
-    $('#grafo').visualize({type: 'line'});
-  });
-</script>
 {% endblock %}
 {% block menu %}  
 {% if request.session.activa%}
