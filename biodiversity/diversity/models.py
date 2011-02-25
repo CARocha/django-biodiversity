@@ -15,6 +15,9 @@ class Pais(models.Model):
     def __unicode__(self):
         return self.nombre
 
+    def get_zonas(self):
+        return Lugar.objects.filter(pais = self)
+
 class Lugar(models.Model):
     ''' Lugar de origen de los productos que vayan
     agregando

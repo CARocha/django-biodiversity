@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block extra_header %}
+<link href="{{MEDIA_URL}}css/askbotmini.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/files/js/autocomplete/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="/files/js/tiny_mce/tiny_mce.js"></script>
+<script type="text/javascript" src="/files/js/tiny_mce/askbotconfig.js"></script>
+{% endblock %}
+{% block contenido %}
+<h1>Askbot Mini, sin poderes de Super Vaca!! :D</h1>
+<a href="./questions/ask/">Ask Question</a>
+<div>
+    <form action="." method="post">{% csrf_token %}
+        <table class="askquestion">
+            <tr>
+                <td>
+                    <label for="question">{{form.question.label}}</label>
+                    {{form.question}}
+                </td>
+            </tr>
+            <tr>
+                <td>{{form.description}}</td></tr>
+            <tr>
+                <td>
+                    <label for="id_tags">Tags:</label><br>
+                    {{form.tags}}
+                </td>
+            </tr>
+            <tr>               
+                <td>
+                    {{form.notify}}<label for="id_notify">Notificar a los usuarios del sitio</label>
+                </td>                
+            </tr>            
+        </table>
+        <input type="submit" value="Preguntar">
+    </form>
+</div>
+{% endblock %}

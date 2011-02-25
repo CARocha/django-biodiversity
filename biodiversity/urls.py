@@ -28,6 +28,8 @@ urlpatterns = patterns('',
     (r'^noticias/', include('noticias.urls')),
     (r'^foro/', include('forum.urls')),
     (r'^busqueda/', include('haystack.urls')),
+    (r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
+    (r'^askbot/', include('askbotmini.urls')),
 )
 
 if settings.DEBUG:

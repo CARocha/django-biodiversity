@@ -25,21 +25,6 @@
 {% endblock %}
 
 {% block contenido %}
-<form action"." method="POST">
-    {% csrf_token %}
-<div id="formulario_tabla" >
-    <div class="form_label"><b>{{form.fecha.label}}</b></div>
-    <div class="form_widget">{{form.fecha}}</div>
-    <div class="form_label"><b>{{form.pais.label}}</b></div>
-    <div class="form_widget">{{form.pais}}</div>
-    <div class="form_label"><b>{{form.lugar.label}}</b></div>
-    <div class="form_widget">{{form.lugar}}</div>
-    <div class="form_label"><b>{{form.tipo_grafo.label}}</b></div>
-    <div class="form_widget">{{form.tipo_grafo}}</div>
-</div>
-
-  <input type="submit" value="Consultar" id="boton" class="filtro"/>
-</form>
 {% if request.session.activa%}
 <a href="/precio/grafo/productor/"> Precio al productor</a>
 <a href="/precio/grafo/consumidor/"> Precio al consumidor</a>
@@ -53,6 +38,7 @@
 <div id="encabezado_contenido">PRECIOS DE PRODUCTOS</div>
 <div id="contenido_full">
     <p>Tempor nunc auctor, eu porta aliquam placerat a integer montes ridiculus? Sit in porttitor, nisi? A elementum! Pellentesque turpis ac odio magnis vel mauris. Pulvinar. Facilisis magna parturient, hac integer ac amet aenean! Enim sed, urna penatibus a mauris nascetur dis ridiculus! Enim pulvinar magna! Ac a sed mid? Sit cum, ultricies ut, nec? Magna cursus duis elementum et natoque quis placerat, adipiscing dis. Mus in duis! Mid integer tincidunt mid tristique, mus sociis placerat scelerisque! Aliquet odio turpis, ac, aliquet integer nisi montes</p>
+    {{form.errors}}
     <div id="formarea">
         <form action"." method="POST">
             {% csrf_token %}
@@ -65,27 +51,14 @@
                 </div>
                 <div class="clean"></div>
                 <div id="zonas">ZONAS DE CONTROL</div>
+                    {%for pais in paises%}
                     <div class="zona-pais">
-                        <div class="zona-pais-nombre">Nicaragua</div>
-                            <div class="checks"><input type="checkbox" name="Matagalpa"><label FOR="Matagalpa">Matagalpa</label></div>
-                            <div class="checks"><input type="checkbox" name="Quilali"><label FOR="Matagalpa">Quilali</label></div>
-                            <div class="checks"><input type="checkbox" name="Leon"><label FOR="Matagalpa">Leon</label></div>
+                      <div class="zona-pais-nombre">{{pais.nombre|capfirst}}</div>
+                            {% for zona in pais.get_zonas %}
+                            <div class="checks"><input type="checkbox" id="id_lugar_{{forloop.counter}}" value="{{zona.id}}" name="lugar"> <label for="id_lugar_{{forloop.counter}}">{{zona.nombre|capfirst}}</label></div>
+                            {%endfor%}
                     </div>
-                    <div class="zona-pais">
-                        <div class="zona-pais-nombre">Honduras</div>
-                            <div class="checks"><input type="checkbox" name="Matagalpa"><label FOR="Matagalpa">Matagalpa</label></div>
-                            <div class="checks"><input type="checkbox" name="Quilali"><label FOR="Matagalpa">Quilali</label></div>
-                    </div>
-                    <div class="zona-pais">
-                        <div class="zona-pais-nombre">Costa Rica</div>
-                            <div class="checks"><input type="checkbox" name="Matagalpa"><label FOR="Matagalpa">Matagalpa</label></div>
-                    </div>
-                    <div class="zona-pais">
-                        <div class="zona-pais-nombre">Peru</div>
-                            <div class="checks"><input type="checkbox" name="Matagalpa"><label FOR="Matagalpa">Matagalpa</label></div>
-                            <div class="checks"><input type="checkbox" name="Quilali"><label FOR="Matagalpa">Quilali</label></div>
-                            <div class="checks"><input type="checkbox" name="Leon"><label FOR="Matagalpa">Leon</label></div>
-                    </div>
+                    {%endfor%}
                     <div class="clean"></div>
             </div>
             <div id="form-right">
