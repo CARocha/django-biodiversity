@@ -118,6 +118,9 @@ INSTALLED_APPS = (
     'biodiversity.forum',
     'pagination',
     'haystack',
+    'biodiversity.tagging',
+    'biodiversity.tagging_autocomplete',
+    'biodiversity.askbotmini',
 )
 
 # A sample logging configuration. The only tangible logging
