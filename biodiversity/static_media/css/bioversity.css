@@ -40,8 +40,9 @@ a{
     float: left;
 }
 .header .nav .menu{
-    float: right;
-    margin-top: 62px;    
+/*    float: left;*/
+    margin-top: -23px;
+    margin-left: 430px;    
 }
 .header .nav .menu ul{
     list-style: none;
@@ -68,8 +69,26 @@ a{
 .header .nav .menu ul li a:hover{
     color: #2d6311;
 }
-.header .login{
-    margin-left: 430px;
+#login{
+    float: left;
+    margin-left: 590px;
+    margin-top: -100px;
+    min-width:80px;
+    max-width:266px;
+    height:22px;
+    font-size:13px;
+    color: #fff;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    -moz-border-top-left-radius: 3px;
+    -moz-border-top-right-radius: 3px;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    background-color: #000;
+}
+
+#login a{
+    color: #fff;
 }
 
 /*agregado por byron */

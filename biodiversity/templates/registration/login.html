@@ -1,17 +1,11 @@
-{% extends "base.html" %}
-{% block extratitle %}| Entrar{% endblock %}
-{% block top %}
-<div class="nombre_modulo">
-    Iniciar Sesi&oacute;n
-</div>
-{% endblock %}
 {% block contenido %}
 <div class="ajustado">    
     {{flash.messages}}
     {% if form.errors %}
     <p class="warning">Por favor, corija los siguentes erores:</p>
     {% endif %}
-    <form method="post" action="{% url django.contrib.auth.views.login %}" class="registro">{% csrf_token %}
+    <form method="post" action="{% url django.contrib.auth.views.login %}" class="registro">
+    {% csrf_token %}
         <table>
             {{form.as_table}}
         </table>
