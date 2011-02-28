@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block extra_header %}
+{% endblock %}
+{% block contenido %}
+<h1>Askbot Mini, sin poderes de Super Vaca!! :D</h1>
+<a href="./questions/ask/">Ask Question</a>
+<br><br>
+<div class="question_list">
+    <h1>{{question.question}}</h1>
+    <div class="question">
+        <div class="question_detail">
+            {{question.description|safe}}
+        </div>
+        Publicado por: {{question.user}} hace {{question.date_created|timesince}}<br>
+        <span style="font-size: 12px;">{% for tag in question.get_tags %}&bull; {{tag.name}}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</span>
+    </div>    
+</div>
+{% endblock %}

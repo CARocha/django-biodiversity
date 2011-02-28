@@ -8,7 +8,13 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.utils import simplejson
+from django.contrib.auth import logout
+from django.http import HttpResponseRedirect
 
+def logout_page(request):
+  logout(request)
+  return HttpResponseRedirect('/')
+  
 def index(request):
     ''' Vista que devolvera muchas de las salidas
         de la pagina principal o inicio del sitio
