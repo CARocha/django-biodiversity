@@ -1,0 +1,24 @@
+{% extends 'base.html'%}
+
+{% block contenido %}
+<div id="contenido">
+    <div id="encabezado_contenido">Datos del Socio</div>
+    nombre: {{socio.nombre}}<br/>
+
+{%if socio.link%}
+    pagina web: {{socio.link}}<br/>
+{%endif%}
+
+{%if socio.correo%}
+    correo electronico: {{socio.correo}}<br/>
+{%endif%}
+
+{%if socio.logotipo%}
+      logotipo:  {{socio.urls_150x150}}<br/>
+{%endif%}
+
+{% for zonas in socio.zona.all %}    
+    zonas:{{zonas}}<br/>
+{%endfor%}
+</div>
+{% endblock %}

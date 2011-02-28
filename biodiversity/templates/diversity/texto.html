@@ -1,0 +1,8 @@
+{%block contenido%}
+<div class="banner_content">
+        {% for textos in texto %}
+            <span style="font-weight: bold;">{{textos.titulo}}</span> <br>{{textos.texto|safe}}
+        {% endfor %}
+        </div>
+<br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+{%endblock%}
