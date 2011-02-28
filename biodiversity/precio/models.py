@@ -52,28 +52,33 @@ class Moneda(models.Model):
         
 class Precios(models.Model):
     
+    titulo = models.CharField(max_length=200, help_text="Aca va el titulo de los precios ejem: precios correspondiente al mes de Enero")
+    
+    def __unicode__(self):
+        return self.titulo
+        
     class Meta:
         verbose_name_plural = "Precios"
         
-    def precioconsumidor(self):
-        mostrar = PrecioConsumidor.objects.filter(precios1__id=self.id)[0].precio_consumidor
-        return "%s" % (mostrar)
-    precioconsumidor.short_description = 'Precio Consumidor'
-    
-    def precioproductor(self):
-        mostrar1 = Precio.objects.filter(precios2__id=self.id)[0].precio_productor
-        return "%s" % (mostrar1)
-    precioproductor.short_description = 'Precio Productor'
-        
-    def productoconsumidor(self):
-        mostrar2 = PrecioConsumidor.objects.filter(precios1__id=self.id)[0].producto.nombre
-        return "%s" % (mostrar2)
-    productoconsumidor.short_description = 'Producto Consumidor'
-    
-    def productoproductor(self):
-        mostrar3 = Precio.objects.filter(precios2__id=self.id)[0].producto.nombre
-        return "%s" % (mostrar3)
-    productoproductor.short_description = 'Producto Productor'
+#    def precioconsumidor(self):
+#        mostrar = PrecioConsumidor.objects.filter(precios1__id=self.id)[0].precio_consumidor
+#        return "%s" % (mostrar)
+#    precioconsumidor.short_description = 'Precio Consumidor'
+#    
+#    def precioproductor(self):
+#        mostrar1 = Precio.objects.filter(precios2__id=self.id)[0].precio_productor
+#        return "%s" % (mostrar1)
+#    precioproductor.short_description = 'Precio Productor'
+#        
+#    def productoconsumidor(self):
+#        mostrar2 = PrecioConsumidor.objects.filter(precios1__id=self.id)[0].producto.nombre
+#        return "%s" % (mostrar2)
+#    productoconsumidor.short_description = 'Producto Consumidor'
+#    
+#    def productoproductor(self):
+#        mostrar3 = Precio.objects.filter(precios2__id=self.id)[0].producto.nombre
+#        return "%s" % (mostrar3)
+#    productoproductor.short_description = 'Producto Productor'
         
    
 class PrecioConsumidor(models.Model):

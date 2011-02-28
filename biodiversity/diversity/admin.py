@@ -51,8 +51,10 @@ class PrecioConsumidorInline(admin.TabularInline):
 class PrecioAdmin(admin.ModelAdmin):
     actions_on_top = True
     inlines = [PrecioInline,PrecioConsumidorInline]
-    list_display = ('precioconsumidor', 'precioproductor', 
-                    'productoconsumidor', 'productoproductor',)
+    list_display = ('id', 'titulo',)
+    list_display_links = ('id','titulo',)
+#    list_display = ('precioconsumidor', 'precioproductor', 
+#                    'productoconsumidor', 'productoproductor',)
     
 class ClimaInline(admin.TabularInline):
     model = Clima
