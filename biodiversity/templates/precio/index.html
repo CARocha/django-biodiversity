@@ -38,7 +38,7 @@
 <div id="encabezado_contenido">PRECIOS DE PRODUCTOS</div>
 <div id="contenido_full">
     <p>Tempor nunc auctor, eu porta aliquam placerat a integer montes ridiculus? Sit in porttitor, nisi? A elementum! Pellentesque turpis ac odio magnis vel mauris. Pulvinar. Facilisis magna parturient, hac integer ac amet aenean! Enim sed, urna penatibus a mauris nascetur dis ridiculus! Enim pulvinar magna! Ac a sed mid? Sit cum, ultricies ut, nec? Magna cursus duis elementum et natoque quis placerat, adipiscing dis. Mus in duis! Mid integer tincidunt mid tristique, mus sociis placerat scelerisque! Aliquet odio turpis, ac, aliquet integer nisi montes</p>
-    {{form.errors}}
+    <div class="clean"></div>
     <div id="formarea">
         <form action"." method="POST">
             {% csrf_token %}
@@ -64,8 +64,10 @@
             <div id="form-right">
 
                 <div class="zona-pais" style="float:left">
+                
                     <div class="zona-pais-nombre">Moneda</div>
                         <div class="checks">{{form.unidad}}</div>
+                        {{ form.unidad.errors }}
                 </div>
                                 <div id="mensajito-moneda">
                     La moneda nativa depende de cada pais o zona y solamente se aplica cuando solo se selecciona una zona de control

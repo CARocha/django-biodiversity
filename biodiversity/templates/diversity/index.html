@@ -1,19 +1,6 @@
 {% extends "base.html" %}
 {%block extra_header%}
 <script type="text/javascript" src="/files/js/jquery.nivo.slider.pack.js"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
-        $("#boton-documentos").click(function () {
-            window.location = '/documentos/';
-        });
-        $("#boton-precio").click(function () {
-            window.location = '/precio/';
-        });
-        $("#boton-clima").click(function () {
-            window.location = '/clima/';
-        });
-    });
-</script>
 {%endblock%}
 {% block contenido %}
 <div class="banner">
@@ -21,7 +8,7 @@
         <div class="banner_content">
             <span style="font-weight: bold;">EL PROGRAMA</span> <br>El cultivo de Bananas y café bajo árboles, representa un importante "uso de la tierra" para los pequeños productores en Latinoamérica. El resultado del proyecto financiado por la GTZ en este tema, debe ser accesible tanto para los colaboradores, como para los implicados en el programa piloto y la comunidad en general. Este portal web promete ser un espacio virtual de consulta, base de datos y documentación relevante en el tema. También servirá como proyección de este "sistema agroforestal de cultivo y comercialización de bananas", relativamente nuevo. En pocas palabras, este sitio web le facilitará el acceso a la información, herramientas y documentación generada en este tópico en particular.
         </div>
-        <a class="leer-mas" href="/info/"></a><a class="mapas" href="/mapas/"></a>
+        <a class="leer-mas" href="/info/"></a><a class="mapas" href="/bioversity/mapa/"></a>
     </div>
     <div class="right">
         <div id="slider" style="min-width: 328px !important; min-height: 213px !important;">
@@ -36,8 +23,8 @@
     </div>
     <div class="clean"></div>
 </div>
-
 <div class="buttons">
+    <a href="/precio/">
     <div class="big price" id="boton-precio">
         <div class="b_info">
             <span class="b_title">Precio</span><br>
@@ -45,6 +32,8 @@
             en puntos de control
         </div>
     </div>
+    </a>
+    <a href="/clima/">
     <div class="big clima" id="boton-clima">
         <div class="b_info">
             <span class="b_title">Clima</span><br>
@@ -54,12 +43,15 @@
             de control
         </div>
     </div>
+    </a>
+    <a href="/documentos/">
     <div class="big docs" id="boton-documentos">
         <div class="b_info">
             <span class="b_title">Documentos</span><br>
             Documentos de descarga<br>del programa
         </div>
     </div>
+    </a>
     <div class="clean"></div>
 </div>
 <div>
