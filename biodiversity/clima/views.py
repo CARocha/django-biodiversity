@@ -30,6 +30,7 @@ def _get_params(request):
     
 def index(request):
     '''Vista incluye formulario de consulta'''
+    paises = Pais.objects.all()
     if request.method == 'POST':
         form = DiversityForm(request.POST)
         if form.is_valid():
@@ -40,12 +41,12 @@ def index(request):
             activa = True
         else:
             activa = False
-        dicc = {'form': form, 'activa': activa}
+        dicc = {'form': form, 'activa': activa, 'paises': paises}
         return render_to_response('clima/index.html', dicc,
                                   context_instance = RequestContext(request))
     else:
         form = DiversityForm()
-        return render_to_response('clima/index.html', {'form': form},
+        return render_to_response('clima/index.html', {'form': form, 'paises': paises},
                                   context_instance = RequestContext(request))
 @session_required
 def grafohumedad(request):
