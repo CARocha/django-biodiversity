@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.shortcuts import get_object_or_404
 from forms import *
 from models import *
 import datetime
@@ -27,3 +28,20 @@ def ask_question(request):
     else:
         form = AskForm()
     return render_to_response('askbotmini/ask_question.html', RequestContext(request, locals()))
+
+@login_required
+def view_question(request, id):
+    question = get_object_or_404(Question, id=int(id))
+    user_ip = request.META['REMOTE_ADDR']
+    try:
+        vista = View.objects.get(question=question, ip=user_ip)
+    except:
+        vista = View()
+        vista.question = question
+        vista.ip = user_ip
+        vista.save()
+        question.views = question.views + 1
+        question.save()
+
+    return render_to_response('askbotmini/view_question.html', RequestContext(request, locals()))
+
