@@ -19,6 +19,9 @@ def index(request):
     ''' Vista que devolvera muchas de las salidas
         de la pagina principal o inicio del sitio
     '''
+    #para el inicio sea mas dinamico
+    inicio = TextoInicio.objects.all()
+    
     request.session['flag'] = 'index'
     notis = Noticias.objects.all().order_by('fecha')
     lista = []
@@ -28,6 +31,12 @@ def index(request):
             if len(lista) == 5:
                 break
     return render_to_response('diversity/index.html', locals(),
+                              context_instance=RequestContext(request))
+                              
+def leer_texto(request):
+    texto = TextoInicio.objects.all()
+    
+    return render_to_response('diversity/texto.html', locals(),
                               context_instance=RequestContext(request))
 
 def lista_sitios(request):
@@ -53,7 +62,7 @@ def ficha_socios(request, id):
         bioversity
     '''
     socio = get_object_or_404(Socios, id=id)
-    print socio
+    
     return render_to_response('diversity/ficha_socio.html', {'socio': socio},
                               context_instance=RequestContext(request))
 

@@ -11,4 +11,5 @@ urlpatterns = patterns('diversity.views',
     (r'^ajax/pais/(?P<pais_id>\d+)/$', 'ajax_pais'),
     (r'^ajax/socios/(?P<zona>\d+)/$', 'ajax_socios'),
     (r'^ficha/(?P<id>\d+)/$', 'ficha_socios'),
+    (r'^textos/$', 'leer_texto'),
 )

@@ -6,9 +6,11 @@
 <div class="banner">
     <div class="left">
         <div class="banner_content">
-            <span style="font-weight: bold;">EL PROGRAMA</span> <br>El cultivo de Bananas y café bajo árboles, representa un importante "uso de la tierra" para los pequeños productores en Latinoamérica. El resultado del proyecto financiado por la GTZ en este tema, debe ser accesible tanto para los colaboradores, como para los implicados en el programa piloto y la comunidad en general. Este portal web promete ser un espacio virtual de consulta, base de datos y documentación relevante en el tema. También servirá como proyección de este "sistema agroforestal de cultivo y comercialización de bananas", relativamente nuevo. En pocas palabras, este sitio web le facilitará el acceso a la información, herramientas y documentación generada en este tópico en particular.
+        {% for texto in inicio %}
+            <span style="font-weight: bold;">{{texto.titulo}}</span> <br>{{texto.texto|safe}}
+        {% endfor %}
         </div>
-        <a class="leer-mas" href="/info/"></a><a class="mapas" href="/bioversity/mapa/"></a>
+        <a class="leer-mas" href="/bioversity/textos/" rel="facebox"></a><a class="mapas" href="/bioversity/mapa/"></a>
     </div>
     <div class="right">
         <div id="slider" style="min-width: 328px !important; min-height: 213px !important;">
