@@ -47,13 +47,14 @@ def lista_socios(request):
     return render_to_response('diversity/lista_socios.html', {'socios': socios},
                               context_instance=RequestContext(request))
 
-def ver_socio(request, socio_id):
-    '''Vista para ver un sitio especifico
-    NOTA: En la plantilla hay que hacerle mapita de san google
-    puede acceder a los puntos desde la variable zona(many to many)
+#views de las fichas de los sucios
+def ficha_socios(request, id):
+    ''' Vista para devolver las fichas de los socios de 
+        bioversity
     '''
-    socio = get_object_or_404(Socios, pk=socio_id)
-    return render_to_response('diversity/ver_socio.html', {'socio': socio},
+    socio = get_object_or_404(Socios, id=id)
+    print socio
+    return render_to_response('diversity/ficha_socio.html', {'socio': socio},
                               context_instance=RequestContext(request))
 
 def mapa(request):

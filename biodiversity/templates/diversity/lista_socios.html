@@ -1,0 +1,20 @@
+{%extends "base.html"%}
+
+{%block contenido%}
+<div id="contenido">
+    <div id="encabezado_contenido">Lista de Socios</div>
+    {%for sitio in socios.object_list%}
+      <h2><a href="/bioversity/ficha/{{sitio.id}}"> {{sitio.nombre}}</a> </h2>
+    {%endfor%}
+    
+    {% if sitios.has_previous %}
+      <a href="?page={{sitios.previous_page_number}}">Anterior</a>
+    {%endif%}
+    Página {{sitios.number}} de {{sitios.paginator.num_pages}}
+    {% if sitios.has_next%}
+      <a href="?page={{sitios.next_page_number}}">Anterior</a>
+    {%endif%}
+
+
+</div>
+{%endblock%}
