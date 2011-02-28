@@ -1,6 +1,21 @@
 {% extends "base.html" %}
 {%block extra_header%}
 <script type="text/javascript" src="/files/js/jquery.nivo.slider.pack.js"></script>
+<script type='text/javascript'>
+  function cargar_grafo(titulo){
+    if(titulo=='humedad' || titulo=='temperatura' || titulo == 'precipitacion'){
+      $.getJSON('/clima/ajax/' + titulo + '/', function(data){
+          $("#grafico").html('');
+          $("#grafico").html("<img src='" + data.url +"'/>");
+          });
+    }else if(titulo=='productor' || titulo=='consumidor'){
+      $.getJSON('/precio/ajax/' + titulo + '/', function(data){
+          $("#grafico").html('');
+          $("#grafico").html("<img src='" + data.url +"'/>");
+          });
+    }
+  }
+</script>
 {%endblock%}
 {% block contenido %}
 <div class="banner">
@@ -58,13 +73,13 @@
     <p class="graphs">GR&Aacute;FICOS</p>
     <div class="graficos">
         <div class="selectores">
-            <a href="#" class="selector">Precios por punto de control</a>
-            <a href="#" class="selector">Precios por punto de control</a>
-            <a href="#" class="selector activo">Precios por punto de control</a>
-            <a href="#" class="selector">Precios por punto de control</a>
-            <a href="#" class="selector">Precios por punto de control</a>
+            <a href="#" class="selector" onclick="cargar_grafo('consumidor')">Precios al consumidor </a>
+            <a href="#" class="selector" onclick="cargar_grafo('productor')">Precios al productor</a>
+            <a href="#" class="selector" onclick="cargar_grafo('temperatura')">Temperatura promedio</a>
+            <a href="#" class="selector" onclick="cargar_grafo('precipitacion')">Precipitación promedio</a>
+            <a href="#" class="selector" onclick="cargar_grafo('humedad')">Humedad Promedio</a>
         </div>
-        <div class="grafico">
+        <div id="grafico" class="grafico">
             <img src="/files/img/grafico-muestra.png" alt="grafico muestra">
         </div>
         <div class="clean"></div>
