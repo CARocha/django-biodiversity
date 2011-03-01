@@ -8,16 +8,16 @@
 <div id="contenido">
  <div id="encabezado_contenido">Foro de Discuciones</div>
     <div id="barra_foro">
-        <a href="/askbot"><img src="/files/img/discucion.png" >Discuciones destacadas</a>
-        <a href=""><img src="/files/img/ultimas.png" >Ultimas discuciones</a>
-        <a href="/askbot/questions/ask/" style="float:right;width:120px"><img src="/files/img/add.png" >Crear un foro</a>
+        <a href="/foro/"><img src="/files/img/discucion.png" >Discuciones destacadas</a>
+        <a href="/foro/?tab=latest"><img src="/files/img/ultimas.png" >Ultimas discuciones</a>
+        <a href="/foro/questions/ask/" style="float:right;width:120px"><img src="/files/img/add.png" >Crear un foro</a>
     </div>
 <div class="question_list">
     <div id="question-detail">
 
         <div class="question">
             <div class="question_detail">
-            <div class="titulo-foro"><a href="">{{question.question}}</a> <a href="edit/">[editar]</a>
+            <div class="titulo-foro"><a href="">{{question.question}}</a> {% if question.user == request.user %}| <a href="edit/">[editar]</a>{% endif %}
                 {{question.description|safe}}
             </div>
             <div class="publicadop">

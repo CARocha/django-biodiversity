@@ -64,6 +64,8 @@ def edit_question(request, id):
 
 @login_required
 def view_question(request, id):
+    tags = Tag.objects.usage_for_model(Question, counts=True)
+    tags.sort(key=operator.attrgetter('count'), reverse=True)
     question = get_object_or_404(Question, id=int(id))
     user_ip = request.META['REMOTE_ADDR']
     try:
