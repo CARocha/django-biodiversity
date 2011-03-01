@@ -262,7 +262,8 @@ a{
     width:181px;
     height:32px;
     float:left;
-    line-height:32px
+    line-height:32px;
+    text-decoration:none;
 }
 
 #barra_foro a:hover{

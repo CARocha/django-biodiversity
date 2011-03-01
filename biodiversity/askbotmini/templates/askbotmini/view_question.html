@@ -25,8 +25,12 @@
             <div class="titulo-foro"><a href="">{{question.question}}</a>
                 {{question.description|safe}}
             </div>
-            Publicado por: {{question.user}} hace {{question.date_created|timesince}}<br>
-            <span style="font-size: 12px;">{% for tag in question.get_tags %}&bull; {{tag.name}}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</span>
+            <div class="publicadop">
+            Publicado por: <a href="">{{question.user}} </a>hace {{question.date_created|timesince}}<br>
+            </div>
+    
+            <div class="tags">{% for tag in question.get_tags %}<a href="">{{tag.name}}</a>{% endfor %}</div>
+            <div class="clean"></div>
         </div>  
     </div>  
 </div>
