@@ -9,6 +9,7 @@ import datetime
 
 def index(request):
     questions = Question.objects.all().order_by('-last_answer_date')
+    num_preguntas = Question.objects.all().count()
     return render_to_response('askbotmini/index.html', locals(), context_instance=RequestContext(request))
 
 @login_required
