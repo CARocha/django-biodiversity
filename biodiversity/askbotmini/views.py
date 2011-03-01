@@ -48,16 +48,13 @@ def edit_question(request, id):
         return HttpResponse('<h1>Permiso denegado</h1>')
 
     if request.method == 'POST':
-        form = AskForm(request.POST, instance=question)
-        if form.is_valid():
-            obj = Question()
-            obj.question = request.POST['question']
-            obj.description = request.POST['description']
-            obj.views = 0
-            obj.date_created = datetime.datetime.now()
-            obj.tags = request.POST['tags']
-            obj.save()
-        return HttpResponseRedirect('/foro/questions/%s' % obj.id)
+        form = AskForm(request.POST)
+        if form.is_valid():            
+            question.question = request.POST['question']
+            question.description = request.POST['description']
+            question.tags = request.POST['tags']
+            question.save()
+            return HttpResponseRedirect('/foro/questions/%s' % question.id)
     else:
         form = AskForm(instance=question)
     return render_to_response('askbotmini/ask_question.html', RequestContext(request, locals()))

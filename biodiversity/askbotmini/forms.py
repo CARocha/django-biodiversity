@@ -5,7 +5,7 @@ from models import *
 
 class AskForm(forms.ModelForm):
     tags = TagField(widget=TagAutocomplete())
-    notify = forms.BooleanField()
+    notify = forms.BooleanField(required=False)
 
     class Meta:
         model = Question
