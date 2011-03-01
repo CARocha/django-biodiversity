@@ -84,8 +84,8 @@ a{
     color: #fff;
     padding-left: 5px;
     padding-right: 5px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     -moz-border-radius-bottomright:3px;
     -moz-border-radius-bottomleft:3px;
     -webkit-border-bottom-left-radius: 3px;
@@ -262,13 +262,16 @@ a{
     width:181px;
     height:32px;
     float:left;
-    line-height:32px
+    line-height:32px;
+    text-decoration:none;
 }
 
 #barra_foro a:hover{
     background:#D5E0DC;
 }
-
+#barra_foro a.selected{
+    background:#D5E0DC;
+}
 #barra_foro a img{
     float:left;
     margin-right:3px;
@@ -393,9 +396,10 @@ a{
     border:#a2c0d5 1px solid;
 }
 
-.question a{
-    font-size:16px;
+.titulo-foro a{
+    font-size:17px;
     color:#3b8118;
+    text-decoration:none;
 
 }
 
@@ -416,6 +420,7 @@ a{
     margin-top:5px;
     font-size:11px;
     color:#484848;
+    text-decoration:none;
 }
 
 .tags a:hover{
@@ -431,7 +436,13 @@ a{
 .publicadop a{
     font-weight:bold;
     color:#336699;
-    font-size:11px
+    font-size:11px;
+    text-decoration:none;
+}
+
+#question-detail{
+    padding:8px;
+font-size:13px;
 }
 /*agregado por byron para la biblioteca*/
 
@@ -822,7 +833,6 @@ a .big, a:visited .big{
 
 
 }
-
 .paginacion{
     padding:10px;
     border:#f2f2db 1px solid;
@@ -831,7 +841,6 @@ a .big, a:visited .big{
     background-position:bottom left;
     font-size:13px;
 }
-
 .paginacion a, .paginacion a:visited{
     text-decoration:none;
     font-weight:bold;

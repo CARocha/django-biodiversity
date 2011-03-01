@@ -1,15 +1,26 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.shortcuts import get_object_or_404
+from tagging.models import Tag, TaggedItem
 from forms import *
 from models import *
+import operator
 import datetime
 
 def index(request):
+    request.session['flag'] = 'foro'
+    barra_foro = 'index'
     questions = Question.objects.all().order_by('-last_answer_date')
-    num_preguntas = Question.objects.all().count()
+
+    #valorando si muestra solo las ultimas preguntas
+    tab = request.GET.get('tab', '')
+    if tab == 'latest':
+        barra_foro = 'latest'
+        questions = Question.objects.all().order_by('-date_created')
+
+    tags = Tag.objects.usage_for_model(Question, counts=True)
+    tags.sort(key=operator.attrgetter('count'), reverse=True)
     return render_to_response('askbotmini/index.html', locals(), context_instance=RequestContext(request))
 
 @login_required
@@ -25,9 +36,30 @@ def ask_question(request):
         obj.date_created = datetime.datetime.now()
         obj.tags = request.POST['tags']
         obj.save()
-        return HttpResponseRedirect('/askbot/')
+        return HttpResponseRedirect('/foro/?tab=latest')
     else:
         form = AskForm()
+    return render_to_response('askbotmini/ask_question.html', RequestContext(request, locals()))
+
+@login_required
+def edit_question(request, id):
+    question = get_object_or_404(Question, id=int(id))    
+    if not question.user == request.user:
+        return HttpResponse('<h1>Permiso denegado</h1>')
+
+    if request.method == 'POST':
+        form = AskForm(request.POST, instance=question)
+        if form.is_valid():
+            obj = Question()
+            obj.question = request.POST['question']
+            obj.description = request.POST['description']
+            obj.views = 0
+            obj.date_created = datetime.datetime.now()
+            obj.tags = request.POST['tags']
+            obj.save()
+        return HttpResponseRedirect('/foro/questions/%s' % obj.id)
+    else:
+        form = AskForm(instance=question)
     return render_to_response('askbotmini/ask_question.html', RequestContext(request, locals()))
 
 @login_required
@@ -46,3 +78,8 @@ def view_question(request, id):
 
     return render_to_response('askbotmini/view_question.html', RequestContext(request, locals()))
 
+@login_required
+def tagged_in(request, tag_name):
+    tag = get_object_or_404(Tag, name=tag_name)
+    questions = TaggedItem.objects.get_by_model(Question, tag.name).order_by('-last_answer_date')
+    return render_to_response('askbotmini/tagged_in.html', RequestContext(request, locals()))

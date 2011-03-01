@@ -26,10 +26,10 @@ urlpatterns = patterns('',
     (r'^precio/', include('precio.urls')),
     (r'^documentos/', include('documentos.urls')),
     (r'^noticias/', include('noticias.urls')),
-    (r'^foro/', include('forum.urls')),
+    #(r'^foro/', include('forum.urls')),
     (r'^busqueda/', include('haystack.urls')),
     (r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
-    (r'^askbot/', include('askbotmini.urls')),
+    (r'^foro/', include('askbotmini.urls')),
 )
 
 if settings.DEBUG:

@@ -2,10 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{%block title%}Sistema de Informaci&oacute;n Bioversity{%endblock%}</title>
+        <title>Sistema de Informaci&oacute;n Bioversity | {%block title%}{%endblock%}</title>
         <link href="{{MEDIA_URL}}css/bioversity.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="{{MEDIA_URL}}css/nivo-slider.css" rel="stylesheet" type="text/css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/forum/baseforo.css">
         <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
         <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.nivo.slider.pack.js"></script>
@@ -62,7 +61,7 @@
                             <li {% if request.session.flag == 'evento' %}class='selecto'{% endif %}><a href="/eventos/calendario/">Eventos</a></li>
                             {% if user.is_authenticated %}
                             &nbsp;|&nbsp;<li {% if request.session.flag == 'biblioteca' %}class='selecto'{% endif %}><a href="/documentos/">Biblioteca</a></li>&nbsp;|&nbsp;
-                            <li {% if request.session.flag == 'foro' %}class='selecto'{% endif %}><a href="/askbot">Foro</a></li>
+                            <li {% if request.session.flag == 'foro' %}class='selecto'{% endif %}><a href="/foro/">Foro</a></li>
                             {% endif %}
                         </ul>                         
                     </div>

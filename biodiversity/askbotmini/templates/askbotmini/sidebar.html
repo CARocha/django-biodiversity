@@ -1,0 +1,15 @@
+<!--Sidebar-->
+<div class="titulo">Buscar </div>
+<form action="" method="get">
+    <div>
+        <input id ="busqueda-foro"type="text" name="q" id="busqueda" value=""/>
+    </div>
+</form>
+<br>
+<div class="titulo">Temas</div>
+<div id="listatags">
+    {% for tag in tags %}
+    <a href="/foro/tagged/{{tag.name}}">{{tag.name}}</a> x {{tag.items.all.count}}<br><br>
+    {% endfor %}
+</div>
+
