@@ -9,7 +9,7 @@
 <div class="titulo">Temas</div>
 <div id="listatags">
     {% for tag in tags %}
-    <a href="/askbot/tagged/{{tag.name}}">{{tag.name}}</a> x {{tag.items.all.count}}<br><br>
+    <a href="/foro/tagged/{{tag.name}}">{{tag.name}}</a> x {{tag.items.all.count}}<br><br>
     {% endfor %}
 </div>
 
