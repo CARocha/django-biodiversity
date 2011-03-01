@@ -1,13 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
-from django.shortcuts import get_object_or_404
 from tagging.models import Tag, TaggedItem
 from forms import *
 from models import *
-import datetime
 import operator
+import datetime
 
 def index(request):
     request.session['flag'] = 'foro'
@@ -37,9 +36,30 @@ def ask_question(request):
         obj.date_created = datetime.datetime.now()
         obj.tags = request.POST['tags']
         obj.save()
-        return HttpResponseRedirect('/askbot/')
+        return HttpResponseRedirect('/foro/?tab=latest')
     else:
         form = AskForm()
+    return render_to_response('askbotmini/ask_question.html', RequestContext(request, locals()))
+
+@login_required
+def edit_question(request, id):
+    question = get_object_or_404(Question, id=int(id))    
+    if not question.user == request.user:
+        return HttpResponse('<h1>Permiso denegado</h1>')
+
+    if request.method == 'POST':
+        form = AskForm(request.POST, instance=question)
+        if form.is_valid():
+            obj = Question()
+            obj.question = request.POST['question']
+            obj.description = request.POST['description']
+            obj.views = 0
+            obj.date_created = datetime.datetime.now()
+            obj.tags = request.POST['tags']
+            obj.save()
+        return HttpResponseRedirect('/foro/questions/%s' % obj.id)
+    else:
+        form = AskForm(instance=question)
     return render_to_response('askbotmini/ask_question.html', RequestContext(request, locals()))
 
 @login_required

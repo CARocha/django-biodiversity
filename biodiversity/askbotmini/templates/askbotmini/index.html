@@ -26,9 +26,9 @@
                 <div class="num_clicks">{{question.views}}</div>
                 <div class="clicks">VISTAS</div> 
             </div>
-            <a href="./questions/{{question.id}}/" title="{{question.question}}">{{question.question}}</a>
+            <a href="/foro/questions/{{question.id}}/" title="{{question.question}}">{{question.question}}</a>
             <br>
-            <div class="tags">{% for tag in question.get_tags %}<a href="/askbot/tagged/{{tag.name}}">{{tag.name}}</a>{% endfor %}</div>
+            <div class="tags">{% for tag in question.get_tags %}<a href="/foro/tagged/{{tag.name}}">{{tag.name}}</a>{% endfor %}</div>
             <div class="clean"></div>
             <div class="publicadop">
                 {% if tab == 'latest' %}

@@ -3,10 +3,10 @@
 {% endblock %}
 {% block contenido %}
 <h1>Foros</h1>
-<a href="./questions/ask/">Haz las Preguntas</a>
+<a href="/foro/questions/ask/">Haz las Preguntas</a>
 <br><br>
 <div class="question_list">
-    <h1>{{question.question}}</h1>
+    <h1>{{question.question}}</h1> <a href="edit/">[editar]</a>
     <div class="question">
         <div class="question_detail">
             {{question.description|safe}}
