@@ -371,6 +371,7 @@ a{
     background:#eece57;
     border:#eece57 1px solid;
     margin-right:10px;
+    font-weight:bold;
 }
 
 .num_respuestas-red{
@@ -389,11 +390,12 @@ a{
     width:55px;
     height:14px;
     font-size:8px;
-    color:#343434;
+    color:#fff;
     text-align:center;
     background:#DA4938;
     border:#DA4938 1px solid;
     margin-right:10px;
+    font-weight:bold;
 }
 
 .num_clicks{
@@ -417,6 +419,7 @@ a{
     text-align:center;
     background:#a2c0d5;
     border:#a2c0d5 1px solid;
+    font-weight:bold;
 }
 
 .titulo-foro a{

@@ -18,13 +18,13 @@
         <div class="question">
             <div class="left">
                 {%if question.answer_set.all.count == 0 %}
-                <div class="num_respuestas">{{question.answer_set.all.count}}</div>
-                <div class="respuestas">
+                                <div class="num_respuestas-red">{{question.answer_set.all.count}}</div>
+                <div class="respuestas-red">
                     RESPUESTAS
                 </div>
                 {%else%}
-                <div class="num_respuestas-red">{{question.answer_set.all.count}}</div>
-                <div class="respuestas-red">
+                <div class="num_respuestas">{{question.answer_set.all.count}}</div>
+                <div class="respuestas">
                     RESPUESTAS
                 </div>
                 {%endif%}
