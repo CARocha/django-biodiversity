@@ -2,7 +2,7 @@
 
 {% block contenido %}
 <div id="contenido">
-    <div id="encabezado_contenido">Datos del Socio</div>
+    <div id="encabezado_contenido">Datos del Socio  <a href="/bioversity/socios/">Volver a la lista de Socios</a> </div>
     nombre: {{socio.nombre}}<br/>
 
 {%if socio.link%}
@@ -14,11 +14,11 @@
 {%endif%}
 
 {%if socio.logotipo%}
-      logotipo:  {{socio.urls_150x150}}<br/>
+      logotipo:  <img src="{{socio.logotipo.url_150x150}}"> <br/>
 {%endif%}
-
+ zonas:
 {% for zonas in socio.zona.all %}    
-    zonas:{{zonas}}<br/>
+     {{zonas}}<br/>
 {%endfor%}
 </div>
 {% endblock %}
