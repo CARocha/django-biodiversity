@@ -435,6 +435,35 @@ a{
     margin-bottom:5px;
 }
 
+.askquestion{
+    font-size:12px
+}
+
+#id_question{
+    width:660px;
+    border:#7F7F7F 1px solid;
+    background:#fff;
+}
+
+#id_tags{
+    width:660px;
+    border:#7F7F7F 1px solid;
+    background:#fff;
+}
+
+#boton-preguntar{
+    background:#4b932a;
+    color:#fff;
+    border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    border:0px;
+    width:100px;
+    height:25px;
+    float:right;
+    margin:10px;
+    margin-right:30px;
+}
 .tags a{
     display:block;
     padding:2px;
