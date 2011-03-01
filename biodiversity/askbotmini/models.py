@@ -37,6 +37,9 @@ class Question(models.Model):
             return 0        
         return self.answer_set.all().count()
 
+    def last_answer(self):
+        return self.answer_set.latest('fecha')
+
 
 class Answer(models.Model):
     question = models.ForeignKey(Question)
@@ -45,11 +48,16 @@ class Answer(models.Model):
     user = models.ForeignKey(User)
 
     def __unicode__(self):
-        return u'%s' % self.respuesta
-
+        return u'%s' % self.question
+    
     class Meta:
         verbose_name = u'Respuesta'
         verbose_name_plural = u'Respuestas'
+
+    def save(self, force_insert=False, force_update=False):
+        self.question.last_answer_date = self.fecha
+        self.question.save()
+	super(Answer, self).save(force_insert, force_update)
 
 class View(models.Model):
     question = models.ForeignKey(Question)

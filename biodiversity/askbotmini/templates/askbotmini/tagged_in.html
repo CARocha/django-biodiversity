@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Foros | {{tag.name}}{% endblock %}
+{% block extra_header %}
+{% endblock %}
+{% block contenido %}
+<div id="contenido">    
+    <div class="question_list">
+        {% for question in questions %}
+        <div class="question">
+            <div class="left">
+                <div class="num_respuestas">{{question.answer_set.all.count}}</div>
+                <div class="respuestas">
+                    RESPUESTAS
+                </div>
+            </div>
+            <div class="left">
+                <div class="num_clicks">{{question.views}}</div>
+                <div class="clicks">VISTAS</div>
+            </div>
+            <a href="./questions/{{question.id}}/" title="{{question.question}}">{{question.question}}</a>
+            <br>
+            <div class="tags">{% for tag in question.get_tags %}<a href="">{{tag.name}}</a>{% endfor %}</div>
+            <div class="clean"></div>
+            <div class="publicadop">Publicado por: <a href="">{{question.user}}</a> hace {{question.date_created|timesince}}</div>
+            <div class="clean"></div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

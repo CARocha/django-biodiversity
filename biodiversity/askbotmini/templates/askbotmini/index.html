@@ -1,28 +1,17 @@
 {% extends "base.html" %}
+{% block title %}Foros{% endblock %}
 {% block extra_header %}
 {% endblock %}
 {% block contenido %}
 <div id="sidebar">
-    <div class="titulo">Buscar </div>
-        <form action="" method="get">
-            <div>
-                 <input id ="busqueda-foro"type="text" name="q" id="busqueda" value=""/>
-            </div>
-        </form>
-    <br>
-    <div class="titulo">Temas</div>
-    <div id="listatags">
-        <a href="#">Tag1</a> x 30<br><br>
-        <a href="#">Tag1</a> x 30<br><br>
-        <a href="#">Tag1</a> x 30<br><br>
-    </div>
+    {% include "askbotmini/sidebar.html" %}
 </div>
 <div id="contenido">
-    <div id="encabezado_contenido">Foro de Discuciones <div style="float:right; margin-right:5px;">{{num_preguntas}} Discuciones</div></div>
+    <div id="encabezado_contenido">Foro de Discuciones <div style="float:right; margin-right:5px;">{{questions.count}} Discusiones</div></div>
     <div id="barra_foro">
-        <a href=""><img src="/files/img/discucion.png" >Discuciones destacadas</a>
-        <a href=""><img src="/files/img/ultimas.png" >Ultimas discuciones</a>
-        <a href="./questions/ask/" style="float:right;width:120px"><img src="/files/img/add.png" >Crear un foro</a>
+        <a href="/foro/" {% if barra_foro == 'index' %}class='selected'{% endif %}><img src="/files/img/discucion.png" alt="discusion">Discusiones destacadas</a>
+        <a href="/foro/?tab=latest"  {% if barra_foro == 'latest' %}class='selected'{% endif %}><img src="/files/img/ultimas.png" alt="destacadas">Ultimas discusiones</a>
+        <a href="/foro/questions/ask/" style="float:right;width:120px"><img src="/files/img/add.png" alt="add foro">Crear un foro</a>
     </div>
     <div class="question_list">
         {% for question in questions %}
@@ -30,7 +19,7 @@
             <div class="left">
                 <div class="num_respuestas">{{question.answer_set.all.count}}</div>
                 <div class="respuestas">
-                RESPUESTAS
+                    RESPUESTAS
                 </div>
             </div>
             <div class="left">
@@ -39,9 +28,22 @@
             </div>
             <a href="./questions/{{question.id}}/" title="{{question.question}}">{{question.question}}</a>
             <br>
-            <div class="tags">{% for tag in question.get_tags %}<a href="">{{tag.name}}</a>{% endfor %}</div>
+            <div class="tags">{% for tag in question.get_tags %}<a href="/askbot/tagged/{{tag.name}}">{{tag.name}}</a>{% endfor %}</div>
             <div class="clean"></div>
-            <div class="publicadop">Publicado por: <a href="">{{question.user}}</a> hace {{question.date_created|timesince}}</div>
+            <div class="publicadop">
+                {% if tab == 'latest' %}
+                Creado hace {{question.date_created|timesince}}
+                por <a href="">{{question.user}}</a>
+                {% else %}
+                {% if question.last_answer %}
+                Respuesta hace {{question.last_answer.fecha|timesince}}
+                por <a href="">{{question.last_answer.user}}</a>
+                {% else %}
+                Creado hace {{question.date_created|timesince}}
+                por <a href="">{{question.user}}</a>
+                {% endif %}
+                {% endif %}
+            </div>
             <div class="clean"></div>
         </div>
         {% endfor %}
