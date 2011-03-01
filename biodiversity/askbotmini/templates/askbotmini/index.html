@@ -17,10 +17,17 @@
         {% for question in questions %}
         <div class="question">
             <div class="left">
+                {%if question.answer_set.all.count == 0 %}
                 <div class="num_respuestas">{{question.answer_set.all.count}}</div>
                 <div class="respuestas">
                     RESPUESTAS
                 </div>
+                {%else%}
+                <div class="num_respuestas-red">{{question.answer_set.all.count}}</div>
+                <div class="respuestas-red">
+                    RESPUESTAS
+                </div>
+                {%endif%}
             </div>
             <div class="left">
                 <div class="num_clicks">{{question.views}}</div>

@@ -373,6 +373,29 @@ a{
     margin-right:10px;
 }
 
+.num_respuestas-red{
+    width:55px;
+    height:41px;
+    border:#DA4938 1px solid;
+    text-align:center;
+    line-height:41px;
+    color:#919191;
+    text-shadow: #5f5f5f 1px 1px 0px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.respuestas-red{
+    width:55px;
+    height:14px;
+    font-size:8px;
+    color:#343434;
+    text-align:center;
+    background:#DA4938;
+    border:#DA4938 1px solid;
+    margin-right:10px;
+}
+
 .num_clicks{
     width:55px;
     height:41px;

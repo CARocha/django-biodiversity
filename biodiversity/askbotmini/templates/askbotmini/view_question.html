@@ -2,17 +2,32 @@
 {% block extra_header %}
 {% endblock %}
 {% block contenido %}
-<h1>Foros</h1>
-<a href="/foro/questions/ask/">Haz las Preguntas</a>
-<br><br>
+<div id="sidebar">
+    {% include "askbotmini/sidebar.html" %}
+</div> 
+<div id="contenido">
+ <div id="encabezado_contenido">Foro de Discuciones</div>
+    <div id="barra_foro">
+        <a href="/askbot"><img src="/files/img/discucion.png" >Discuciones destacadas</a>
+        <a href=""><img src="/files/img/ultimas.png" >Ultimas discuciones</a>
+        <a href="/askbot/questions/ask/" style="float:right;width:120px"><img src="/files/img/add.png" >Crear un foro</a>
+    </div>
 <div class="question_list">
-    <h1>{{question.question}}</h1> <a href="edit/">[editar]</a>
-    <div class="question">
-        <div class="question_detail">
-            {{question.description|safe}}
-        </div>
-        Publicado por: {{question.user}} hace {{question.date_created|timesince}}<br>
-        <span style="font-size: 12px;">{% for tag in question.get_tags %}&bull; {{tag.name}}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</span>
-    </div>    
+    <div id="question-detail">
+
+        <div class="question">
+            <div class="question_detail">
+            <div class="titulo-foro"><a href="">{{question.question}}</a> <a href="edit/">[editar]</a>
+                {{question.description|safe}}
+            </div>
+            <div class="publicadop">
+            Publicado por: <a href="">{{question.user}} </a>hace {{question.date_created|timesince}}<br>
+            </div>
+    
+            <div class="tags">{% for tag in question.get_tags %}<a href="">{{tag.name}}</a>{% endfor %}</div>
+            <div class="clean"></div>
+        </div>  
+    </div>  
+</div>
 </div>
 {% endblock %}
