@@ -14,7 +14,7 @@
 {%endif%}
 
 {%if socio.logotipo%}
-      logotipo:  {{socio.urls_150x150}}<br/>
+      logotipo:  <img src="{{socio.logotipo.url_150x150}}"> <br/>
 {%endif%}
  zonas:
 {% for zonas in socio.zona.all %}    
