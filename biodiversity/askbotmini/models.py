@@ -10,10 +10,10 @@ add_introspection_rules([], ["^tagging_autocomplete\.models\.TagAutocompleteFiel
 
 
 class Question(models.Model):
-    question = models.CharField(max_length=300, verbose_name='Title')
+    question = models.CharField(max_length=300, verbose_name='Titulo')
     description = models.TextField()
     date_created = models.DateTimeField(default=datetime.datetime.now())
-    tags = TagAutocompleteField(help_text='Separar elementos con "," ')
+    tags = TagAutocompleteField(verbose_name='Palabras Claves',help_text='Separar elementos con "," ')
     last_answer_date = models.DateTimeField(default=datetime.datetime.now())
     views = models.IntegerField()
     user = models.ForeignKey(User)

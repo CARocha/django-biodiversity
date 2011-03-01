@@ -55,7 +55,7 @@
                             <li {% if request.session.flag == 'evento' %}class='selecto'{% endif %}><a href="/eventos/calendario/">Eventos</a></li>
                             {% if user.is_authenticated %}
                             &nbsp;|&nbsp;<li {% if request.session.flag == 'biblioteca' %}class='selecto'{% endif %}><a href="/documentos/">Biblioteca</a></li>&nbsp;|&nbsp;
-                            <li {% if request.session.flag == 'foro' %}class='selecto'{% endif %}><a href="/foro/">Foro</a></li>
+                            <li {% if request.session.flag == 'foro' %}class='selecto'{% endif %}><a href="/askbot">Foro</a></li>
                             {% endif %}
                         </ul>                         
                     </div>

@@ -55,3 +55,16 @@ class Socios(models.Model):
 
     def __unicode__(self):
         return self.nombre
+        
+class TextoInicio(models.Model):
+    ''' modelos del blabla del inicio de 
+        bioversity
+    '''
+    titulo = models.CharField(max_length=200)   
+    texto = models.TextField()
+    
+    def __unicode__(self):
+        return  self.titulo
+        
+    class Meta:
+        verbose_name_plural = "Texto del Inicio"
