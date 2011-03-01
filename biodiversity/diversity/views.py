@@ -19,6 +19,9 @@ def index(request):
     ''' Vista que devolvera muchas de las salidas
         de la pagina principal o inicio del sitio
     '''
+    #para el inicio sea mas dinamico
+    inicio = TextoInicio.objects.all()
+    
     request.session['flag'] = 'index'
     notis = Noticias.objects.all().order_by('fecha')
     lista = []
@@ -28,6 +31,12 @@ def index(request):
             if len(lista) == 5:
                 break
     return render_to_response('diversity/index.html', locals(),
+                              context_instance=RequestContext(request))
+                              
+def leer_texto(request):
+    texto = TextoInicio.objects.all()
+    
+    return render_to_response('diversity/texto.html', locals(),
                               context_instance=RequestContext(request))
 
 def lista_sitios(request):
@@ -47,13 +56,14 @@ def lista_socios(request):
     return render_to_response('diversity/lista_socios.html', {'socios': socios},
                               context_instance=RequestContext(request))
 
-def ver_socio(request, socio_id):
-    '''Vista para ver un sitio especifico
-    NOTA: En la plantilla hay que hacerle mapita de san google
-    puede acceder a los puntos desde la variable zona(many to many)
+#views de las fichas de los sucios
+def ficha_socios(request, id):
+    ''' Vista para devolver las fichas de los socios de 
+        bioversity
     '''
-    socio = get_object_or_404(Socios, pk=socio_id)
-    return render_to_response('diversity/ver_socio.html', {'socio': socio},
+    socio = get_object_or_404(Socios, id=id)
+    
+    return render_to_response('diversity/ficha_socio.html', {'socio': socio},
                               context_instance=RequestContext(request))
 
 def mapa(request):

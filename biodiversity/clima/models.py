@@ -10,7 +10,7 @@ CICLO_MES=((1,'Enero'),(2,'Febrero'),(3,'Marzo'),(4,'Abril'),(5,'Mayo'),
            (11,'Noviembre'),(12,'Diciembre'))
 
 class Climas(models.Model):
-    nombre = models.CharField(max_length=200, help_text="Introduzca un titulo para estos climas")
+    nombre = models.CharField(max_length=200, help_text="Introduzca un titulo para estos climas ejem: climas para el mes de Enero")
     
     def __unicode__(self):
         return self.nombre        

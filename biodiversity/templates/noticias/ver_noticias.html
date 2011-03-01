@@ -29,9 +29,11 @@ $(document).ready(function() {
 {% block contenido %}
 <div id="sidebar">
     <div class="titulo">Ultimas Noticias</div>
+    <div id="listacarpetas">
     {%for ultima in ultimas%}
 	<div class="item-noticia"><a href="/noticias/ver/{{ultima.id}}">{{ultima.titulo}}</a></div>
     {%endfor%}
+    </div>
 </div>
 <div id="contenido">
     <div id="encabezado_contenido">Noticias</div>
