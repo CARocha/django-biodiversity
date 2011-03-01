@@ -1,15 +1,15 @@
 <!--Sidebar-->
 <div class="titulo">Buscar </div>
-<form action="" method="get">
+<form action="/foro/" method="get">
     <div>
-        <input id ="busqueda-foro"type="text" name="q" id="busqueda" value=""/>
+        <input id="busqueda-foro"type="text" name="q" id="busqueda" value="{% if query %}{{query}}{% endif %}"/>
     </div>
 </form>
 <br>
 <div class="titulo">Temas</div>
 <div id="listatags">
     {% for tag in tags %}
-    <a href="/foro/tagged/{{tag.name}}">{{tag.name}}</a> x {{tag.items.all.count}}<br><br>
+    <a href="/foro/tagged/{{tag.name}}">{{tag.name}}</a> x {% if query %}{{tag.count}}{% else %}{{tag.items.all.count}}{% endif %}<br><br>
     {% endfor %}
 </div>
 
