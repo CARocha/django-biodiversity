@@ -393,9 +393,10 @@ a{
     border:#a2c0d5 1px solid;
 }
 
-.question a{
-    font-size:16px;
+.titulo-foro a{
+    font-size:17px;
     color:#3b8118;
+    text-decoration:none;
 
 }
 
@@ -416,6 +417,7 @@ a{
     margin-top:5px;
     font-size:11px;
     color:#484848;
+    text-decoration:none;
 }
 
 .tags a:hover{
@@ -431,7 +433,13 @@ a{
 .publicadop a{
     font-weight:bold;
     color:#336699;
-    font-size:11px
+    font-size:11px;
+    text-decoration:none;
+}
+
+#question-detail{
+    padding:8px;
+font-size:13px;
 }
 /*agregado por byron para la biblioteca*/
 
