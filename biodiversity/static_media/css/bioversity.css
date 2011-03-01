@@ -11,6 +11,14 @@ body {
 .clean{
     clear: both;
 }
+
+.left{
+    float:left;
+}
+
+.right{
+    float:right;
+}
 img{
     outline: none;
     border: none;
@@ -19,9 +27,9 @@ a{
     outline: none;
 }
 .centro{
-  margin: 0pt auto;
-  padding:0pt;
- }
+    margin: 0pt auto;
+    padding:0pt;
+}
 .header{
     height: 114px;    
 }
@@ -40,9 +48,9 @@ a{
     float: left;
 }
 .header .nav .menu{
-/*    float: left;*/
-    margin-top: -23px;
-    margin-left: 430px;    
+    float: left;
+    margin-top: -17px;
+    margin-left: 430px;
 }
 .header .nav .menu ul{
     list-style: none;
@@ -69,26 +77,30 @@ a{
 .header .nav .menu ul li a:hover{
     color: #2d6311;
 }
-#login{
-    float: left;
-    margin-left: 590px;
-    margin-top: -100px;
-    min-width:80px;
-    max-width:266px;
+#login{    
+    float: right;        
     height:22px;
     font-size:13px;
     color: #fff;
+    padding-left: 5px;
+    padding-right: 5px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    -moz-border-top-left-radius: 3px;
-    -moz-border-top-right-radius: 3px;
-    -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-bottomright:3px;
+    -moz-border-radius-bottomleft:3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
     background-color: #000;
 }
 
 #login a{
     color: #fff;
+}
+#login a:hover{
+    color: #f1dd70;    
+}
+.username{
+    color: #f1dd70;    
 }
 
 /*agregado por byron */
@@ -98,7 +110,7 @@ a{
     width:250px;
     float:left;
     margin-top:5px;
-    
+
 }
 
 #sidebar .titulo{
@@ -111,7 +123,7 @@ a{
     padding-left:10px;
 }
 
-#sidebar a, #sidebar a:visited{
+#sidebar #listacarpetas a, #sidebar #listacarpetas a:visited{
     padding-left:45px;
     display:block;
     font-size:11px;
@@ -122,7 +134,7 @@ a{
     color:#000;
 }
 
-#sidebar a:hover{
+#sidebar #listacarpetas a:hover{
     border-left:#a5a28a 4px solid;
 }
 
@@ -236,6 +248,31 @@ a{
     background: url(/files/img/fondobusqueda.png) repeat-x;
 }
 
+#barra_foro{
+    background:#f8fbfa;
+    font-size:14px;
+    color:#000;
+    height:32px;
+}
+
+#barra_foro a{
+    color:#666666;
+    font-size:13px;
+    display:block;
+    width:181px;
+    height:32px;
+    float:left;
+    line-height:32px
+}
+
+#barra_foro a:hover{
+    background:#D5E0DC;
+}
+
+#barra_foro a img{
+    float:left;
+    margin-right:3px;
+}
 
 /*agregado por byron para las noticias*/
 
@@ -308,6 +345,94 @@ a{
     padding:5px !important;
 }
 
+/*agregado por byron para el foro*/
+
+.num_respuestas{
+    width:55px;
+    height:41px;
+    border:#eece57 1px solid;
+    text-align:center;
+    line-height:41px;
+    color:#919191;
+    text-shadow: #5f5f5f 1px 1px 0px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.respuestas{
+    width:55px;
+    height:14px;
+    font-size:8px;
+    color:#343434;
+    text-align:center;
+    background:#eece57;
+    border:#eece57 1px solid;
+    margin-right:10px;
+}
+
+.num_clicks{
+    width:55px;
+    height:41px;
+    border:#a2c0d5 1px solid;
+    text-align:center;
+    line-height:41px;
+    color:#919191;
+    text-shadow: #5f5f5f 1px 1px 0px;
+    font-size:20px;
+    font-weight:bold;
+    margin-right:10px;
+}
+
+.clicks{
+    width:55px;
+    height:14px;
+    font-size:8px;
+    color:#343434;
+    text-align:center;
+    background:#a2c0d5;
+    border:#a2c0d5 1px solid;
+}
+
+.question a{
+    font-size:16px;
+    color:#3b8118;
+
+}
+
+.question{
+    padding:8px;
+    border-bottom:#e4e8e7 1px solid;
+    margin-bottom:5px;
+}
+
+.tags a{
+    display:block;
+    padding:2px;
+    float:left;
+    background:#eeeeee;
+    border-right:#b5b5b5 1px solid;
+    border-bottom:#b5b5b5 1px solid;
+    margin-right:5px;
+    margin-top:5px;
+    font-size:11px;
+    color:#484848;
+}
+
+.tags a:hover{
+    color:#000;
+}
+
+.publicadop{
+    float:right;
+    font-size:11px;
+    color:#666666;
+}
+
+.publicadop a{
+    font-weight:bold;
+    color:#336699;
+    font-size:11px
+}
 /*agregado por byron para la biblioteca*/
 
 #titulo_categoria{
@@ -429,7 +554,7 @@ a{
     background:#fff;
     border: #ccc 1px solid;
     border-left: #ccc 5px solid;
-    
+
 }
 
 #zonas{
@@ -466,6 +591,33 @@ a{
     padding-right:5px;
     font-size:11px;
 }
+
+#listatags{
+    font-size:11px;
+}
+
+#listatags a{
+    border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    background:#918f7a;
+    margin-left:10px;
+    margin-right:10px;
+    display:block;
+    float:left;
+    padding:3px;
+    font-size:11px;
+    color:#fff;
+}
+
+#busqueda-foro{
+    width:230px;
+    height:25px;
+    margin-left:10px;
+    background:#f8f8f2;
+    border:#828282 1px solid;
+}
+
 .checks{
     font-size:13px;
     color:#4b4b4b;
@@ -600,7 +752,7 @@ a:hover .big{
 
 a .big, a:visited .big{
 
-color:#313131;
+    color:#313131;
 }
 .b_info{
     float: left;
@@ -666,7 +818,7 @@ color:#313131;
     margin-left: 8%;
 }
 #slider {
-	min-width: 230px;
+    min-width: 230px;
 
 
 }
@@ -681,13 +833,13 @@ color:#313131;
 }
 
 .paginacion a, .paginacion a:visited{
-text-decoration:none;
-font-weight:bold;
-color:#4D4D4D;
+    text-decoration:none;
+    font-weight:bold;
+    color:#4D4D4D;
 }
 
 .paginacion a:hover{
-color:#000;
+    color:#000;
 }
 .pag_izq{
     background:url(/files/img/pag_izq.png);

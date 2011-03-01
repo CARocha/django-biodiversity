@@ -74,7 +74,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'djangoflash.middleware.FlashMiddleware',
 )
 
 ROOT_URLCONF = 'biodiversity.urls'
@@ -93,7 +92,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.media",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
-    #"djangoflash.context_processors.flash",
 )
 
 INSTALLED_APPS = (

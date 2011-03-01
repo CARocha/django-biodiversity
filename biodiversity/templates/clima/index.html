@@ -25,25 +25,51 @@
 {% endblock %}
 
 {% block contenido %}
-<form action"." method="POST">
-    {% csrf_token %}
-<div id="formulario_tabla" >
-    <div class="form_label"><b>{{form.fecha.label}}</b></div>
-    <div class="form_widget">{{form.fecha}}</div>
-    <div class="form_label"><b>{{form.pais.label}}</b></div>
-    <div class="form_widget">{{form.pais}}</div>
-    <div class="form_label"><b>{{form.lugar.label}}</b></div>
-    <div class="form_widget">{{form.lugar}}</div>
-    <div class="form_label"><b>{{form.tipo_grafo.label}}</b></div>
-    <div class="form_widget">{{form.tipo_grafo}}</div>
-</div>
-
-  <input type="submit" value="Consultar" id="boton" class="filtro"/>
-</form>
-{{form.errors}}
-{% if activa%}
-<h1>Session activa</h1>
-<a href="/clima/humedad"> Humedad</a>
-
+{% if request.session.activa%}
+<a href="/clima/humedad/"> Humedad</a>
+<a href="/clima/clima/temperatura/"> Temperatura</a>
+<a href="/clima/clima/precipitacion/">Precipitacion</a>
 {%endif%}
+
+<br>
+<br>
+<br>
+<br>
+
+<div id="encabezado_contenido">PRECIOS DE PRODUCTOS</div>
+<div id="contenido_full">
+    <p>Tempor nunc auctor, eu porta aliquam placerat a integer montes ridiculus? Sit in porttitor, nisi? A elementum! Pellentesque turpis ac odio magnis vel mauris. Pulvinar. Facilisis magna parturient, hac integer ac amet aenean! Enim sed, urna penatibus a mauris nascetur dis ridiculus! Enim pulvinar magna! Ac a sed mid? Sit cum, ultricies ut, nec? Magna cursus duis elementum et natoque quis placerat, adipiscing dis. Mus in duis! Mid integer tincidunt mid tristique, mus sociis placerat scelerisque! Aliquet odio turpis, ac, aliquet integer nisi montes</p>
+    <div class="clean"></div>
+    <div id="formarea">
+        <form action"." method="POST">
+            {% csrf_token %}
+            <div id="form-left">
+                <div class="form_label">Año</div>
+                <div class="form_widget">{{form.fecha}}</div>
+                <div class="clean"></div>
+                <div id="zonas">ZONAS DE CONTROL</div>
+                    {%for pais in paises%}
+                    <div class="zona-pais">
+                      <div class="zona-pais-nombre">{{pais.nombre|capfirst}}</div>
+                            {% for zona in pais.get_zonas %}
+                            <div class="checks"><input type="checkbox" id="id_lugar_{{forloop.counter}}" value="{{zona.id}}" name="lugar"> <label for="id_lugar_{{forloop.counter}}">{{zona.nombre|capfirst}}</label></div>
+                            {%endfor%}
+                    </div>
+                    {%endfor%}
+                    <div class="clean"></div>
+            </div>
+            <div id="form-right">
+
+                <div class="zona-pais" style="float:left">
+                
+                <div id="mensajito-moneda">
+                    Mensaje de ayuda, algo hay que poner aca? 
+                </div>
+                <div class="clean"></div>
+                <input type="submit" value="Consultar" id="boton" class="filtro"/>
+            </div>
+            <div class="clean"></div>
+        </form>
+    </div>
+</div>
 {% endblock %}

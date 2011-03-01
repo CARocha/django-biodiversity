@@ -30,6 +30,7 @@ def _get_params(request):
     
 def index(request):
     '''Vista incluye formulario de consulta'''
+    paises = Pais.objects.all()
     if request.method == 'POST':
         form = DiversityForm(request.POST)
         if form.is_valid():
@@ -40,12 +41,12 @@ def index(request):
             activa = True
         else:
             activa = False
-        dicc = {'form': form, 'activa': activa}
+        dicc = {'form': form, 'activa': activa, 'paises': paises}
         return render_to_response('clima/index.html', dicc,
                                   context_instance = RequestContext(request))
     else:
         form = DiversityForm()
-        return render_to_response('clima/index.html', {'form': form},
+        return render_to_response('clima/index.html', {'form': form, 'paises': paises},
                                   context_instance = RequestContext(request))
 @session_required
 def grafohumedad(request):
@@ -65,7 +66,7 @@ def grafohumedad(request):
         tabla.append(fila)
     
     grafo_url = grafos.make_graph(valores, ['humedad'], 
-                                      'Temperatura max y minima', 
+                                      'Humedad Promedio', 
                                       leyends,
                                       type = grafos.BAR_CHART_V, multiline=False, size=(650, 300))
    
@@ -153,3 +154,77 @@ def clima(request, tipo):
                                   context_instance = RequestContext(request))
     else:
         raise Http404
+
+def ajax_temperatura(request):
+    ''' Vista para hacer grafos de temperatura
+        tipo(string): Tipo de grafo
+        puede ser: temperatura, precipitacion.
+    '''
+    filas = []
+    valores_max = []
+    valores_min = []
+    params = dict(ano=datetime.datetime.now().year) 
+
+    semanas = range(1, 53)
+    for semana in semanas:
+        params['semana'] = semana
+        #se hace un FIX al params para que soporte ano y no fecha
+        temps = Clima.objects.filter(**params).aggregate(maxima = Avg('t_max'), 
+                                                     minima = Avg('t_min'))
+        if temps['maxima']:
+            valores_max.append(temps['maxima'])
+        else:
+            valores_max.append(0)
+        if temps['minima']:
+            valores_min.append(temps['minima'])
+        else:
+            valores_min.append(0)
+
+    return  grafos.make_graph([valores_max, valores_min], ['Máxima', 'Minima'], 
+                                  'Temperatura max y minima año %s' % params['ano'], 
+                                  semanas,
+                                  type = grafos.LINE_CHART, 
+                                  multiline=True, return_json=True)
+
+def ajax_humedad(request):
+    valores = []
+    leyends = []
+    ano = datetime.datetime.now().year 
+    for numero, letras in CICLO_MES:
+        humedad = Humedad.objects.filter(mes = numero,  ano = ano).aggregate(prom = Avg('humedad'))['prom']
+        valores.append(humedad) if humedad != None else valores.append(0)
+        leyends.append(letras)
+    
+    return grafos.make_graph(valores, ['humedad'], 
+                                  'Humedad Promedio', 
+                                  leyends, return_json = True,
+                                  type = grafos.BAR_CHART_V, multiline=False, size=(650, 300))
+   
+
+
+def ajax_precipitacion(request):
+    #se hace un FIX al params para que soporte ano y no fecha
+    params = dict(ano=datetime.datetime.now().year)
+
+    semanas = range(1, 53)
+    filas_grafo = []
+    leyendas = []
+    for zona in Lugar.objects.all():
+        nombre_zona = zona.nombre
+        valores = []
+        for semana in semanas:
+            params['semana'] = semana
+            params['zona'] = zona 
+            prec = Clima.objects.filter(**params).aggregate(prec = Avg('precipitacion'))['prec'] 
+            if prec:
+                valores.append(prec)
+            else:
+                valores.append(0)
+
+        filas_grafo.append(valores)
+        leyendas.append(nombre_zona)
+    return grafos.make_graph(filas_grafo, leyendas,  
+                                  'Precipitación promedio',
+                                  semanas,
+                                  type = grafos.LINE_CHART, 
+                                  multiline=True, return_json=True)

@@ -18,19 +18,31 @@
                 $('a[rel*=facebox]').facebox({
                     loading_image : '{{MEDIA_URL}}img/loading.gif',
                     close_image   : '{{MEDIA_URL}}img/closelabel.gif'
-                    }); 
                 });
+            });
         </script>
-
         <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-
+        <style type="text/css">
+            {% if user.is_authenticated %}
+            .header .nav .menu{
+                margin-top: -23px !important;
+            }
+            {% endif %}
+        </style>
 	{%block extra_header%}{%endblock%}
     </head>
     <body>
         <!-- Comienza el header -->
         <div id="wrapper">
+            <div id="login">
+                {% if user.is_authenticated %}
+                Bienvenido <span class="username">{{ user.username }}</span> | <a href="/admin" title="Ir a Administración">Administrar</a> | <a href="/accounts/logout" title="Salir de Administración">Salir</a>
+                {% else %}
+                <a href="/accounts/login/" title="login" rel="facebox">Iniciar Sesion</a>
+                {% endif %}
+            </div>
             <div class="header">
                 <div class="logo">
                     <a href="/">
@@ -39,14 +51,7 @@
                 </div>
                 <div class="pagetitle">
                     <img src="/files/img/pagetitle.png" alt="Sistema de informacion Bioversity">
-                </div>
-                <div id="login">
-                {% if user.username %}
-                Bienvenido {{ user.username }} | <a href="/admin" title="Ir a Administración">Administrar</a> | <a href="/accounts/logout" title="Salir de Administración">Salir</a>
-                {%else%}
-                <a href="/accounts/login/" title="login" rel="facebox">Iniciar Sesion</a>
-                {%endif%}
-                </div> <!--   fin de la class login-->
+                </div>                 
                 <div class="nav">
                     <div class="menu">
                         <ul>
