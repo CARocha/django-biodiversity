@@ -446,7 +446,7 @@ a{
     margin-top:5px;
     font-size:11px;
     color:#484848;
-    text-decoration:none;
+    text-decoration:none !important;
 }
 
 .tags a:hover{
@@ -645,6 +645,7 @@ font-size:13px;
     padding:3px;
     font-size:11px;
     color:#fff;
+    text-decoration:none;
 }
 
 #busqueda-foro{
