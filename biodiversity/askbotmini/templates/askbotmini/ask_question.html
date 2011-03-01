@@ -7,14 +7,17 @@
 <script type="text/javascript" src="/files/js/tiny_mce/askbotconfig.js"></script>
 {% endblock %}
 {% block contenido %}
-<h1>Foros</h1>
-<a href="/foro/questions/ask/">Haz las Preguntas</a>
+<div id="sidebar">
+    {% include "askbotmini/sidebar.html" %}
+</div> 
+<div id="contenido">
+ <div id="encabezado_contenido">Foro de Discuciones</div>
 <div>
     <form action="." method="post">{% csrf_token %}
         <table class="askquestion">
             <tr>
                 <td>
-                    <label for="question">{{form.question.label}}</label>
+                    <label for="question">{{form.question.label}}</label><br>
                     {{form.question}}
                 </td>
             </tr>
@@ -32,7 +35,10 @@
                 </td>                
             </tr>            
         </table>
-        <input type="submit" value="Preguntar">
+        <input id="boton-preguntar" type="submit" value="Guardar">
     </form>
+</div>
+
+
 </div>
 {% endblock %}
