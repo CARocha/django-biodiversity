@@ -16,9 +16,9 @@
 {%if socio.logotipo%}
       logotipo:  {{socio.urls_150x150}}<br/>
 {%endif%}
-
+ zonas:
 {% for zonas in socio.zona.all %}    
-    zonas:{{zonas}}<br/>
+     {{zonas}}<br/>
 {%endfor%}
 </div>
 {% endblock %}

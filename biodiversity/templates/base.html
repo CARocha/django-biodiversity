@@ -56,7 +56,7 @@
                     <div class="menu">
                         <ul>
                             <li {% if request.session.flag == 'index' %}class='selecto'{% endif %}><a href="/">Inicio</a></li>&nbsp;|&nbsp;
-                            <li {% if request.session.flag == 'proyecto' %}class='selecto'{% endif %}><a href="/proyecto/">El Proyecto</a></li>&nbsp;|&nbsp;
+                            <li {% if request.session.flag == 'proyecto' %}class='selecto'{% endif %}><a href="/bioversity/textos/" rel="facebox" >El Proyecto</a></li>&nbsp;|&nbsp;
                             <li {% if request.session.flag == 'mapa' %}class='selecto'{% endif %}><a href="/bioversity/mapa/">Mapa</a></li>&nbsp;|&nbsp;
                             <li {% if request.session.flag == 'noticia' %}class='selecto'{% endif %}><a href="/noticias/listar">Noticias</a></li>&nbsp;|&nbsp;
                             <li {% if request.session.flag == 'evento' %}class='selecto'{% endif %}><a href="/eventos/calendario/">Eventos</a></li>
