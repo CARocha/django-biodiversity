@@ -51,6 +51,7 @@ class Answer(models.Model):
         return u'%s' % self.question
     
     class Meta:
+        ordering = ['fecha', ]
         verbose_name = u'Respuesta'
         verbose_name_plural = u'Respuestas'
 

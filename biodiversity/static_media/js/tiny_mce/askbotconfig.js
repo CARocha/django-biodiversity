@@ -15,6 +15,6 @@ tinyMCE.init({
 	file_browser_callback: "CustomFileBrowser",
 	content_css : "/files/js/tiny_mce/css/word.css",
         height: "200",
-        width: "660",
+        width: "662"
 });
 

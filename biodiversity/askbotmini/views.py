@@ -1,15 +1,19 @@
+import operator
+
+import datetime
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response, get_object_or_404
+from django.contrib.auth.models import User
+from django.core.mail import EmailMultiAlternatives
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
-from django.core.mail import send_mail
-from django.contrib.auth.models import User
-from tagging.models import Tag, TaggedItem
 from forms import *
 from models import *
-import operator
-import datetime
+from tagging.models import Tag
+from tagging.models import TaggedItem
 
 def index(request):
     request.session['flag'] = 'foro'
@@ -87,6 +91,7 @@ def view_question(request, id):
     tags.sort(key=operator.attrgetter('count'), reverse=True)
     question = get_object_or_404(Question, id=int(id))
     user_ip = request.META['REMOTE_ADDR']
+
     try:
         vista = View.objects.get(question=question, ip=user_ip)
     except:
@@ -96,6 +101,22 @@ def view_question(request, id):
         vista.save()
         question.views = question.views + 1
         question.save()
+
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = Answer()
+            answer.question = question
+            answer.answer = form.cleaned_data['answer']
+            answer.fecha = datetime.datetime.now()
+            answer.user = request.user
+            answer.save()
+            notify_user(question, answer)
+            return HttpResponseRedirect('/foro/questions/%s/?ansid=%s' % (question.id, answer.id))
+    else:
+        form = AnswerForm()
+
+    ansid = request.GET.get('ansid', '')
 
     return render_to_response('askbotmini/view_question.html', RequestContext(request, locals()))
 
@@ -113,9 +134,26 @@ def notify_all(question):
     site = 'http://localhost:8000/foro/questions/'
     users = User.objects.all().exclude(username='admin')
     contenido = render_to_string('askbotmini/notify_new_question.txt', {'question': question,
-                        'url': '%s%s' % (site, question.id),
-                        'url_answer': '%s%s/#answer' % (site, question.id),
-                        })
+                                 'url': '%s%s' % (site, question.id),
+                                 'url_answer': '%s%s/#answer' % (site, question.id),
+                                 })
     for user in users:
         if user.email:
             send_mail('Nueva pregunta', contenido, 'develop@simasni.org', [user.email, ])
+
+def notify_user(question, answer):
+    site = 'http://localhost:8000/foro/questions/'
+    
+    text_content = render_to_string('askbotmini/notify_new_answer_text.txt', {'question': question,
+                                 'url': '%s%s' % (site, question.id),
+                                 'url_answer': '%s/#%s' % (site, answer.id),
+                                 'answer': answer
+                                 })
+    html_content = render_to_string('askbotmini/notify_new_answer.txt', {'question': question,                                 
+                                 'url_answer': '%s%s/?ansid=%s' % (site, question.id, answer.id),
+                                 'answer': answer
+                                 })
+
+    msg = EmailMultiAlternatives('1 Pregunta tiene 1 Respuesta nueva', text_content, 'develop@simasni.org', [question.user.email, ])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()  

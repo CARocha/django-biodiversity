@@ -1,0 +1,10 @@
+{{question.question}}
+
+{{url_answer}}
+
+{{answer.answer}}
+
+-- {{answer.user.username}} {{answer.fecha|timesince}}
+
+
+Bioversity Team.
