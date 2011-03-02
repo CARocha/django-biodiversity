@@ -19,14 +19,12 @@
 		</tr>
 	</thead>
 	<tbody>
-      {%for valor in tabla%}	
+      {%for fila in tabla%}	
     <tr>            
-         <th scope="row">{{valor.mes}}</th>
-         {%if valor.humo%}
-         <td>{{valor.humo}}</td>
-         {%else%}
-         <td>0</td>
-         {%endif%}
+         <th scope="row">{{fila.leyenda}}</th>
+         {%for valor in fila.valores%}
+         <td>{{valor}}</td>
+         {%endfor%}
     </tr>
     {%endfor%}
    </tbody>

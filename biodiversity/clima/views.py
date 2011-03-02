@@ -53,25 +53,26 @@ def grafohumedad(request):
     ''' vista para los grafico de clima-humedad
     '''
     tabla = []
-    fila = []
-    valores = []
+    filas = []
     leyends = []
     ano = request.session['fecha']
-    zona = request.session['lugares']
-    for numero, letras in CICLO_MES:
-        humedad = Humedad.objects.filter(mes = numero, zona__in=zona, ano = ano).aggregate(prom = Avg('humedad'))['prom']
-        fila = {'mes':letras, 'humo':humedad}
-        valores.append(humedad) if humedad != None else valores.append(0)
-        leyends.append(letras)
-        tabla.append(fila)
+    zonas = request.session['lugares']
+    for zona in Lugar.objects.filter(id__in=zonas):
+        valores = []
+        for numero, letras in CICLO_MES:
+            humedad = Humedad.objects.filter(mes=numero, zona = zona, ano=ano).aggregate(prom = Avg('humedad'))['prom']
+            valores.append(humedad) if humedad != None else valores.append(0)
+        
+        filas.append(valores)
+        leyends.append(zona.nombre)
+        tabla.append({'leyenda': zona.nombre, 'valores': valores})  
     
-    grafo_url = grafos.make_graph(valores, ['humedad'], 
+    grafo_url = grafos.make_graph(filas, leyends, 
                                       'Humedad Promedio', 
-                                      leyends,
-                                      type = grafos.BAR_CHART_V, multiline=False, size=(650, 300))
+                                      [mes[1] for mes in CICLO_MES],
+                                      type = grafos.LINE_CHART, multiline=True, size=(650, 300))
    
     dicc = {'tabla': tabla, 'url': grafo_url}
-    
     return render_to_response('clima/grafo_humedad.html', dicc,
                              context_instance=RequestContext(request))
 
@@ -187,20 +188,23 @@ def ajax_temperatura(request):
                                   multiline=True, return_json=True)
 
 def ajax_humedad(request):
+    filas = []
     valores = []
     leyends = []
-    ano = datetime.datetime.now().year 
-    for numero, letras in CICLO_MES:
-        humedad = Humedad.objects.filter(mes = numero,  ano = ano).aggregate(prom = Avg('humedad'))['prom']
-        valores.append(humedad) if humedad != None else valores.append(0)
-        leyends.append(letras)
+    ano = request.session['fecha']
+    for zona in Lugar.objects.all():
+        for numero, letras in CICLO_MES:
+            humedad = Humedad.objects.filter(mes=numero, zona = zona, ano=ano).aggregate(prom = Avg('humedad'))['prom']
+            valores.append(humedad) if humedad != None else valores.append(0)
+        
+        filas.append(valores)
+        leyends.append(zona.nombre)
     
-    return grafos.make_graph(valores, ['humedad'], 
+    return  grafos.make_graph(filas, leyends, 
                                   'Humedad Promedio', 
-                                  leyends, return_json = True,
-                                  type = grafos.BAR_CHART_V, multiline=False, size=(650, 300))
-   
-
+                                  [mes[1] for mes in CICLO_MES],
+                                  return_json=True,
+                                  type = grafos.LINE_CHART, multiline=True, size=(650, 300))
 
 def ajax_precipitacion(request):
     #se hace un FIX al params para que soporte ano y no fecha
