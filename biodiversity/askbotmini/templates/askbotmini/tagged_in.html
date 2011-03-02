@@ -3,25 +3,55 @@
 {% block extra_header %}
 {% endblock %}
 {% block contenido %}
+<div id="sidebar">
+    {% include "askbotmini/sidebar.html" %}
+</div> 
 <div id="contenido">    
+    <div id="encabezado_contenido">Foro de Discuciones <div style="float:right; margin-right:5px;">{{questions.count}} Discusiones</div></div>
+    <div id="barra_foro">
+        <a href="/foro/" {% if barra_foro == 'index' %}class='selected'{% endif %}><img src="/files/img/discucion.png" alt="discusion">Discusiones destacadas</a>
+        <a href="/foro/?tab=latest"  {% if barra_foro == 'latest' %}class='selected'{% endif %}><img src="/files/img/ultimas.png" alt="destacadas">Ultimas discusiones</a>
+        <a href="/foro/questions/ask/" style="float:right;width:120px"><img src="/files/img/add.png" alt="add foro">Crear un foro</a>
+    </div>
     <div class="question_list">
-        {% for question in questions %}
+        <div class="num-respuesta-commnet">Foros encontrados para tema > <b>{{tag.name}}</b></div>
+ {% for question in questions %}
         <div class="question">
             <div class="left">
+                {%if question.answer_set.all.count == 0 %}
+                                <div class="num_respuestas-red">{{question.answer_set.all.count}}</div>
+                <div class="respuestas-red">
+                    RESPUESTAS
+                </div>
+                {%else%}
                 <div class="num_respuestas">{{question.answer_set.all.count}}</div>
                 <div class="respuestas">
                     RESPUESTAS
                 </div>
+                {%endif%}
             </div>
             <div class="left">
                 <div class="num_clicks">{{question.views}}</div>
-                <div class="clicks">VISTAS</div>
+                <div class="clicks">VISTAS</div> 
             </div>
-            <a href="./questions/{{question.id}}/" title="{{question.question}}">{{question.question}}</a>
-            <br>
-            <div class="tags">{% for tag in question.get_tags %}<a href="">{{tag.name}}</a>{% endfor %}</div>
+            <div class="titulo-foro"><a href="/foro/questions/{{question.id}}/" title="{{question.question}}">{{question.question}}</a></div>
+
+            <div class="tags">{% for tag in question.get_tags %}<a href="/foro/tagged/{{tag.name}}">{{tag.name}}</a>{% endfor %}</div>
             <div class="clean"></div>
-            <div class="publicadop">Publicado por: <a href="">{{question.user}}</a> hace {{question.date_created|timesince}}</div>
+            <div class="publicadop">
+                {% if tab == 'latest' %}
+                Creado hace {{question.date_created|timesince}}
+                por <a href="">{{question.user}}</a>
+                {% else %}
+                {% if question.last_answer %}
+                Respuesta hace {{question.last_answer.fecha|timesince}}
+                por <a href="">{{question.last_answer.user}}</a>
+                {% else %}
+                Creado hace {{question.date_created|timesince}}
+                por <a href="">{{question.user}}</a>
+                {% endif %}
+                {% endif %}
+            </div>
             <div class="clean"></div>
         </div>
         {% endfor %}
