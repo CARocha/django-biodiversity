@@ -25,6 +25,7 @@ img{
 }
 a{
     outline: none;
+    text-decoration:none;
 }
 .centro{
     margin: 0pt auto;
