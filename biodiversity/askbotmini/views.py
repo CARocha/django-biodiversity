@@ -98,4 +98,6 @@ def view_question(request, id):
 def tagged_in(request, tag_name):
     tag = get_object_or_404(Tag, name=tag_name)
     questions = TaggedItem.objects.get_by_model(Question, tag.name).order_by('-last_answer_date')
+    tags = Tag.objects.usage_for_model(Question, counts=True)
+    tags.sort(key=operator.attrgetter('count'), reverse=True)  
     return render_to_response('askbotmini/tagged_in.html', RequestContext(request, locals()))

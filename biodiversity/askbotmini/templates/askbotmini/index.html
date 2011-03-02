@@ -35,7 +35,7 @@
             </div>
             <div class="titulo-foro"><a href="./questions/{{question.id}}/" title="{{question.question}}">{{question.question}}</a></div>
 
-            <div class="tags">{% for tag in question.get_tags %}<a href="/askbot/tagged/{{tag.name}}">{{tag.name}}</a>{% endfor %}</div>
+            <div class="tags">{% for tag in question.get_tags %}<a href="/foro/tagged/{{tag.name}}">{{tag.name}}</a>{% endfor %}</div>
             <div class="clean"></div>
             <div class="publicadop">
                 {% if tab == 'latest' %}

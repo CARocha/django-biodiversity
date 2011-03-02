@@ -437,7 +437,8 @@ a{
 }
 
 .askquestion{
-    font-size:12px
+    font-size:12px;
+    margin-left:10px;
 }
 
 #id_question{
@@ -470,6 +471,8 @@ a{
     font-size:17px;
     color:#989898;
     margin-bottom:10px;
+    margin-left:10px;
+    margin-top:5px;
 }
 
 #nueva-respuesta a{
