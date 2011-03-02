@@ -58,6 +58,9 @@ def grafo(request, tipo):
         filas = []
         filas_grafo = []
         params = _get_params(request)
+
+        normalizar = True if len(request.session['lugares']) >1 else False 
+        
         for zona in request.session['lugares']:
             valores = []
             leyenda = Lugar.objects.get(pk=zona).nombre
@@ -65,8 +68,19 @@ def grafo(request, tipo):
             params['zona'] = zona
             for mes in range(1, 13):
                 params['fecha__month'] = mes
-                precio = models[tipo].objects.filter(**params).aggregate(valor = Avg('precio_%s' % tipo))['valor']
-                valores.append(int(precio)) if precio != None else valores.append(0)
+                if normalizar==False:
+                    precio = models[tipo].objects.filter(**params).aggregate(valor = Avg('precio_%s' % tipo))['valor']
+                else:
+                    #sacamos un promedio de lo internacional a manopla
+                    total = 0
+                    for objeto in  models[tipo].objects.filter(**params):
+                        total += objeto.to_int()[0]
+                    try:
+                        precio = total/models[tipo].objects.filter(**params).count() 
+                    except: 
+                        precio = 0
+
+                valores.append(float(precio)) if precio != None else valores.append(0)
             fila = {'leyenda': leyenda, 'valores': valores}
             filas_grafo.append(valores)
             filas.append(fila)
@@ -79,5 +93,36 @@ def grafo(request, tipo):
                                    'url': grafo_url,
                                   'filas': filas},
                                   context_instance = RequestContext(request))
+    else:
+        raise Http404
+
+def grafos_ajax(request, tipo):
+    #TODO: normalizar la shit!
+    leyendas = []
+    models = dict(productor = Precio, consumidor=PrecioConsumidor)
+    if tipo in models.keys():
+        filas = []
+        filas_grafo = []
+        params = _get_params(request)
+        for zona in request.session['lugares']:
+            valores = []
+            leyenda = Lugar.objects.get(pk=zona).nombre
+            leyendas.append(leyenda)
+            params['zona'] = zona
+            for mes in range(1, 13):
+                params['fecha__month'] = mes
+                total = 0
+                for objeto in  models[tipo].objects.filter(**params):
+                    total += objeto.to_int()[0]
+                try:
+                    precio = total/models[tipo].objects.filter(**params).count() 
+                except: 
+                    precio = 0
+                valores.append(float(precio)) if precio != None else valores.append(0)
+            filas_grafo.append(valores)
+        return grafos.make_graph(filas_grafo, leyendas,  
+                                      'Precio al %s' % tipo,
+                                      MESES, return_json=True,
+                                      type = grafos.LINE_CHART, multiline=True)
     else:
         raise Http404
