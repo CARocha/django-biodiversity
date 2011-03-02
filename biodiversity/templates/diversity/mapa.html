@@ -93,4 +93,33 @@
 <br>
 <div id="encabezado_contenido">Mapa de ubicación de socios y zonas de control <a href="/bioversity/socios/">Socios</a> </div>
 <div id="map_canvas"></div>
+<div id="lista-actores">
+    <table>
+        <tr class="fondo-azul">
+            <th>Socio </th>
+            <th>Zona</th>
+            <th>Pais</th>
+        </tr>
+        {% for socio in socios.object_list %}
+            {% for zona in socio.zona.all%}
+            <tr  class="actores" onclick="window.location='/bioversity/ficha/{{socio.id}}' ">
+                {%if forloop.first%}
+                <td  class="actores" colspan="1" rowspan="{{socio.zona.all.count}}"><b>{{socio.nombre}}</b></td>
+                {%else%}
+                
+                {%endif%}
+                <td class="actores">
+                {{zona.nombre}} 
+                </td>
+                <td class="actores">
+                 {{zona.pais.nombre}}
+                 </td>
+            </tr>
+            {%endfor%}        
+     
+        {%endfor%}
+        
+    </table>
+</div>
+<div class="clean"></div>
 {% endblock %}
