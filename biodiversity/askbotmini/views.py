@@ -20,7 +20,24 @@ def index(request):
         questions = Question.objects.all().order_by('-date_created')
 
     tags = Tag.objects.usage_for_model(Question, counts=True)
-    tags.sort(key=operator.attrgetter('count'), reverse=True)
+    tags.sort(key=operator.attrgetter('count'), reverse=True)  
+
+    query = request.GET.get('q', '')
+    if query:
+        result_questions = Question.objects.filter(question__icontains=query)
+        result_tags = Tag.objects.filter(name__icontains=query)
+        lista = []
+        tags = []
+        for n in result_questions:
+            lista.append(n)
+        for rtag in result_tags:
+            if not rtag.items.all().count() == 0:
+                tags.append({'name':rtag.name, 'count': rtag.items.all().count()})
+            for item in TaggedItem.objects.get_by_model(Question, rtag.name):
+                lista.append(item)
+        tags.sort(key=operator.itemgetter('count'), reverse=True)
+        questions = list(set(lista))        
+
     return render_to_response('askbotmini/index.html', locals(), context_instance=RequestContext(request))
 
 @login_required
