@@ -1,0 +1,11 @@
+{{question.user}} has posteado una nueva pregunta en
+los Foros de Bioversity
+
+Fecha: {{question.date_created|date:"D d M Y"}}
+{{question.question}}
+{{url}}
+
+Para responder a esta pregunta
+{{url_answer}}
+
+Bioversity Team. 

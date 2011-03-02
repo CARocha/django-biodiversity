@@ -99,6 +99,21 @@ class PrecioConsumidor(models.Model):
         
     def __unicode__(self):
         return self.producto.nombre
+
+    def unidad_to_int(self):
+        return (self.precio_consumidor/self.unidad.equivalente, 
+                self.unidad.unidad_int)
+
+    def to_int(self):
+        precio, unidad_int = self.unidad_to_int()
+        try:
+            tipo_de_cambio = TipoCambio.objects.filter(moneda_local = self.moneda, fecha = self.fecha)[0] 
+            precio_int = precio * tipo_de_cambio.cantidad_extranjera
+        except:
+            tipo_de_cambio = 0
+            precio_int = 0
+        return (precio_int, unidad_int)
+        
         
 class Precio(models.Model):
     ''' Modelos sobre los distintos precios
@@ -118,6 +133,21 @@ class Precio(models.Model):
    
     def __unicode__(self):
         return self.producto.nombre
+
+    def unidad_to_int(self):
+        return (self.precio_productor/self.unidad.equivalente, 
+                self.unidad.unidad_int)
+
+    def to_int(self):
+        precio, unidad_int = self.unidad_to_int()
+        try:
+            tipo_de_cambio = TipoCambio.objects.filter(moneda_local = self.moneda, fecha = self.fecha)[0] 
+            precio_int = precio * tipo_de_cambio.cantidad_extranjera
+        except:
+            tipo_de_cambio = 0
+            precio_int = 0
+
+        return (precio_int, unidad_int)
 
 class TipoCambio(models.Model):
     cantidad_local = models.FloatField('Ingrese cantidad en moneda local')
