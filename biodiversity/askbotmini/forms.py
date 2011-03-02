@@ -10,3 +10,9 @@ class AskForm(forms.ModelForm):
     class Meta:
         model = Question
         exclude = ['date_created', 'views', 'user', 'last_answer_date']
+
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        exclude = ['question', 'user', 'fecha']

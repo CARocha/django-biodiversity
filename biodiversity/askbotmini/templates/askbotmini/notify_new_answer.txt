@@ -1,0 +1,16 @@
+<h2><a href='{{url_answer}}'>{{question.question}}</a></h2>
+
+<hr>
+<p>
+{{answer.answer}}
+</p>
+<p>
+-- <strong>{{answer.user.username}}</strong> {{answer.fecha|date:"D d M Y"}}
+</p>
+<hr>
+<p>
+<span style='color: #999'>
+Bioversity Team.
+</span>
+</p>
+

@@ -1,56 +1,85 @@
 {% extends "base.html" %}
 {% block extra_header %}
+<script src="/files/js/jquery.color.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){        
+        if (window.location.href.indexOf('#answer')!=-1){                        
+            answer();
+        }
+        {% if ansid %}
+        $('html, body').animate({
+            scrollTop: $('#answer-{{ansid}}').offset().top
+        }, 500);
+        $("#answer-{{ansid}}").animate( { backgroundColor: '#BEDA53' }, 10).animate( { backgroundColor: 'white' }, 2000);
+        {% endif %}
+    });
+    function answer(){
+        $('html, body').animate({
+            scrollTop: $('#answer').offset().top
+        }, 1000);        
+        $("#answer").animate( { backgroundColor: '#BEDA53' }, 10)
+        .animate( { backgroundColor: 'white' }, 2000);        
+        window.location.href='#answer';
+    }    
+</script>
 {% endblock %}
 {% block contenido %}
 <div id="sidebar">
     {% include "askbotmini/sidebar.html" %}
 </div> 
 <div id="contenido">
-     <div id="encabezado_contenido">Foro de Discuciones</div>
-        <div id="barra_foro">
-            <a href="/foro/"><img src="/files/img/discucion.png" >Discuciones destacadas</a>
-            <a href="/foro/?tab=latest"><img src="/files/img/ultimas.png" >Ultimas discuciones</a>
-            <a href="/foro/questions/ask/" style="float:right;width:120px"><img src="/files/img/add.png" >Crear un foro</a>
-        </div>
+    <div id="encabezado_contenido">Foro de Discuciones</div>
+    <div id="barra_foro">
+        <a href="/foro/"><img src="/files/img/discucion.png" >Discuciones destacadas</a>
+        <a href="/foro/?tab=latest"><img src="/files/img/ultimas.png" >Ultimas discuciones</a>
+        <a href="/foro/questions/ask/" style="float:right;width:120px"><img src="/files/img/add.png" >Crear un foro</a>
+    </div>
     <div class="question_list">
         <div id="question-detail">
 
             <div class="question">
                 <div class="question_detail">
-                <div class="titulo-foro"><a href="">{{question.question}}</a> {% if question.user == request.user %}| <a href="edit/">[editar]</a>{% endif %}
-                    {{question.description|safe}}
+                    <div class="titulo-foro"><a href="">{{question.question}}</a> {% if question.user == request.user %}| <a href="edit/">[editar]</a>{% endif %}
+                        {{question.description|safe}}
+                    </div>
+                    <div class="publicadop">
+                        Publicado por: <a href="">{{question.user}} </a>hace {{question.date_created|timesince}}<br>
+                    </div>
+
+                    <div class="tags">{% for tag in question.get_tags %}<a href="/foro/tagged/{{tag.name}}">{{tag.name}}</a>{% endfor %}</div>
+                    <div class="clean"></div>
                 </div>
-                <div class="publicadop">
-                Publicado por: <a href="">{{question.user}} </a>hace {{question.date_created|timesince}}<br>
-                </div>
-        
-                <div class="tags">{% for tag in question.get_tags %}<a href="/foro/tagged/{{tag.name}}">{{tag.name}}</a>{% endfor %}</div>
+            </div>
+            <div class="respuestas-comment">
+                <div id="nueva-respuesta"><a onclick="answer(); $('#id_answer').focus();" href="javascript:void(0);"><img src="/files/img/forum/new_post.png">Contestar</a></div>
+                <div class="num-respuesta-commnet left">{{question.answer_set.all.count}} Respuestas</div>
                 <div class="clean"></div>
-            </div>  
-        </div>  
-        <div class="respuestas-comment">
-            <div class="num-respuesta-commnet left">11 Respuestas</div>
-            
-            <div id="nueva-respuesta"><a href="#responder"><img src="/files/img/forum/new_post.png">Contestar</a></div>
-            <div class="clean"></div>
-            
-            <div class="comment">
-            <div class="publicadop"> <a href="">Ususraio</a> dijo:</div><br>
-            Aliquet ut ac facilisis scelerisque elementum! Nisi purus non egestas aenean amet! Mus auctor elementum, amet ultrices urna sed non? Urna scelerisque, scelerisque in, mauris cras ac? Turpis in! Placerat scelerisque elementum, montes urna ac? Sed nascetur nunc mus vel, parturient nascetur! Arcu montes, urna turpis nec ut, urna vut. Pid nisi, nascetur urna scelerisque scelerisque! Enim sed mauris amet, dis elementum aenean nisi hac vel nunc tristique lundium lacus lundium et turpis ve
+                {% for answer in question.answer_set.all %}
+                <div class="comment" id="answer-{{answer.id}}">
+                    <div class="publicadop" id="{{answer.id}}">
+                        {% if answer.user == request.user %}
+                        <a href="">[editar]</a> | 
+                        {% endif %}
+                        <a href="#{{answer.id}}">{{answer.user}}</a> hace {{answer.fecha|timesince}} dijo:                        
+                    </div><br>
+                    {{answer.answer}}
+                </div>
+                <br>
+                {% endfor %}
+                <br>
+                <div id="answer">
+                    <div  class="num-respuesta-commnet left">RESPONDER</div><br><br>
+                    <div>
+                        <form action="." method="POST">{% csrf_token %}
+                            {{form.answer}}
+                            <input id="boton-preguntar" type="submit" value="Responder">
+                        </form>
+                    </div>
+                    <div class="clean"></div>
+                    <br>
+                </div>
             </div>
-            <div class="comment">
-            <div class="publicadop"> <a href="">Ususraio</a> dijo:</div><br>
-            montes urna ac? Sed nascetur nunc mus vel, parturient nascetur! Arcu montes, urna turpis nec ut, urna vut. Pid nisi, nascetur urna scelerisque scelerisque! Enim sed mauris amet, dis elementum aenean nisi hac vel nunc tristique lundium lacus lundium et turpis ve
-            </div>
-            <br>
-            <div  class="num-respuesta-commnet left">RESPONDER</div><br><br>
-            <form>
-            <a name="responder"></a>
-            <textarea></textarea>
-            <input id="boton-preguntar" type="submit" value="Responder">
-            </form>
         </div>
     </div>
-
 </div>
 {% endblock %}

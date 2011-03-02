@@ -441,18 +441,12 @@ a{
     margin-left:10px;
 }
 
-#id_question{
-    width:660px;
+#id_question, #id_tags{
+    width:656px;
     border:#7F7F7F 1px solid;
     background:#fff;
+    padding: 2px;
 }
-
-#id_tags{
-    width:660px;
-    border:#7F7F7F 1px solid;
-    background:#fff;
-}
-
 #boton-preguntar{
     background:#4b932a;
     color:#fff;
@@ -495,6 +489,15 @@ a{
     padding-top:5px;
     color:#464646;
     font-size:12px;
+    padding: 10px 5px 15px 5px;    
+}
+#id_answer{
+    border: 1px #9FA3A8 solid;
+    padding: 5px;
+    float: left;
+    margin-left: -100px;
+    width: 500px;
+    height: 130px;
 }
 
 .tags a{
