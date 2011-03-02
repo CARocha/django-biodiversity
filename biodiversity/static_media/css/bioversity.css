@@ -919,9 +919,55 @@ a .big, a:visited .big{
 }
 #slider {
     min-width: 230px;
+}
 
+#lista-actores{
+    width:380px;
+    height:450px;
+    z-index:2;
+    background-color: #000;
+    position:relative;
+    margin-top:-450px;
+    float:right;
+    background: url(/files/img/fondo-actores.png);
+    #background:#333333;
+    -moz-box-shadow: -2px 0px 4px #7D7D7D;
+    -webkit-box-shadow: -2px 0px 4px #7D7D7D;
+}
+
+#lista-actores table{
+    width:380px;
+    color:#bbbbbb;
+    font-size:12px;
+    border-collapse:collapse;
+    text-align:left;
+    cursor:pointer;
+}
+
+.fondo-azul{
+    background: url(/files/img/fondoazul.png);
+}
+
+#lista-actores table td {
+    height:30px;
+    vertical-align:center;
+    padding-left:15px;
+    border-bottom:#515151 1px solid;
 
 }
+
+#lista-actores table th {
+    height:28px;
+    vertical-align:center;
+    padding-left:15px;
+    border-bottom:#000 1px solid;
+    color:#000;
+}
+
+#lista-actores .actores:hover {
+    background:#000;
+}
+
 .paginacion{
     padding:10px;
     border:#f2f2db 1px solid;

@@ -69,7 +69,8 @@ def ficha_socios(request, id):
 def mapa(request):
     '''Vista para el mapa de los lugares en que esta el socio'''
     map_center = dict(lat=0, lon=0) 
-    return render_to_response('diversity/mapa.html', {'center': map_center},
+    socios = _get_elementos(request, Socios.objects.all())
+    return render_to_response('diversity/mapa.html', {'center': map_center, 'socios':socios},
                               context_instance=RequestContext(request))
 
 def ajax_socios(request, zona):
