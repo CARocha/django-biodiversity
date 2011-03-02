@@ -19,12 +19,30 @@
         });
     });
 </script>
+
+<script type="text/javascript">
+	
+$.metadata.setType("attr", "validate");
+
+$(document).ready(function() {
+	$("#form1").validate();
+});
+</script>
+
 {% endblock %}
 {% block menu %}  
 
 {% endblock %}
 
 {% block contenido %}
+
+<style type="text/css">
+.block { display: block;
+       }
+form.cmxform label.error { display: none;
+                           color: red; }	
+</style>
+
 {% if request.session.activa%}
 <a href="/precio/grafo/productor/">Precio al productor</a>
 <a href="/precio/grafo/consumidor/">Precio al consumidor</a>
@@ -40,23 +58,27 @@
     <p>Tempor nunc auctor, eu porta aliquam placerat a integer montes ridiculus? Sit in porttitor, nisi? A elementum! Pellentesque turpis ac odio magnis vel mauris. Pulvinar. Facilisis magna parturient, hac integer ac amet aenean! Enim sed, urna penatibus a mauris nascetur dis ridiculus! Enim pulvinar magna! Ac a sed mid? Sit cum, ultricies ut, nec? Magna cursus duis elementum et natoque quis placerat, adipiscing dis. Mus in duis! Mid integer tincidunt mid tristique, mus sociis placerat scelerisque! Aliquet odio turpis, ac, aliquet integer nisi montes</p>
     <div class="clean"></div>
     <div id="formarea">
-        <form action"." method="POST">
+        <form class="cmxform" id="form1" action"." method="POST">
             {% csrf_token %}
             <div id="form-left">
                 <div class="form_label">Año</div>
                 <div class="form_widget">{{form.fecha}}</div>
                 <div class="form_label">Producto</div>
-                <div class="form_widget">
+                <div class="form_widget" name="producto" validate="required:true" class="required">
                   {{form.producto}}
+                  
+                  <label for="producto" class="error">Seleccione un producto</label>
                 </div>
+                
                 <div class="clean"></div>
                 <div id="zonas">ZONAS DE CONTROL</div>
                     {%for pais in paises%}
                     <div class="zona-pais">
                       <div class="zona-pais-nombre">{{pais.nombre|capfirst}}</div>
                             {% for zona in pais.get_zonas %}
-                            <div class="checks"><input type="checkbox" id="id_lugar_{{forloop.counter}}" value="{{zona.id}}" name="lugar"> <label for="id_lugar_{{forloop.counter}}">{{zona.nombre|capfirst}}</label></div>
+                            <div class="checks"><input type="checkbox" id="id_lugar_{{forloop.counter}}" value="{{zona.id}}" name="lugar" validate="required:true" class="required"> <label for="id_lugar_{{forloop.counter}}">{{zona.nombre|capfirst}}</label></div>
                             {%endfor%}
+                     <label for="lugar" class="error">Seleccione sus Zonas</label>
                     </div>
                     {%endfor%}
                     <div class="clean"></div>

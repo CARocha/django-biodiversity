@@ -49,6 +49,8 @@ class Socios(models.Model):
                sizes=((150,150),(250,250)), null=True, blank=True)
     correo = models.EmailField(null=True, blank=True)
     
+    fileDir = 'socios/logos'
+    
     class Meta:
         verbose_name = "Socios"
         verbose_name_plural = "Socio"
