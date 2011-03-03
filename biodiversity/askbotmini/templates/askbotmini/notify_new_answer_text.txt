@@ -6,5 +6,4 @@
 
 -- {{answer.user.username}} {{answer.fecha|timesince}}
 
-
 Bioversity Team.

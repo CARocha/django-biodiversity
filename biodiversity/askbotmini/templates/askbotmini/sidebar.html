@@ -9,7 +9,7 @@
 <div class="titulo">Temas</div>
 <div id="listatags">
     {% for tag in tags %}
-    <a href="/foro/tagged/{{tag.name}}">{{tag.name}}</a> x {% if query %}{{tag.count}}{% else %}{{tag.items.all.count}}{% endif %}<br><br>
+    <a href="/foro/tagged/{{tag.name}}">{{tag.name}}</a> x {% if query %}{{tag.count}}{% else %}{{tag.get_real_items}}{% endif %}<br><br>
     {% endfor %}
 </div>
 

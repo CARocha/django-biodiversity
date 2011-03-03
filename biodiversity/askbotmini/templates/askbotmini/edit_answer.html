@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block extra_header %}
+<style type="text/css">
+    #id_answer{
+        margin-left: 0px !important;
+    }
+</style>
+{% endblock %}
+{% block contenido %}
+<div id="sidebar">
+    {% include "askbotmini/sidebar.html" %}
+</div>
+<div id="contenido">
+    <div id="encabezado_contenido">Foro de Discuciones</div>
+    <div id="barra_foro">
+        <a href="/foro/"><img src="/files/img/discucion.png" >Discuciones destacadas</a>
+        <a href="/foro/?tab=latest"><img src="/files/img/ultimas.png" alt="ultimas noticias">Ultimas discuciones</a>
+        <a href="/foro/questions/ask/" style="float:right;width:120px"><img src="/files/img/add.png" >Crear un foro</a>
+    </div>
+    <div class="question_list">
+        <div id="question-detail">
+            <div class="question">
+                <div class="question_detail">
+                    <div class="titulo-foro"><a href="">{{answer.question.question}}</a>
+                        {{answer.question.description|safe}}
+                    </div>
+                    <div class="publicadop">
+                        Publicado por: <a href="">{{answer.question.user}} </a>hace {{answer.question.date_created|timesince}}<br>
+                    </div>
+
+                    <div class="tags">{% for tag in answer.question.get_tags %}<a href="/foro/tagged/{{tag.name}}">{{tag.name}}</a>{% endfor %}</div>
+                    <div class="clean"></div>
+                </div>
+            </div>
+            <div class="respuestas-comment">
+                <div class="num-respuesta-commnet left">Respuesta</div>
+                <div class="clean"></div>
+                <br>
+                <div id="answer">                    
+                    <div>
+                        <form action="." method="POST">{% csrf_token %}
+                            {{form.answer}}
+                            <input id="boton-preguntar" type="submit" value="Responder">
+                        </form>
+                    </div>
+                    <div class="clean"></div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
