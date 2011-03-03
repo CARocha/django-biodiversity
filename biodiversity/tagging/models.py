@@ -469,6 +469,15 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
 
+    #metodo para devolver la cantidad de objetos existentes en una tag
+    def get_real_items(self):
+        lista = []
+        for item in self.items.all():
+            if item.object:
+                lista.append(item)
+
+        return len(lista)
+
 class TaggedItem(models.Model):
     """
     Holds the relationship between a tag and the item being tagged.

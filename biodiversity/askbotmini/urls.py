@@ -6,6 +6,7 @@ urlpatterns = patterns('askbotmini.views',
             (r'^questions/ask/$', 'ask_question'),
             (r'^questions/(?P<id>\d+)/$', 'view_question'),
             (r'^questions/(?P<id>\d+)/edit/$', 'edit_question'),
+            (r'^posts/(?P<id>\d+)/edit/$', 'edit_answer'),
             (r'^tagged/(?P<tag_name>\w+)/$', 'tagged_in'),
 )
 
