@@ -2,7 +2,7 @@
 
 {%block extra_header%}
 <script>
-        $(document).ready(function() {
+    $(document).ready(function() {
         var pais = document.getElementById("id_pais");
         var zona = document.getElementById("id_lugar");
        
@@ -25,20 +25,17 @@
 {% endblock %}
 
 {% block contenido %}
-                    <form action"." method="POST">
-                        {% csrf_token %}
-
-                    <div id="formulario_tabla" >
-                        <div class="form_label"><b>{{form.fecha.label}}</b></div>
-                        <div class="form_widget">{{form.fecha}}</div>
-                        <div class="form_label"><b>{{form.pais.label}}</b></div>
-                        <div class="form_widget">{{form.pais}}</div>
-                        <div class="form_label"><b>{{form.lugar.label}}</b></div>
-                        <div class="form_widget">{{form.lugar}}</div>
-                        <div class="form_label"><b>{{form.tipo_grafo.label}}</b></div>
-                        <div class="form_widget">{{form.tipo_grafo}}</div>
-                    </div>
-
-                      <input type="submit" value="Consultar" id="boton" class="filtro"/>
-                    </form>
+<form action"." method="POST">{% csrf_token %}
+      <div id="formulario_tabla" >
+        <div class="form_label"><b>{{form.fecha.label}}</b></div>
+        <div class="form_widget">{{form.fecha}}</div>
+        <div class="form_label"><b>{{form.pais.label}}</b></div>
+        <div class="form_widget">{{form.pais}}</div>
+        <div class="form_label"><b>{{form.lugar.label}}</b></div>
+        <div class="form_widget">{{form.lugar}}</div>
+        <div class="form_label"><b>{{form.tipo_grafo.label}}</b></div>
+        <div class="form_widget">{{form.tipo_grafo}}</div>
+    </div>
+    <input type="submit" value="Consultar" id="boton" class="filtro"/>
+</form>
 {% endblock %}
