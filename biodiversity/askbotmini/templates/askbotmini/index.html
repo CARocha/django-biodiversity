@@ -13,6 +13,7 @@
         <a href="/foro/?tab=latest"  {% if barra_foro == 'latest' %}class='selected'{% endif %}><img src="/files/img/ultimas.png" alt="destacadas">Ultimas discusiones</a>
         <a href="/foro/questions/ask/" style="float:right;width:120px"><img src="/files/img/add.png" alt="add foro">Crear un foro</a>
     </div>
+    <div class="num-respuesta-commnet">Foros encontrados para la busqueda > <b>{{query}}</b></div>
     <div class="question_list">
         {% for question in questions %}
         <div class="question">

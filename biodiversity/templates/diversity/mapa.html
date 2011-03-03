@@ -35,7 +35,9 @@
                 });
                 attachInfowindow(marker, elemento.socios);
             });
-        });        
+        }); 
+        
+        $('#lista-actores').hide()       
     });
     
     function attachInfowindow(marker, socios) {
@@ -79,6 +81,10 @@
             }catch(err){}
             ib.open(map, marker);
         });
+        
+    $("#disparador").click(function() {
+            $('#lista-actores').fadeTo("slow", 1);
+        });
     }           
 </script>
 <style type="text/css">
@@ -91,7 +97,7 @@
 {% block contenido %}
 <div class="clean"></div>
 <br>
-<div id="encabezado_contenido">Mapa de ubicación de socios y zonas de control <a href="/bioversity/socios/">Socios</a> </div>
+<div id="encabezado_contenido">Mapa de ubicación de socios y zonas de control <a id="disparador" href="#">Socios</a> </div>
 <div id="map_canvas"></div>
 <div id="lista-actores">
     <table>
@@ -101,21 +107,42 @@
             <th>Pais</th>
         </tr>
         {% for socio in socios.object_list %}
+        <tr  class="actores" onclick="window.location='/bioversity/ficha/{{socio.id}}' ">
+        <td  class="actores" ><b>{{socio.nombre}}</b></td>
+        <td>
+        <table>
             {% for zona in socio.zona.all%}
-            <tr  class="actores" onclick="window.location='/bioversity/ficha/{{socio.id}}' ">
-                {%if forloop.first%}
-                <td  class="actores" colspan="1" rowspan="{{socio.zona.all.count}}"><b>{{socio.nombre}}</b></td>
+                {%if not forloop.last%}
+                    <tr>
+                        <td> {{zona.nombre}}</td>
+                    </tr>
                 {%else%}
-                
+                    <tr >
+                        <td style="border-bottom:0px !important;"> {{zona.nombre}}</td>
+                    </tr>
                 {%endif%}
-                <td class="actores">
-                {{zona.nombre}} 
-                </td>
-                <td class="actores">
-                 {{zona.pais.nombre}}
-                 </td>
-            </tr>
-            {%endfor%}        
+            
+            {%endfor%}  
+        </table>
+        </td>   
+        <td>
+        <table>
+            {% for zona in socio.zona.all%}
+                {%if not forloop.last%}
+                    <tr>
+                        <td> {{zona.pais.nombre}}</td>
+                        <td style="border-bottom:0px !important;"> <img src="/files/img/flags/{{zona.pais.codigo_int}}.gif"></td>
+                    </tr>
+                {%else%}
+                    <tr >
+                        <td style="border-bottom:0px !important;"> {{zona.pais.nombre}}</td>
+                        <td style="border-bottom:0px !important;"> <img src="/files/img/flags/{{zona.pais.codigo_int}}.gif"></td>
+                    </tr>
+                {%endif%}
+            
+            {%endfor%}  
+        </table>
+        </td>   
      
         {%endfor%}
         

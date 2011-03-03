@@ -8,6 +8,7 @@ class Pais(models.Model):
         que esten en este sistema
     '''
     nombre = models.CharField(max_length=200)
+    codigo_int = models.CharField('Codigo Internacional', max_length=2, help_text="Ejemplo > Nicaragua = ni")
       
     class Meta:
         verbose_name_plural = "Pais"

@@ -954,7 +954,7 @@ a .big, a:visited .big{
 #lista-actores table td {
     height:30px;
     vertical-align:center;
-    padding-left:15px;
+    padding-left:10px;
     border-bottom:#515151 1px solid;
 
 }
@@ -969,6 +969,15 @@ a .big, a:visited .big{
 
 #lista-actores .actores:hover {
     background:#000;
+}
+
+#lista-actores table table{
+    width:100%;
+}
+
+#lista-actores table table td img{
+    float:right;
+    margin-right:8px;
 }
 
 .paginacion{
