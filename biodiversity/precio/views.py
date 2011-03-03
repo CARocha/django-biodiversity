@@ -34,7 +34,7 @@ def index(request):
             #request.session['pais'] = form.cleaned_data['fecha']
             request.session['producto'] = form.cleaned_data['producto']
             #Unidad no se mete al params.
-            request.session['unidad'] = form.cleaned_data['producto']
+            request.session['unidad'] = form.cleaned_data['unidad']
             request.session['activa'] = True
             activa = True
         else:
@@ -58,8 +58,9 @@ def grafo(request, tipo):
         filas = []
         filas_grafo = []
         params = _get_params(request)
-
-        normalizar = True if len(request.session['lugares']) >1 else False 
+        
+        #linea mas larga ever
+        normalizar = True if len(request.session['lugares']) >1 or request.session['unidad']!='nativa' else False 
         
         for zona in request.session['lugares']:
             valores = []
@@ -97,7 +98,6 @@ def grafo(request, tipo):
         raise Http404
 
 def grafos_ajax(request, tipo):
-    #TODO: normalizar la shit!
     leyendas = []
     models = dict(productor = Precio, consumidor=PrecioConsumidor)
     if tipo in models.keys():

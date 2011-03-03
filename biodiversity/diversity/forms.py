@@ -20,6 +20,7 @@ class PrecioForm(forms.Form):
     producto = forms.ModelChoiceField(queryset=Producto.objects.all())
     unidad = forms.ChoiceField(choices=(('nativa', 'Nativa'), 
                                         ('normalizada', 'Normalizada')),
-                                        widget=forms.RadioSelect)
+                                        widget=forms.RadioSelect, 
+                                        initial='nativa')
     #ModelMultipleChoiceField(widget=forms.SelectMultiple,
     #                queryset=RubroCultivo.objects.all(), label='Rubro Cultivo',
