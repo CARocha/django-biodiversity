@@ -36,7 +36,6 @@
     </div>
     <div class="question_list">
         <div id="question-detail">
-
             <div class="question">
                 <div class="question_detail">
                     <div class="titulo-foro"><a href="">{{question.question}}</a> {% if question.user == request.user %}| <a href="edit/">[editar]</a>{% endif %}
@@ -58,7 +57,7 @@
                 <div class="comment" id="answer-{{answer.id}}">
                     <div class="publicadop" id="{{answer.id}}">
                         {% if answer.user == request.user %}
-                        <a href="">[editar]</a> | 
+                        <a href="/foro/posts/{{answer.id}}/edit">[editar]</a> |
                         {% endif %}
                         <a href="#{{answer.id}}">{{answer.user}}</a> hace {{answer.fecha|timesince}} dijo:                        
                     </div><br>
