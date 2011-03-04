@@ -85,6 +85,9 @@
     $("#disparador").click(function() {
             $('#lista-actores').fadeTo("slow", 1);
         });
+    $("#cerrar").click(function() {
+            $('#lista-actores').hide();
+        });
     }           
 </script>
 <style type="text/css">
@@ -97,14 +100,15 @@
 {% block contenido %}
 <div class="clean"></div>
 <br>
-<div id="encabezado_contenido">Mapa de ubicación de socios y zonas de control <a id="disparador" href="#">Socios</a> </div>
+<div id="encabezado_contenido">Mapa de ubicación de socios y zonas de control <a id="disparador" href="#">Mostrar lista de socios <img src="/files/img/arrowdown.png"></a> <div class="clean"></div></div>
+
 <div id="map_canvas"></div>
 <div id="lista-actores">
     <table>
         <tr class="fondo-azul">
             <th>Socio </th>
             <th>Zona</th>
-            <th>Pais</th>
+            <th>Pais <img id="cerrar" style="float:right; margin-right:10px;" src="/files/img/close.png"></th>
         </tr>
         {% for socio in socios.object_list %}
         <tr  class="actores" onclick="window.location='/bioversity/ficha/{{socio.id}}' ">
