@@ -4,6 +4,14 @@
 <!--<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>-->
 <!--<script type="text/javascript" src="/files/js/markerclusterer.js"></script>-->
 <script type="text/javascript" src="/files/js/infobox.js"></script>
+<style type="text/css">
+    #map_canvas{
+        height: 450px;
+    }
+    .actor_detalle{
+        display: none;
+    }
+</style>
 <script type="text/javascript">    
     // Aplicar QuickSearch a la tabla y la lista
     var map;
@@ -37,7 +45,7 @@
             });
         }); 
         
-        $('#lista-actores').hide()       
+        $('#lista-actores').hide();
     });
     
     function attachInfowindow(marker, socios) {
@@ -81,32 +89,29 @@
             }catch(err){}
             ib.open(map, marker);
         });
-        
-    $("#disparador").click(function() {
-            $('#actor-table').hide();
-            $('#lista-actores').fadeIn();
-            $('#actores-table').fadeIn();
-            
-        });
-    $("#cerrar").click(function() {
-            $('#lista-actores').fadeOut();
-        });
-    $(".actores").click(function() {
-            $('#actores-table').hide();
-            $('#actor-table').fadeIn();
-        });
-    $("#regresar").click(function() {
-            $('#actor-table').hide();
-            $('#actores-table').fadeIn();
-
+        $(document).ready(function(){
+            $("#disparador").click(function() {                
+                $('#lista-actores').fadeIn();                
+                return false;
+            });
+            $("#cerrar").click(function() {
+                $('#lista-actores').fadeOut();
+                return false;
+            });
+            $(".actores").click(function() {
+                $('#actores-table').hide();
+                var id = $(this).attr('id');
+                $('#actor-table'+id).fadeIn();
+                return false;
+            });
+            $(".regresar").click(function() {
+                $('.actor_detalle').hide();
+                $('#actores-table').fadeIn();
+                return false;
+            });
         });
     }           
 </script>
-<style type="text/css">
-    #map_canvas{        
-        height: 450px;
-    }
-</style>
 {%endblock%}
 
 {% block contenido %}
@@ -123,68 +128,75 @@
             <th>Pais <img id="cerrar" style="float:right; margin-right:10px;" src="/files/img/close.png"></th>
         </tr>
         {% for socio in socios.object_list %}
-        <tr  class="actores">
-        <td><b>{{socio.nombre}}</b></td>
-        <td>
-        <table>
-            {% for zona in socio.zona.all%}
-                {%if not forloop.last%}
+        <tr  class="actores" id="{{socio.id}}">
+            <td><b>{{socio.nombre}}</b></td>
+            <td>
+                <table>
+                    {% for zona in socio.zona.all%}
+                    {%if not forloop.last%}
                     <tr>
                         <td> {{zona.nombre}}</td>
                     </tr>
-                {%else%}
+                    {%else%}
                     <tr >
                         <td style="border-bottom:0px !important;"> {{zona.nombre}}</td>
                     </tr>
-                {%endif%}
-            
-            {%endfor%}  
-        </table>
-        </td>   
-        <td>
-        <table>
-            {% for zona in socio.zona.all%}
-                {%if not forloop.last%}
+                    {%endif%}
+
+                    {%endfor%}
+                </table>
+            </td>
+            <td>
+                <table>
+                    {% for zona in socio.zona.all%}
+                    {%if not forloop.last%}
                     <tr>
                         <td> {{zona.pais.nombre}}</td>
                         <td style="border-bottom:0px !important;"> <img src="/files/img/flags/{{zona.pais.codigo_int}}.gif"></td>
                     </tr>
-                {%else%}
+                    {%else%}
                     <tr >
                         <td style="border-bottom:0px !important;"> {{zona.pais.nombre}}</td>
                         <td style="border-bottom:0px !important;"> <img src="/files/img/flags/{{zona.pais.codigo_int}}.gif"></td>
                     </tr>
-                {%endif%}
-            
-            {%endfor%}  
-        </table>
-        </td>  
+                    {%endif%}
+
+                    {%endfor%}
+                </table>
+            </td>
         </tr>
         {%endfor%}
-        
+
     </table>
-    <table id="actor-table">
+    {% for socio in socios.object_list %}
+    <table id="actor-table{{socio.id}}" class="actor_detalle">
         <tr class="fondo-azul">
-            <th>Nombre Socio </th>
-            <th><img id="regresar" style="float:right; margin-right:10px;" src="/files/img/regresar.png"></th>
+            <th>{{socio.nombre}}</th>
+            <th><img class="regresar" style="float:right; margin-right:10px;" src="/files/img/regresar.png" alt="regresar"></th>
         </tr>
         <tr>
             <td>Nombre</td>
-            <td>UNAN</td>
+            <td>{{socio.nombre}}</td>
         </tr>
         <tr>
             <td>Email</td>
-            <td>algo@.com</td>
+            <td>{{socio.correo}}</td>
         </tr>
         <tr>
             <td>Enlace</td>
-            <td>www.google.com</td>
+            <td><a class="socio_link" href="{{socio.link}}" target="_blank">{{socio.link}}</a></td>
         </tr>
+        {% if socio.logotipo %}
         <tr>
-            <td>logo</td>
-            <td></td>
+            <td colspan="2">
+                <br>
+                <center><img src="{{socio.logotipo.url_200x175}}" alt="Logo"></center>
+                <br>
+            </td>
         </tr>
+        {% endif %}
     </table>
+    {% endfor %}
 </div>
 <div class="clean"></div>
 {% endblock %}

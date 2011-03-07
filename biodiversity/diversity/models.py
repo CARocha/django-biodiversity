@@ -47,7 +47,7 @@ class Socios(models.Model):
     nombre = models.CharField(max_length=200)
     link = models.URLField(null=True, blank=True)
     logotipo = ImageWithThumbsField(upload_to=get_file_path,
-               sizes=((150,150),(250,250)), null=True, blank=True)
+               sizes=((150,150),(200,175)), null=True, blank=True)
     correo = models.EmailField(null=True, blank=True)
     
     fileDir = 'socios/logos'
