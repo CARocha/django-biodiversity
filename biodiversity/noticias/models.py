@@ -2,7 +2,7 @@
 from django.db import models
 from biodiversity.utils import get_file_path 
 from thumbs import ImageWithThumbsField
-from diversity.models import Pais
+from biodiversity.diversity.models import Pais
         
 class Noticias(models.Model):
     ''' Modelo que contendra las noticias del sitio

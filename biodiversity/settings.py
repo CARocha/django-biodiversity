@@ -151,4 +151,3 @@ HAYSTACK_SITECONF = 'biodiversity.search_sites'
 HAYSTACK_SEARCH_ENGINE = 'simple'
 
 NO_DATA_GRAPH_URL = 'http://farm4.static.flickr.com/3124/3237693057_f93125d14d.jpg'
-
