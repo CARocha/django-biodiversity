@@ -278,6 +278,23 @@ a{
     margin-right:3px;
 }
 
+#login-form {
+    font-size:12px;
+}
+
+#login-form #id_username, #login-form #id_password{
+    float:left;
+    margin-right:10px;
+    height:15px;
+    font-size:12px;
+    border: #333 solid 1px;
+    background:#fff;
+}
+#login-form label{
+    float:left;
+    margin-right:5px;
+}
+
 /*agregado por byron para las noticias*/
 
 .noticia{
