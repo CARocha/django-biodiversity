@@ -83,10 +83,22 @@
         });
         
     $("#disparador").click(function() {
-            $('#lista-actores').fadeTo("slow", 1);
+            $('#actor-table').hide();
+            $('#lista-actores').fadeIn();
+            $('#actores-table').fadeIn();
+            
         });
     $("#cerrar").click(function() {
-            $('#lista-actores').hide();
+            $('#lista-actores').fadeOut();
+        });
+    $(".actores").click(function() {
+            $('#actores-table').hide();
+            $('#actor-table').fadeIn();
+        });
+    $("#regresar").click(function() {
+            $('#actor-table').hide();
+            $('#actores-table').fadeIn();
+
         });
     }           
 </script>
@@ -104,15 +116,15 @@
 
 <div id="map_canvas"></div>
 <div id="lista-actores">
-    <table>
+    <table id="actores-table">
         <tr class="fondo-azul">
             <th>Socio </th>
             <th>Zona</th>
             <th>Pais <img id="cerrar" style="float:right; margin-right:10px;" src="/files/img/close.png"></th>
         </tr>
         {% for socio in socios.object_list %}
-        <tr  class="actores" onclick="window.location='/bioversity/ficha/{{socio.id}}' ">
-        <td  class="actores" ><b>{{socio.nombre}}</b></td>
+        <tr  class="actores">
+        <td><b>{{socio.nombre}}</b></td>
         <td>
         <table>
             {% for zona in socio.zona.all%}
@@ -146,10 +158,32 @@
             
             {%endfor%}  
         </table>
-        </td>   
-     
+        </td>  
+        </tr>
         {%endfor%}
         
+    </table>
+    <table id="actor-table">
+        <tr class="fondo-azul">
+            <th>Nombre Socio </th>
+            <th><img id="regresar" style="float:right; margin-right:10px;" src="/files/img/regresar.png"></th>
+        </tr>
+        <tr>
+            <td>Nombre</td>
+            <td>UNAN</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>algo@.com</td>
+        </tr>
+        <tr>
+            <td>Enlace</td>
+            <td>www.google.com</td>
+        </tr>
+        <tr>
+            <td>logo</td>
+            <td></td>
+        </tr>
     </table>
 </div>
 <div class="clean"></div>
