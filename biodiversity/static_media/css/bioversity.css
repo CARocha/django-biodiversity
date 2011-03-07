@@ -1099,3 +1099,9 @@ a .big, a:visited .big{
     background:none;
     margin-top:35px;
 }
+.socio_link{
+    color: #fff;    
+}
+.socio_link:hover{
+    text-decoration: underline;
+}
