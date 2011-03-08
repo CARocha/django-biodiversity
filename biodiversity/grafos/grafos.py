@@ -15,6 +15,7 @@ PIE_CHART_3D, PIE_CHART_2D = pie_types
 BAR_CHART_H, BAR_CHART_V, GROUPED_BAR_CHART_H, GROUPED_BAR_CHART_V = bar_types
 LINE_CHART = line_types
 
+COLORS = ['FFBC13','22A410','E6EC23','2B2133','BD0915','3D43BD']
 
 def make_graph(data, legends, message=None, 
                axis_labels=None, steps=4, return_json = False,
@@ -47,7 +48,7 @@ def make_graph(data, legends, message=None,
 
 def _pie_graph(data, legends, size, type=PieChart3D):
     graph = type(size[0], size[1])
-    graph.set_colours([ 'FFBC13','22A410','E6EC23','2B2133','BD0915','3D43BD'])
+    graph.set_colours(COLORS)
     graph.add_data(data)
     graph.set_legend(legends)
     porcentajes = saca_porcentajes(data)
@@ -122,7 +123,7 @@ def _bar_graph(data, legends, axis_labels, size, steps,
     else:
         graph.add_data(data)
     
-    graph.set_colours([ 'FFBC13','22A410','E6EC23','2B2133','BD0915','3D43BD'])
+    graph.set_colours(COLORS)
     graph.set_bar_width(44)
     graph.set_legend(legends)
     graph.set_legend_position('b')
@@ -176,10 +177,10 @@ def _line_strip_graph(data, legends, axis_labels, size, steps,
         left_axis = range(0, 2)
     left_axis[0]=''
     chart.set_axis_labels(Axis.LEFT, left_axis)
-    chart.set_colours([ 'FFBC13','22A410','E6EC23','2B2133','BD0915','3D43BD'])
     chart.set_grid(0, 25, 4, 4,)
     chart.chls=4|4
     #chart.fill_linear_stripes(Chart.CHART, 0, 'FFFFEF', 0.2, 'FFFFFF', 0.2)
+    chart.set_colours(COLORS)
 
     if axis_labels:
         chart.set_axis_labels(Axis.BOTTOM, axis_labels)
