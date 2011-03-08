@@ -604,7 +604,7 @@ class Chart(object):
 
     def set_axis_labels(self, axis_type, values):
         assert(axis_type in Axis.TYPES)
-        values = [urllib.quote(str(a)) for a in values]
+        values = [urlquote(a) for a in values]
         axis_index = len(self.axis)
         axis = LabelAxis(axis_index, axis_type, values)
         self.axis.append(axis)

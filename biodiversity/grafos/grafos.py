@@ -178,7 +178,7 @@ def _line_strip_graph(data, legends, axis_labels, size, steps,
     left_axis[0]=''
 
     chart.set_axis_range(Axis.LEFT, min_y, tope)
-    if kwargs['units']:
+    if 'units' in kwargs:
         chart.set_axis_labels(Axis.LEFT, kwargs['units'])
     chart.set_grid(0, 25, 4, 4,)
     chart.chls=4|4
@@ -190,7 +190,7 @@ def _line_strip_graph(data, legends, axis_labels, size, steps,
     chart.set_legend(legends)
     chart.set_legend_position('b')
 
-    if kwargs['thickness']:
+    if 'thickness' in kwargs:
         if multiline:
             for i in range(len(data)):
                 chart.set_line_style(index = i, thickness=kwargs['thickness'])
