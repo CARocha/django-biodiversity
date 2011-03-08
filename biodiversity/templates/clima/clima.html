@@ -37,7 +37,7 @@
         </thead>
         <tbody>
             {% for fila in filas%}
-            <tr class="{%cycle  '' 'odd'%}">
+            <tr class="{% cycle  '' 'odd' %}">
                 {%for valor in fila.valores%}
                 {%if valor%}
                 <td>{{valor}}</td>
