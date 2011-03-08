@@ -70,7 +70,9 @@ def grafohumedad(request):
     grafo_url = grafos.make_graph(filas, leyends, 
                                       'Humedad Promedio', 
                                       [mes[1] for mes in CICLO_MES],
-                                      type = grafos.LINE_CHART, multiline=True, size=(650, 300))
+                                      type = grafos.LINE_CHART, multiline=True, 
+                                      size=(650, 300), 
+                                      thickness=3, units = ['mes', 'mm'])
    
     dicc = {'tabla': tabla, 'url': grafo_url}
     return render_to_response('clima/grafo_humedad.html', dicc,
@@ -110,7 +112,8 @@ def clima(request, tipo):
         grafo_url = grafos.make_graph([valores_max, valores_min], ['Máxima', 'Minima'], 
                                       'Temperatura max y minima', 
                                       semanas,
-                                      type = grafos.LINE_CHART, multiline=True)
+                                      type = grafos.LINE_CHART, multiline=True, 
+                                      thickness=3, units = ['semana#', 'C'])
         return render_to_response('clima/clima.html',
                                   {'tiempos': semanas,
                                   'filas': filas, 
@@ -146,7 +149,8 @@ def clima(request, tipo):
         grafo_url = grafos.make_graph(filas_grafo, leyendas,  
                                       'Precipitación promedio',
                                       semanas,
-                                      type = grafos.LINE_CHART, multiline=True)
+                                      type = grafos.LINE_CHART, multiline=True, 
+                                      thickness=3, units = ['semana', 'mm'])
         return render_to_response('clima/clima.html',
                                   {'tiempos': semanas,
                                   'filas': filas, 
@@ -185,7 +189,8 @@ def ajax_temperatura(request):
                                   'Temperatura max y minima año %s' % params['ano'], 
                                   semanas,
                                   type = grafos.LINE_CHART, 
-                                  multiline=True, return_json=True)
+                                  multiline=True, return_json=True, 
+                                  thickness=3, units=['semana', 'C'])
 
 def ajax_humedad(request):
     filas = []
@@ -204,7 +209,8 @@ def ajax_humedad(request):
                                   'Humedad Promedio', 
                                   [mes[1] for mes in CICLO_MES],
                                   return_json=True,
-                                  type = grafos.LINE_CHART, multiline=True, size=(650, 300))
+                                  type = grafos.LINE_CHART, multiline=True, size=(650, 300),
+                                  thickness=3, units=['meses', 'g/m3'])
 
 def ajax_precipitacion(request):
     #se hace un FIX al params para que soporte ano y no fecha
@@ -231,4 +237,5 @@ def ajax_precipitacion(request):
                                   'Precipitación promedio',
                                   semanas,
                                   type = grafos.LINE_CHART, 
-                                  multiline=True, return_json=True)
+                                  multiline=True, return_json=True, 
+                                  thickness=3, units=['semana', 'mm'])
