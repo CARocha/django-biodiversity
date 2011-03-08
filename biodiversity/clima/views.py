@@ -189,15 +189,9 @@ def ajax_temperatura(request):
                                   'Temperatura max y minima en las semanas del año %s' % params['ano'], 
                                   semanas,
                                   type = grafos.LINE_CHART, 
-<<<<<<< HEAD
                                   multiline=True, return_json=True, 
                                   thickness=3, units=['semana', 'C'])
-=======
-                                 # size = (800,400),
                                  
-                                  multiline=True, return_json=True)
->>>>>>> 9c0aeb01ccceb8684b7b9a948a2e4383c6fb6261
-
 def ajax_humedad(request):
     filas = []
     valores = []
