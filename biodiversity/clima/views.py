@@ -8,7 +8,6 @@ from django.db.models import Avg
 from diversity.decorators import session_required
 from django.template.defaultfilters import slugify
 from diversity.forms import DiversityForm
-from biodiversity.utils import MESES 
 from biodiversity import grafos 
 
 def list_parse(s):

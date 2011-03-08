@@ -5,9 +5,9 @@ import datetime
 
 CICLO_CHOICES=[(numero, numero) for numero in range(datetime.date.today().year, 2000, -1)]
 CICLO_SEMANA=[(numero ,("semana-%d" % numero)) for numero in range (1, 53)]
-CICLO_MES=((1,'Enero'),(2,'Febrero'),(3,'Marzo'),(4,'Abril'),(5,'Mayo'),
-           (6,'Junio'),(7,'Julio'),(8,'Agosto'),(9,'Septiembre'),(10,'Octubre'),
-           (11,'Noviembre'),(12,'Diciembre'))
+CICLO_MES=((1,'Ene'),(2,'Feb'),(3,'Mar'),(4,'Abr'),(5,'May'),
+           (6,'Jun'),(7,'Jul'),(8,'Ago'),(9,'Sep'),(10,'Oct'),
+           (11,'Nov'),(12,'Dic'))
 
 class Climas(models.Model):
     nombre = models.CharField(max_length=200, help_text="Introduzca un titulo para estos climas ejem: climas para el mes de Enero")
