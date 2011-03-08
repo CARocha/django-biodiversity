@@ -1214,7 +1214,7 @@ a .big, a:visited .big{
 			text-decoration: none;
 			border-bottom: 1px dotted #8A8F95;
 			padding: 2px;
-			padding-right: 12px; background: transparent url(http://www.alvit.de/vf/csstablegallery/link.gif) no-repeat 100% 50%;
+			padding-right: 12px; background: transparent url() no-repeat 100% 50%;
 		}
 
 		#grafo a:hover {
@@ -1223,14 +1223,14 @@ a .big, a:visited .big{
 			text-decoration: none;
 			border-bottom: 3px solid #333;
 			padding: 2px;
-			padding-right: 12px; color: #A2A2A2; background: transparent url(http://www.alvit.de/vf/csstablegallery/link.gif) no-repeat 100% 50%;
+			padding-right: 12px; color: #A2A2A2; background: transparent url() no-repeat 100% 50%;
 		}
 		
 		#grafo a:visited {
 			text-decoration: none;
 			border-bottom: 1px dotted #333;
 			text-decoration: none;
-			padding-right: 12px; color: #A2A2A2; background: transparent url(http://www.alvit.de/vf/csstablegallery/visitedLink.gif) no-repeat 100% 50%;
+			padding-right: 12px; color: #A2A2A2; background: transparent url() no-repeat 100% 50%;
 		}
 		
 		#grafo a:visited:hover {
@@ -1238,5 +1238,5 @@ a .big, a:visited .big{
 			text-decoration: none;
 			border-bottom: 3px solid #333;
 			padding: 2px;
-			padding-right: 12px; color: #A2A2A2; background: transparent url(http://www.alvit.de/vf/csstablegallery/visitedLink.gif) no-repeat 100% 50%;
+			padding-right: 12px; color: #A2A2A2; background: transparent url() no-repeat 100% 50%;
 		}
