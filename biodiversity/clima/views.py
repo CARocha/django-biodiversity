@@ -74,7 +74,7 @@ def grafohumedad(request):
                                       size=(650, 300), 
                                       thickness=3, units = ['mes', 'mm'])
    
-    dicc = {'tabla': tabla, 'url': grafo_url}
+    dicc = {'tabla': tabla, 'url': grafo_url, 'columnas': [mes[1] for mes in CICLO_MES]}
     return render_to_response('clima/grafo_humedad.html', dicc,
                              context_instance=RequestContext(request))
 

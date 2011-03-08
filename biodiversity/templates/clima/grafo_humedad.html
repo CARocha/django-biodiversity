@@ -15,7 +15,9 @@
 	<thead>
 		<tr>
 			<td></td>
-			<th scope="col">Humedad</th>
+      {%for columna in columnas%}
+      <th scope="col">{{columna}}</th>
+      {%endfor%}
 		</tr>
 	</thead>
 	<tbody>
