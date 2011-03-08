@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {%block extra_header%}
+<script type="text/javascript">
+    $(document).ready(function(){
+        var ancho1 = $('.dato_grafos1').width();
+        $('.dato_grafos2').width($('#contenido_full').width()-ancho1+10);
+        $('.dato_grafos1').width(ancho1);
+    });
+</script>
 {% endblock %}
 {% block menu %}  
 {% if request.session.activa%}
@@ -11,61 +18,61 @@
 {% block contenido %}
 <br>
 <div id="encabezado_contenido">
-{% if tipo == 'precipitacion'%}
-DATOS DE PRECIPITACION
-{%endif%}
-{% if tipo == 'temperatura'%}
-DATOS DE TEMPERATURA
-{%endif%}
+    {% if tipo == 'precipitacion'%}
+    DATOS DE PRECIPITACION
+    {%endif%}
+    {% if tipo == 'temperatura'%}
+    DATOS DE TEMPERATURA
+    {%endif%}
 </div>
 <div id="contenido_full">
-        <div class="controles">
-            <a href="/clima/clima/temperatura" class="state_selected" >Temperatura</a>
-            <a href="/clima/clima/precipitacion">Precipitación</a>
-            <a href="/clima/humedad/">Humedad</a>
-        </div>
-        <br>
-<div>{{titulo}}</div>
-<div class="dato_grafos1">
-    <table class="grafo">
-        <thead>
-            <tr>
-                <th>Semanas</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for fila in filas %}
-            <tr>
-                <td>{{fila.leyenda}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-<div class="dato_grafos2">
-    <table class="grafo">
-        <thead>
-            <tr>
-                {%for tiempo in tiempos%}
-                <th scope="col">{{tiempo}}</th>
+    <div class="controles">
+        <a href="/clima/clima/temperatura" class="state_selected" >Temperatura</a>
+        <a href="/clima/clima/precipitacion">Precipitación</a>
+        <a href="/clima/humedad/">Humedad</a>
+    </div>
+    <br>
+    <div>{{titulo}}</div>
+    <div class="dato_grafos1">
+        <table class="grafo">
+            <thead>
+                <tr>
+                    <th>Semanas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in filas %}
+                <tr class="{% cycle  '' 'odd' %}">
+                    <td>{{fila.leyenda}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="dato_grafos2">
+        <table class="grafo">
+            <thead>
+                <tr>
+                    {%for tiempo in tiempos%}
+                    <th scope="col">{{tiempo}}</th>
+                    {%endfor%}
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in filas%}
+                <tr class="{% cycle  '' 'odd' %}">
+                    {%for valor in fila.valores%}
+                    {%if valor%}
+                    <td>{{valor}}</td>
+                    {%else%}
+                    <td>0</td>
+                    {%endif%}
+                    {%endfor%}
+                </tr>
                 {%endfor%}
-            </tr>
-        </thead>
-        <tbody>
-            {% for fila in filas%}
-            <tr class="{% cycle  '' 'odd' %}">
-                {%for valor in fila.valores%}
-                {%if valor%}
-                <td>{{valor}}</td>
-                {%else%}
-                <td>0</td>
-                {%endif%}
-                {%endfor%}
-            </tr>
-            {%endfor%}
-        </tbody>
-    </table>
-</div>
-<img src="{{url}}"/>
+            </tbody>
+        </table>
+    </div>
+    <img src="{{url}}"/>
 </div>
 {% endblock %}
