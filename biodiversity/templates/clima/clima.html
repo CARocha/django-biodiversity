@@ -20,8 +20,8 @@ DATOS DE TEMPERATURA
 </div>
 <div id="contenido_full">
         <div class="controles">
-            <a href="/clima/clima/temperatura" class="state_selected" >Temperatura</a>
-            <a href="/clima/clima/precipitacion">Precipitación</a>
+            <a href="/clima/clima/temperatura" {% if tipo == 'temperatura'%}class="state_selected"{%endif%} >Temperatura</a>
+            <a href="/clima/clima/precipitacion" {% if tipo == 'precipitacion'%}class="state_selected"{%endif%}>Precipitación</a>
             <a href="/clima/humedad/">Humedad</a>
         </div>
         <br>
