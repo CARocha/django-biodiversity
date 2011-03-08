@@ -943,7 +943,7 @@ a .big, a:visited .big{
 
 }
 
-.controles a:hover{
+.controles a:hover, .controles .state_selected{
     background:#b2d3cd;
     border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 20px 20px 20px 20px;

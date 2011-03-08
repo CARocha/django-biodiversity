@@ -2,20 +2,25 @@
 {%block extra_header%}
 <script type="text/javascript" src="/files/js/jquery.nivo.slider.pack.js"></script>
 <script type='text/javascript'>
-  function cargar_grafo(titulo){
-    if(titulo=='humedad' || titulo=='temperatura' || titulo == 'precipitacion'){
-      $.getJSON('/clima/ajax/' + titulo + '/', function(data){
-          $("#grafico").html('');
-          $("#grafico").html("<img src='" + data.url +"'/>");
-          });
-    }else if(titulo=='productor' || titulo=='consumidor'){
-      $.getJSON('/precio/ajax/' + titulo + '/', function(data){
-          $("#grafico").html('');
-          $("#grafico").html("<img src='" + data.url +"'/>");
-          });
-    
-    }
-  }
+  $(document).ready(function(){
+    $('.controles a').click(function (){
+        var titulo = $(this).attr('id');
+        if(titulo=='humedad' || titulo=='temperatura' || titulo == 'precipitacion'){
+            $.getJSON('/clima/ajax/' + titulo + '/', function(data){
+                $("#grafico").html('');
+                $("#grafico").html("<img src='" + data.url +"'/>");
+            });
+        }else if(titulo=='productor' || titulo=='consumidor'){
+            $.getJSON('/precio/ajax/' + titulo + '/', function(data){
+                $("#grafico").html('');
+                $("#grafico").html("<img src='" + data.url +"'/>");
+            });    
+        }
+        $('.state_selected').removeClass('state_selected');
+        $(this).addClass('state_selected');        
+        return false;
+    });
+  });  
 </script>
 {%endblock%}
 {% block contenido %}
@@ -76,11 +81,11 @@
     <p class="graphs">GR&Aacute;FICOS</p>
     <div class="graficos">
         <div class="controles">
-            <a href="#" onclick="cargar_grafo('consumidor');return false;">Precios al consumidor </a>
-            <a href="#" onclick="cargar_grafo('productor');return false;">Precios al productor</a>
-            <a href="#" onclick="cargar_grafo('temperatura');return false;">Temperatura promedio</a>
-            <a href="#" onclick="cargar_grafo('precipitacion');return false;">Precipitación promedio</a>
-            <a href="#" onclick="cargar_grafo('humedad');return false;">Humedad Promedio</a>
+            <a href="#" id="consumidor" class="state_selected">Precios al consumidor </a>
+            <a href="#" id="productor">Precios al productor</a>
+            <a href="#" id="temperatura">Temperatura promedio</a>
+            <a href="#" id="precipitacion">Precipitación promedio</a>
+            <a href="#" id="humedad">Humedad Promedio</a>
         </div>
         <div class="clean"></div>
         <div id="grafico" class="grafico">
