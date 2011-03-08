@@ -943,7 +943,7 @@ a .big, a:visited .big{
 
 }
 
-.controles a:hover{
+.controles a:hover, .controles .state_selected{
     background:#b2d3cd;
     border-radius: 5px 5px 5px 5px;
     -webkit-border-radius: 20px 20px 20px 20px;
@@ -1140,3 +1140,103 @@ a .big, a:visited .big{
 .socio_link:hover{
     text-decoration: underline;
 }
+
+/* para tablas */
+
+ 
+ 		#grafo {
+			font: 11px verdana,verdana, arial;
+			margin: 0;
+			padding: 0;
+			border-collapse: collapse;
+			text-align: left;
+			color: #333;
+			line-height: 19px;
+		}
+		
+		#grafo caption {
+			font-size: 14px;
+			font-weight: bold;
+			margin-bottom: 20px;
+			text-align: left;
+			text-transform: uppercase;
+		}
+		
+		#grafo td {
+			margin: 0;
+			padding: 20px 10px;
+			border: 1px dotted #BDBDBD;
+		}
+		
+		
+		#grafo th {
+			font-weight: normal;
+			text-transform: uppercase;
+		}
+		
+		#grafo thead tr th {
+			background-color: #575757;
+			padding:  20px 10px;
+			color: #fff;
+			font-weight: bold;
+			border-right: 1px solid #333;
+			text-transform: uppercase;
+			text-align:center;
+		}
+		
+		#grafo tfoot tr th, #grafo tfoot tr td {
+			background-color: transparent;
+			padding:  20px 10px;
+			color: #ccc;
+			border-top: 1px solid #ccc;
+		}
+		
+		#grafo tbody tr th {
+			padding: 20px 10px;
+			border-bottom: 1px dotted #BDBDBD;
+            border-left: 1px dotted #BDBDBD;
+		}
+		
+		#grafo tr { 
+			background-color: #FBFDF6;
+		}
+		#grafo tr.odd {
+			background-color: #EDF7DC;
+		}
+		
+
+
+
+		
+		#grafo a {
+			color: #608117;
+			background-image: none;
+			text-decoration: none;
+			border-bottom: 1px dotted #8A8F95;
+			padding: 2px;
+			padding-right: 12px; background: transparent url(http://www.alvit.de/vf/csstablegallery/link.gif) no-repeat 100% 50%;
+		}
+
+		#grafo a:hover {
+			color: #BBC4CD;
+			background-image: none;
+			text-decoration: none;
+			border-bottom: 3px solid #333;
+			padding: 2px;
+			padding-right: 12px; color: #A2A2A2; background: transparent url(http://www.alvit.de/vf/csstablegallery/link.gif) no-repeat 100% 50%;
+		}
+		
+		#grafo a:visited {
+			text-decoration: none;
+			border-bottom: 1px dotted #333;
+			text-decoration: none;
+			padding-right: 12px; color: #A2A2A2; background: transparent url(http://www.alvit.de/vf/csstablegallery/visitedLink.gif) no-repeat 100% 50%;
+		}
+		
+		#grafo a:visited:hover {
+			background-image: none;
+			text-decoration: none;
+			border-bottom: 3px solid #333;
+			padding: 2px;
+			padding-right: 12px; color: #A2A2A2; background: transparent url(http://www.alvit.de/vf/csstablegallery/visitedLink.gif) no-repeat 100% 50%;
+		}

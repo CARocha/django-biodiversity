@@ -71,8 +71,13 @@ def grafo(request, tipo):
                 params['fecha__month'] = mes
                 if normalizar==False:
                     precio = models[tipo].objects.filter(**params).aggregate(valor = Avg('precio_%s' % tipo))['valor']
+                    try:
+                        moneda = models[tipo].objects.filter(**params)[0].moneda.nombre 
+                    except:
+                        pass
                 else:
                     #sacamos un promedio de lo internacional a manopla
+                    moneda = 'Dollar'
                     total = 0
                     for objeto in  models[tipo].objects.filter(**params):
                         total += objeto.to_int()[0]
@@ -88,7 +93,8 @@ def grafo(request, tipo):
         grafo_url = grafos.make_graph(filas_grafo, leyendas,  
                                       'Precio al %s' % tipo,
                                       MESES,
-                                      type = grafos.LINE_CHART, multiline=True)
+                                      type = grafos.LINE_CHART, multiline=True,
+                                      units=['mes', moneda], thickness=3)
         return render_to_response('precio/%s.html' % tipo,
                                   {'tiempos': MESES,
                                    'url': grafo_url,
@@ -123,6 +129,7 @@ def grafos_ajax(request, tipo):
         return grafos.make_graph(filas_grafo, leyendas,  
                                       'Precio al %s' % tipo,
                                       MESES, return_json=True,
-                                      type = grafos.LINE_CHART, multiline=True)
+                                      type = grafos.LINE_CHART, multiline=True,
+                                      units=['mes', '$'], thickness=3)
     else:
         raise Http404

@@ -19,7 +19,7 @@ COLORS = ['FFBC13','22A410','E6EC23','2B2133','BD0915','3D43BD']
 
 def make_graph(data, legends, message=None, 
                axis_labels=None, steps=4, return_json = False,
-               type=PieChart2D, size=(920, 300), multiline=False):
+               type=PieChart2D, size=(920, 300), multiline=False, **kwargs):
 
     if (type in pie_types):
         graph = _pie_graph(data, legends, size, type)
@@ -28,7 +28,7 @@ def make_graph(data, legends, message=None,
                                steps, type, multiline)
     elif(type is line_types):
         graph = _line_strip_graph(data, legends, axis_labels,
-                                       size, steps, type, multiline)
+                                       size, steps, type, multiline, **kwargs)
     else:
         raise Exception('shit broke')
     try:
@@ -132,7 +132,7 @@ def _bar_graph(data, legends, axis_labels, size, steps,
     return graph
 
 def _line_strip_graph(data, legends, axis_labels, size, steps, 
-                           type=SimpleLineChart, multiline=False):
+                           type=SimpleLineChart, multiline=False, **kwargs):
     if multiline:
         max_values = []
         min_values = [] 
@@ -176,7 +176,10 @@ def _line_strip_graph(data, legends, axis_labels, size, steps,
         #error por que los range no soportan decimales
         left_axis = range(0, 2)
     left_axis[0]=''
-    chart.set_axis_labels(Axis.LEFT, left_axis)
+
+    chart.set_axis_range(Axis.LEFT, min_y, tope)
+    if 'units' in kwargs:
+        chart.set_axis_labels(Axis.LEFT, kwargs['units'])
     chart.set_grid(0, 25, 4, 4,)
     chart.chls=4|4
     #chart.fill_linear_stripes(Chart.CHART, 0, 'FFFFEF', 0.2, 'FFFFFF', 0.2)
@@ -186,6 +189,13 @@ def _line_strip_graph(data, legends, axis_labels, size, steps,
         chart.set_axis_labels(Axis.BOTTOM, axis_labels)
     chart.set_legend(legends)
     chart.set_legend_position('b')
+
+    if 'thickness' in kwargs:
+        if multiline:
+            for i in range(len(data)):
+                chart.set_line_style(index = i, thickness=kwargs['thickness'])
+        else:
+            chart.set_line_style(index=0, thickness=kwargs['thickness'])
 
     return chart
 
