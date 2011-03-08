@@ -209,7 +209,7 @@ def ajax_humedad(request):
                                   'Humedad Promedio', 
                                   [mes[1] for mes in CICLO_MES],
                                   return_json=True,
-                                  type = grafos.LINE_CHART, multiline=True, size=(650, 300),
+                                  type = grafos.LINE_CHART, multiline=True,
                                   thickness=3, units=['meses', 'g/m3'])
 
 def ajax_precipitacion(request):
