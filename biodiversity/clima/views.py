@@ -118,7 +118,8 @@ def clima(request, tipo):
                                   {'tiempos': semanas,
                                   'filas': filas, 
                                   'url': grafo_url,
-                                  'titulo': 'Temperaturas máximas y mínimas(promedio)'},
+                                  'titulo': 'Temperaturas máximas y mínimas(promedio)',
+                                  'tipo':tipo},
                                   context_instance = RequestContext(request))
     elif tipo == 'precipitacion':
         params = _get_params(request)
@@ -155,7 +156,8 @@ def clima(request, tipo):
                                   {'tiempos': semanas,
                                   'filas': filas, 
                                   'url': grafo_url,
-                                  'titulo': 'Precipitación Promedio'},
+                                  'titulo': 'Precipitación Promedio',
+                                  'tipo':tipo},
                                   context_instance = RequestContext(request))
     else:
         raise Http404

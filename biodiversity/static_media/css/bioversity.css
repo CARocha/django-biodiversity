@@ -1143,7 +1143,6 @@ a .big, a:visited .big{
 
 /* para tablas */
 
-
 .grafo {
     font: 11px verdana,verdana, arial;
     margin: 0;
@@ -1235,3 +1234,4 @@ a .big, a:visited .big{
 .dato_grafos2{
     float: left; display: inline; overflow-x: auto;
 }
+

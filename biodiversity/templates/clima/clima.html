@@ -9,6 +9,19 @@
 {% endblock %}
 
 {% block contenido %}
+<br>
+<div id="encabezado_contenido">
+{% if tipo == 'precipitacion'%}
+DATOS DE PRECIPITACION
+{%endif%}
+</div>
+<div id="contenido_full">
+        <div class="controles">
+            <a href="/clima/clima/temperatura" class="state_selected" >Temperatura</a>
+            <a href="/clima/clima/precipitacion">Precipitación</a>
+            <a href="/clima/humedad/">Humedad</a>
+        </div>
+        <br>
 <div>{{titulo}}</div>
 <div class="dato_grafos1">
     <table class="grafo">
@@ -51,4 +64,5 @@
     </table>
 </div>
 <img src="{{url}}"/>
+</div>
 {% endblock %}
