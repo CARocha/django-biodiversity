@@ -9,31 +9,46 @@
 {% endblock %}
 
 {% block contenido %}
-
-<table id="grafo">
-  <caption>{{titulo}}</caption>
-  <thead>
-    <tr>
-      <th>Semanas</th>
-      {%for tiempo in tiempos%}
-      <th scope="col">{{tiempo}}</th>
-      {%endfor%}
-    </tr>
-  </thead>
-  <tbody>
-    {% for fila in filas%}
-    <tr class="{%cycle  '' 'odd'%}">
-      <th scope="row">{{fila.leyenda}}</th>
-      {%for valor in fila.valores%}
-      {%if valor%}
-      <td>{{valor}}</td>
-      {%else%}
-      <td>0</td>
-      {%endif%}
-      {%endfor%}
-    </tr>
-    {%endfor%}
-  </tbody>
-</table>
+<div>{{titulo}}</div>
+<div class="dato_grafos1">
+    <table class="grafo">
+        <thead>
+            <tr>
+                <th>Semanas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in filas %}
+            <tr>
+                <td>{{fila.leyenda}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="dato_grafos2">
+    <table class="grafo">
+        <thead>
+            <tr>
+                {%for tiempo in tiempos%}
+                <th scope="col">{{tiempo}}</th>
+                {%endfor%}
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in filas%}
+            <tr class="{%cycle  '' 'odd'%}">
+                {%for valor in fila.valores%}
+                {%if valor%}
+                <td>{{valor}}</td>
+                {%else%}
+                <td>0</td>
+                {%endif%}
+                {%endfor%}
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
 <img src="{{url}}"/>
 {% endblock %}
