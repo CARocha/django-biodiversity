@@ -18,7 +18,7 @@ LINE_CHART = line_types
 
 def make_graph(data, legends, message=None, 
                axis_labels=None, steps=4, return_json = False,
-               type=PieChart2D, size=(950, 300), multiline=False):
+               type=PieChart2D, size=(920, 300), multiline=False):
 
     if (type in pie_types):
         graph = _pie_graph(data, legends, size, type)
@@ -177,6 +177,9 @@ def _line_strip_graph(data, legends, axis_labels, size, steps,
     left_axis[0]=''
     chart.set_axis_labels(Axis.LEFT, left_axis)
     chart.set_colours([ 'FFBC13','22A410','E6EC23','2B2133','BD0915','3D43BD'])
+    chart.set_grid(0, 25, 4, 4,)
+    chart.chls=4|4
+    #chart.fill_linear_stripes(Chart.CHART, 0, 'FFFFEF', 0.2, 'FFFFFF', 0.2)
 
     if axis_labels:
         chart.set_axis_labels(Axis.BOTTOM, axis_labels)
