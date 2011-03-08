@@ -10,24 +10,33 @@
 {% endblock %}
 
 {% block contenido %}
+<br>
+<div id="encabezado_contenido">DATOS DE HUMEDAD</div>
+<div id="contenido_full">
+        <div class="controles">
+            <a href="/clima/clima/temperatura"  >Temperatura</a>
+            <a href="/clima/clima/precipitacion">Precipitación</a>
+            <a href="/clima/humedad/"class="state_selected">Humedad</a>
+        </div>
+        <br>
 <table id="grafo">
-	<caption>Húmedad</caption>
 	<thead>
 		<tr>
 			<td></td>
-			<th scope="col">Humedad</th>
+			<th>Humedad</th>
 		</tr>
 	</thead>
 	<tbody>
       {%for fila in tabla%}	
-    <tr>            
+    <tr class="{%cycle  '' 'odd'%}">            
          <th scope="row">{{fila.leyenda}}</th>
          {%for valor in fila.valores%}
-         <td>{{valor}}</td>
+         <td >{{valor}}</td>
          {%endfor%}
     </tr>
     {%endfor%}
    </tbody>
 </table>
 <img src="{{url}}"/>
+</div>
 {% endblock %}

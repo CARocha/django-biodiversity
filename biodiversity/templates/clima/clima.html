@@ -9,11 +9,12 @@
 {% endblock %}
 
 {% block contenido %}
+
 <table id="grafo">
   <caption>{{titulo}}</caption>
   <thead>
     <tr>
-      <td></td>
+      <th>Semanas</th>
       {%for tiempo in tiempos%}
       <th scope="col">{{tiempo}}</th>
       {%endfor%}
@@ -21,7 +22,7 @@
   </thead>
   <tbody>
     {% for fila in filas%}
-    <tr>
+    <tr class="{%cycle  '' 'odd'%}">
       <th scope="row">{{fila.leyenda}}</th>
       {%for valor in fila.valores%}
       {%if valor%}
