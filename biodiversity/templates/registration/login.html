@@ -6,10 +6,11 @@
     {% endif %}
     <form method="post" action="{% url django.contrib.auth.views.login %}" class="registro">
     {% csrf_token %}
-        <table>
-            {{form.as_table}}
-        </table>
-        <br>
+        <div id="login-form">
+            <label>{{form.username.label}}</label> {{form.username}}
+            <label>{{form.password.label}}</label> {{form.password}}
+        </div>
+        <br><br>
         <input name="submit" type="submit" value="Iniciar Sesi&oacute;n">
         <input type="hidden" name="next" value="{{ next }}" />
     </form>

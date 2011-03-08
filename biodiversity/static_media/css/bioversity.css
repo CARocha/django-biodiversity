@@ -278,6 +278,23 @@ a{
     margin-right:3px;
 }
 
+#login-form {
+    font-size:12px;
+}
+
+#login-form #id_username, #login-form #id_password{
+    float:left;
+    margin-right:10px;
+    height:15px;
+    font-size:12px;
+    border: #333 solid 1px;
+    background:#fff;
+}
+#login-form label{
+    float:left;
+    margin-right:5px;
+}
+
 /*agregado por byron para las noticias*/
 
 .noticia{
@@ -900,6 +917,39 @@ a .big, a:visited .big{
     float: left;
     width: 100%;
 }
+
+#grafico{
+    padding:10px;
+}
+
+.controles{
+        background: url(/files/img/fondotitulografos.png) repeat-x;
+        height:32px;
+}
+
+.controles a{
+    font-size:13px;
+    color:#fff;
+    display:block;
+    float:left;
+    margin-right:10px;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:8px;
+    padding-right:8px;
+    margin-left:5px;
+    margin-top:4px;
+    font-weight:bold;
+}
+
+.controles a:hover{
+    background:#b2d3cd;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 20px 20px 20px 20px;
+    -moz-border-radius: 5px 5px 5px 5px;
+
+}
+
 .selector{
     background: url(/files/img/selector.png) no-repeat;
     background-position: 0px -58px;
@@ -918,7 +968,6 @@ a .big, a:visited .big{
 .graficos .grafico{
     float: left;
     width: 100%;
-    margin-left: 8%;
 }
 #slider {
     min-width: 230px;
@@ -1081,4 +1130,10 @@ a .big, a:visited .big{
     padding-left:13px;
     background:none;
     margin-top:35px;
+}
+.socio_link{
+    color: #fff;    
+}
+.socio_link:hover{
+    text-decoration: underline;
 }

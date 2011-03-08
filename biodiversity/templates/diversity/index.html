@@ -13,6 +13,7 @@
           $("#grafico").html('');
           $("#grafico").html("<img src='" + data.url +"'/>");
           });
+    
     }
   }
 </script>
@@ -22,7 +23,7 @@
     <div class="left">
         <div class="banner_content">
         {% for texto in inicio %}
-            <span style="font-weight: bold;">{{texto.titulo}}</span> <br>{{texto.texto|safe}}
+            <span style="font-weight: bold;">{{texto.titulo}}</span> <br>{{texto.texto|truncatewords:111}}
         {% endfor %}
         </div>
         <a class="leer-mas" href="/bioversity/textos/" rel="facebox"></a><a class="mapas" href="/bioversity/mapa/"></a>
@@ -84,8 +85,9 @@
         <div class="clean"></div>
         <div id="grafico" class="grafico">
             <img src="/files/img/grafico-muestra.png" alt="grafico muestra">
+            
         </div>
-        <div class="clean"></div>
+        <div class="clean"></div><br>
     </div>
 </div>
 <script type="text/javascript">

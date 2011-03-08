@@ -186,11 +186,17 @@ def ajax_temperatura(request):
             valores_min.append(0)
 
     return  grafos.make_graph([valores_max, valores_min], ['Máxima', 'Minima'], 
-                                  'Temperatura max y minima año %s' % params['ano'], 
+                                  'Temperatura max y minima en las semanas del año %s' % params['ano'], 
                                   semanas,
                                   type = grafos.LINE_CHART, 
+<<<<<<< HEAD
                                   multiline=True, return_json=True, 
                                   thickness=3, units=['semana', 'C'])
+=======
+                                 # size = (800,400),
+                                 
+                                  multiline=True, return_json=True)
+>>>>>>> 9c0aeb01ccceb8684b7b9a948a2e4383c6fb6261
 
 def ajax_humedad(request):
     filas = []
@@ -220,7 +226,7 @@ def ajax_precipitacion(request):
     filas_grafo = []
     leyendas = []
     for zona in Lugar.objects.all():
-        nombre_zona = zona.nombre
+        nombre_zona = zona.nombre +" - "+ zona.pais.nombre
         valores = []
         for semana in semanas:
             params['semana'] = semana
@@ -234,7 +240,7 @@ def ajax_precipitacion(request):
         filas_grafo.append(valores)
         leyendas.append(nombre_zona)
     return grafos.make_graph(filas_grafo, leyendas,  
-                                  'Precipitación promedio',
+                                  'Precipitación promedio en las semanas del año %s' % params['ano'],
                                   semanas,
                                   type = grafos.LINE_CHART, 
                                   multiline=True, return_json=True, 

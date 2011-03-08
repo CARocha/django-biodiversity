@@ -49,8 +49,8 @@
 
 #facebox .body {
   padding: 10px;
-  background: #fff;
-  width: 370px;
+  background: #fff url(/files/img/fondopopup.png) repeat-x;
+  width: 600px;
 }
 
 #facebox .loading {
