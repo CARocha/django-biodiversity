@@ -15,7 +15,7 @@ PIE_CHART_3D, PIE_CHART_2D = pie_types
 BAR_CHART_H, BAR_CHART_V, GROUPED_BAR_CHART_H, GROUPED_BAR_CHART_V = bar_types
 LINE_CHART = line_types
 
-COLORS = ['FFBC13','22A410','E6EC23','2B2133','BD0915','3D43BD']
+COLORS = ['FFBC13','22A410','E6EC23','2B2133','BD0915','3D43BD','003366','0197fd','d40000','6600cc','c17d11','3465a4','fcaf3e','75507b','8ae234']
 
 def make_graph(data, legends, message=None, 
                axis_labels=None, steps=4, return_json = False,
