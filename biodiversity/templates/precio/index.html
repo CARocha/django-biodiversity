@@ -4,25 +4,42 @@
 <script src="{{MEDIA_URL}}js/jquery.validate.js" type="text/javascript"></script>
 <script src="{{MEDIA_URL}}js/jquery.metadata.js" type="text/javascript"></script>
 <script type="text/javascript">
-$.metadata.setType("attr", "validate");
+    $.metadata.setType("attr", "validate");
 
-$(document).ready(function() {
-    $("#form1").validate(); 
-});
+    $(document).ready(function() {
+        $("#form1").validate();
+        $("input[name='lugar']").change(function(){checkSelectos()});
+    });
+
+    function checkSelectos(){
+        var cantidad = 0;
+        $("input[name='lugar']").each(function(item){
+            if($(this).attr('checked')){
+                cantidad += 1;
+            }
+        });
+        if(cantidad>1){
+            $('#id_unidad_1').attr('checked', true);
+            $('#id_unidad_0').attr('disabled', true);
+        }else{
+            $('#id_unidad_0').attr('disabled', false);
+        }
+    }
 </script>
+<style type="text/css">
+    .block { display: block;
+    }
+    form.cmxform label.error {
+        display: none;
+        color: red;
+    }
+</style>
 {% endblock %}
 {% block menu %}  
 
 {% endblock %}
 
 {% block contenido %}
-
-<style type="text/css">
-.block { display: block;
-       }
-form.cmxform label.error { display: none;
-                           color: red; }	
-</style>
 
 {% if request.session.activa%}
 <a href="/precio/grafo/productor/">Precio al productor</a>
@@ -33,46 +50,44 @@ form.cmxform label.error { display: none;
 <br>
 <br>
 <br>
-
 <div id="encabezado_contenido">PRECIOS DE PRODUCTOS</div>
 <div id="contenido_full">
     <p>Tempor nunc auctor, eu porta aliquam placerat a integer montes ridiculus? Sit in porttitor, nisi? A elementum! Pellentesque turpis ac odio magnis vel mauris. Pulvinar. Facilisis magna parturient, hac integer ac amet aenean! Enim sed, urna penatibus a mauris nascetur dis ridiculus! Enim pulvinar magna! Ac a sed mid? Sit cum, ultricies ut, nec? Magna cursus duis elementum et natoque quis placerat, adipiscing dis. Mus in duis! Mid integer tincidunt mid tristique, mus sociis placerat scelerisque! Aliquet odio turpis, ac, aliquet integer nisi montes</p>
     <div class="clean"></div>
     <div id="formarea">
         <form class="cmxform" id="form1" action"." method="POST">
-            {% csrf_token %}
-            <div id="form-left">
+              {% csrf_token %}
+              <div id="form-left">
                 <div class="form_label">Año</div>
                 <div class="form_widget">{{form.fecha}}</div>
                 <div class="form_label">Producto</div>
                 <div class="form_widget" name="producto" validate="required:true" class="required">
-                  {{form.producto}}
-                  
-                  <label for="producto" class="error">Seleccione un producto</label>
+                    {{form.producto}}
+                    <label for="producto" class="error">Seleccione un producto</label>
                 </div>
-                
+
                 <div class="clean"></div>
                 <div id="zonas">ZONAS DE CONTROL</div>
-                    {%for pais in paises%}
-                    <div class="zona-pais">
-                      <div class="zona-pais-nombre">{{pais.nombre|capfirst}}</div>
-                            {% for zona in pais.get_zonas %}
-                            <div class="checks"><input type="checkbox" id="id_lugar_{{forloop.counter}}" value="{{zona.id}}" name="lugar" validate="required:true" class="required"> <label for="id_lugar_{{forloop.counter}}">{{zona.nombre|capfirst}}</label></div>
-                            {%endfor%}
-                     <label for="lugar" class="error">Seleccione sus Zonas</label>
-                    </div>
+                {%for pais in paises%}
+                <div class="zona-pais">
+                    <div class="zona-pais-nombre">{{pais.nombre|capfirst}}</div>
+                    {% for zona in pais.get_zonas %}
+                    <div class="checks"><input type="checkbox" id="id_lugar_{{forloop.counter}}" value="{{zona.id}}" name="lugar" validate="required:true" class="required"> <label for="id_lugar_{{forloop.counter}}">{{zona.nombre|capfirst}}</label></div>
                     {%endfor%}
-                    <div class="clean"></div>
+                    <label for="lugar" class="error">Seleccione sus Zonas</label>
+                </div>
+                {%endfor%}
+                <div class="clean"></div>
             </div>
             <div id="form-right">
 
                 <div class="zona-pais" style="float:left">
-                
+
                     <div class="zona-pais-nombre">Moneda</div>
-                        <div class="checks">{{form.unidad}}</div>
-                        {{ form.unidad.errors }}
+                    <div class="checks">{{form.unidad}}</div>
+                    {{ form.unidad.errors }}
                 </div>
-                                <div id="mensajito-moneda">
+                <div id="mensajito-moneda">
                     La moneda nativa depende de cada pais o zona y solamente se aplica cuando solo se selecciona una zona de control
                 </div>
                 <div class="clean"></div>
