@@ -45,10 +45,10 @@ def _get_elementos(request, queryset, elements=25):
 
     return elementos
 
-MESES = ['Enero', 'Febrero', 'Marzo', 
-         'Abril', 'Mayo', 'Junio',
-         'Julio', 'Agosto', 'Septiembre',
-         'Octubre', 'Noviembre', 'Diciembre']
+MESES = ['Ene', 'Feb', 'Mar', 
+         'Abr', 'May', 'Jun',
+         'Jul', 'Ago', 'Sep',
+         'Oct', 'Nov', 'Dic']
 
 def get_mes(num):
     return MESES[num-1]

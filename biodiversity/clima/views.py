@@ -3,7 +3,7 @@ from models import *
 import datetime
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template import RequestContext
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.db.models import Avg
 from diversity.decorators import session_required
 from django.template.defaultfilters import slugify
@@ -39,6 +39,7 @@ def index(request):
             request.session['pais'] = form.cleaned_data['pais']
             request.session['activa'] = True
             activa = True
+            #return HttpResponseRedirect('/clima/clima/temperatura')
         else:
             activa = False
         dicc = {'form': form, 'activa': activa, 'paises': paises}
@@ -59,7 +60,7 @@ def grafohumedad(request):
     zonas = request.session['lugares']
     for zona in Lugar.objects.filter(id__in=zonas):
         valores = []
-        for numero, letras in CICLO_MES:
+        for numero, letras in CICLO_MES_AB:
             humedad = Humedad.objects.filter(mes=numero, zona = zona, ano=ano).aggregate(prom = Avg('humedad'))['prom']
             valores.append(humedad) if humedad != None else valores.append(0)
         
@@ -69,12 +70,12 @@ def grafohumedad(request):
     
     grafo_url = grafos.make_graph(filas, leyends, 
                                       'Humedad Promedio', 
-                                      [mes[1] for mes in CICLO_MES],
+                                      [mes[1] for mes in CICLO_MES_AB],
                                       type = grafos.LINE_CHART, multiline=True, 
                                       size=(650, 300), 
                                       thickness=3, units = ['mes', 'mm'])
    
-    dicc = {'tabla': tabla, 'url': grafo_url, 'columnas': [mes[1] for mes in CICLO_MES]}
+    dicc = {'tabla': tabla, 'url': grafo_url, 'columnas': [mes[1] for mes in CICLO_MES_AB]}
     return render_to_response('clima/grafo_humedad.html', dicc,
                              context_instance=RequestContext(request))
 
@@ -200,7 +201,7 @@ def ajax_humedad(request):
     leyends = []
     ano = request.session['fecha']
     for zona in Lugar.objects.all():
-        for numero, letras in CICLO_MES:
+        for numero, letras in CICLO_MES_AB:
             humedad = Humedad.objects.filter(mes=numero, zona = zona, ano=ano).aggregate(prom = Avg('humedad'))['prom']
             valores.append(humedad) if humedad != None else valores.append(0)
         
@@ -209,7 +210,7 @@ def ajax_humedad(request):
     
     return  grafos.make_graph(filas, leyends, 
                                   'Humedad Promedio', 
-                                  [mes[1] for mes in CICLO_MES],
+                                  [mes[1] for mes in CICLO_MES_AB],
                                   return_json=True,
                                   type = grafos.LINE_CHART, multiline=True,
                                   thickness=3, units=['meses', 'g/m3'])
