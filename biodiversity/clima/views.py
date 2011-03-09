@@ -38,7 +38,6 @@ def index(request):
             request.session['pais'] = form.cleaned_data['pais']
             request.session['activa'] = True
             activa = True
-            #return HttpResponseRedirect('/clima/clima/temperatura')
         else:
             activa = False
         dicc = {'form': form, 'activa': activa, 'paises': paises}
@@ -85,31 +84,41 @@ def clima(request, tipo):
         puede ser: temperatura, precipitacion.
     '''
     filas = []
+    valores = []
     if tipo == 'temperatura':
-        valores_max = []
-        valores_min = []
+        leyendas = []
         params = _get_params(request)
         params['ano'] = params['fecha__year']
         del params['fecha__year']
+        zonas = params['zona__in']
+        del params['zona__in']
 
         semanas = range(1, 53)
-        for semana in semanas:
-            params['semana'] = semana
-            #se hace un FIX al params para que soporte ano y no fecha
-            temps = Clima.objects.filter(**params).aggregate(maxima = Avg('t_max'), 
-                                                         minima = Avg('t_min'))
-            if temps['maxima']:
-                valores_max.append(temps['maxima'])
-            else:
-                valores_max.append(0)
-            if temps['minima']:
-                valores_min.append(temps['minima'])
-            else:
-                valores_min.append(0)
+        for zona in Lugar.objects.filter(id__in=zonas): 
+            valores_max = []
+            valores_min = []
+            params['zona'] = zona
+            for semana in semanas:
+                params['semana'] = semana
+                #se hace un FIX al params para que soporte ano y no fecha
+                temps = Clima.objects.filter(**params).aggregate(maxima = Avg('t_max'), 
+                                                             minima = Avg('t_min'))
+                if temps['maxima']:
+                    valores_max.append(temps['maxima'])
+                else:
+                    valores_max.append(0)
+                if temps['minima']:
+                    valores_min.append(temps['minima'])
+                else:
+                    valores_min.append(0)
 
-        filas.append(dict(leyenda = 'Máximas', valores = valores_max))
-        filas.append(dict(leyenda = 'Mínimas', valores = valores_min))
-        grafo_url = grafos.make_graph([valores_max, valores_min], ['Máxima', 'Minima'], 
+            leyendas.append('Maximas en %s' % zona.nombre) 
+            leyendas.append('Minimas en %s' % zona.nombre) 
+            valores.append([int(v) for v in valores_max])
+            valores.append([int(v) for v in valores_min])
+            filas.append(dict(leyenda = 'Maximas en %s' % zona.nombre, valores = valores_max))
+            filas.append(dict(leyenda = 'Minimas en %s' % zona.nombre, valores = valores_min))
+        grafo_url = grafos.make_graph(valores, leyendas, 
                                       'Temperatura max y minima', 
                                       semanas,
                                       type = grafos.LINE_CHART, multiline=True, 
@@ -168,26 +177,36 @@ def ajax_temperatura(request):
         puede ser: temperatura, precipitacion.
     '''
     filas = []
-    valores_max = []
-    valores_min = []
+    valores = []
     params = dict(ano=datetime.datetime.now().year) 
+    leyendas = []
 
     semanas = range(1, 53)
-    for semana in semanas:
-        params['semana'] = semana
-        #se hace un FIX al params para que soporte ano y no fecha
-        temps = Clima.objects.filter(**params).aggregate(maxima = Avg('t_max'), 
-                                                     minima = Avg('t_min'))
-        if temps['maxima']:
-            valores_max.append(temps['maxima'])
-        else:
-            valores_max.append(0)
-        if temps['minima']:
-            valores_min.append(temps['minima'])
-        else:
-            valores_min.append(0)
+    for zona in Lugar.objects.all(): 
+        valores_max = []
+        valores_min = []
+        params['zona'] = zona
 
-    return  grafos.make_graph([valores_max, valores_min], ['Máxima', 'Minima'], 
+        for semana in semanas:
+            params['semana'] = semana
+            #se hace un FIX al params para que soporte ano y no fecha
+            temps = Clima.objects.filter(**params).aggregate(maxima = Avg('t_max'), 
+                                                         minima = Avg('t_min'))
+            if temps['maxima']:
+                valores_max.append(temps['maxima'])
+            else:
+                valores_max.append(0)
+            if temps['minima']:
+                valores_min.append(temps['minima'])
+            else:
+                valores_min.append(0)
+
+        leyendas.append('Maximas en %s' % zona.nombre) 
+        leyendas.append('Minimas en %s' % zona.nombre) 
+        valores.append([int(v) for v in valores_max])
+        valores.append([int(v) for v in valores_min])
+
+    return  grafos.make_graph(valores, leyendas, 
                                   'Temperatura max y minima en las semanas del año %s' % params['ano'], 
                                   semanas,
                                   type = grafos.LINE_CHART, 
