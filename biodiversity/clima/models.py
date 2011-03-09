@@ -9,6 +9,10 @@ CICLO_MES=((1,'Ene'),(2,'Feb'),(3,'Mar'),(4,'Abr'),(5,'May'),
            (6,'Jun'),(7,'Jul'),(8,'Ago'),(9,'Sep'),(10,'Oct'),
            (11,'Nov'),(12,'Dic'))
 
+CICLO_MES_AB=((1,'Ene'),(2,'Feb'),(3,'Mar'),(4,'Abr'),(5,'May'),
+           (6,'Jun'),(7,'Jul'),(8,'Ago'),(9,'Sep'),(10,'Oct'),
+           (11,'Nov'),(12,'Dic'))
+
 class Climas(models.Model):
     nombre = models.CharField(max_length=200, help_text="Introduzca un titulo para estos climas ejem: climas para el mes de Enero")
     
