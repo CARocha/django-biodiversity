@@ -1,14 +1,48 @@
+{% extends "base.html" %}
+{% block extra_header %}
+<style type="text/css">
+    label{
+        font-size: 13px;
+        font-weight: normal;
+        font-family: Ubuntu, sans-serif;
+        float:left;
+        margin-right:5px;
+    }
+    .errorlist{
+        color: red;
+        font-size: 11px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    input[type='text'], input[type='password']{
+        border: 1px #333 solid !important;
+        height: 20px !important;
+        padding: 2px !important;
+        width: 180px !important;
+        margin-top: 5px !important;
+    }
+    input[type='text']:focus, input[type='password']:focus{
+        background-color: #fffad2 !important;
+    }
+</style>
+{% endblock %}
 {% block contenido %}
-<div class="ajustado">    
+<br>
+<div id="encabezado_contenido">
+    Iniciar Sesi&oacute;n
+</div>
+<div id="contenido_full">
     {{flash.messages}}
     {% if form.errors %}
     <p class="warning">Por favor, corija los siguentes erores:</p>
     {% endif %}
     <form method="post" action="{% url django.contrib.auth.views.login %}" class="registro">
-    {% csrf_token %}
+        {% csrf_token %}
         <div id="login-form">
-            <label>{{form.username.label}}</label> {{form.username}}
-            <label>{{form.password.label}}</label> {{form.password}}
+            <table>
+                {{form.as_table}}
+            </table>
         </div>
         <br><br>
         <input name="submit" type="submit" value="Iniciar Sesi&oacute;n">
@@ -16,4 +50,3 @@
     </form>
 </div>
 {% endblock %}
-
