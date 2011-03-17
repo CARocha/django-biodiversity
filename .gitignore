@@ -3,24 +3,20 @@
 *.py~
 local_settings.py
 *.sqlite3
-<<<<<<< HEAD
 *.db
 nbproject/
 *.db
 *.swp
 /media/profile/*.*
-biodiversity/static_media/noticiasfotos/*.*
-=======
+biodiversity/static_media/noticiasfotos/
 *.swp
 /media/profile/*.*
->>>>>>> 715a51ccc5dcdef31b5ecc4b59ccc83930c55ceb
 *.pdf
 *.xls
 *.doc
 *.odt
 *.svn/*.*
 .DS_Store
-<<<<<<< HEAD
 settings_local.py
 *.tar.bz
 *.tar
