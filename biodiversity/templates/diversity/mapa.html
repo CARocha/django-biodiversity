@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {%block extra_header%}
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<!--<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js"></script>-->
-<!--<script type="text/javascript" src="/files/js/markerclusterer.js"></script>-->
 <script type="text/javascript" src="/files/js/infobox.js"></script>
 <style type="text/css">
     #map_canvas{
@@ -47,7 +45,29 @@
         
         $('#lista-actores').hide();
     });
-    
+
+    $(document).ready(function(){
+        $("#disparador").click(function() {
+            $('#lista-actores').fadeIn();
+            return false;
+        });
+        $("#cerrar").click(function() {
+            $('#lista-actores').fadeOut();
+            return false;
+        });
+        $(".actores").click(function() {
+            $('#actores-table').hide();
+            var id = $(this).attr('id');
+            $('#actor-table'+id).fadeIn();
+            return false;
+        });        
+        $(".regresar").click(function() {
+            $('.actor_detalle').hide();
+            $('#actores-table').fadeIn();
+            return false;
+        });
+    });
+
     function attachInfowindow(marker, socios) {
         var ib;
         var salida;
@@ -55,7 +75,7 @@
         text.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto;";
         salida = "<div class='infobox'><ul>";
         for(var i=0; i < socios.length; i++){            
-            salida += "<li><a class='globito_enlace' href='#'>"+socios[i].nombre+"</a></li>";
+            salida += "<li><a onclick='javascript:viewInfo("+socios[i].id+"); return false;' href='#'>"+socios[i].nombre+"</a></li>";
         }
         salida += "</ul></div>";                
 
@@ -88,35 +108,15 @@
                 }                
             }catch(err){}
             ib.open(map, marker);
-        });
-        $(document).ready(function(){
-            $("#disparador").click(function() {                
-                $('#lista-actores').fadeIn();                
-                return false;
-            });
-            $("#cerrar").click(function() {
-                $('#lista-actores').fadeOut();
-                return false;
-            });
-            $(".actores").click(function() {
-                $('#actores-table').hide();
-                var id = $(this).attr('id');
-                $('#actor-table'+id).fadeIn();
-                return false;
-            });
-            $(".globito_enlace").click(function() {
-                $('#actores-table').hide();
-                var id = $(this).attr('id');
-                $('#actor-table'+id).fadeIn();
-                return false;
-            });
-            $(".regresar").click(function() {
-                $('.actor_detalle').hide();
-                $('#actores-table').fadeIn();
-                return false;
-            });
-        });
-    }           
+        });        
+    }
+
+    function viewInfo(id){
+        $('.actor_detalle').hide();
+        $('#lista-actores').show();
+        $('#actores-table').hide();
+        $('#actor-table'+id).show();
+    }
 </script>
 {%endblock%}
 

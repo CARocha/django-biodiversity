@@ -1,6 +1,6 @@
-{%extends "base.html"%}
-{%block title%}Documentos Privados - {{documento.titulo}}{%endblock%}
-{%block extra_header%}
+{% extends "base.html" %}
+{% block title %}Documentos Privados - {{documento.titulo}}{% endblock %}
+{% block extra_header %}
 <script type="text/javascript"> 
 $(document).ready(function() {
     $(".detalle_doc_sec").hide();
