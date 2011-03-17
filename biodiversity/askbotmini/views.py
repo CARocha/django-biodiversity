@@ -157,7 +157,7 @@ def tagged_in(request, tag_name):
 
 #este sera el hilo para mandar mails
 def notify_all(question):
-    site = 'http://localhost:8000/foro/questions/'
+    site = 'http://bioversity.simasni.org/foro/questions/'
     users = User.objects.all().exclude(username='admin').exclude(username=question.user.username)
     contenido = render_to_string('askbotmini/notify_new_question.txt', {'question': question,
                                  'url': '%s%s' % (site, question.id),
@@ -168,7 +168,7 @@ def notify_all(question):
             send_mail('Nueva pregunta', contenido, 'develop@simasni.org', [user.email, ])
 
 def notify_user(question, answer):
-    site = 'http://localhost:8000/foro/questions/'
+    site = 'http://bioversity.simasni.org/foro/questions/'
     
     text_content = render_to_string('askbotmini/notify_new_answer_text.txt', {'question': question,
                                  'url': '%s%s' % (site, question.id),
