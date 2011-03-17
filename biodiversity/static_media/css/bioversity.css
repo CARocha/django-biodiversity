@@ -1235,12 +1235,11 @@ a .big, a:visited .big{
 }
 .dato_grafos1{
     float: left;
-    min-width: 10%;
+    width: auto;
 }
 .dato_grafos2{
     float: left;
-    min-width: 90%;
-    margin-left: -12px;
+    width: auto;
     overflow-y: hidden;
     overflow-x: auto;
     padding-bottom: 2px;
