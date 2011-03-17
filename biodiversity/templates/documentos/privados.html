@@ -30,7 +30,7 @@ function mostrar(id){
     <div id="barra_busqueda">
         <form action="/busqueda/" method="get">
             <div>
-                <label>Palabra Clave</label>
+                <label>Buscar por Palabra Clave</label>
                  <input type="text" name="q" id="busqueda" value=""/>
             </div>
         </form>
@@ -60,13 +60,21 @@ function mostrar(id){
         </div>
     {%endfor%}
     
-    {% if documentos.has_previous %}
-      <a href="?page={{documentos.previous_page_number}}">Anterior</a>
-    {%endif%}
-    Página {{documentos.number}} de {{documentos.paginator.num_pages}}
-    {% if documentos.has_next%}
-      <a href="?page={{documentos.next_page_number}}">Anterior</a>
-    {%endif%}
+   <div class="paginacion">
+        <span class="pagina-links">
+		    {% if documentos.has_previous %}
+            <a href="?page={{ documentos.previous_page_number }}" class="pag_izq">Anterior</a>
+		    {% endif %}
+
+            <span class="actual">
+			Página {{ documentos.number }} de {{ documentos.paginator.num_pages }}.
+            </span>
+
+		    {% if documentos.has_next %}
+            <a href="?page={{ documentos.next_page_number }}" class="pag_der">Siguiente</a>
+		    {% endif %}
+        </span>
+    </div>
 
 
 </div>

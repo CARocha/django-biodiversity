@@ -583,10 +583,11 @@ a{
 }
 
 .tag_archivo{
-    padding:2px;
+    padding:3px;
     background:#ebebeb;
-    width:100px;
     float:right;
+    color:#4D4D4D;
+    margin:5px;
     font-size:11px;
 }
 
@@ -1150,7 +1151,7 @@ a .big, a:visited .big{
     border-collapse: collapse;
     text-align: left;
     color: #333;
-    line-height: 19px;
+    line-height: 0px;
 }
 .grafo caption {
     font-size: 14px;
@@ -1161,7 +1162,7 @@ a .big, a:visited .big{
 }
 .grafo td {
     margin: 0;
-    padding: 20px 10px;
+    padding: 14px 10px;
     border: 1px dotted #BDBDBD;
 }
 .grafo th {
@@ -1170,8 +1171,8 @@ a .big, a:visited .big{
 }
 
 .grafo thead tr th {
-    background-color: #575757;
-    padding:  20px 10px;
+    background-color: #575757 ;
+    padding:  14px 10px;
     color: #fff;
     font-weight: bold;
     border-right: 1px solid #333;
@@ -1181,19 +1182,20 @@ a .big, a:visited .big{
 
 .grafo tfoot tr th, .grafo tfoot tr td {
     background-color: transparent;
-    padding:  20px 10px;
+    padding:  14px 10px;
     color: #ccc;
     border-top: 1px solid #ccc;
 }
 
 .grafo tbody tr th {
-    padding: 20px 10px;
+    padding: 14px 10px;
     border-bottom: 1px dotted #BDBDBD;
     border-left: 1px dotted #BDBDBD;
 }
 
 .grafo tr {
-    background-color: #FBFDF6;
+    background-color: #FBFDF6 ;
+    height:40px;
 }
 .grafo tr.odd {
     background-color: #EDF7DC;

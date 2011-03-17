@@ -55,7 +55,7 @@
         text.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto;";
         salida = "<div class='infobox'><ul>";
         for(var i=0; i < socios.length; i++){            
-            salida += "<li><a href='/bioversity/ficha/"+socios[i].id+"'>"+socios[i].nombre+"</a></li>";
+            salida += "<li><a class='globito_enlace' href='#'>"+socios[i].nombre+"</a></li>";
         }
         salida += "</ul></div>";                
 
@@ -99,6 +99,12 @@
                 return false;
             });
             $(".actores").click(function() {
+                $('#actores-table').hide();
+                var id = $(this).attr('id');
+                $('#actor-table'+id).fadeIn();
+                return false;
+            });
+            $(".globito_enlace").click(function() {
                 $('#actores-table').hide();
                 var id = $(this).attr('id');
                 $('#actor-table'+id).fadeIn();
