@@ -38,6 +38,7 @@ def index(request):
             request.session['pais'] = form.cleaned_data['pais']
             request.session['activa'] = True
             activa = True
+            return HttpResponseRedirect('/clima/clima/temperatura/')
         else:
             activa = False
         dicc = {'form': form, 'activa': activa, 'paises': paises}
