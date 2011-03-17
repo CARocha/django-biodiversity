@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.template import RequestContext
 from django.db.models import Avg
 from models import *
@@ -37,6 +37,7 @@ def index(request):
             request.session['unidad'] = form.cleaned_data['unidad']
             request.session['activa'] = True
             activa = True
+            return HttpResponseRedirect('/precio/grafo/productor/')
         else:
             activa = False
         dicc = {'form': form, 'activa': activa, 'paises': paises}
