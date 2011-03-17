@@ -30,12 +30,12 @@ function mostrar(id){
     <div id="barra_busqueda">
         <form action="/busqueda/" method="get">
             <div>
-                <label>Palabra Clave</label>
+                <label>Buscar por Palabra Clave</label>
                  <input type="text" name="q" id="busqueda" value=""/>
             </div>
         </form>
     </div>
-    <div id="titulo_categoria" class="centro">{{categoria.nombre}}</div>
+    <div id="titulo_categoria" class="centro">{{categoria.nombre}}</div><br>
     {%for documento in documentos.object_list%}
         <div class="archivo_lista">
           <a href="#">

@@ -583,10 +583,11 @@ a{
 }
 
 .tag_archivo{
-    padding:2px;
+    padding:3px;
     background:#ebebeb;
-    width:100px;
     float:right;
+    color:#4D4D4D;
+    margin:5px;
     font-size:11px;
 }
 
