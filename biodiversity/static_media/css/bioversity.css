@@ -215,6 +215,10 @@ a{
     float:left;
 }
 
+.titulo-evento a, .titulo-evento a:visited{
+    color:#04699c;
+}
+
 .ficha-evento-elemento{
     font-size:12px;
     border-bottom:#CFD0D0 1px solid;
