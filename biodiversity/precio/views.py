@@ -110,7 +110,7 @@ def grafos_ajax(request, tipo):
     if tipo in models.keys():
         filas = []
         filas_grafo = []
-        params = _get_params(request)
+        params = {} 
 
         for producto in Producto.objects.all():
             valores = []
