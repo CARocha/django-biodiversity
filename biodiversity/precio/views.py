@@ -111,11 +111,11 @@ def grafos_ajax(request, tipo):
         filas = []
         filas_grafo = []
         params = _get_params(request)
-        for zona in request.session['lugares']:
+
+        for producto in Producto.objects.all():
             valores = []
-            leyenda = Lugar.objects.get(pk=zona).nombre
-            leyendas.append(leyenda)
-            params['zona'] = zona
+            leyendas.append(producto.nombre)
+            params['producto'] = producto
             for mes in range(1, 13):
                 params['fecha__month'] = mes
                 total = 0
