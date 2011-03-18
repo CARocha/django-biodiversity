@@ -9,6 +9,7 @@ from diversity.decorators import session_required
 from django.template.defaultfilters import slugify
 from diversity.forms import DiversityForm
 from biodiversity import grafos 
+from biodiversity.utils import MESES 
 
 def list_parse(s):
     for c in ['[', ']', 'u', "'",]:
@@ -121,9 +122,10 @@ def clima(request, tipo):
             filas.append(dict(leyenda = 'Minimas en %s' % zona.nombre, valores = valores_min))
         grafo_url = grafos.make_graph(valores, leyendas, 
                                       'Temperatura max y minima', 
-                                      semanas,
+                                      MESES,
                                       type = grafos.LINE_CHART, multiline=True, 
-                                      thickness=3, units = ['semana#', 'C'])
+                                      thickness=3, units = ['semana#', 'C'], 
+                                      time=semanas)
         return render_to_response('clima/clima.html',
                                   {'tiempos': semanas,
                                   'filas': filas, 
@@ -159,9 +161,10 @@ def clima(request, tipo):
             filas.append(dict(leyenda = nombre_zona, valores = valores))
         grafo_url = grafos.make_graph(filas_grafo, leyendas,  
                                       'Precipitación promedio',
-                                      semanas,
+                                      MESES,
                                       type = grafos.LINE_CHART, multiline=True, 
-                                      thickness=3, units = ['semana', 'mm'])
+                                      thickness=3, units = ['semana', 'mm'], 
+                                      time=semanas)
         return render_to_response('clima/clima.html',
                                   {'tiempos': semanas,
                                   'filas': filas, 
@@ -209,10 +212,11 @@ def ajax_temperatura(request):
 
     return  grafos.make_graph(valores, leyendas, 
                                   'Temperatura max y minima en las semanas del año %s' % params['ano'], 
-                                  semanas,
+                                  MESES,
                                   type = grafos.LINE_CHART, 
                                   multiline=True, return_json=True, 
-                                  thickness=3, units=['semana', 'C'])
+                                  thickness=3, units=['semana', 'C'],
+                                  time=semanas)
                                  
 def ajax_humedad(request):
     filas = []
@@ -257,7 +261,8 @@ def ajax_precipitacion(request):
         leyendas.append(nombre_zona)
     return grafos.make_graph(filas_grafo, leyendas,  
                                   'Precipitación promedio en las semanas del año %s' % params['ano'],
-                                  semanas,
+                                  MESES,
                                   type = grafos.LINE_CHART, 
                                   multiline=True, return_json=True, 
-                                  thickness=3, units=['semana', 'mm'])
+                                  thickness=3, units=['semana', 'mm'],
+                                  time=semanas)
