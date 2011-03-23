@@ -75,7 +75,7 @@ def grafo(request, tipo):
                     try:
                         moneda = models[tipo].objects.filter(**params)[0].moneda.nombre 
                     except:
-                        pass
+                        moneda = 'Dollar'
                 else:
                     #sacamos un promedio de lo internacional a manopla
                     moneda = 'Dollar'
