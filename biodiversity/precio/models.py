@@ -32,7 +32,7 @@ class Producto(models.Model):
     por el momento solo va ser para los bananos
     '''
     nombre = models.CharField(max_length=200)
-    variedad = models.ForeignKey(Variedad)
+    #variedad = models.ForeignKey(Variedad)
     
     class Meta:
         verbose_name_plural = "Productos"

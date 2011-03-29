@@ -6,9 +6,8 @@ import urllib
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         extranjera = Moneda.objects.get(codigo='USD')
-        for code in ['NIO', 'HNL', 'PEN']:
-            local = Moneda.objects.get(codigo=code)
-            result = urllib.urlopen("http://www.google.com/ig/calculator?hl=es&q=1%s=?USD" % code).read()
+        for local in Moneda.objects.all():
+            result = urllib.urlopen("http://www.google.com/ig/calculator?hl=es&q=1%s=?USD" % local.codigo).read()
             equivalente = result.split(',')[1].split(': ')[1].replace('"', '').split(' ')[0]
             params = dict(cantidad_local=1, 
                           moneda_local=local,

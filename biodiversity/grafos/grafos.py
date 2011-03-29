@@ -180,6 +180,10 @@ def _line_strip_graph(data, legends, axis_labels, size, steps,
     chart.set_axis_range(Axis.LEFT, min_y, tope)
     if 'units' in kwargs:
         chart.set_axis_labels(Axis.LEFT, kwargs['units'])
+
+    if 'time' in kwargs:
+        chart.set_axis_labels(Axis.BOTTOM, kwargs['time'])
+
     chart.set_grid(0, 25, 4, 4,)
     chart.chls=4|4
     #chart.fill_linear_stripes(Chart.CHART, 0, 'FFFFEF', 0.2, 'FFFFFF', 0.2)
