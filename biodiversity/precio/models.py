@@ -71,32 +71,10 @@ class Precios(models.Model):
     class Meta:
         verbose_name_plural = "Precios"
         
-#    def precioconsumidor(self):
-#        mostrar = PrecioConsumidor.objects.filter(precios1__id=self.id)[0].precio_consumidor
-#        return "%s" % (mostrar)
-#    precioconsumidor.short_description = 'Precio Consumidor'
-#    
-#    def precioproductor(self):
-#        mostrar1 = Precio.objects.filter(precios2__id=self.id)[0].precio_productor
-#        return "%s" % (mostrar1)
-#    precioproductor.short_description = 'Precio Productor'
-#        
-#    def productoconsumidor(self):
-#        mostrar2 = PrecioConsumidor.objects.filter(precios1__id=self.id)[0].producto.nombre
-#        return "%s" % (mostrar2)
-#    productoconsumidor.short_description = 'Producto Consumidor'
-#    
-#    def productoproductor(self):
-#        mostrar3 = Precio.objects.filter(precios2__id=self.id)[0].producto.nombre
-#        return "%s" % (mostrar3)
-#    productoproductor.short_description = 'Producto Productor'
-        
-   
 class PrecioConsumidor(models.Model):
     ''' Modelos sobre los distintos precios
     de los productos
     '''
-    pais = models.ForeignKey(Pais)
     zona = models.ForeignKey(Lugar)
     fecha = models.DateField()
     producto = models.ForeignKey(Producto)
@@ -130,7 +108,6 @@ class Precio(models.Model):
     ''' Modelos sobre los distintos precios
     de los productos
     '''
-    pais = models.ForeignKey(Pais)
     zona = models.ForeignKey(Lugar)
     fecha = models.DateField()
     producto = models.ForeignKey(Producto)
