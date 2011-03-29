@@ -41,15 +41,6 @@
 
 {% block contenido %}
 
-{% if request.session.activa%}
-<a href="/precio/grafo/productor/">Precio al productor</a>
-<a href="/precio/grafo/consumidor/">Precio al consumidor</a>
-{%endif%}
-
-<br>
-<br>
-<br>
-<br>
 <div id="encabezado_contenido">PRECIOS DE PRODUCTOS</div>
 <div id="contenido_full">
     <p>En esta sección usted es libre de realizar búsquedas personalizadas de los precios de productos en las zonas de control dispuestas por Bioversity en diferentes paises. Es necesario en primera instancia seleccionar el producto deseado y el año, posteriormente las zonas de las cuales se desea obtener información y finalmente en que tipo de moneda sera presentado. En el caso de seleccionar moneda nativa se usara la moneda y la unidad de medida del producto en el pais seleccionado. En caso de seleccionar moneda normalizada se hará una conversión dinámica a moneda estado unidense USD $ y a unidad de medida Kilogramos Kg </p><br>
