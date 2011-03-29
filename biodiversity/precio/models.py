@@ -12,6 +12,17 @@ class Variedad(models.Model):
 
     def __unicode__(self):
         return self.nombre
+
+class UnidadInternacional(models.Model):
+    '''Modelo de unidades internacionales'''
+    nombre = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = 'Unidad Internacional'
+        verbose_name_plural = 'Unidades Internacionales'
+
+    def __unicode__(self):
+        return self.nombre
         
 class UnidadProducto(models.Model):
     ''' Modelo sobre las diferentes unidades de los
@@ -19,7 +30,7 @@ class UnidadProducto(models.Model):
     '''
     nombre = models.CharField(max_length=200)
     equivalente = models.FloatField('equivalente en unidad internacional')
-    unidad_int = models.CharField("nombre de la unidad", max_length=10)
+    unidad_int = models.ForeignKey(UnidadInternacional)
         
     class Meta:
         verbose_name_plural = "Unidad del Producto"
