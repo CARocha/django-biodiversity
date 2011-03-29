@@ -220,10 +220,10 @@ def ajax_temperatura(request):
                                  
 def ajax_humedad(request):
     filas = []
-    valores = []
     leyends = []
-    ano = request.session['fecha']
+    ano = datetime.datetime.now().year 
     for zona in Lugar.objects.all():
+        valores = []
         for numero, letras in CICLO_MES_AB:
             humedad = Humedad.objects.filter(mes=numero, zona = zona, ano=ano).aggregate(prom = Avg('humedad'))['prom']
             valores.append(humedad) if humedad != None else valores.append(0)
