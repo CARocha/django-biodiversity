@@ -95,7 +95,7 @@ class NoticiasAdmin(admin.ModelAdmin):
 
 admin.site.register(Pais)
 admin.site.register(Lugar)
-admin.site.register(Variedad)
+#admin.site.register(Variedad)
 admin.site.register(UnidadProducto)
 admin.site.register(Producto)
 admin.site.register(Precios, PrecioAdmin)
