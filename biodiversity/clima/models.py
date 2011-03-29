@@ -22,34 +22,6 @@ class Climas(models.Model):
     class Meta:
         verbose_name_plural = "Clima"
         
-#    def temperatura(self):
-#        mostrar = Clima.objects.filter(climas__id=self.id).t_max
-#        print mostrar
-#        mostrar1 = Clima.objects.filter(climas__id=self.id).t_min
-#        print mostrar1
-#        return "Max: %s - Min: %s" % (mostrar, mostrar1)
-#    temperatura.short_description = 'Temperaturas Max - Min'
-#    
-#    def presipitacion(self):
-#        presi = Clima.objects.filter(climas__id=self.id).precipitacion
-#        print presi
-#        lista = []
-#        for a in presi:
-#            lista.append(a)        
-#        return lista
-#        print lista
-#    presipitacion.short_description = 'Precipitación'
-#    
-#    def zonas(self):
-#        zona = Clima.objects.filter(climas__id=self.id).zona.nombre
-#        return "%s" % (zona)
-#    zonas.short_description = 'Zona'
-#    
-#    def paises(self):
-#        pais = Clima.objects.filter(climas__id=self.id).pais.nombre
-#        return "%s" % (pais)
-#    paises.short_description = 'Pais'
-
 class Clima(models.Model):
     ''' Modelo sobre el clima en las distintas
     regiones de los distintos paises o lugares
@@ -69,7 +41,7 @@ class Clima(models.Model):
         
     class Meta:
         verbose_name_plural = "Clima"
-        unique_together = ['ano', 'semana']
+        unique_together = ['zona', 'ano', 'semana']
         
 class Humedad(models.Model):
     zona = models.ForeignKey(Lugar)
@@ -79,7 +51,7 @@ class Humedad(models.Model):
 
     class Meta:
         verbose_name_plural = "Humedad de suelo"
-        unique_together = ['ano', 'mes']
+        unique_together = ['zona', 'ano', 'mes']
         
     def __unicode__(self):
         return "Humedad para %s en el mes %s del  %s" % (self.zona.nombre, self.mes, self.ano)
