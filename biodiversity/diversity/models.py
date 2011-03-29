@@ -37,7 +37,7 @@ class Lugar(models.Model):
 #        db_table = 'diversity_lugar' 
     
     def __unicode__(self):
-        return self.nombre
+        return '%s, %s' % (self.nombre, self.pais.nombre)
 
 class Socios(models.Model):
     ''' Modelo que contendra un pegueño perfil de las 

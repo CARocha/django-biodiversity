@@ -26,7 +26,6 @@ class Clima(models.Model):
     ''' Modelo sobre el clima en las distintas
     regiones de los distintos paises o lugares
     '''
-    pais = models.ForeignKey(Pais)
     zona = models.ForeignKey(Lugar)
     semana = models.IntegerField(choices=CICLO_SEMANA)
     ano = models.IntegerField('Año', choices=CICLO_CHOICES)
