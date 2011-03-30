@@ -2,16 +2,12 @@
 {%block extra_header%}
 {% endblock %}
 {% block menu %}  
-{% if request.session.activa%}
-<a href="/precio/grafo/productor/"> Precio al productor</a>
-<a href="/precio/grafo/consumidor/"> Precio al consumidor</a>
-{%endif%}
 {% endblock %}
 
 {% block contenido %}
 <div id="contenido_full">
     <div class="controles">
-            <a href="/precio/grafo/productor/">Productor</a>
+            <a href="/precio/grafo/productor/" {% if tipo == 'productor'%}class="state_selected"{%endif%}>Productor</a>
             <a href="/precio/grafo/consumidor/">Consumidor</a>
     </div>
     <br>

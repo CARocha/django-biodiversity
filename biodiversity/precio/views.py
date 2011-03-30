@@ -99,7 +99,8 @@ def grafo(request, tipo):
         return render_to_response('precio/%s.html' % tipo,
                                   {'tiempos': MESES,
                                    'url': grafo_url,
-                                  'filas': filas},
+                                  'filas': filas,
+                                  'tipo':tipo},
                                   context_instance = RequestContext(request))
     else:
         raise Http404
