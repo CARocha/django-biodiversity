@@ -9,9 +9,15 @@
 {% endblock %}
 
 {% block contenido %}
-<img src="{{url}}" />
-<table id="grafo">
-  <caption>Precio al Consumidor</caption>
+<div id="contenido_full">
+    <div class="controles">
+            <a href="/precio/grafo/productor/">Productor</a>
+            <a href="/precio/grafo/consumidor/">Consumidor</a>
+    </div>
+    <br>
+        <div>Precios al consumidor</div>
+    <br>
+<table class="grafo">
   <thead>
     <tr>
       <td></td>
@@ -35,4 +41,7 @@
     {%endfor%}
   </tbody>
 </table>
+<img src="{{url}}" />
+
+</div>
 {% endblock %}

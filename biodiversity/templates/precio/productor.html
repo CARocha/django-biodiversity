@@ -9,30 +9,39 @@
 {% endblock %}
 
 {% block contenido %}
-<img src="{{url}}" />
-<table id="grafo">
-  <caption>Precio al Productor</caption>
-  <thead>
-    <tr>
-      <td></td>
-      {%for tiempo in tiempos%}
-      <th scope="col">{{tiempo}}</th>
-      {%endfor%}
-    </tr>
-  </thead>
-  <tbody>
-    {% for fila in filas%}
-    <tr>
-      <th scope="row">{{fila.leyenda}}</th>
-      {%for valor in fila.valores%}
-      {%if valor%}
-      <td>{{valor}}</td>
-      {%else%}
-      <td>0</td>
-      {%endif%}
-      {%endfor%}
-    </tr>
-    {%endfor%}
-  </tbody>
-</table>
+<div id="contenido_full">
+    <div class="controles">
+            <a href="/precio/grafo/productor/">Productor</a>
+            <a href="/precio/grafo/consumidor/">Consumidor</a>
+    </div>
+    <br>
+        <div>Precios al productor</div>
+    <br>
+    <table class="grafo">
+      <thead>
+        <tr>
+          <td></td>
+          {%for tiempo in tiempos%}
+          <th scope="col">{{tiempo}}</th>
+          {%endfor%}
+        </tr>
+      </thead>
+      <tbody>
+        {% for fila in filas%}
+        <tr>
+          <th scope="row">{{fila.leyenda}}</th>
+          {%for valor in fila.valores%}
+          {%if valor%}
+          <td>{{valor}}</td>
+          {%else%}
+          <td>0</td>
+          {%endif%}
+          {%endfor%}
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+    <img src="{{url}}" />
+
+</div>
 {% endblock %}
