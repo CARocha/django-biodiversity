@@ -70,12 +70,13 @@ def grafo(request, tipo):
             params['zona'] = zona
             for mes in range(1, 13):
                 params['fecha__month'] = mes
+                moneda = 'Dolar'
                 if normalizar==False:
                     precio = models[tipo].objects.filter(**params).aggregate(valor = Avg('precio_%s' % tipo))['valor']
                     try:
                         moneda = models[tipo].objects.filter(**params)[0].moneda.nombre 
                     except:
-                        moneda = 'Dollar'
+                        pass
                 else:
                     #sacamos un promedio de lo internacional a manopla
                     moneda = 'Dollar'
