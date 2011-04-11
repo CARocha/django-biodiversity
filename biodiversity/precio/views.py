@@ -52,7 +52,6 @@ def index(request):
 @session_required
 def grafo(request, tipo):
     '''Grafo generado del precio'''
-    #TODO: normalizar la shit!
     leyendas = []
     models = dict(productor = Precio, consumidor=PrecioConsumidor)
     if tipo in models.keys():
@@ -70,7 +69,6 @@ def grafo(request, tipo):
             params['zona'] = zona
             for mes in range(1, 13):
                 params['fecha__month'] = mes
-                moneda = 'Dolar'
                 if normalizar==False:
                     precio = models[tipo].objects.filter(**params).aggregate(valor = Avg('precio_%s' % tipo))['valor']
                     try:
