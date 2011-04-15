@@ -34,10 +34,8 @@ class Clima(models.Model):
     precipitacion = models.FloatField('Precipitación',
             help_text = "Total en mm acumulada")
     climas = models.ForeignKey(Climas)
+    humedad = models.FloatField('Humedad relativa')
     
-#    def __unicode__(self):
-#        return "%s %s" % int(self.t_max, self.t_min)
-        
     class Meta:
         verbose_name_plural = "Clima"
         unique_together = ['zona', 'ano', 'semana']

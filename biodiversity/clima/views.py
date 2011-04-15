@@ -83,7 +83,7 @@ def grafohumedad(request):
 def clima(request, tipo):
     ''' Vista para hacer grafos de temperatura
         tipo(string): Tipo de grafo
-        puede ser: temperatura, precipitacion.
+        puede ser: temperatura, precipitacion, humedad relativa
     '''
     filas = []
     valores = []
@@ -133,7 +133,7 @@ def clima(request, tipo):
                                   'titulo': 'Temperaturas máximas y mínimas(promedio)',
                                   'tipo':tipo},
                                   context_instance = RequestContext(request))
-    elif tipo == 'precipitacion':
+    elif tipo in ('precipitacion', 'humedad'):
         params = _get_params(request)
         #se hace un FIX al params para que soporte ano y no fecha
         params['ano'] = params['fecha__year']
@@ -150,7 +150,7 @@ def clima(request, tipo):
             for semana in semanas:
                 params['semana'] = semana
                 params['zona__id'] = int(zona) 
-                prec = Clima.objects.filter(**params).aggregate(prec = Avg('precipitacion'))['prec'] 
+                prec = Clima.objects.filter(**params).aggregate(prec = Avg(tipo))['prec'] 
                 if prec:
                     valores.append(prec)
                 else:
@@ -159,17 +159,30 @@ def clima(request, tipo):
             filas_grafo.append(valores)
             leyendas.append(nombre_zona)
             filas.append(dict(leyenda = nombre_zona, valores = valores))
-        grafo_url = grafos.make_graph(filas_grafo, leyendas,  
-                                      'Precipitación promedio',
-                                      MESES,
-                                      type = grafos.LINE_CHART, multiline=True, 
-                                      thickness=3, units = ['semana', 'mm'], 
-                                      time=semanas)
+
+        titulo = ''
+        if tipo == "precipitacion":
+            grafo_url = grafos.make_graph(filas_grafo, leyendas,  
+                                          'Precipitación promedio',
+                                          MESES,
+                                          type = grafos.LINE_CHART, multiline=True, 
+                                          thickness=3, units = ['semana', 'mm'], 
+                                          time=semanas)
+            titulo = "Precipitación Promedio"
+        elif tipo == "humedad":
+            grafo_url = grafos.make_graph(filas_grafo, leyendas,  
+                                          'Humedad relativa promedio',
+                                          MESES,
+                                          type = grafos.LINE_CHART, multiline=True, 
+                                          thickness=3, units = ['semana', '%'], 
+                                          time=semanas)
+            titulo = "Humedad Relativa Promedio"
+            
         return render_to_response('clima/clima.html',
                                   {'tiempos': semanas,
                                   'filas': filas, 
                                   'url': grafo_url,
-                                  'titulo': 'Precipitación Promedio',
+                                  'titulo': titulo,
                                   'tipo':tipo},
                                   context_instance = RequestContext(request))
     else:
