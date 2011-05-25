@@ -12,6 +12,8 @@ class Pais(models.Model):
       
     class Meta:
         verbose_name_plural = "Pais"
+        app_label = "Datos Generales"
+        db_table = 'diversity_pais'
 
     def __unicode__(self):
         return self.nombre
@@ -33,8 +35,8 @@ class Lugar(models.Model):
     class Meta:
         verbose_name_plural = "Zonas"
         verbose_name_plural = "Zona"
-#        app_label = 'Sitio'
-#        db_table = 'diversity_lugar' 
+        app_label = "Datos Generales"
+        db_table = 'diversity_lugar'
     
     def __unicode__(self):
         return '%s, %s' % (self.nombre, self.pais.nombre)
@@ -55,6 +57,8 @@ class Socios(models.Model):
     class Meta:
         verbose_name = "Socios"
         verbose_name_plural = "Socio"
+        app_label = "Datos Generales"
+        db_table = 'diversity_socios'
 
     def __unicode__(self):
         return self.nombre
@@ -71,3 +75,5 @@ class TextoInicio(models.Model):
         
     class Meta:
         verbose_name_plural = "Texto del Inicio"
+        app_label = "Datos Generales"
+        db_table = 'diversity_textoinicio'

@@ -28,7 +28,7 @@ class Evento(models.Model):
     #tags =  TagAutocompleteField(help_text='Separar elementos con "," ')
     foto = ImageWithThumbsField(upload_to=get_file_path,
                                          sizes=((150,150),(250,250)), null=True, blank=True)
-    fileDir = 'eventosfotos/fotos'
+    contacto = models.CharField(max_length=250, blank=True, null=True, help_text="Nombre y correo o numero de telefono del responsable" )
 
     def __unicode__(self):
         return self.titulo
