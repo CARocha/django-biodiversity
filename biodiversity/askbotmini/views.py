@@ -7,7 +7,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.template.loader import render_to_string
@@ -183,3 +183,13 @@ def notify_user(question, answer):
     msg = EmailMultiAlternatives('1 Pregunta tiene 1 Respuesta nueva', text_content, 'develop@simasni.org', [question.user.email, ])
     msg.attach_alternative(html_content, "text/html")
     msg.send()  
+
+@login_required
+def delete_question(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+
+    if question.user == request.user or request.user.is_superuser:
+        question.delete()
+        return redirect('askbot-index')
+    else:
+        return redirect('view-question', question_id)

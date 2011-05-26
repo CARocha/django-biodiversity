@@ -38,7 +38,7 @@
         <div id="question-detail">
             <div class="question">
                 <div class="question_detail">
-                    <div class="titulo-foro"><a href="">{{question.question}}</a> {% if question.user == request.user %}| <a href="edit/">[editar]</a>{% endif %}
+                  <div class="titulo-foro"><a href="">{{question.question}}</a> {% if question.user == request.user or request.user.is_superuser %}| <a href="edit/">[editar]</a><a href="delete/">[borrar]</a>{% endif %}
                         {{question.description|safe}}
                     </div>
                     <div class="publicadop">

@@ -115,10 +115,10 @@ def grafos_ajax(request, tipo):
         filas_grafo = []
         params = {} 
 
-        for producto in Producto.objects.all():
+        for lugar in Lugar.objects.all():
             valores = []
-            leyendas.append(producto.nombre)
-            params['producto'] = producto
+            leyendas.append(lugar.nombre)
+            params['zona'] = lugar 
             for mes in range(1, 13):
                 params['fecha__month'] = mes
                 total = 0
@@ -131,7 +131,7 @@ def grafos_ajax(request, tipo):
                 valores.append(float(precio)) if precio != None else valores.append(0)
             filas_grafo.append(valores)
         return grafos.make_graph(filas_grafo, leyendas,  
-                                      'Precio al %s' % tipo,
+                                      'Precio del Banano al %s' % tipo,
                                       MESES, return_json=True,
                                       type = grafos.LINE_CHART, multiline=True,
                                       units=['mes', '$'], thickness=3)
