@@ -10,27 +10,27 @@
         display: none;
     }
 </style>
-<script type="text/javascript">    
+<script type="text/javascript">
     // Aplicar QuickSearch a la tabla y la lista
     var map;
-    var ibs = new Array();    
-    $(document).ready(function () {        
+    var ibs = new Array();
+    $(document).ready(function () {
         var myLatlng = new google.maps.LatLng(-0.175781,-78.398437);
         var myOptions = {
             zoom: 4,
             mapTypeControl: true,
             center: myLatlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
-        }        
+        }
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-        
+
         var image = new google.maps.MarkerImage('/files/img/custom_marker.png',
         new google.maps.Size(45, 44),
         new google.maps.Point(0,0),
         new google.maps.Point(0, 32));
 
         $.getJSON('/bioversity/ajax/zonas/', function(data){
-            $.each(data, function(i, elemento){                
+            $.each(data, function(i, elemento){
                 var latlng = new google.maps.LatLng(elemento.punto[0], elemento.punto[1]);
                 var marker = new google.maps.Marker({
                     position: latlng,
@@ -41,8 +41,8 @@
                 });
                 attachInfowindow(marker, elemento.socios);
             });
-        }); 
-        
+        });
+
         $('#lista-actores').hide();
     });
 
@@ -60,7 +60,7 @@
             var id = $(this).attr('id');
             $('#actor-table'+id).fadeIn();
             return false;
-        });        
+        });
         $(".regresar").click(function() {
             $('.actor_detalle').hide();
             $('#actores-table').fadeIn();
@@ -74,13 +74,13 @@
         var text = document.createElement("div");
         text.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto;";
         salida = "<div class='infobox'><ul>";
-        for(var i=0; i < socios.length; i++){            
+        for(var i=0; i < socios.length; i++){
             salida += "<li><a onclick='javascript:viewInfo("+socios[i].id+"); return false;' href='#'>"+socios[i].nombre+"</a></li>";
         }
-        salida += "</ul></div>";                
+        salida += "</ul></div>";
 
         text.innerHTML = salida;
-        var myOptions = {            
+        var myOptions = {
             content: text,
             disableAutoPan: false,
             maxWidth: 0,
@@ -97,18 +97,18 @@
             isHidden: false,
             pane: "floatPane",
             enableEventPropagation: false
-        };       
-        
+        };
+
         ib = new InfoBox(myOptions);
-        ibs.push(ib);        
+        ibs.push(ib);
         google.maps.event.addListener(marker, 'mouseover', function() {
             try{
                 for(var i=0;i<ibs.length;i++){
                     ibs[i].close();
-                }                
+                }
             }catch(err){}
             ib.open(map, marker);
-        });        
+        });
     }
 
     function viewInfo(id){
@@ -123,35 +123,18 @@
 {% block contenido %}
 <div class="clean"></div>
 <br>
-<div id="encabezado_contenido">Mapa de ubicación de socios y zonas de control <a id="disparador" href="#">Mostrar lista de socios <img src="/files/img/arrowdown.png"></a> <div class="clean"></div></div>
+<div id="encabezado_contenido">Mapa de ubicación de socios y zonas de control <a id="disparador" href="#">Mostrar lista de zonas y socios <img src="/files/img/arrowdown.png"></a> <div class="clean"></div></div>
 
 <div id="map_canvas"></div>
 <div id="lista-actores">
     <table id="actores-table">
         <tr class="fondo-azul">
-            <th>Socio </th>
+            <th>Pais </th>
             <th>Zona</th>
-            <th>Pais <img id="cerrar" style="float:right; margin-right:10px;" src="/files/img/close.png"></th>
+            <th>Socio <img id="cerrar" style="float:right; margin-right:10px;" src="/files/img/close.png"></th>
         </tr>
         {% for socio in socios.object_list %}
         <tr  class="actores" id="{{socio.id}}">
-            <td><b>{{socio.nombre}}</b></td>
-            <td>
-                <table>
-                    {% for zona in socio.zona.all%}
-                    {%if not forloop.last%}
-                    <tr>
-                        <td> {{zona.nombre}}</td>
-                    </tr>
-                    {%else%}
-                    <tr >
-                        <td style="border-bottom:0px !important;"> {{zona.nombre}}</td>
-                    </tr>
-                    {%endif%}
-
-                    {%endfor%}
-                </table>
-            </td>
             <td>
                 <table>
                     {% for zona in socio.zona.all%}
@@ -170,6 +153,23 @@
                     {%endfor%}
                 </table>
             </td>
+            <td>
+                <table>
+                    {% for zona in socio.zona.all%}
+                    {%if not forloop.last%}
+                    <tr>
+                        <td> {{zona.nombre}}</td>
+                    </tr>
+                    {%else%}
+                    <tr >
+                        <td style="border-bottom:0px !important;"> {{zona.nombre}}</td>
+                    </tr>
+                    {%endif%}
+
+                    {%endfor%}
+                </table>
+            </td>
+            <td><b>{{socio.nombre}}</b></td>
         </tr>
         {%endfor%}
 

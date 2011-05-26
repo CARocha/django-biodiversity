@@ -6,7 +6,7 @@ body {
 }
 #wrapper{
     width: 960px;
-    margin: 0 auto;    
+    margin: 0 auto;
 }
 .clean{
     clear: both;
@@ -32,16 +32,16 @@ a{
     padding:0pt;
 }
 .header{
-    height: 114px;    
+    height: 114px;
 }
 .header .logo{
     width: 90px;
     height: 80px;
     float: left;
-    padding: 13px 20px;    
+    padding: 13px 20px;
 }
 .header .pagetitle{
-    float: left;    
+    float: left;
     margin-top: 13px;
     width: 268px;
 }
@@ -60,13 +60,13 @@ a{
 }
 .header .nav .menu ul li{
     display: inline-block;
-    height: 32px;        
+    height: 32px;
 }
 .header .nav .menu ul li:hover{
     background: url(/files/img/menu-bg.png) bottom repeat-x;
 }
 .selecto{
-    background: url(/files/img/menu-bg.png) bottom repeat-x;    
+    background: url(/files/img/menu-bg.png) bottom repeat-x;
 }
 .header .nav .menu ul li a{
     color: #151515;
@@ -78,8 +78,8 @@ a{
 .header .nav .menu ul li a:hover{
     color: #2d6311;
 }
-#login{    
-    float: right;        
+#login{
+    float: right;
     height:22px;
     font-size:13px;
     color: #fff;
@@ -98,10 +98,10 @@ a{
     color: #fff;
 }
 #login a:hover{
-    color: #f1dd70;    
+    color: #f1dd70;
 }
 .username{
-    color: #f1dd70;    
+    color: #f1dd70;
 }
 
 /*agregado por byron */
@@ -231,11 +231,11 @@ a{
     margin-bottom:15px;
 }
 
-.lista_boton{ 
+.lista_boton{
     background:url(/files/img/lista.png) no-repeat;
 }
 
-.calendario_boton{ 
+.calendario_boton{
     background:url(/files/img/calendario.png) no-repeat;
 }
 #barra_busqueda{
@@ -493,7 +493,7 @@ a{
     padding-top:5px;
     color:#464646;
     font-size:12px;
-    padding: 10px 5px 15px 5px;    
+    padding: 10px 5px 15px 5px;
 }
 #id_answer{
     border: 1px #9FA3A8 solid;
@@ -771,7 +771,7 @@ a{
 .banner_content{
     font-size: 12px;
     margin: 25px 20px 0px;
-    height: 135px;    
+    height: 135px;
 }
 .banner .left{
     float: left;
@@ -809,7 +809,7 @@ a{
     background: url(/files/img/controles.png) no-repeat;
     width: 248px;
     height: 43px;
-    background-position: -43px 0;        
+    background-position: -43px 0;
 }
 .descrip .text{
     color: #fff;
@@ -823,7 +823,7 @@ a{
     background: url(/files/img/controles.png) no-repeat;
     background-position: -291px 0;
     height: 43px;
-    width: 40px;    
+    width: 40px;
 }
 .adelante:hover{
     background-position: -291px -43px;
@@ -872,9 +872,9 @@ a .big, a:visited .big{
     font-size: 26px;
     font-weight: bold;
     text-shadow: #fff 1px 1px 0px;
-    text-align: center;    
+    text-align: center;
 }
-.price{    
+.price{
     background: url(/files/img/button1.png) no-repeat;
     margin-right: 15px;
 }
@@ -967,7 +967,7 @@ a .big, a:visited .big{
 #disparador {
     color:#29819e;
     font-size:15px;
-    width:245px;
+    width:300px;
     display:block;
     float:right;
     text-align:center;
@@ -1123,7 +1123,7 @@ a .big, a:visited .big{
     margin-top:35px;
 }
 .socio_link{
-    color: #fff;    
+    color: #fff;
 }
 .socio_link:hover{
     text-decoration: underline;
