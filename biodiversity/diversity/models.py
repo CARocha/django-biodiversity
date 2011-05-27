@@ -31,15 +31,25 @@ class Lugar(models.Model):
             decimal_places=5, blank=True, null = True)
     longitud = models.DecimalField('Longitud', max_digits=8,
             decimal_places=5, blank=True, null = True)
+    descripcion = models.TextField('Descripción', blank=True, null=True)
 
     class Meta:
         verbose_name_plural = "Zonas"
-        verbose_name_plural = "Zona"
+        verbose_name = "Zona"
         app_label = "Datos Generales"
         db_table = 'diversity_lugar'
     
     def __unicode__(self):
         return '%s, %s' % (self.nombre, self.pais.nombre)
+
+#class FotosLugar(models.Model):
+#    lugar = models.ForeignKey(Lugar)
+#    foto = ImageWithThumbsField(
+#    class Meta:
+#        verbose_name_plural = "Fotos de Zonas"
+#        verbose_name = "Foto de Zona"
+#        app_label = "Datos Generales"
+#        db_table = 'diversity_fotoszona'
 
 class Socios(models.Model):
     ''' Modelo que contendra un pegueño perfil de las 
