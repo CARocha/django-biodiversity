@@ -29,7 +29,7 @@
             }
             {% endif %}
         </style>
-	{%block extra_header%}{%endblock%}
+    {%block extra_header%}{%endblock%}
     </head>
     <body>
         <!-- Comienza el header -->
@@ -42,14 +42,10 @@
                 {% endif %}
             </div>
             <div class="header">
-                <div class="logo">
-                    <a href="/">
-                        <img src="/files/img/logo.png" alt="Logo Bioversity">
-                    </a>
-                </div>
+
                 <div class="pagetitle">
                     <img src="/files/img/pagetitle.png" alt="Sistema de informacion Bioversity">
-                </div>                 
+                </div>
                 <div class="nav">
                     <div class="menu">
                         <ul>
@@ -62,7 +58,7 @@
                             &nbsp;|&nbsp;<li {% if request.session.flag == 'biblioteca' %}class='selecto'{% endif %}><a href="/documentos/">Biblioteca</a></li>&nbsp;|&nbsp;
                             <li {% if request.session.flag == 'foro' %}class='selecto'{% endif %}><a href="/foro/">Foro</a></li>
                             {% endif %}
-                        </ul>                         
+                        </ul>
                     </div>
                     <div class="clean"></div>
                 </div>

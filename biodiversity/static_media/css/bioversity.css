@@ -44,6 +44,7 @@ a{
     float: left;
     margin-top: 13px;
     width: 268px;
+    margin-bottom:16px;
 }
 .header .nav{
     float: left;
@@ -1093,11 +1094,15 @@ a .big, a:visited .big{
 .infobox ul{
     color: #000;
     font-size: 11px;
-    padding: 0;
-    padding-left: 3px;
-    margin: 0;
-    list-style: none;
+    margin-top:5px;
+    padding-left: 20px;
+
+    list-style-image: url(http://www.alvit.de/vf/csstablegallery/link.gif);
 }
+
+.infobox li{
+}
+
 .infobox a{
     color: #08368F;
 }
