@@ -44,7 +44,7 @@
             {% for noticia in lista %}
             <a href="/noticias/ver/{{noticia.id}}">
                 {% for galeria in  noticia.adjunto.all %}
-                <img alt="{{galeria.nombre}}" src="{{galeria.adjunto.url_328x213}}" title="<a href='/noticias/ver/{{noticia.id}}'>{{galeria.nombre}}</a>">
+                <img alt="{{galeria.nombre}}" src="{{galeria.adjunto.url_328x213}}" title="<a href='/noticias/ver/{{noticia.id}}'>Noticia: {{galeria.nombre}}</a>">
                 {% endfor %}
             </a>
             {% endfor %}                        

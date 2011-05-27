@@ -14,14 +14,20 @@
                 {%if evento.foto %}<img align="left"  style="margin-right:10px;" src="{{evento.foto.url_150x150}}"><br>{%else%}{%endif%}
                <div class="ficha-evento-elemento">
                     <b>Inicia:</b>{{evento.fecha_inicio|date:"d M Y"}}    <b>Finaliza:</b> {{evento.fecha_final|date:"d M Y"}}<br>
-               </div>
-                <div class="ficha-evento-elemento">
-                    {%if evento.lugar %}<b>Lugar: </b>{{evento.lugar}}<br>{%endif%}
                 </div>
+                {%if evento.lugar %}
+                <div class="ficha-evento-elemento">
+                    <b>Lugar: </b>{{evento.lugar}}<br>
+                </div>
+                {%endif%}
                 <div class="ficha-evento-elemento">
                     {%if evento.contenido %}{{evento.contenido|safe}}<br>{%else%}No hay información adicional{%endif%}
                 </div>
-                
+                {%if evento.contacto%}
+                <div class="ficha-evento-elemento">
+                    <b>Contacto: </b>{{evento.contacto}}<br>
+                </div>
+                {%endif%}
                 <div class="clean">
                    
                 </div>

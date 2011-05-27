@@ -29,7 +29,8 @@
     <div class="controles">
             <a href="/clima/clima/temperatura" {% if tipo == 'temperatura'%}class="state_selected"{%endif%} >Temperatura</a>
             <a href="/clima/clima/precipitacion" {% if tipo == 'precipitacion'%}class="state_selected"{%endif%}>Precipitación</a>
-            <a href="/clima/humedad/">Humedad</a>
+            <a href="/clima/clima/humedad" {% if tipo == 'humedad'%}class="state_selected"{%endif%}>Humedad Relativa</a>
+            <a href="/clima/humedad/">Humedad de suelo</a>
     </div>
     <br>
     <div>{{titulo}}</div>
