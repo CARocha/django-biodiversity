@@ -1110,6 +1110,7 @@ a .big, a:visited .big{
 }
 
 .infobox li{
+    margin:5px;
 }
 
 .infobox a{
