@@ -14,14 +14,14 @@ from django.http import HttpResponseRedirect
 def logout_page(request):
   logout(request)
   return HttpResponseRedirect('/')
-  
+
 def index(request):
     ''' Vista que devolvera muchas de las salidas
         de la pagina principal o inicio del sitio
     '''
     #para el inicio sea mas dinamico
     inicio = TextoInicio.objects.all()
-    
+
     request.session['flag'] = 'index'
     notis = Noticias.objects.all().order_by('fecha')
     lista = []
@@ -32,10 +32,10 @@ def index(request):
                 break
     return render_to_response('diversity/index.html', locals(),
                               context_instance=RequestContext(request))
-                              
+
 def leer_texto(request):
     texto = TextoInicio.objects.all()
-    
+
     return render_to_response('diversity/texto.html', locals(),
                               context_instance=RequestContext(request))
 
@@ -58,18 +58,18 @@ def lista_socios(request):
 
 #views de las fichas de los sucios
 def ficha_socios(request, id):
-    ''' Vista para devolver las fichas de los socios de 
+    ''' Vista para devolver las fichas de los socios de
         bioversity
     '''
     socio = get_object_or_404(Socios, id=id)
-    
+
     return render_to_response('diversity/ficha_socio.html', {'socio': socio},
                               context_instance=RequestContext(request))
 
 def mapa(request):
     '''Vista para el mapa de los lugares en que esta el socio'''
     request.session['flag'] = 'mapa'
-    map_center = dict(lat=0, lon=0) 
+    map_center = dict(lat=0, lon=0)
     socios = _get_elementos(request, Socios.objects.all())
     return render_to_response('diversity/mapa.html', {'center': map_center, 'socios':socios},
                               context_instance=RequestContext(request))
@@ -77,7 +77,7 @@ def mapa(request):
 def ajax_socios(request, zona):
     zona = get_object_or_404(Lugar, pk=zona)
     socios_list = Socios.objects.filter(zona=zona).values('nombre', 'link', 'id')
-    
+
     return HttpResponse(simplejson.dumps(list(socios_list)), mimetype="application/javascript")
 
 def ajax_zonas(request):
@@ -90,12 +90,13 @@ def ajax_zonas(request):
         dicc = {
             'punto': (float(zona.latitud), float(zona.longitud)),
             'zona': zona.nombre,
-            'socios': list(socios)
+            'socios': list(socios),
+            'zonadescrip': zona.descripcion
         }
         lista.append(dicc)
 
-    ##Esta shit de zonas_list se tiene que convertir explicitamente a lista por que es un 
-    #value queryset x_x    
+    ##Esta shit de zonas_list se tiene que convertir explicitamente a lista por que es un
+    #value queryset x_x
     return HttpResponse(simplejson.dumps(lista), mimetype="application/javascript")
 
 def ajax_pais(request, pais_id):

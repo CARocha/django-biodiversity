@@ -39,7 +39,7 @@
                     icon: image,
                     id: elemento.id
                 });
-                attachInfowindow(marker, elemento.socios, elemento.zona);
+                attachInfowindow(marker, elemento.socios, elemento.zona, elemento.zonadescrip);
             });
         });
 
@@ -68,16 +68,16 @@
         });
     });
 
-    function attachInfowindow(marker, socios, zona) {
+    function attachInfowindow(marker, socios, zona, descrip) {
         var ib;
         var salida;
         var text = document.createElement("div");
-        text.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto;";
-        salida = "<div class='infobox'>"+zona+"<ul>";
+        text.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto; width:400px;";
+        salida = "<div class='infobox'><div class='mapazonadescrip'><span style='font-weight:bold;text-transform:uppercase;'>"+zona+"</span><br>"+descrip+"</div><ul><span style='font-weight:bold;text-transform:uppercase;'>Socios</span>";
         for(var i=0; i < socios.length; i++){
             salida += "<li><a onclick='javascript:viewInfo("+socios[i].id+"); return false;' href='#'>"+socios[i].nombre+"</a></li>";
         }
-        salida += "</ul></div>";
+        salida += "</ul><div class='clean'></div></div>";
 
         text.innerHTML = salida;
         var myOptions = {
@@ -87,12 +87,13 @@
             pixelOffset: new google.maps.Size(-130, 0),
             zIndex: null,
             boxStyle: {
-                background: "url('../images/tipbox.gif') no-repeat",
+                background: "#92B900 no-repeat",
                 opacity: 1,
-                width: "180px"
+                opacity: 0.91,
+                width: "413px"
             },
             closeBoxMargin: "2px 5px 0px 2px",
-            closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+            closeBoxURL: "http://cdn1.iconfinder.com/data/icons/Boolean/Signage/Close%20Square.png",
             infoBoxClearance: new google.maps.Size(1, 1),
             isHidden: false,
             pane: "floatPane",

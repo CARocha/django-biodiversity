@@ -1088,13 +1088,24 @@ a .big, a:visited .big{
 .infobox{
     cursor: pointer;
     background: #fff;
+    width:400px;
+}
+
+.mapazonadescrip{
+    float:left;
+    width:240px;
+    font-size:11px;
+    margin-right:15px;
 }
 .infobox ul{
     color: #000;
     font-size: 11px;
-    margin-top:5px;
+    margin-top:0px;
     padding-left: 20px;
-
+    float:left;
+    width:125px;
+    background:#eee;
+    height:200px;
     list-style-image: url(http://www.alvit.de/vf/csstablegallery/link.gif);
 }
 
@@ -1107,6 +1118,8 @@ a .big, a:visited .big{
 .infobox a:hover{
     text-decoration: underline;
 }
+
+.infobox img{float:right;}
 
 .errorlist{
     background:url(/files/img/error.png);
