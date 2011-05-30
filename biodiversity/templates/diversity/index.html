@@ -20,13 +20,13 @@
             $.getJSON('/precio/ajax/' + titulo + '/', function(data){
                 $("#grafico").html('');
                 $("#grafico").html("<img src='" + data.url +"'/>");
-            });    
+            });
         }
         $('.state_selected').removeClass('state_selected');
-        $(this).addClass('state_selected');        
+        $(this).addClass('state_selected');
         return false;
     });
-  });  
+  });
 </script>
 {%endblock%}
 {% block contenido %}
@@ -34,7 +34,7 @@
     <div class="left">
         <div class="banner_content">
         {% for texto in inicio %}
-            <span style="font-weight: bold;">{{texto.titulo}}</span> <br>{{texto.texto|truncatewords:111}}
+            <span style="font-weight: bold;">{{texto.titulo}}</span> <br>{{texto.texto|truncatewords:100}}
         {% endfor %}
         </div>
         <a class="leer-mas" href="/bioversity/textos/" rel="facebox"></a><a class="mapas" href="/bioversity/mapa/"></a>
@@ -47,8 +47,8 @@
                 <img alt="{{galeria.nombre}}" src="{{galeria.adjunto.url_328x213}}" title="<a href='/noticias/ver/{{noticia.id}}'>Noticia: {{galeria.nombre}}</a>">
                 {% endfor %}
             </a>
-            {% endfor %}                        
-        </div>        
+            {% endfor %}
+        </div>
     </div>
     <div class="clean"></div>
 </div>
