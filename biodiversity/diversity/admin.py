@@ -93,8 +93,18 @@ class NoticiasAdmin(admin.ModelAdmin):
         js = ['../files/js/tiny_mce/tiny_mce.js',
               '../files/js/editores/textareas.js',]
 
+class FotosLugarInline(admin.TabularInline):
+    model = FotosLugar 
+    extra = 1
+
+class LugarAdmin(admin.ModelAdmin):
+    save_on_top = True
+    actions_on_top = True
+    inlines = [FotosLugarInline]
+
 admin.site.register(Pais)
-admin.site.register(Lugar)
+admin.site.register(Lugar, LugarAdmin)
+#admin.site.register(Lugar)
 #admin.site.register(Variedad)
 admin.site.register(UnidadProducto)
 admin.site.register(UnidadInternacional)

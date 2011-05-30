@@ -42,14 +42,16 @@ class Lugar(models.Model):
     def __unicode__(self):
         return '%s, %s' % (self.nombre, self.pais.nombre)
 
-#class FotosLugar(models.Model):
-#    lugar = models.ForeignKey(Lugar)
-#    foto = ImageWithThumbsField(
-#    class Meta:
-#        verbose_name_plural = "Fotos de Zonas"
-#        verbose_name = "Foto de Zona"
-#        app_label = "Datos Generales"
-#        db_table = 'diversity_fotoszona'
+class FotosLugar(models.Model):
+    lugar = models.ForeignKey(Lugar)
+    foto = ImageWithThumbsField(upload_to=get_file_path,
+               sizes=((150,150),(200,175)))
+    fileDir = 'lugar/fotos'
+    class Meta:
+        verbose_name_plural = "Fotos de Zonas"
+        verbose_name = "Foto de Zona"
+        app_label = "Datos Generales"
+        db_table = 'diversity_fotoszona'
 
 class Socios(models.Model):
     ''' Modelo que contendra un pegueño perfil de las 
