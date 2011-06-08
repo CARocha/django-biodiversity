@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.shortcuts import render_to_response, redirect
 from django.forms.models import inlineformset_factory
 from django.template import RequestContext
+from django.shortcuts import get_object_or_404
 from models import *
 from biodiversity.noticias.models import *
 from biodiversity.clima.models import *
@@ -48,12 +49,10 @@ class ProductoAdmin(admin.ModelAdmin):
 class PrecioInline(admin.TabularInline):
     model = Precio
     extra = 1
-    form = PrecioProductorInlineForm
     
 class PrecioConsumidorInline(admin.TabularInline):
     model = PrecioConsumidor
     extra = 1
-    form = PrecioConsumidorInlineForm
     
 class PrecioAdmin(admin.ModelAdmin):
     actions_on_top = True
@@ -72,7 +71,7 @@ class PrecioAdmin(admin.ModelAdmin):
             form = PrecioSeleccionadorForm(request.POST, request.FILES)
             if form.is_valid():
                 zona = form.cleaned_data['lugar']
-                precio = Precios(titulo="Precio para %s" % zona.nombre)
+                precio = Precios(titulo="Precio para %s" % zona.nombre, zona=zona)
                 precio.save()
                 return redirect('admin:precio_precios_change', precio.id)
         else:
@@ -89,37 +88,10 @@ class PrecioAdmin(admin.ModelAdmin):
         return render_to_response(template, context, 
                 context_instance=RequestContext(request))
 
-    def admin_agregar_precio_form(model_admin, request, zona_id):
-        opts = model_admin.model._meta
-        admin_site = model_admin.admin_site
-        has_perm = request.user.has_perm(opts.app_label + '.' + opts.get_add_permission())
-        if request.method == "POST":
-            form = PrecioSeleccionadorForm(request.POST, request.FILES)
-            if form.is_valid():
-                zona = form.cleaned_data['lugar']
-                return redirect('admin:llenar_datos_precio', zona.id)
-        else:
-            form = PrecioSeleccionadorForm()
-
-        context = {'admin_site': admin_site.name,
-                'title': "Agregar precio",
-                'opts': opts,
-                #'form': form,
-                'root_path': '/%s' % admin_site.root_path,
-                'app_label': opts.app_label,
-                'has_change_permission': has_perm}
-        template = 'admin/precio/admin_agregar_precio_form.html',
-        return render_to_response(template, context, 
-                context_instance=RequestContext(request))
-
     def get_urls(self):
         from django.conf.urls.defaults import *
         urls = super(PrecioAdmin, self).get_urls()
         my_urls = patterns('',
-                url(
-                    r'add/(?P<zona_id>\d+)/',
-                    self.admin_site.admin_view(self.admin_agregar_precio_form),
-                    name='admin_llenar_datos_precio'),
                 url(
                     r'add',
                     self.admin_site.admin_view(self.admin_agregar_precio),

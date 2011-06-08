@@ -42,6 +42,7 @@
         {% for fieldset in inline_admin_form %}
           {% for line in fieldset %}
             {% for field in line %}
+            {%if not field.field.is_hidden %}
               <td class="{{ field.field.name }}">
               {% if field.is_readonly %}
                   <p>{{ field.contents }}</p>
@@ -50,6 +51,7 @@
                   {{ field.field }}
               {% endif %}
               </td>
+              {% endif %}
             {% endfor %}
           {% endfor %}
         {% endfor %}
