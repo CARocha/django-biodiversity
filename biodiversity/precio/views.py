@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
+from django.utils import simplejson
 from django.db.models import Avg
 from models import *
 #from bioversity.utils import _get_elementos
@@ -56,7 +57,6 @@ def grafo(request, tipo):
     models = dict(productor = Precio, consumidor=PrecioConsumidor)
     if tipo in models.keys():
         filas = []
-        filas_grafo = []
         params = _get_params(request)
         
         #linea mas larga ever
@@ -91,17 +91,11 @@ def grafo(request, tipo):
 
                 valores.append(float(precio)) if precio != None else valores.append(0)
             fila = {'leyenda': leyenda, 'valores': valores}
-            filas_grafo.append(valores)
             filas.append(fila)
-        grafo_url = grafos.make_graph(filas_grafo, leyendas,  
-                                      'Precio al %s' % tipo,
-                                      MESES,
-                                      type = grafos.LINE_CHART, multiline=True,
-                                      units=['mes', moneda], thickness=3)
         return render_to_response('precio/%s.html' % tipo,
                                   {'tiempos': MESES,
-                                   'url': grafo_url,
                                   'filas': filas,
+                                  'leyendas': leyendas,
                                   'tipo':tipo},
                                   context_instance = RequestContext(request))
     else:
@@ -130,10 +124,9 @@ def grafos_ajax(request, tipo):
                     precio = 0
                 valores.append(float(precio)) if precio != None else valores.append(0)
             filas_grafo.append(valores)
-        return grafos.make_graph(filas_grafo, leyendas,  
-                                      'Precio del Banano al %s' % tipo,
-                                      MESES, return_json=True,
-                                      type = grafos.LINE_CHART, multiline=True,
-                                      units=['mes', '$'], thickness=3)
+        json = simplejson.dumps(dict(filas=filas_grafo, leyendas=leyendas, 
+                                     titulo='Precio del Banano al %s' % tipo, 
+                                     labels = MESES, units = ['mes', '$']))
+        return HttpResponse(json, mimetype='application/javascript') 
     else:
         raise Http404

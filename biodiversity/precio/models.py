@@ -64,7 +64,7 @@ class Moneda(models.Model):
 class Precios(models.Model):
     
     titulo = models.CharField(max_length=200, help_text="Aca va el titulo de los precios ejem: precios correspondiente al mes de Enero")
-    zona = models.ForeignKey(Lugar, blank=True, null=True, editable=False)
+    zona = models.ForeignKey(Lugar, blank=True, null=True)
     
     def __unicode__(self):
         return self.titulo
@@ -99,6 +99,7 @@ class PrecioConsumidor(models.Model):
             if not self.zona:
                 self.zona=self.precios1.zona
         except:
+            print 'omg'
             self.zona=self.precios1.zona
         super(PrecioConsumidor, self).save(*args, **kwargs)
 

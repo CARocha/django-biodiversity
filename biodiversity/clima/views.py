@@ -3,7 +3,8 @@ from models import *
 import datetime
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
 from django.template import RequestContext
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponse
+from django.utils import simplejson
 from django.db.models import Avg
 from diversity.decorators import session_required
 from django.template.defaultfilters import slugify
@@ -223,13 +224,10 @@ def ajax_temperatura(request):
         valores.append([int(v) for v in valores_max])
         valores.append([int(v) for v in valores_min])
 
-    return  grafos.make_graph(valores, leyendas, 
-                                  'Temperatura max y minima en las semanas del año %s' % params['ano'], 
-                                  MESES,
-                                  type = grafos.LINE_CHART, 
-                                  multiline=True, return_json=True, 
-                                  thickness=3, units=['semana', 'C'],
-                                  time=semanas)
+    json = simplejson.dumps(dict(filas=valores, leyendas=leyendas, 
+                                 titulo='Temperatura max y minima en las semanas del año %s' % params['ano'], 
+                                 labels = MESES, units = ['semana', 'C']))
+    return HttpResponse(json, mimetype='application/javascript') 
                                  
 def ajax_humedad(request):
     filas = []
@@ -244,12 +242,11 @@ def ajax_humedad(request):
         filas.append(valores)
         leyends.append(zona.nombre)
     
-    return  grafos.make_graph(filas, leyends, 
-                                  'Humedad Promedio', 
-                                  [mes[1] for mes in CICLO_MES_AB],
-                                  return_json=True,
-                                  type = grafos.LINE_CHART, multiline=True,
-                                  thickness=3, units=['meses', 'g/m3'])
+    json = simplejson.dumps(dict(filas=filas, leyendas=leyends, 
+                                 titulo='Humedad Promedio',
+                                 labels = [mes[1] for mes in CICLO_MES_AB],
+                                 units = ['meses', 'g/m3']))
+    return HttpResponse(json, mimetype='application/javascript') 
 
 def ajax_precipitacion(request):
     #se hace un FIX al params para que soporte ano y no fecha
@@ -272,10 +269,8 @@ def ajax_precipitacion(request):
 
         filas_grafo.append(valores)
         leyendas.append(nombre_zona)
-    return grafos.make_graph(filas_grafo, leyendas,  
-                                  'Precipitación promedio en las semanas del año %s' % params['ano'],
-                                  MESES,
-                                  type = grafos.LINE_CHART, 
-                                  multiline=True, return_json=True, 
-                                  thickness=3, units=['semana', 'mm'],
-                                  time=semanas)
+
+    json = simplejson.dumps(dict(filas=filas_grafo, leyendas=leyendas, 
+                                 titulo='Precipitación promedio en las semanas del año %s' % params['ano'], 
+                                 labels = MESES, units = ['semana', 'mm']))
+    return HttpResponse(json, mimetype='application/javascript') 
