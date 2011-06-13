@@ -69,14 +69,9 @@ def grafohumedad(request):
         leyends.append(zona.nombre)
         tabla.append({'leyenda': zona.nombre, 'valores': valores})  
     
-    grafo_url = grafos.make_graph(filas, leyends, 
-                                      'Humedad Promedio', 
-                                      [mes[1] for mes in CICLO_MES_AB],
-                                      type = grafos.LINE_CHART, multiline=True, 
-                                      size=(650, 300), 
-                                      thickness=3, units = ['mes', 'mm'])
-   
-    dicc = {'tabla': tabla, 'url': grafo_url, 'columnas': [mes[1] for mes in CICLO_MES_AB]}
+    dicc = {'tabla': tabla, 
+            'titulo': "Humedad Promedio",
+            'columnas': [mes[1] for mes in CICLO_MES_AB]}
     return render_to_response('clima/grafo_humedad.html', dicc,
                              context_instance=RequestContext(request))
 
@@ -178,7 +173,6 @@ def clima(request, tipo):
                                           thickness=3, units = ['semana', '%'], 
                                           time=semanas)
             titulo = "Humedad Relativa Promedio"
-            
         return render_to_response('clima/clima.html',
                                   {'tiempos': semanas,
                                   'filas': filas, 
