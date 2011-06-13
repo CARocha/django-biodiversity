@@ -1,0 +1,70 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_modify adminmedia %}
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript" src="../../../jsi18n/"></script>
+{{ media }}
+{% endblock %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/forms.css" />{% endblock %}
+
+{% block coltype %}{% if ordered_objects %}colMS{% else %}colM{% endif %}{% endblock %}
+
+{% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
+
+{% block breadcrumbs %}{% if not is_popup %}
+<div class="breadcrumbs">
+  trolololloo
+     <a href="/admin/">{% trans "Home" %}</a> &rsaquo;
+     <a href="/admin/{{app_label}}/">{{ app_label|capfirst|escape }}</a> &rsaquo;
+     <a href="/admin/{{app_label}}/{{model_label}}/">{{ model_label|capfirst }}s</a> &rsaquo;
+     {{ title }}
+</div>
+{% endif %}{% endblock %}
+
+{% block content %}<div id="content-main">
+{% block object-tools %}
+{% if change %}{% if not is_popup %}
+  <ul class="object-tools"><li><a href="history/" class="historylink">{% trans "History" %}</a></li>
+  {% if has_absolute_url %}<li><a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="viewsitelink">{% trans "View on site" %}</a></li>{% endif%}
+  </ul>
+{% endif %}{% endif %}
+{% endblock %}
+
+
+<form action="." method="POST">
+
+    {{ form.management_form }}
+<table>
+    {% for single_form in form.forms %}
+{% if forloop.first %}
+<tr>
+        {% for field in single_form %}
+<th>
+{% ifnotequal field.label_tag '<label for="id_form-0-id">Id</label>' %}
+           {{ field.label_tag }}
+{% endifnotequal%}
+</th>
+
+
+        {% endfor %}
+</tr>
+{% endif %}
+<tr>
+        {% for field in single_form %}
+<td>
+            {{ field }} {{field.errors}}
+</td>
+        {% endfor %}
+</tr>
+    {% endfor %}
+<table>
+
+<div class="submit-row" >
+<input type="submit" value="Grabar" class="default" name="_save" />
+
+<input type="submit" value="{{next_set_description}}" name="_next_set"  />
+<input type="submit" value="Grabar y continuar editando" name="_continue_editing" />
+</div>
+
+</form></div>
+{% endblock %}

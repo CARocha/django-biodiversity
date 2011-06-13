@@ -12,7 +12,7 @@ class Pais(models.Model):
       
     class Meta:
         verbose_name_plural = "Pais"
-        app_label = "Datos Generales"
+        #app_label = "Datos Generales"
         db_table = 'diversity_pais'
 
     def __unicode__(self):
@@ -36,7 +36,7 @@ class Lugar(models.Model):
     class Meta:
         verbose_name_plural = "Zonas"
         verbose_name = "Zona"
-        app_label = "Datos Generales"
+        #app_label = "Datos Generales"
         db_table = 'diversity_lugar'
     
     def __unicode__(self):
@@ -50,7 +50,7 @@ class FotosLugar(models.Model):
     class Meta:
         verbose_name_plural = "Fotos de Zonas"
         verbose_name = "Foto de Zona"
-        app_label = "Datos Generales"
+        #app_label = "Datos Generales"
         db_table = 'diversity_fotoszona'
 
 class Socios(models.Model):
@@ -69,7 +69,7 @@ class Socios(models.Model):
     class Meta:
         verbose_name = "Socios"
         verbose_name_plural = "Socio"
-        app_label = "Datos Generales"
+        #app_label = "Datos Generales"
         db_table = 'diversity_socios'
 
     def __unicode__(self):
@@ -87,5 +87,5 @@ class TextoInicio(models.Model):
         
     class Meta:
         verbose_name_plural = "Texto del Inicio"
-        app_label = "Datos Generales"
+        #app_label = "Datos Generales"
         db_table = 'diversity_textoinicio'

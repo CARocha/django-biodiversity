@@ -1,6 +1,57 @@
 {% extends "base.html" %}
 {%block extra_header%}
-{% endblock %}
+<script type="text/javascript" src="/files/js/highcharts.js"></script>
+<script type="text/javascript" src="/files/js/exporting_patched.js"></script>
+<script type='text/javascript'>
+  $(document).ready(function(){
+		var chart =  Highcharts.Chart({
+		  chart: {
+			 renderTo: 'grafohs',
+			 defaultSeriesType: 'line',
+			 marginRight: 130,
+			 marginBottom: 25,
+			 height: 500,
+			 width: 950,
+		  },
+		  title: {
+       text: "Precio al {{tipo}}",
+			 x: -20 //center
+		  },
+		  xAxis: {
+       categories: [ {%for mes in tiempos%}"{{mes}}",{%endfor%}]
+		  },
+		  yAxis: {
+			 min: 0,
+			 title: {
+				text: ''
+			 },
+			 plotLines: [{
+				value: 0,
+				width: 1,
+				color: '#808080'
+			 }]
+		  },
+		  tooltip: {
+			 formatter: function() {
+					   return '<b>'+ this.series.name +'</b><br/>'+
+				   this.x +': '+ this.y;
+			 }
+		  },
+		  legend: {
+			 layout: 'vertical',
+			 align: 'right',
+			 verticalAlign: 'top',
+			 x: 10,
+			 y: 100,
+			 borderWidth: 0
+		  },
+     series: [
+        {% for dato in filas%} {data: {{dato.valores}}, name: "{{dato.leyenda}}" }, {%endfor%}
+      ]
+	   });
+  });  
+</script>
+{%endblock%}
 {% block menu %}  
 {% endblock %}
 
@@ -37,7 +88,7 @@
         {%endfor%}
       </tbody>
     </table>
-    <img src="{{url}}" />
 
+<div id="grafohs"></div>
 </div>
 {% endblock %}

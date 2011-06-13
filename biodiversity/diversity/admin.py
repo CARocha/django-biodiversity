@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+#from django.contrib.auth.decorators import permission_required
+from django.shortcuts import render_to_response, redirect
+from django.forms.models import inlineformset_factory
+from django.template import RequestContext
+from django.shortcuts import get_object_or_404
 from models import *
 from biodiversity.noticias.models import *
 from biodiversity.clima.models import *
 from biodiversity.precio.models import *
+from biodiversity.precio.forms import *
 
 class PaisAdmin(admin.ModelAdmin):
     save_on_top = True
@@ -55,6 +61,43 @@ class PrecioAdmin(admin.ModelAdmin):
     list_display_links = ('id','titulo',)
 #    list_display = ('precioconsumidor', 'precioproductor', 
 #                    'productoconsumidor', 'productoproductor',)
+
+    #@permission_required('precio.add_precio')
+    def admin_agregar_precio(model_admin, request):
+        opts = model_admin.model._meta
+        admin_site = model_admin.admin_site
+        has_perm = request.user.has_perm(opts.app_label + '.' + opts.get_add_permission())
+        if request.method == "POST":
+            form = PrecioSeleccionadorForm(request.POST, request.FILES)
+            if form.is_valid():
+                zona = form.cleaned_data['lugar']
+                precio = Precios(titulo="Precio para %s" % zona.nombre, zona=zona)
+                precio.save()
+                return redirect('admin:precio_precios_change', precio.id)
+        else:
+            form = PrecioSeleccionadorForm()
+
+        context = {'admin_site': admin_site.name,
+                'title': "Agregar precio",
+                'opts': opts,
+                'form': form,
+                'root_path': '/%s' % admin_site.root_path,
+                'app_label': opts.app_label,
+                'has_change_permission': has_perm}
+        template = 'admin/precio/admin_agregar_precio.html',
+        return render_to_response(template, context, 
+                context_instance=RequestContext(request))
+
+    def get_urls(self):
+        from django.conf.urls.defaults import *
+        urls = super(PrecioAdmin, self).get_urls()
+        my_urls = patterns('',
+                url(
+                    r'add',
+                    self.admin_site.admin_view(self.admin_agregar_precio),
+                    name='admin_add_precios'),
+                )
+        return my_urls + urls
     
 class ClimaInline(admin.TabularInline):
     model = Clima

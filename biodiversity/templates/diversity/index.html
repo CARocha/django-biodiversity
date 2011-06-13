@@ -2,31 +2,88 @@
 {% block title %}Home{% endblock %}
 {%block extra_header%}
 <script type="text/javascript" src="/files/js/jquery.nivo.slider.pack.js"></script>
+<script type="text/javascript" src="/files/js/highcharts.js"></script>
+<script type="text/javascript" src="/files/js/exporting_patched.js"></script>
 <script type='text/javascript'>
   $(document).ready(function(){
     //consumidor a pata
     $.getJSON('/precio/ajax/consumidor/', function(data){
-                $("#grafico").html('');
-                $("#grafico").html("<img src='" + data.url +"'/>");
+                render_chart(data);
             });
     $('.controles a').click(function (){
         var titulo = $(this).attr('id');
         if(titulo=='humedad' || titulo=='temperatura' || titulo == 'precipitacion'){
             $.getJSON('/clima/ajax/' + titulo + '/', function(data){
-                $("#grafico").html('');
-                $("#grafico").html("<img src='" + data.url +"'/>");
+                render_chart(data);
             });
         }else if(titulo=='productor' || titulo=='consumidor'){
             $.getJSON('/precio/ajax/' + titulo + '/', function(data){
-                $("#grafico").html('');
-                $("#grafico").html("<img src='" + data.url +"'/>");
-            });
+                render_chart(data);
+            });    
         }
         $('.state_selected').removeClass('state_selected');
         $(this).addClass('state_selected');
         return false;
     });
-  });
+    
+    var lista_maker = function(data, legends){
+		var result = [];
+		for (i=0; i<data.length; i++){
+			result[i] = {name: legends[i], data: data[i]};
+		}
+		return result
+	}
+			
+    var render_chart = function(data){
+		new Highcharts.Chart({
+		  chart: {
+			 renderTo: 'grafico',
+			 defaultSeriesType: 'line',
+			 marginRight: 130,
+			 marginBottom: 25,
+			 height: 500,
+			 width: 950,
+		  },
+		  title: {
+			 text: data.titulo,
+			 x: -20 //center
+		  },
+		  /*subtitle: {
+			 text: 'Source: WorldClimate.com',
+			 x: -20
+		  },*/
+		  xAxis: {
+			 categories: data.labels
+		  },
+		  yAxis: {
+			 min: 0,
+			 title: {
+				text: ''
+			 },
+			 plotLines: [{
+				value: 0,
+				width: 1,
+				color: '#808080'
+			 }]
+		  },
+		  tooltip: {
+			 formatter: function() {
+					   return '<b>'+ this.series.name +'</b><br/>'+
+				   this.x +': '+ this.y;
+			 }
+		  },
+		  legend: {
+			 layout: 'vertical',
+			 align: 'right',
+			 verticalAlign: 'top',
+			 x: 10,
+			 y: 100,
+			 borderWidth: 0
+		  },
+		  series: lista_maker(data.filas, data.leyendas)
+	   });
+  };
+  });  
 </script>
 {%endblock%}
 {% block contenido %}

@@ -1,0 +1,17 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+{% block breadcumbs %}
+<div class="breadcumbs">
+  <a href="../../">{%trans "Home" %}</a> &rsaquo;
+  <a href="../">mEEEE</a> &rsaquo;
+  {% if has_change_permission %}<a href='../'>{{opts.verbose_name_plural|capfirst}}</a>
+  {%else%}{{opts.verbose_name_plural|capfirst}}{%endif%} &rsaquo; Agregar Precio
+</div>
+{%endblock%}
+{% block content%}
+<form method="POST" action=".">
+{% csrf_token %}
+{{form.as_table}}
+<input type="submit" value="{% trans "Add"%}"/>
+</form>
+{%endblock%}
