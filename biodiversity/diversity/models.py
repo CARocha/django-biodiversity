@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from thumbs import ImageWithThumbsField
-from biodiversity.utils import get_file_path 
+from biodiversity.utils import get_file_path
 
 class Pais(models.Model):
     ''' Modelo para contener todos los paises
@@ -9,7 +9,7 @@ class Pais(models.Model):
     '''
     nombre = models.CharField(max_length=200)
     codigo_int = models.CharField('Codigo Internacional', max_length=2, help_text="Ejemplo > Nicaragua = ni")
-      
+
     class Meta:
         verbose_name_plural = "Pais"
         #app_label = "Datos Generales"
@@ -38,7 +38,7 @@ class Lugar(models.Model):
         verbose_name = "Zona"
         #app_label = "Datos Generales"
         db_table = 'diversity_lugar'
-    
+
     def __unicode__(self):
         return '%s, %s' % (self.nombre, self.pais.nombre)
 
@@ -54,7 +54,7 @@ class FotosLugar(models.Model):
         db_table = 'diversity_fotoszona'
 
 class Socios(models.Model):
-    ''' Modelo que contendra un pegueño perfil de las 
+    ''' Modelo que contendra un pegueño perfil de las
     organizaciones socias
     '''
     zona = models.ManyToManyField(Lugar)
@@ -63,9 +63,9 @@ class Socios(models.Model):
     logotipo = ImageWithThumbsField(upload_to=get_file_path,
                sizes=((150,150),(200,175)), null=True, blank=True)
     correo = models.EmailField(null=True, blank=True)
-    
+
     fileDir = 'socios/logos'
-    
+
     class Meta:
         verbose_name = "Socios"
         verbose_name_plural = "Socio"
@@ -74,18 +74,32 @@ class Socios(models.Model):
 
     def __unicode__(self):
         return self.nombre
-        
+
 class TextoInicio(models.Model):
-    ''' modelos del blabla del inicio de 
+    ''' modelos del blabla del inicio de
         bioversity
     '''
-    titulo = models.CharField(max_length=200)   
+    titulo = models.CharField(max_length=200)
     texto = models.TextField()
-    
+
     def __unicode__(self):
         return  self.titulo
-        
+
     class Meta:
         verbose_name_plural = "Texto del Inicio"
         #app_label = "Datos Generales"
         db_table = 'diversity_textoinicio'
+
+class FotoInicio(models.Model):
+    ''' modelo para las fotos del slider del inicio
+    '''
+    leyenda = models.CharField(max_length=250)
+    foto = ImageWithThumbsField(upload_to=get_file_path,
+               sizes=((415,212),(200,175)), null=True, blank=True)
+    fileDir = 'fotos/inicio'
+    def __unicode__(self):
+        return  self.leyenda
+
+    class Meta:
+        verbose_name_plural = "Fotos del inicio"
+        db_table = 'diversity_fotoinicio'
