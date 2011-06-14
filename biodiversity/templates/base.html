@@ -34,9 +34,14 @@
                 <a href="/accounts/login/" title="Login">Iniciar Sesi&oacute;n</a>
                 {% endif %}
             </div>
+           <style type="text/css">
+            {% if user.is_authenticated %}
+            .header .nav .menu{
+                margin-top: 39px !important;
+            }
+            {% endif %}
+        </style>
             <div class="header">
-
-
                 <div class="nav">
                     <div class="menu">
                         <ul>

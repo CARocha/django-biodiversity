@@ -46,10 +46,11 @@ a{
     width: 268px;
 }
 .header .nav{
-    float: left;
+    float: right;
+    margin-top:22px;
 }
 .header .nav .menu{
-    float: left;
+    float: right;
     margin-left: 430px;
     margin-top:61px;
 }
@@ -246,7 +247,9 @@ a{
     height:29px;
     padding-top:4px;
 }
-
+.popup .banner_content{
+    color:#000;
+    }
 #barra_busqueda #busqueda{
     border:#dfdfdf 1px solid;
     width:250px;
