@@ -21,9 +21,9 @@ def index(request):
     '''
     #para el inicio sea mas dinamico
     inicio = TextoInicio.objects.all()
-
+    fotos = FotoInicio.objects.all()
     request.session['flag'] = 'index'
-    notis = Noticias.objects.all().order_by('fecha')
+    notis = Noticias.objects.all().order_by('fecha')[:2]
     lista = []
     for n in notis:
         if n.galeria_set.all():

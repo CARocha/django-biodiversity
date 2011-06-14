@@ -45,21 +45,21 @@ class ProductoAdmin(admin.ModelAdmin):
     list_display = ('nombre', )
     list_filter = ['nombre', ]
     search_fields = ['nombre',]
-    
+
 class PrecioInline(admin.TabularInline):
     model = Precio
     extra = 1
-    
+
 class PrecioConsumidorInline(admin.TabularInline):
     model = PrecioConsumidor
     extra = 1
-    
+
 class PrecioAdmin(admin.ModelAdmin):
     actions_on_top = True
     inlines = [PrecioInline,PrecioConsumidorInline]
     list_display = ('id', 'titulo',)
     list_display_links = ('id','titulo',)
-#    list_display = ('precioconsumidor', 'precioproductor', 
+#    list_display = ('precioconsumidor', 'precioproductor',
 #                    'productoconsumidor', 'productoproductor',)
 
     #@permission_required('precio.add_precio')
@@ -85,7 +85,7 @@ class PrecioAdmin(admin.ModelAdmin):
                 'app_label': opts.app_label,
                 'has_change_permission': has_perm}
         template = 'admin/precio/admin_agregar_precio.html',
-        return render_to_response(template, context, 
+        return render_to_response(template, context,
                 context_instance=RequestContext(request))
 
     def get_urls(self):
@@ -98,18 +98,18 @@ class PrecioAdmin(admin.ModelAdmin):
                     name='admin_add_precios'),
                 )
         return my_urls + urls
-    
+
 class ClimaInline(admin.TabularInline):
     model = Clima
     extra = 1
     max_num = 4
-    
+
 class ClimasAdmin(admin.ModelAdmin):
     actions_on_top = True
     inlines = [ClimaInline,]
     list_display = ('id','nombre',)
     list_display_links = ('id','nombre',)
-    
+
 
 class SociosAdmin(admin.ModelAdmin):
     save_on_top = True
@@ -117,12 +117,12 @@ class SociosAdmin(admin.ModelAdmin):
     list_display = ('nombre', )
     list_filter = ['nombre', ]
     search_fields = ['nombre',]
-	
+
 class GaleriaInline(admin.TabularInline):
     model = Galeria
     extra = 1
     max_num = 6
-	
+
 class NoticiasAdmin(admin.ModelAdmin):
     save_on_top = True
     actions_on_top = True
@@ -131,13 +131,13 @@ class NoticiasAdmin(admin.ModelAdmin):
     list_filter = ['titulo', ]
     search_fields = ['titulo',]
     date_hierarchy = 'fecha'
-    
+
     class Media:
         js = ['../files/js/tiny_mce/tiny_mce.js',
               '../files/js/editores/textareas.js',]
 
 class FotosLugarInline(admin.TabularInline):
-    model = FotosLugar 
+    model = FotosLugar
     extra = 1
 
 class LugarAdmin(admin.ModelAdmin):
@@ -160,3 +160,4 @@ admin.site.register(Moneda)
 admin.site.register(TipoCambio)
 admin.site.register(Noticias, NoticiasAdmin)
 admin.site.register(TextoInicio)
+admin.site.register(FotoInicio)

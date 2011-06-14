@@ -19,21 +19,21 @@
         }else if(titulo=='productor' || titulo=='consumidor'){
             $.getJSON('/precio/ajax/' + titulo + '/', function(data){
                 render_chart(data);
-            });    
+            });
         }
         $('.state_selected').removeClass('state_selected');
         $(this).addClass('state_selected');
         return false;
     });
-    
+
     var lista_maker = function(data, legends){
-		var result = [];
-		for (i=0; i<data.length; i++){
-			result[i] = {name: legends[i], data: data[i]};
-		}
-		return result
-	}
-			
+        var result = [];
+        for (i=0; i<data.length; i++){
+            result[i] = {name: legends[i], data: data[i]};
+        }
+        return result
+    }
+
     var render_chart = function(data){
 		new Highcharts.Chart({
 		  chart: {
@@ -83,7 +83,7 @@
 		  series: lista_maker(data.filas, data.leyendas)
 	   });
   };
-  });  
+  });
 </script>
 {%endblock%}
 {% block contenido %}
@@ -91,21 +91,30 @@
     <div class="left">
         <div class="banner_content">
         {% for texto in inicio %}
-            <span style="font-weight: bold;">{{texto.titulo}}</span> <br>{{texto.texto|truncatewords:100}}
+            <span style="font-weight: bold; color:#fce94f;">{{texto.titulo}}</span> <br>{{texto.texto|truncatewords:25}}
         {% endfor %}
         </div>
-        <a class="leer-mas" href="/bioversity/textos/" rel="facebox"></a><a class="mapas" href="/bioversity/mapa/"></a>
+        <div style="width:110px;float:right;margin-right:5px;"><a class="leer-mas" href="/bioversity/textos/" rel="facebox">Leer mas</a><a class="mapas" href="/bioversity/mapa/">Mapa de zonas</a></div>
     </div>
     <div class="right">
         <div id="slider" style="min-width: 328px !important; min-height: 213px !important;">
-            {% for noticia in lista %}
-            <a href="/noticias/ver/{{noticia.id}}">
-                {% for galeria in  noticia.adjunto.all %}
-                <img alt="{{galeria.nombre}}" src="{{galeria.adjunto.url_328x213}}" title="<a href='/noticias/ver/{{noticia.id}}'>Noticia: {{galeria.nombre}}</a>">
-                {% endfor %}
-            </a>
+            {% for foto in fotos %}
+                <img alt="{{foto.leyenda}}" src="{{foto.foto.url_415x212}}" title="{{foto.leyenda}}">
             {% endfor %}
         </div>
+    </div>
+    <div class="noticiabanner">
+        <div class="noticias">NOTICIAS</div>
+        {% for noticia in notis %}
+                <div class="unanota">
+                {% for galeria in  noticia.adjunto.all %}
+                    {%if forloop.first %}
+                    <img alt="{{galeria.nombre}}" src="{{galeria.adjunto.url_132x117}}" title="<a href='/noticias/ver/{{noticia.id}}'>Noticia: {{galeria.nombre}}</a>">
+                    {%endif%}
+                {% endfor %}
+                <a href="/noticias/ver/{{noticia.id}}">{{noticia.titulo|truncatewords:13}}</a>
+                </div>
+         {% endfor %}
     </div>
     <div class="clean"></div>
 </div>
@@ -114,8 +123,7 @@
     <div class="big price" id="boton-precio">
         <div class="b_info">
             <span class="b_title">Precio</span><br>
-            Precios de bananas
-            en puntos de control
+            Precio de banano agroforestal al consumidor y al productor en zonas selectas
         </div>
     </div>
     </a>
@@ -123,10 +131,7 @@
     <div class="big clima" id="boton-clima">
         <div class="b_info">
             <span class="b_title">Clima</span><br>
-            Precipitaciones,
-            temperatura y humedad
-            de suelo de puntos
-            de control
+            Clima en zonas de banano con arboles
         </div>
     </div>
     </a>
@@ -162,7 +167,7 @@
             effect:'random', //Specify sets like: 'fold,fade,sliceDown'
             slices:8,
             animSpeed:1000, //Slide transition speed
-            pauseTime:3000,
+            pauseTime:5000,
             startSlide:0, //Set starting Slide (0 index)
             directionNav:true, //Next & Prev
             directionNavHide:false, //Only show on hover

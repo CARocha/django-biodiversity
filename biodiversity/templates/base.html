@@ -22,13 +22,6 @@
         <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <style type="text/css">
-            {% if user.is_authenticated %}
-            .header .nav .menu{
-                margin-top: -23px !important;
-            }
-            {% endif %}
-        </style>
     {%block extra_header%}{%endblock%}
     </head>
     <body>
@@ -43,9 +36,7 @@
             </div>
             <div class="header">
 
-                <div class="pagetitle">
-                    <img src="/files/img/pagetitle.png" alt="Sistema de informacion Bioversity">
-                </div>
+
                 <div class="nav">
                     <div class="menu">
                         <ul>
