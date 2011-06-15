@@ -55,6 +55,8 @@ def grafo(request, tipo):
     '''Grafo generado del precio'''
     leyendas = []
     models = dict(productor = Precio, consumidor=PrecioConsumidor)
+    moneda = None 
+    unidad = None
     if tipo in models.keys():
         filas = []
         params = _get_params(request)
@@ -71,30 +73,45 @@ def grafo(request, tipo):
                 params['fecha__month'] = mes
                 if normalizar==False:
                     precio = models[tipo].objects.filter(**params).aggregate(valor = Avg('precio_%s' % tipo))['valor']
-                    try:
-                        moneda = models[tipo].objects.filter(**params)[0].moneda.nombre 
-                    except:
-                        for coso in models[tipo].objects.filter(**params):
-                            if coso.moneda.nombre:
-                                moneda = coso.moneda.nombre
-                                break
+                    if not unidad:
+                        try: 
+                            unidad = models[tipo].objects.filter(**params)[0].unidad.nombre
+                        except:
+                            pass
+                    if not moneda:
+                        try:
+                            moneda = models[tipo].objects.filter(**params)[0].moneda.nombre 
+                        except:
+                            pass
+                        #codigo no corerra nunca pero mejor lo dejo LOL
+                        #for coso in models[tipo].objects.filter(**params):
+                        #    if coso.moneda.nombre:
+                        #        moneda = coso.moneda.nombre
+                        #        break
                 else:
                     #sacamos un promedio de lo internacional a manopla
-                    moneda = 'Dollar'
+                    moneda = 'Dolar'
                     total = 0
                     for objeto in  models[tipo].objects.filter(**params):
                         total += objeto.to_int()[0]
+                        if not unidad:
+                            try:
+                                unidad = objeto.unidad.unidad_int.nombre
+                            except:
+                                pass
                     try:
                         precio = total/models[tipo].objects.filter(**params).count() 
                     except: 
                         precio = 0
-
+                    
                 valores.append(float(precio)) if precio != None else valores.append(0)
             fila = {'leyenda': leyenda, 'valores': valores}
             filas.append(fila)
         return render_to_response('precio/%s.html' % tipo,
                                   {'tiempos': MESES,
                                   'filas': filas,
+                                  'moneda': moneda,
+                                  'unidad': unidad,
                                   'leyendas': leyendas,
                                   'tipo':tipo},
                                   context_instance = RequestContext(request))

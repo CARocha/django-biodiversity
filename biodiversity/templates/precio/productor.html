@@ -7,14 +7,14 @@
 		var chart =  Highcharts.Chart({
 		  chart: {
 			 renderTo: 'grafohs',
-			 defaultSeriesType: 'line',
+			 defaultSeriesType: 'scatter',
 			 marginRight: 130,
 			 marginBottom: 25,
 			 height: 360,
 			 width: 950,
 		  },
 		  title: {
-       text: "Precio al {{tipo}}",
+       text: "Precio al {{tipo}}{%if moneda and unidad%}({{moneda}}/{{unidad}}){%endif%}",
 			 x: -20 //center
 		  },
 		  xAxis: {
@@ -62,7 +62,7 @@
             <a href="/precio/grafo/consumidor/">Consumidor</a>
     </div>
     <br>
-        <div>Precios al productor</div>
+        <div>Precio al {{tipo}}{%if moneda and unidad%}({{moneda}}/{{unidad}}){%endif%}</div>
     <br>
     <table class="grafo">
       <thead>
@@ -79,7 +79,7 @@
           <th scope="row">{{fila.leyenda}}</th>
           {%for valor in fila.valores%}
           {%if valor%}
-          <td>{{valor}}</td>
+          <td>{{valor|floatformat:3}}</td>
           {%else%}
           <td>0</td>
           {%endif%}

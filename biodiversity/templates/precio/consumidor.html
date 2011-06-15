@@ -14,7 +14,7 @@
 			 width: 950,
 		  },
 		  title: {
-       text: "Precio al {{tipo}}",
+       text: "Precio al {{tipo}}{%if moneda and unidad%}({{moneda}}/{{unidad}}){%endif%}",
 			 x: -20 //center
 		  },
 		  /*subtitle: {
@@ -66,7 +66,7 @@
             <a href="/precio/grafo/consumidor/" {% if tipo == 'consumidor'%}class="state_selected"{%endif%}>Consumidor</a>
     </div>
     <br>
-        <div>Precios al consumidor</div>
+        <div>Precio al {{tipo}}{%if moneda and unidad%}({{moneda}}/{{unidad}}){%endif%}</div>
     <br>
 <table class="grafo">
   <thead>
@@ -83,7 +83,7 @@
       <th scope="row">{{fila.leyenda}}</th>
       {%for valor in fila.valores%}
       {%if valor%}
-      <td>{{valor}}</td>
+      <td>{{valor|floatformat:3}}</td>
       {%else%}
       <td>0</td>
       {%endif%}

@@ -70,7 +70,7 @@ def grafohumedad(request):
         tabla.append({'leyenda': zona.nombre, 'valores': valores})  
     
     dicc = {'tabla': tabla, 
-            'titulo': "Humedad Promedio",
+            'titulo': "Humedad de suelo Promedio(%)",
             'columnas': [mes[1] for mes in CICLO_MES_AB]}
     return render_to_response('clima/grafo_humedad.html', dicc,
                              context_instance=RequestContext(request))
@@ -116,17 +116,11 @@ def clima(request, tipo):
             valores.append([int(v) for v in valores_min])
             filas.append(dict(leyenda = 'Maximas en %s' % zona.nombre, valores = valores_max))
             filas.append(dict(leyenda = 'Minimas en %s' % zona.nombre, valores = valores_min))
-        grafo_url = grafos.make_graph(valores, leyendas, 
-                                      'Temperatura max y minima', 
-                                      MESES,
-                                      type = grafos.LINE_CHART, multiline=True, 
-                                      thickness=3, units = ['semana#', 'C'], 
-                                      time=semanas)
+
         return render_to_response('clima/clima.html',
                                   {'tiempos': semanas,
                                   'filas': filas, 
-                                  'url': grafo_url,
-                                  'titulo': 'Temperaturas máximas y mínimas(promedio)',
+                                  'titulo': 'Temperaturas máximas y mínimas(promedio semanal en grados Celsius)',
                                   'tipo':tipo},
                                   context_instance = RequestContext(request))
     elif tipo in ('precipitacion', 'humedad'):
@@ -158,25 +152,12 @@ def clima(request, tipo):
 
         titulo = ''
         if tipo == "precipitacion":
-            grafo_url = grafos.make_graph(filas_grafo, leyendas,  
-                                          'Precipitación promedio',
-                                          MESES,
-                                          type = grafos.LINE_CHART, multiline=True, 
-                                          thickness=3, units = ['semana', 'mm'], 
-                                          time=semanas)
-            titulo = "Precipitación Promedio"
+            titulo = "Precipitación Acumulada Semanal(mm)"
         elif tipo == "humedad":
-            grafo_url = grafos.make_graph(filas_grafo, leyendas,  
-                                          'Humedad relativa promedio',
-                                          MESES,
-                                          type = grafos.LINE_CHART, multiline=True, 
-                                          thickness=3, units = ['semana', '%'], 
-                                          time=semanas)
-            titulo = "Humedad Relativa Promedio"
+            titulo = "Humedad Relativa Promedio (%)"
         return render_to_response('clima/clima.html',
                                   {'tiempos': semanas,
                                   'filas': filas, 
-                                  'url': grafo_url,
                                   'titulo': titulo,
                                   'tipo':tipo},
                                   context_instance = RequestContext(request))
@@ -219,7 +200,7 @@ def ajax_temperatura(request):
         valores.append([int(v) for v in valores_min])
 
     json = simplejson.dumps(dict(filas=valores, leyendas=leyendas, 
-                                 titulo='Temperatura max y minima en las semanas del año %s' % params['ano'], 
+                                 titulo='Temperatura max y minima en las semanas del año %s (grados Celsius)' % params['ano'], 
                                  labels = MESES, units = ['semana', 'C']))
     return HttpResponse(json, mimetype='application/javascript') 
                                  
