@@ -75,17 +75,17 @@
         </div>
         <br>
 <table class="grafo" style ="width:940px !important;">
-	<thead>
-		<tr>
-			<td></td>
+    <thead>
+        <tr>
+            <td></td>
       {%for columna in columnas%}
       <th scope="col">{{columna}}</th>
       {%endfor%}
-		</tr>
-	</thead>
-	<tbody>
-      {%for fila in tabla%}	
-    <tr class="{%cycle  '' 'odd'%}">            
+        </tr>
+    </thead>
+    <tbody>
+      {%for fila in tabla%}
+    <tr class="{%cycle  '' 'odd'%}">
          <th scope="row">{{fila.leyenda}}</th>
          {%for valor in fila.valores%}
          <td >{{valor}}</td>

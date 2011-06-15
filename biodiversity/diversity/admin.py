@@ -145,6 +145,16 @@ class LugarAdmin(admin.ModelAdmin):
     actions_on_top = True
     inlines = [FotosLugarInline]
 
+    class Media:
+        js = ['../files/js/tiny_mce/tiny_mce.js',
+              '../files/js/editores/textareas.js',]
+
+class TextoInicioAdmin(admin.ModelAdmin):
+
+    class Media:
+        js = ['../files/js/tiny_mce/tiny_mce.js',
+              '../files/js/editores/textareas.js',]
+
 admin.site.register(Pais)
 admin.site.register(Lugar, LugarAdmin)
 #admin.site.register(Lugar)
@@ -159,5 +169,5 @@ admin.site.register(Humedad)
 admin.site.register(Moneda)
 admin.site.register(TipoCambio)
 admin.site.register(Noticias, NoticiasAdmin)
-admin.site.register(TextoInicio)
+admin.site.register(TextoInicio, TextoInicioAdmin)
 admin.site.register(FotoInicio)
