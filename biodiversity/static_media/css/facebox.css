@@ -47,6 +47,8 @@
   padding: 0;
 }
 
+
+
 #facebox .body {
   padding: 10px;
   background: #fff url(/files/img/fondopopup.png) repeat-x;
@@ -104,4 +106,9 @@
 * html #facebox_overlay { /* ie6 hack */
   position: absolute;
   height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');
+}
+
+#facebox .content{
+  overflow-x:hidden;
+  overflow-y:auto;
 }

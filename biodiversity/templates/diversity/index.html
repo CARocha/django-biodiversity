@@ -91,7 +91,7 @@
     <div class="left">
         <div class="banner_content">
         {% for texto in inicio %}
-            <span style="font-weight: bold; color:#fce94f;">{{texto.titulo}}</span> <br>{{texto.texto|truncatewords:20}}
+            <span style="font-weight: bold; color:#fce94f;">{{texto.titulo}}</span> <br>{{texto.texto|striptags|safe|truncatewords:20}}
         {% endfor %}
         </div>
         <div style="width:110px;float:right;margin-right:5px;"><a class="leer-mas" href="/bioversity/textos/" rel="facebox">Leer mas</a><a class="mapas" href="/bioversity/mapa/">Mapa de zonas</a></div>
