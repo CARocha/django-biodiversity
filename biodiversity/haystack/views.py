@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from haystack.forms import ModelSearchForm
 from haystack.query import EmptySearchQuerySet
+from documentos.models import Categoria
 
 
 RESULTS_PER_PAGE = getattr(settings, 'HAYSTACK_SEARCH_RESULTS_PER_PAGE', 20)
@@ -107,7 +108,7 @@ class SearchView(object):
         
         Must return a dictionary.
         """
-        return {}
+        return {'categorias': Categoria.objects.all()}
     
     def create_response(self):
         """

@@ -3,12 +3,51 @@
 {%block extra_header%}
 {%endblock%}
 {%block contenido%}
-    <h2>{{documento.titulo}}</h2>
-    {{documento.resumen}}
-    {{documento.fecha}}
-    {{documento.publico}}
-    {{documento.palabra_clave}}
-       
+<div id="sidebar">
+    <div class="titulo">Directorio</div>
+    <div id="listacarpetas">
+        {%for categoria in categorias %}
+        <a href="/documentos/categoria/{{categoria.id}}">
+            {{categoria.nombre}}<br>
+            <span style="color:#565656">{{categoria.conteo}} archivos</span>
+        </a>
+        {%endfor%}
+    </div>
+</div>
+
+<div id="contenido">
+    <div id="encabezado_contenido">Biblioteca de documentos</div>
+    <div id="barra_busqueda">
+        <form action="/busqueda/" method="get">
+            <div>
+                <label>Buscar por Palabra Clave</label>
+                <input type="text" name="q" id="busqueda" value=""/>
+            </div>
+        </form>
+    </div>
+    <div class="archivo_lista">
+        <a href="#">
+            <div class="detalle_doc_prin" onClick="mostrar('{{documento.id}}');">
+                <img src="/files/img/archivo.png" align="left">
+                <div class="nombre_archivo">{{documento.titulo}}</div>
+                <div class="tag_archivo">{{documento.palabra_clave}}</div>
+                <div class="cuenta_archivo">{{documento.archivos_cuenta}} Adjuntos</div>
+
+            </div></a>
+        <div class="detalle_doc_sec" id="{{documento.id}}">
+            <div class="resumen_archivo">
+                {{documento.resumen}}
+            </div>
+            {%for adjunto in documento.adjuntos%}
+            <div class="adjunto_archivo">
+                <img src="/files/img/{{adjunto.tipo}}.png">
+                {{adjunto.adjunto}}
+                <a href="/files/{{adjunto.adjunto}}"><img style="float:right" src="/files/img/descargar_doc.jpg"></a>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+</div>
 {%endblock %}
 
  

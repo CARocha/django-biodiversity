@@ -18,13 +18,12 @@ def privados(request):
                               context_instance=RequestContext(request))
 def documento(request, documento_id):
     documento = get_object_or_404(Documentos, pk=documento_id)
-    if request.user.is_authenticated() and not documento.publico:
+    categorias = Categoria.objects.all()
+    if request.user.is_authenticated() or documento.publico:
         return render_to_response('documentos/documento.html',
-                                  {'documento': documento},
+                                  {'documento': documento, 'categorias': categorias},
                                   context_instance=RequestContext(request))
     else:
-        request.flash['message'] = 'Este documento no es público, favor inice sesión'
-        #return HttpResponseRedirect(reverse('django.contrib.auth.views.login'))
         return HttpResponseRedirect('/accounts/login?next=/documentos/documento/%s' % documento.id)
 
 def categoria(request, categoria_id):

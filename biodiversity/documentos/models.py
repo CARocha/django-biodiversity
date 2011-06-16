@@ -45,6 +45,9 @@ class Documentos(models.Model):
     def adjuntos(self):
         adjuntos = Adjunto.objects.filter(documento__id = self.id)
         return adjuntos
+
+    def get_full_url(self):
+        return '/documentos/documento/%d/' % self.id
         
 class Adjunto(models.Model):
     ''' Modelo para agregar varios archivos 

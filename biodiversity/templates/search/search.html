@@ -8,6 +8,17 @@ $(document).ready(function(){
 {% endblock %}
 
 {%block contenido%}
+<div id="sidebar">
+    <div class="titulo">Directorio</div>
+    <div id="listacarpetas">
+        {%for categoria in categorias %}
+        <a href="/documentos/categoria/{{categoria.id}}">
+            {{categoria.nombre}}<br>
+            <span style="color:#565656">{{categoria.conteo}} archivos</span>
+        </a>
+        {%endfor%}
+    </div>
+</div>
 <div id="contenido">
 <div id="encabezado_contenido">Búsquedas de documentos</div>
 <div id="barra_busqueda">
