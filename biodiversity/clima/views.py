@@ -242,7 +242,7 @@ def ajax_humedad(request):
         leyends.append(zona.nombre)
     
     json = simplejson.dumps(dict(filas=filas, leyendas=leyends, 
-                                 titulo='Humedad Promedio(%)',
+                                 titulo='Humedad de Suelo Promedio(%)',
                                  labels = [mes[1] for mes in CICLO_MES_AB],
                                  units = ['meses', 'g/m3']))
     return HttpResponse(json, mimetype='application/javascript') 
