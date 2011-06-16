@@ -12,7 +12,7 @@
             });
     $('.controles a').click(function (){
         var titulo = $(this).attr('id');
-        if(titulo=='humedad' || titulo=='temperatura' || titulo == 'precipitacion'){
+        if(titulo=='humedad' || titulo=='temperatura' || titulo == 'precipitacion' || titulo == 'humedad-relativa'){
             $.getJSON('/clima/ajax/' + titulo + '/', function(data){
                 render_chart(data);
             });
@@ -38,7 +38,7 @@
 		new Highcharts.Chart({
 		  chart: {
 			 renderTo: 'grafico',
-			 defaultSeriesType: 'line',
+			 defaultSeriesType: 'scatter',
 			 marginRight: 130,
 			 marginBottom: 25,
 			 height: 360,
@@ -153,7 +153,8 @@
             <a href="#" id="productor">Precios al productor</a>
             <a href="#" id="temperatura">Temperatura promedio</a>
             <a href="#" id="precipitacion">Precipitación promedio</a>
-            <a href="#" id="humedad">Humedad Promedio</a>
+            <a href="#" id="humedad">Humedad de Suelo</a>
+            <a href="#" id="humedad-relativa">Humedad Relativa</a>
         </div>
         <div class="clean"></div>
         <div id="grafico" class="grafico">

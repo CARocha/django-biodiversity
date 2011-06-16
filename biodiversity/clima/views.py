@@ -166,8 +166,6 @@ def clima(request, tipo):
 
 def ajax_temperatura(request):
     ''' Vista para hacer grafos de temperatura
-        tipo(string): Tipo de grafo
-        puede ser: temperatura, precipitacion.
     '''
     filas = []
     valores = []
@@ -201,8 +199,34 @@ def ajax_temperatura(request):
 
     json = simplejson.dumps(dict(filas=valores, leyendas=leyendas, 
                                  titulo='Temperatura max y minima en las semanas del año %s (grados Celsius)' % params['ano'], 
-                                 labels = MESES, units = ['semana', 'C']))
+                                 labels = semanas, units = ['semana', 'C']))
     return HttpResponse(json, mimetype='application/javascript') 
+
+def ajax_humedad_relativa(request):
+    ''' Vista para hacer grafos de temperatura
+    '''
+    filas = []
+    valores = []
+    params = dict(ano=datetime.datetime.now().year) 
+    leyendas = []
+
+    semanas = range(1, 53)
+    for zona in Lugar.objects.all(): 
+        params['zona'] = zona
+        humedades = []
+        for semana in semanas:
+            params['semana'] = semana
+            #se hace un FIX al params para que soporte ano y no fecha
+            humedad = Clima.objects.filter(**params).aggregate(humedad = Avg('humedad'))['humedad']
+            humedades.append(humedad)
+
+        valores.append(humedades)
+        leyendas.append('Humedad Relativa en %s' % zona.nombre) 
+
+    json = simplejson.dumps(dict(filas=valores, leyendas=leyendas, 
+                                 titulo='Humedad Relativa por semana año %s' % params['ano'], 
+                                 labels = semanas, units = ['semana', 'C']))
+    return HttpResponse(json, mimetype='application/javascript')
                                  
 def ajax_humedad(request):
     filas = []
@@ -218,7 +242,7 @@ def ajax_humedad(request):
         leyends.append(zona.nombre)
     
     json = simplejson.dumps(dict(filas=filas, leyendas=leyends, 
-                                 titulo='Humedad Promedio',
+                                 titulo='Humedad Promedio(%)',
                                  labels = [mes[1] for mes in CICLO_MES_AB],
                                  units = ['meses', 'g/m3']))
     return HttpResponse(json, mimetype='application/javascript') 
@@ -246,6 +270,6 @@ def ajax_precipitacion(request):
         leyendas.append(nombre_zona)
 
     json = simplejson.dumps(dict(filas=filas_grafo, leyendas=leyendas, 
-                                 titulo='Precipitación promedio en las semanas del año %s' % params['ano'], 
-                                 labels = MESES, units = ['semana', 'mm']))
+                                 titulo='Precipitación semanal del año %s (mm)' % params['ano'], 
+                                 labels = semanas, units = ['semana', 'mm']))
     return HttpResponse(json, mimetype='application/javascript') 

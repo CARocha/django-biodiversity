@@ -8,6 +8,7 @@ urlpatterns = patterns('clima.views',
                       (r'^clima/(?P<tipo>\w+)/$', 'clima'),
                       (r'^ajax/temperatura/$', 'ajax_temperatura'),
                       (r'^ajax/humedad/$', 'ajax_humedad'),
+                      (r'^ajax/humedad-relativa/$', 'ajax_humedad_relativa'),
                       (r'^ajax/precipitacion/$', 'ajax_precipitacion'),
               )
 
