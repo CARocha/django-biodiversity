@@ -39,7 +39,7 @@
                     icon: image,
                     id: elemento.id
                 });
-                attachInfowindow(marker, elemento.socios, elemento.zona, elemento.zonadescrip);
+                attachInfowindow(marker, elemento.socios, elemento.zona, elemento.zonadescrip, elemento.fotos);
             });
         });
 
@@ -68,12 +68,16 @@
         });
     });
 
-    function attachInfowindow(marker, socios, zona, descrip) {
+    function attachInfowindow(marker, socios, zona, descrip, fotos) {
         var ib;
         var salida;
         var text = document.createElement("div");
         text.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto; width:400px;";
-        salida = "<div class='infobox'><div class='mapazonadescrip'><span style='font-weight:bold;text-transform:uppercase;'>"+zona+"</span><br>"+descrip+"</div><ul><span style='font-weight:bold;text-transform:uppercase;'>Socios</span>";
+        salida = "<div class='infobox'><div class='mapazonadescrip'><span style='font-weight:bold;text-transform:uppercase;'>"+zona+"</span><br>"+descrip;
+        for(var i=0; i < fotos.length; i++){
+          salida += "<img height='50px' height='50px' src='" + fotos[i] + "'>";
+        }
+        salida += "</div><ul><span style='font-weight:bold;text-transform:uppercase;'>Socios</span>";
         for(var i=0; i < socios.length; i++){
             salida += "<li><a onclick='javascript:viewInfo("+socios[i].id+"); return false;' href='#'>"+socios[i].nombre+"</a></li>";
         }
