@@ -91,7 +91,8 @@ def ajax_zonas(request):
             'punto': (float(zona.latitud), float(zona.longitud)),
             'zona': zona.nombre,
             'socios': list(socios),
-            'zonadescrip': zona.descripcion
+            'zonadescrip': zona.descripcion,
+            'fotos': FotosLugar.objects.filter(lugar=zona).values_list('foto')[:3]
         }
         lista.append(dicc)
 
