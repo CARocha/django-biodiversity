@@ -18,7 +18,7 @@
 			 x: -20 //center
 		  },
 		  xAxis: {
-       categories: [ {%for mes in tiempos%}"{{mes}}",{%endfor%}]
+       categories: [ {%for mes in tiempos%}"{{mes}}"{%if not forloop.last%},{%endif%}{%endfor%}]
 		  },
 		  yAxis: {
 			 min: 0,
@@ -46,7 +46,7 @@
 			 borderWidth: 0
 		  },
      series: [
-        {% for dato in filas%} {data: {{dato.valores}}, name: "{{dato.leyenda}}" }, {%endfor%}
+        {% for dato in filas%} {data: {{dato.valores}}, name: "{{dato.leyenda}}" }{%if not forloop.last%},{%endif%}{%endfor%}
       ]
 	   });
   });  
