@@ -49,7 +49,7 @@
                     icon: image,
                     id: elemento.id
                 });
-                attachInfowindow(marker, elemento.socios, elemento.zona, elemento.zonadescrip, elemento.fotos);
+                attachInfowindow(marker, elemento.socios, elemento.zona, elemento.zonadescrip, elemento.fotos,elemento.fotosgran);
             });
         });
 
@@ -78,14 +78,14 @@
         });
     });
 
-    function attachInfowindow(marker, socios, zona, descrip, fotos) {
+    function attachInfowindow(marker, socios, zona, descrip, fotos,fotosgran) {
         var ib;
         var salida;
         var text = document.createElement("div");
         text.style.cssText = "border: 1px solid #92B900; background:#fff; padding: 5px; overflow: auto; width:400px;";
         salida = "<div class='infobox'><div class='mapazonadescrip'><span style='font-weight:bold;text-transform:uppercase;'>"+zona+"</span><br>"+descrip;
         for(var i=0; i < fotos.length; i++){
-          salida += "<a href='" + fotos[i] + "' rel='galeria'><img style='margin:3px;' height='70px' height='70px' src='" + fotos[i] + "'></a>";
+          salida += "<a href='" + fotosgran[i] + "' rel='galeria'><img style='margin:3px;' height='70px' height='70px' src='" + fotos[i] + "'></a>";
         }
         salida += "</div><ul><span style='font-weight:bold;text-transform:uppercase;'>Socios</span>";
         for(var i=0; i < socios.length; i++){
@@ -139,7 +139,6 @@
 <div class="clean"></div>
 <br>
 <div id="encabezado_contenido">Mapa de ubicación de socios y zonas de control <a id="disparador" href="#">Mostrar lista de zonas y socios <img src="/files/img/arrowdown.png"></a> <div class="clean"></div></div>
-
 <div id="map_canvas"></div>
 <div id="lista-actores">
     <table id="actores-table">

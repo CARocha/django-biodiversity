@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 def lista_noticias(request):
     request.session['flag'] = 'noticia'
     '''Vista de lista general de noticias paginadas'''
-    noticias_list = Noticias.objects.all()
+    noticias_list = Noticias.objects.all().order_by('-fecha')
     paginator = Paginator(noticias_list, 5) 
 
     try:

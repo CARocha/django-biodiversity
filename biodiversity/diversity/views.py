@@ -87,13 +87,15 @@ def ajax_zonas(request):
 
     for zona in zonas_list:
         fotos = [foto.foto.url_150x150 for foto  in FotosLugar.objects.filter(lugar=zona)[:3]]
+        fotosgran = [foto.foto.url for foto  in FotosLugar.objects.filter(lugar=zona)[:3]]
         socios = Socios.objects.filter(zona__id=zona.id).values('nombre', 'id')
         dicc = {
             'punto': (float(zona.latitud), float(zona.longitud)),
             'zona': zona.nombre,
             'socios': list(socios),
             'zonadescrip': zona.descripcion,
-            'fotos': fotos 
+            'fotos': fotos,
+            'fotosgran': fotosgran
         }
         lista.append(dicc)
 
