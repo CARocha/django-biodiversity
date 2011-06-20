@@ -10,7 +10,7 @@ $(document).ready(function() {
 		startSlide:0, //Set starting Slide (0 index)
 		directionNav:true, //Next & Prev
 		directionNavHide:true, //Only show on hover
-		controlNav:true, //1,2,3...
+		controlNav:false, //1,2,3...
 		controlNavThumbs:false, //Use thumbnails for Control Nav
       	controlNavThumbsFromRel:false, //Use image rel for thumbs
 		controlNavThumbsSearch: '.jpg', //Replace this with...
@@ -21,8 +21,7 @@ $(document).ready(function() {
 		captionOpacity:0.8, //Universal caption opacity
 		beforeChange: function(){},
 		afterChange: function(){},
-        prevText: '&nbsp;', // Prev directionNav text
-        nextText: '&nbsp;', // Next directionNav text
+
 		slideshowEnd: function(){}//Triggers after all slides have been shown
 	});
 });
