@@ -8,8 +8,6 @@
 		  chart: {
 			 renderTo: 'grafohs',
 			 defaultSeriesType: 'scatter',
-			 marginRight: 130,
-			 marginBottom: 25,
 			 height: 360,
 			 width: 950,
 		  },
@@ -42,12 +40,6 @@
 			 }
 		  },
 		  legend: {
-			 layout: 'vertical',
-			 align: 'right',
-			 verticalAlign: 'top',
-			 x: 10,
-			 y: 100,
-			 borderWidth: 0
 		  },
      series: [
        {% for dato in filas%} {data: {{dato.valores}}, name: "{{dato.leyenda}}" }{%if not forloop.last%},{%endif%}{%endfor%}

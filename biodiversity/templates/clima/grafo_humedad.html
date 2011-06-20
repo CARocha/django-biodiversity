@@ -10,49 +10,41 @@
         $('.dato_grafos1').width(ancho1);
         var chart =  Highcharts.Chart({
             chart: {
-             renderTo: 'grafohs',
-             defaultSeriesType: 'scatter',
-             marginRight: 130,
-             marginBottom: 25,
-             height: 360,
-             width: 950,
+                renderTo: 'grafohs',
+                defaultSeriesType: 'scatter',
+                height: 360,
+                width: 950,
             },
             title: {
-             text: "{{titulo}}",
-             x: -20 //center
+                text: "{{titulo}}",
+                x: -20 //center
             },
             xAxis: {
-             categories: [ {%for mes in tiempos%}"{{mes}}"{%if not forloop.last%},{%endif%}{%endfor%}]
+              categories: [ {%for mes in columnas%}"{{mes}}"{%if not forloop.last%},{%endif%}{%endfor%}]
             },
             yAxis: {
-             min: 0,
-             title: {
-              text: ''
-             },
-             plotLines: [{
-              value: 0,
-              width: 1,
-              color: '#808080'
-             }]
+                min: 0,
+                title: {
+                    text: ''
+                },
+                plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
             },
             tooltip: {
-             formatter: function() {
-                   return '<b>'+ this.series.name +'</b><br/>'+
-                 this.x +': '+ this.y;
-             }
+                formatter: function() {
+                    return '<b>'+ this.series.name +'</b><br/>'+
+                        this.x +': '+ this.y;
+                }
             },
             legend: {
-             layout: 'vertical',
-             align: 'right',
-             verticalAlign: 'top',
-             x: 10,
-             y: 100,
-             borderWidth: 0
             },
-           series: [
-            {% for dato in filas%} {data: {{dato.valores}}, name: "{{dato.leyenda}}" }{%if not forloop.last%},{%endif%}{%endfor%}
+            series: [
+                {% for dato in tabla%} {data: {{dato.valores}}, name: "{{dato.leyenda}}" }{%if not forloop.last%},{%endif%}{%endfor%}
             ]
-           });
+        });
     });
 </script>
 {% endblock %}
