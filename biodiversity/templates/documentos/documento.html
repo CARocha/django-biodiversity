@@ -3,6 +3,7 @@
 {%block extra_header%}
 {%endblock%}
 {%block contenido%}
+<br>
 <div id="sidebar">
     <div class="titulo">Directorio</div>
     <div id="listacarpetas">
@@ -14,7 +15,6 @@
         {%endfor%}
     </div>
 </div>
-
 <div id="contenido">
     <div id="encabezado_contenido">Biblioteca de documentos</div>
     <div id="barra_busqueda">
@@ -32,7 +32,7 @@
                 <div class="nombre_archivo">{{documento.titulo}}</div>
                 <div class="tag_archivo">{{documento.palabra_clave}}</div>
                 <div class="cuenta_archivo">{{documento.archivos_cuenta}} Adjuntos</div>
-
+                <div class="clean"></div>
             </div></a>
         <div class="detalle_doc_sec" id="{{documento.id}}">
             <div class="resumen_archivo">
@@ -43,6 +43,7 @@
                 <img src="/files/img/{{adjunto.tipo}}.png">
                 {{adjunto.adjunto}}
                 <a href="/files/{{adjunto.adjunto}}"><img style="float:right" src="/files/img/descargar_doc.jpg"></a>
+                <div class="clean"></div>
             </div>
             {%endfor%}
         </div>

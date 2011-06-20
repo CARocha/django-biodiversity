@@ -1,8 +1,8 @@
 /*
- * jQuery Nivo Slider v2.5.2
+ * jQuery Nivo Slider v2.1
  * http://nivo.dev7studios.com
  *
- * Copyright 2011, Gilbert Pellegrom
+ * Copyright 2010, Gilbert Pellegrom
  * Free to use and abuse under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
  * 
@@ -29,20 +29,15 @@
 	border:0;
 	padding:0;
 	margin:0;
-	z-index:6;
+	z-index:60;
 	display:none;
 }
-/* The slices and boxes in the Slider */
+/* The slices in the Slider */
 .nivo-slice {
 	display:block;
 	position:absolute;
-	z-index:5;
+	z-index:50;
 	height:100%;
-}
-.nivo-box {
-	display:block;
-	position:absolute;
-	z-index:5;
 }
 /* Caption styles */
 .nivo-caption {
@@ -53,7 +48,7 @@
 	color:#fff;
 	opacity:0.8; /* Overridden by captionOpacity setting */
 	width:100%;
-	z-index:8;
+	z-index:89;
 }
 .nivo-caption p {
 	padding:5px;
@@ -69,21 +64,41 @@
 .nivo-directionNav a {
 	position:absolute;
 	top:45%;
-	z-index:9;
+	z-index:99;
 	cursor:pointer;
 }
-.nivo-prevNav {
-	left:0px;
+.nivo-directionNav a {
+	display:block;
+	width:30px;
+	height:34px;
+	background:url(/files/img/arrows.png) no-repeat;
+	text-indent:-9999px;
+	border:0;
 }
-.nivo-nextNav {
-	right:0px;
+a.nivo-nextNav {
+	background-position:-30px 0;
+	right:10px;
 }
-/* Control nav styles (e.g. 1,2,3...) */
-.nivo-controlNav a {
-	position:relative;
-	z-index:9;
-	cursor:pointer;
+a.nivo-prevNav {
+	left:10px;
 }
+
 .nivo-controlNav a.active {
 	font-weight:bold;
+}
+
+.nivo-controlNav a {
+	display:block;
+	width:10px;
+	height:55px;
+	background:url(bullets.png) no-repeat;
+	text-indent:-9999px;
+	border:0;
+	margin-right:3px;
+	float:left;
+	margin-top: 254px;
+}
+
+.nivo-controlNav a.active {
+	background-position:-10px 0;
 }

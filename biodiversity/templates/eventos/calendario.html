@@ -20,9 +20,7 @@
 			dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
 			monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 			monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-      contentHeight: 470,
-      
-
+            contentHeight: 470,
 			header: {
 				left: 'prev,next today',
 				center: 'title',
@@ -32,15 +30,13 @@
                 today: 'Hoy',
                 month: 'Mes',
                 day: 'Día',
-                week: 'Semana',
+                week: 'Semana'
             },
-
 			eventClick: function(calEvent, jsEvent, view) {
                 window.location = '/eventos/evento/' + calEvent.slug;
       },
 			editable: false,
-			events: "/eventos/calendario/",		
-
+			events: "/eventos/calendario/"
 		});	
 	});
 </script>

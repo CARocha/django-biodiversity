@@ -21,12 +21,13 @@ $(document).ready(function() {
 		captionOpacity:0.8, //Universal caption opacity
 		beforeChange: function(){},
 		afterChange: function(){},
-		slideshowEnd: function(){} //Triggers after all slides have been shown
+		slideshowEnd: function(){}//Triggers after all slides have been shown
 	});
 });
 </script>
 {%endblock%}
 {% block contenido %}
+<br>
 <div id="sidebar">
     <div class="titulo">Ultimas Noticias</div>
     <div id="listacarpetas">
@@ -37,8 +38,6 @@ $(document).ready(function() {
 </div>
 <div id="contenido">
     <div id="encabezado_contenido">Noticias</div>
-    
-
     <div class="noticia">
 	<div class="noticia-meta">
 	    <b>Autor</b><br>
