@@ -16,7 +16,10 @@
             controlNav:false, //1,2,3...
             keyboardNav:true, //Use left & right arrows
             pauseOnHover:true, //Stop animation while hovering
-            manualAdvance:false //Force manual transitions
+            manualAdvance:false, //Force manual transitions
+            prevText: '&nbsp;', // Prev directionNav text
+            nextText: '&nbsp;' // Next directionNav text
+            
         });
     });
 </script>
@@ -55,6 +58,8 @@
 		  chart: {
 			 renderTo: 'grafico',
 			 defaultSeriesType: 'scatter',
+			 marginRight: 130,
+			 marginBottom: 25,
 			 height: 360,
 			 width: 950
 		  },
@@ -87,6 +92,12 @@
 			 }
 		  },
 		  legend: {
+			 layout: 'vertical',
+			 align: 'right',
+			 verticalAlign: 'top',
+			 x: 10,
+			 y: 100,
+			 borderWidth: 0
 		  },
 		  series: lista_maker(data.filas, data.leyendas)
 	   });

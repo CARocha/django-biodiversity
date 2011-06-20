@@ -71,12 +71,18 @@
 	top:45%;
 	z-index:9;
 	cursor:pointer;
+    background:url("/files/img/arrows.png") no-repeat;
 }
 .nivo-prevNav {
 	left:0px;
+    width:30px;
+    height:30px;
 }
 .nivo-nextNav {
 	right:0px;
+    width:30px;
+    height:30px;
+    background-position:right !important;
 }
 /* Control nav styles (e.g. 1,2,3...) */
 .nivo-controlNav a {

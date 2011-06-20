@@ -955,6 +955,7 @@ a .big, a:visited .big{
 }
 .graficos .selectores{
     float: left;
+
 }
 
 #grafico{
@@ -967,7 +968,7 @@ a .big, a:visited .big{
 }
 
 .controles a{
-    font-size:11px;
+    font-size:13px;
     color:#fff;
     display:block;
     float:left;
