@@ -198,7 +198,7 @@ def ajax_temperatura(request):
         valores.append([int(v) for v in valores_min])
 
     json = simplejson.dumps(dict(filas=valores, leyendas=leyendas, 
-                                 titulo='Temperatura max y minima en las semanas del año %s (grados Celsius)' % params['ano'], 
+                                 titulo='Temperatura max y minima en las semanas del %s (grados Celsius)' % params['ano'], 
                                  labels = semanas, units = ['semana', 'C']))
     return HttpResponse(json, mimetype='application/javascript') 
 
