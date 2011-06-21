@@ -3,6 +3,14 @@
 <script type="text/javascript" src="/files/js/highcharts.js"></script>
 <script type="text/javascript" src="/files/js/exporting_patched.js"></script>
 <script type="text/javascript">
+    function magic_width(aumentar)
+    {
+      if (/msie/i.test(navigator.userAgent) && !/opera/i.test(navigator.userAgent)){
+        return 1200;
+      }else{
+        return 950;
+      } 
+    }
     $(document).ready(function(){
         var ancho1 = $('.dato_grafos1').width();
         $('.dato_grafos2').width($('#contenido_full').width()-ancho1);
@@ -12,7 +20,7 @@
                 renderTo: 'grafohs',
                 defaultSeriesType: 'scatter',
                 height: 360,
-                width: 950
+                width: magic_width() 
             },
             title: {
                 text: "{{titulo}}",
