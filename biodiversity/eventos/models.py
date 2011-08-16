@@ -29,7 +29,7 @@ class Evento(models.Model):
     foto = ImageWithThumbsField(upload_to=get_file_path,
                                          sizes=((150,150),(250,250)), null=True, blank=True)
     contacto = models.CharField(max_length=250, blank=True, null=True, help_text="Nombre y correo o numero de telefono del responsable" )
-
+    fileDir = 'eventosfotos/fotos'
     def __unicode__(self):
         return self.titulo
 
