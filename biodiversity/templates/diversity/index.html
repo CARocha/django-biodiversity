@@ -27,17 +27,17 @@
   $(document).ready(function(){
     //consumidor a pata
     $.getJSON('/precio/ajax/consumidor/', function(data){
-                render_chart(data);
+                render_chart(data, false);
             });
     $('.controles a').click(function (){
         var titulo = $(this).attr('id');
         if(titulo=='humedad' || titulo=='temperatura' || titulo == 'precipitacion' || titulo == 'humedad-relativa'){
             $.getJSON('/clima/ajax/' + titulo + '/', function(data){
-                render_chart(data);
+                render_chart(data, true);
             });
         }else if(titulo=='productor' || titulo=='consumidor'){
             $.getJSON('/precio/ajax/' + titulo + '/', function(data){
-                render_chart(data);
+                render_chart(data, false);
             });
         }
         $('.state_selected').removeClass('state_selected');
@@ -53,13 +53,22 @@
         return result;
     }
 
-    var render_chart = function(data){
+    function magic_width(aumentar)
+    {
+      if (/msie/i.test(navigator.userAgent) && !/opera/i.test(navigator.userAgent) && aumentar){
+        return 1200;
+      }else{
+        return 900;
+      } 
+    }
+
+    var render_chart = function(data, aumentar){
 		new Highcharts.Chart({
 		  chart: {
 			 renderTo: 'grafico',
 			 defaultSeriesType: 'scatter',
 			 height: 360,
-			 width: 950
+			 width: magic_width(aumentar) 
 		  },
 		  title: {
 			 text: data.titulo,
