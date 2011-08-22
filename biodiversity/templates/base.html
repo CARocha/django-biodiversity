@@ -53,6 +53,7 @@
                             {% if user.is_authenticated %}
                                 <li {% if request.session.flag == 'biblioteca' %}class='selecto'{% endif %}><a href="/documentos/">Biblioteca</a></li>
                             <li {% if request.session.flag == 'foro' %}class='selecto'{% endif %}><a href="/foro/">Foro</a></li>
+                            <li><a href="/ayuda/">Ayuda</a></li>
                             {% endif %}
                         </ul>
                     </div>

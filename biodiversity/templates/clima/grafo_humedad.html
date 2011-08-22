@@ -49,6 +49,9 @@
             },
             legend: {
             },
+            exporting: {
+                enabled: true
+            },
             series: [
                 {% for dato in tabla%} {data: {{dato.valores}}, name: "{{dato.leyenda}}" }{%if not forloop.last%},{%endif%}{%endfor%}
             ]

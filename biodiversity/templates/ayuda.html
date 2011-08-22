@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{%block extra_header%}
+
+<script type="text/javascript" src="/files/js/jquery.youtubeplaylist.js"></script>
+<script type="text/ecmascript">
+
+		$(function() {
+			$("ul.demo1").ytplaylist();
+			$("ul.demo2").ytplaylist({addThumbs:true, autoPlay: false, holderId: 'ytvideo2'});
+		});
+
+</script>
+
+<style type="text/css">
+
+
+
+
+#ytvideo,
+#ytvideo2 {
+    float: left;
+	margin-right:10px;
+	width:770px;
+	height: 480px;
+	overflow:hidden;
+	background: #999;
+	position: relative;
+	text-align: center;
+}
+
+
+.yt_holder {
+    background: #f3f3f3;
+    padding: 10px;
+    float: left;
+    border: 1px solid #e3e3e3;
+	margin-bottom:15px;
+
+}
+
+
+.yt_holder ul {
+    float: left;
+    margin: 0;
+    padding: 0;
+    width: 130px;
+}
+
+.yt_holder ul li {
+    list-style-type: none;
+    display:block;
+    background: #f1f1f1;
+    float: left;
+    width: 120px;
+    margin-bottom: 5px;
+	padding:2px;
+
+}
+
+.yt_holder ul li img {
+    width: 120px;
+    float: left;
+    margin-right: 5px;
+    border: 1px solid #999;
+}
+
+.yt_holder ul li a {
+    text-decoration: none;
+    display: block;
+    color: #000;
+    font-size:13px;
+}
+
+.currentvideo {
+	background: #e6e6e6;
+	outline: 1px solid red;
+}
+
+
+
+</style>
+{%endblock%}
+{% block menu %}  
+{% endblock %}
+
+{% block contenido %}
+<div id="contenido_full">
+    <div id="encabezado_contenido">Aprende a administrar el contenido</div>
+    <div class="yt_holder">
+    	<div id="ytvideo2"></div>
+        <ul class="demo2">
+            <li><a href="http://www.youtube.com/watch?v=3OzE0cyzixw">Introducción y mapas</a></li>
+            
+            <li><a href="http://www.youtube.com/watch?v=D8lZ5_vuTn4">Noticias y eventos</a></li>
+
+            <li><a href="http://www.youtube.com/watch?v=row7yk8nTLw">Biblioteca de documentos</a></li>
+            
+            <li><a href="http://www.youtube.com/watch?v=BqoPcyBGCj0">Datos de clima</a></li>
+            
+             <li><a href="http://www.youtube.com/watch?v=l2RMlSRCfJc">Foro de discuciones</a></li>
+            
+        </ul>
+    </div>
+    <div class="clean"></div>
+</div>
+{% endblock %}

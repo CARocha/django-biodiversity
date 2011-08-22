@@ -30,6 +30,7 @@ urlpatterns = patterns('',
     (r'^busqueda/', include('haystack.urls')),
     (r'^tagging_autocomplete/', include('tagging_autocomplete.urls')),
     (r'^foro/', include('askbotmini.urls')),
+    (r'^ayuda/$', direct_to_template, {'template': 'ayuda.html'}),
 )
 
 if settings.DEBUG:

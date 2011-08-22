@@ -20,7 +20,7 @@
                 renderTo: 'grafohs',
                 defaultSeriesType: 'scatter',
                 height: 360,
-                width: magic_width() 
+                width: 920
             },
             title: {
                 text: "{{titulo}}",
@@ -50,7 +50,11 @@
             },
             series: [
                 {% for dato in filas%} {data: {{dato.valores}}, name: "{{dato.leyenda}}" }{%if not forloop.last%},{%endif%}{%endfor%}
-            ]
+            ],
+            exporting: {
+                enabled: true
+            }
+
         });
     });
 </script>
@@ -124,7 +128,7 @@
         </div>
         <br>
         <div class="clean"></div>
-    </div>
-    <div id="grafohs"></div>
+    </div><br>
+    <div id="grafohs" class="grafohs"></div>
 </div>
 {% endblock %}
