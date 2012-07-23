@@ -58,7 +58,7 @@ $(document).ready(function() {
 	    {%if noticia.adjunto %}
 		<div class="slider">
 	       {% for galeria in  noticia.adjunto.all %}
-		    <img src="{{galeria.adjunto.url_250x250}}">
+		    <img src="{{galeria.adjunto.url_250x250}}" title="{{galeria.nombre}}" >
 	       {% endfor %}
 		</div>
 	    {%endif%}

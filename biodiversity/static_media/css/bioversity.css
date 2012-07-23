@@ -1296,3 +1296,7 @@ a .big, a:visited .big{
     overflow-x: auto;
     padding-bottom: 2px;
 }
+
+.nivo-caption{
+    font-size: 11px;
+}

@@ -23,7 +23,7 @@ def index(request):
     inicio = TextoInicio.objects.all()
     fotos = FotoInicio.objects.all()
     request.session['flag'] = 'index'
-    notis = Noticias.objects.all().order_by('fecha')[:2]
+    notis = Noticias.objects.all().order_by('-fecha')[:2]
     lista = []
     for n in notis:
         if n.galeria_set.all():
